@@ -34,9 +34,9 @@ class UNL_UCBCN_MonthWidget extends UNL_UCBCN
 		$this->table = '';
 		$Month = new Calendar_Month_Weekdays($y, $m);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
-		$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&m='.$PMonth->thisMonth().'&d='.$PMonth->thisDay();
+		$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&amp;m='.$PMonth->thisMonth().'&amp;d='.$PMonth->thisDay();
 		$NMonth = $Month->nextMonth('object');
-		$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&m='.$NMonth->thisMonth().'&d='.$NMonth->thisDay();
+		$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&amp;m='.$NMonth->thisMonth().'&amp;d='.$NMonth->thisDay();
 		
 		$this->tfoot = 
 			'<tr>
