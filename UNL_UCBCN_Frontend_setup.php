@@ -1,4 +1,15 @@
 <?php
+/**
+ * This is the post install setup script for the frontend.
+ * 
+ * It takes in responses to questions and handles updating the default
+ * template as well as creating a sample index page.
+ * 
+ * @package UNL_UCBCN_Frontend
+ * @author bbieber
+ * 
+ */
+
 class UNL_UCBCN_Frontend_setup_postinstall
 {
 	var $createFiles;
@@ -51,6 +62,9 @@ class UNL_UCBCN_Frontend_setup_postinstall
         }
     }
     
+    /**
+     * This function creates/upgrades the template files, as well as the sample index page.
+     */
     function createFiles($answers)
     {
     	// Copy the template files over to the location they answered.
@@ -76,6 +90,13 @@ class UNL_UCBCN_Frontend_setup_postinstall
 							);
     }
     
+    /**
+     * Replaces text within files.
+     * 
+     * @param mixed $search An array or string of text to search for.
+     * @param mixed $replace An array or string of text to replace the matched text with.
+     * @param mixed $file An array or string of filenames to search and replace text in.
+     */
     function file_str_replace($search,$replace,$file)
     {
     	$a = true;
@@ -107,6 +128,10 @@ class UNL_UCBCN_Frontend_setup_postinstall
     	}
     }
     
+    /**
+     * This function copies files from source to destination.
+     * 
+     */
     function dircpy($source, $dest, $overwrite = false){
 		if($handle = opendir($source)) {        // if the folder exploration is sucsessful, continue
 			if (!is_dir($dest)) {
