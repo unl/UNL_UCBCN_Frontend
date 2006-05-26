@@ -3,6 +3,9 @@
 /**
  * This class defines a 30 day widget containing information for a given month.
  * 
+ * 
+ * @package UNL_UCBCN_Frontend
+ * @author bbieber
  */
 
 require_once 'UNL/UCBCN.php';
@@ -13,9 +16,13 @@ require_once 'Calendar/Util/Textual.php';
 class UNL_UCBCN_MonthWidget extends UNL_UCBCN
 {	
 
+	/** Year for this month widget */
 	var $year;
+	/** Month for this month widget. */
 	var $month;
+	/** Caption for the month widget. */
 	var $caption;
+	
 	var $thead;
 	var $tfoot;
 	var $tbody;
@@ -31,7 +38,6 @@ class UNL_UCBCN_MonthWidget extends UNL_UCBCN
 	{
 		$this->year = $y;
 		$this->month = $m;
-		$this->table = '';
 		$Month = new Calendar_Month_Weekdays($y, $m);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
 		$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&amp;m='.$PMonth->thisMonth().'&amp;d='.$PMonth->thisDay();
