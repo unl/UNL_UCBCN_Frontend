@@ -25,7 +25,19 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN_Frontend
 	{
 		parent::__construct($options);
 		$this->monthwidget = new UNL_UCBCN_MonthWidget($this->year,$this->month);
-		$this->events = array('Event1','Event2 etc etc');
+		$this->findEvents();
+	}
+	
+	function findEvents()
+	{
+		$events = $this->factory('event');
+		// Need to figure out how events are dated.
+		if ($events->find()) {
+			// Populate the events to display.
+			$this->events = array('Event1','Event2 etc etc');
+		} else {
+			$this->events = 'Sorry, no events were found for today!';
+		}
 	}
 	
 }
