@@ -79,7 +79,7 @@ $task->addParamGroup('questionCreate', array(
 	$task->getParam('createindex',	'Create/Upgrade sample index page?', 'string', 'yes'),
 	));
 $task->addParamGroup('fileSetup', array(
-	$task->getParam('docroot',		'Path to root of webserver', 'string', '/Library/WebServer/Documents/events/'),
+	$task->getParam('docroot',		'Path to root of webserver', 'string', '/Library/WebServer/Documents/events'),
 	$task->getParam('template',	'Template style to use', 'string', 'default')
     ));
 
