@@ -86,7 +86,7 @@ class UNL_UCBCN_Frontend_setup_postinstall
     						$answers['template'],
     						$docroot),
 					array(	$docroot.'index.php',
-							$templateroot.'Frontend_Day.php')
+							$templateroot.'Frontend.php')
 							);
     }
     

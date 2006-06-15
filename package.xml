@@ -16,7 +16,7 @@
   <active>yes</active>
  </lead>
  <date>2006-06-15</date>
- <time>14:07:29</time>
+ <time>16:56:43</time>
  <version>
   <release>0.0.1</release>
   <api>0.0.1</api>
@@ -31,9 +31,9 @@
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
     <file name="Day.php" role="php" />
-    <file name="Event.php" role="data" />
     <file name="Month.php" role="php" />
     <file name="MonthWidget.php" role="php" />
+    <file name="Year.php" role="php" />
    </dir> <!-- /Frontend -->
    <dir name="templates">
     <dir name="default">
@@ -55,8 +55,11 @@
      </dir> <!-- /templates/default/images -->
      <file name="default.css" role="data" />
      <file name="EventListing.php" role="data" />
+     <file name="Frontend.php" role="data" />
      <file name="Frontend_Day.php" role="data" />
+     <file name="Frontend_Month.php" role="data" />
      <file name="Frontend_MonthWidget.php" role="data" />
+     <file name="Frontend_Year.php" role="data" />
      <file name="ieonly.css" role="data" />
      <file name="main.css" role="data" />
     </dir> <!-- /templates/default -->

@@ -13,7 +13,7 @@ require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
 require_once 'UNL/UCBCN/EventListing.php';
 require_once 'Calendar/Day.php';
 
-class UNL_UCBCN_Frontend_Day extends UNL_UCBCN_Frontend
+class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 {
 	/** Calendar UNL_UCBCN_Calendar Object **/
 	var $calendar;
@@ -25,8 +25,6 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN_Frontend
 	var $day;
 	/** Listing of events on this day. */
 	var $output;
-	/** UNL_UCBCN_MonthWidget */
-	var $monthwidget;
 	
 	function __construct($options)
 	{
@@ -37,7 +35,6 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN_Frontend
 				return new UNL_UCBCN_Error('No calendar specified or could be found.');
 			}
 		}
-		$this->monthwidget = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
 		$this->output = $this->showEventListing();
 	}
 	

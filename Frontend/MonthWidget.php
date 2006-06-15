@@ -56,7 +56,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 				</td>
 			</tr>';
 		
-		$this->caption = Calendar_Util_Textual::thisMonthName($Month).' '.$Month->thisYear();
+		$this->caption = '<a href="?y='.$Month->thisYear().'&amp;m='.$Month->thisMonth().'">'.Calendar_Util_Textual::thisMonthName($Month).'</a>&nbsp;<a href="?y='.$Month->thisYear().'">'.$Month->thisYear().'</a>';
 		
 		//Determine selected days
 		$selectedDays = array();

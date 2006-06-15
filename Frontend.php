@@ -9,34 +9,88 @@
  * @author Brett Bieber
  */
 require_once 'UNL/UCBCN.php';
+require_once 'UNL/UCBCN/Frontend/Day.php';
+require_once 'UNL/UCBCN/Frontend/Month.php';
+require_once 'UNL/UCBCN/Frontend/Year.php';
 require_once 'Date.php';
 
 class UNL_UCBCN_Frontend extends UNL_UCBCN
 {
+	/** Calendar UNL_UCBCN_Calendar Object **/
+	var $calendar;
+	/** Year the user is viewing. */
+	var $year;
+	/** Month the user is viewing. */
+	var $month;
+	/** Day to show events for */
+	var $day;
+	/** Navigation */
+	public $navigation;
+	/** Right column (usually the month widget) */
+	public $right;
+	/** Unique body ID */
+	public $uniquebody;
+	/** Main content of the page sent to the client. */
+	public $output;
+	/** Page Title */
+	public $doctitle;
+	/** Section Title */
+	public $sectitle;
 	
-	var $navigation;
-	var $output;
-	
-	function showCalendar($date='')
+	function __construct($options)
 	{
-		if (empty($date)) {
-			$date = time();
-		}
-		$d = new Date_Calc();
-		$savant = $this->getSavant();
-		for ($i=1;$i<=$d->daysInMonth(date('n',$date));$i++) {
-			$savant->days[$i] = $this->getEventList(date('Y-m-').$i);
-		}
-		$savant->display('showCalendar.php');
+		parent::__construct($options);
+		$this->navigation = $this->showNavigation();
 	}
 	
-	function showEvent($id)
+	function showNavigation()
 	{
-		$event = DB_DataObject::factory('Event');
-		if ($event->get($id)) {
-			$this->displayRegion($event);
+		$n = array();
+		$n[] = '<ul>';
+		$n[] = '<li><a href="?">Today\'s Events</a></li>';
+		$n[] = '</ul>';
+		return implode("\n",$n);
+	}
+	
+	function run($view='')
+	{
+		switch($view) {
+			case 'event':
+				if (isset($_GET['id'])) {
+					$id = $_GET['id'];
+				}
+				$this->output = $this->getEvent($id);
+			break;
+			case 'day':
+				$this->output = new UNL_UCBCN_Frontend_Day(array(
+											'dsn'		=> $this->dsn,
+											'year'		=> $this->year,
+											'month'		=> $this->month,
+											'day'		=> $this->day));
+			break;
+			case 'month':
+				$this->output = new UNL_UCBCN_Frontend_Month($this->year,$this->month);
+			break;
+			case 'year':
+				$this->output = new UNL_UCBCN_Frontend_Year($this->year);
+			break;
+		}
+		$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
+	}
+	
+	/**
+	 * Gets the specified event.
+	 * 
+	 * @param int id
+	 * @return object UNL_UCBCN_Event on success UNL_UCBCN_Error on error.
+	 */
+	function getEvent($id)
+	{
+		$e = $this->factory('event');
+		if ($e->get($id)) {
+			return $e;
 		} else {
-			$this->showError('The event with id of '.$id.' was not found.');
+			return new UNL_UCBCN_Error('That event could not be found.');
 		}
 	}
 }

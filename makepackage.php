@@ -42,7 +42,8 @@ $pfm->setOptions(array(
 						'Frontend.php'=>'php',
 						'Frontend/Month.php'=>'php',
 						'Frontend/Day.php'=>'php',
-						'Frontend/MonthWidget.php'=>'php')
+						'Frontend/MonthWidget.php'=>'php',
+						'Frontend/Year.php'=>'php')
 ));
 $pfm->setPackage('UNL_UCBCN_Frontend');
 $pfm->setPackageType('php'); // this is a PEAR-style php script package
