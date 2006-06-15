@@ -15,7 +15,7 @@ if (isset($_GET['m'])) {
 if (isset($_GET['d'])) {
 	$d = (int)$_GET['d'];
 } else {
-	$d = date('n');
+	$d = date('j');
 }
 
 $front = new UNL_UCBCN_Frontend_Day(array('dsn'=>'mysqli://eventcal:eventcal@localhost/eventcal',
@@ -23,7 +23,6 @@ $front = new UNL_UCBCN_Frontend_Day(array('dsn'=>'mysqli://eventcal:eventcal@loc
 											'year'		=> $y,
 											'month'		=> $m,
 											'day'		=> $d));
-
 
 UNL_UCBCN::displayRegion($front);
 

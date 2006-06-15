@@ -1,7 +1,7 @@
 <?php
 /**
  * This is the primary viewing interface for the events.
- * This would be the 'model' if you follow that paradigm.
+ * This would be the 'model/controller' if you follow that paradigm.
  * 
  * This file contains functions used throughout the frontend views.
  * 
@@ -9,6 +9,7 @@
  * @author Brett Bieber
  */
 require_once 'UNL/UCBCN.php';
+require_once 'Date.php';
 
 class UNL_UCBCN_Frontend extends UNL_UCBCN
 {
@@ -18,7 +19,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	
 	function showCalendar($date='')
 	{
-		require 'Date.php';
 		if (empty($date)) {
 			$date = time();
 		}

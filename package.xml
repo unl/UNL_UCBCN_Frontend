@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.6" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
@@ -15,8 +15,8 @@
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2006-05-26</date>
- <time>20:01:11</time>
+ <date>2006-06-15</date>
+ <time>14:07:29</time>
  <version>
   <release>0.0.1</release>
   <api>0.0.1</api>
@@ -31,6 +31,7 @@
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
     <file name="Day.php" role="php" />
+    <file name="Event.php" role="data" />
     <file name="Month.php" role="php" />
     <file name="MonthWidget.php" role="php" />
    </dir> <!-- /Frontend -->
@@ -53,10 +54,11 @@
       <file name="title.gif" role="data" />
      </dir> <!-- /templates/default/images -->
      <file name="default.css" role="data" />
+     <file name="EventListing.php" role="data" />
      <file name="Frontend_Day.php" role="data" />
+     <file name="Frontend_MonthWidget.php" role="data" />
      <file name="ieonly.css" role="data" />
      <file name="main.css" role="data" />
-     <file name="MonthWidget.php" role="data" />
     </dir> <!-- /templates/default -->
    </dir> <!-- /templates -->
    <file name="Frontend.php" role="php">
@@ -98,7 +100,7 @@
        <tasks:name>docroot</tasks:name>
        <tasks:prompt>Path to root of webserver</tasks:prompt>
        <tasks:type>string</tasks:type>
-       <tasks:default>/var/www/events</tasks:default>
+       <tasks:default>/Library/WebServer/Documents/events</tasks:default>
       </tasks:param>
       <tasks:param>
        <tasks:name>template</tasks:name>
@@ -142,8 +144,8 @@
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2006-05-26</date>
-   <license>PHP License</license>
+   <date>2006-06-15</date>
+   <license uri="http://www.php.net/license">PHP License</license>
    <notes>Initial Release... this is really bare-bones.</notes>
   </release>
  </changelog>

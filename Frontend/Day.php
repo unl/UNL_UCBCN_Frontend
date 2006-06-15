@@ -3,40 +3,64 @@
 /**
  * This class contains the information needed for viewing a single day view calendar.
  * 
+ * 
+ * @package UNL_UCBCN_Frontend
+ * @author Brett Bieber
  */
 
 require_once 'UNL/UCBCN/Frontend.php';
 require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
+require_once 'UNL/UCBCN/EventListing.php';
+require_once 'Calendar/Day.php';
 
 class UNL_UCBCN_Frontend_Day extends UNL_UCBCN_Frontend
 {
+	/** Calendar UNL_UCBCN_Calendar Object **/
+	var $calendar;
 	/** Year the user is viewing. */
 	var $year;
 	/** Month the user is viewing. */
 	var $month;
-	/** array of days */
+	/** Day to show events for */
 	var $day;
 	/** Listing of events on this day. */
-	var $events = array();
+	var $output;
 	/** UNL_UCBCN_MonthWidget */
 	var $monthwidget;
 	
 	function __construct($options)
 	{
 		parent::__construct($options);
-		$this->monthwidget = new UNL_UCBCN_MonthWidget($this->year,$this->month);
-		$this->findEvents();
+		if (!isset($this->calendar)) {
+			$this->calendar = $this->factory('calendar');
+			if (!$this->calendar->get(1)) {
+				return new UNL_UCBCN_Error('No calendar specified or could be found.');
+			}
+		}
+		$this->monthwidget = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
+		$this->output = $this->showEventListing();
 	}
 	
-	function findEvents()
+	function showEventListing()
 	{
-		$events = $this->factory('event');
-		// Need to figure out how events are dated.
-		if ($events->find()) {
-			// Populate the events to display.
-			$this->events = array('Event1','Event2 etc etc');
+		$day = new Calendar_Day($this->year,$this->month,$this->day);
+		$eventdatetime = $this->factory('eventdatetime');
+		if (isset($this->calendar)) {
+			$eventdatetime->joinAdd($this->calendar);
+		}
+		$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
+		if ($eventdatetime->find()) {
+			$eventlist = new UNL_UCBCN_EventListing();
+			while ($eventdatetime->fetch()) {
+				// Populate the events to display.
+				$event = $eventdatetime->getLink('event_id');
+				if ($event) {
+					$eventlist->events[] = $event;
+				}
+			}
+			return $eventlist;
 		} else {
-			$this->events = 'Sorry, no events were found for today!';
+			return 'Sorry, no events were found for today!';
 		}
 	}
 	
