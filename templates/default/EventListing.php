@@ -24,7 +24,7 @@ foreach ($this->events as $e) {
             $row .= 'Unknown';
     }
 	$row .= '</td>' .
-			'<td class="title">'.$e->title.'</td>' .
+			'<td class="title"><a href="?id='.$eventdatetime->id.'">'.$e->title.'</a></td>' .
 			'</tr>';
 	echo $row;
 } ?>

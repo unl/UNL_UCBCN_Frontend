@@ -96,8 +96,8 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 			$return[] = '<ul>';
 			while ($eventdatetime->fetch()) {
 				$event = $eventdatetime->getLink('event_id');
-				if (isset($event)) {
-					$return[] = '<li>'.$event->title.'</li>';
+				if (isset($event) && is_object($event)) {
+					$return[] = '<li><a href="?id='.$eventdatetime->id.'">'.$event->title.'</a></li>';
 				}
 			}
 			$return[] = '</ul>';

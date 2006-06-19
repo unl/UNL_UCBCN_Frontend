@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" media="screen" href="templates/@TEMPLATE@/main.css" />
+<title><?php echo $this->doctitle; ?></title>
 </head>
 <body>
 
@@ -27,7 +28,7 @@
 </div><!-- close main content area -->
 
 </div><!-- close main left -->
-	
+
 <div id="right_area">
 <?php UNL_UCBCN::displayRegion($this->right); ?>
 </div><!-- close right-area -->

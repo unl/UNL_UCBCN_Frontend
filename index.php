@@ -21,6 +21,9 @@ if (isset($_GET['d'])) {
 } else {
 	$d = date('j');
 }
+if (isset($_GET['id'])) {
+	$view = 'event';
+}
 
 $front = new UNL_UCBCN_Frontend(array('dsn'=>'mysqli://eventcal:eventcal@localhost/eventcal',
 											'template'	=> 'default',

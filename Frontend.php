@@ -9,6 +9,7 @@
  * @author Brett Bieber
  */
 require_once 'UNL/UCBCN.php';
+require_once 'UNL/UCBCN/EventInstance.php';
 require_once 'UNL/UCBCN/Frontend/Day.php';
 require_once 'UNL/UCBCN/Frontend/Month.php';
 require_once 'UNL/UCBCN/Frontend/Year.php';
@@ -59,7 +60,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
 				}
-				$this->output = $this->getEvent($id);
+				$this->output = $this->getEventInstance($id);
 			break;
 			case 'day':
 				$this->output = new UNL_UCBCN_Frontend_Day(array(
@@ -79,19 +80,14 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	}
 	
 	/**
-	 * Gets the specified event.
+	 * Gets the specified event instance.
 	 * 
 	 * @param int id
-	 * @return object UNL_UCBCN_Event on success UNL_UCBCN_Error on error.
+	 * @return object UNL_UCBCN_EventInstance on success UNL_UCBCN_Error on error.
 	 */
-	function getEvent($id)
+	function getEventInstance($id)
 	{
-		$e = $this->factory('event');
-		if ($e->get($id)) {
-			return $e;
-		} else {
-			return new UNL_UCBCN_Error('That event could not be found.');
-		}
+		return new UNL_UCBCN_EventInstance($id);
 	}
 }
 ?>
