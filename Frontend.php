@@ -25,6 +25,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	var $month;
 	/** Day to show events for */
 	var $day;
+	/** URI to the management frontend */
+	public $uri = '';
+	/** URI to the management interface UNL_UCBCN_Manager */
+	public $manageruri = '';
 	/** Navigation */
 	public $navigation;
 	/** Right column (usually the month widget) */
@@ -48,7 +52,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	{
 		$n = array();
 		$n[] = '<ul>';
-		$n[] = '<li><a href="?">Today\'s Events</a></li>';
+		$n[] = '<li><a href="'.$this->uri.'">Today\'s Events</a></li>';
 		$n[] = '</ul>';
 		return implode("\n",$n);
 	}

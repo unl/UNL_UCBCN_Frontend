@@ -63,7 +63,7 @@
 			<div id="leftcollinks"> <!-- InstanceBeginEditable name="leftcollinks" -->
 				<h3>Related Links</h3>
 				<ul>
-					<li><a href="<?php echo $this->manager_uri; ?>">Event Publishing Manager</a></li>
+					<li><a href="<?php echo $this->manageruri; ?>">Event Publishing Manager</a></li>
 				</ul>
 				<!-- InstanceEndEditable --> </div>
 		</div>
