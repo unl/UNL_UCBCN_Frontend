@@ -104,7 +104,7 @@
 		<div class="footer_col">
 				<h3>Ongiong Development</h3>
 				The ongoing development is handled through the UNL 
-				<abbr title="PHP Extension and Application Repository">PEAR</a> compatible channel
+				<abbr title="PHP Extension and Application Repository">PEAR</abbr> compatible channel
 				<a href="http://pear.unl.edu/">http://pear.unl.edu/</a>.
 				If you find an error, of have a feature request or just want to get involved this is the place.
 				</div>
