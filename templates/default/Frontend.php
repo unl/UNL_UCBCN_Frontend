@@ -9,16 +9,16 @@
 <link rel="stylesheet" type="text/css" media="print" href="/ucomm/templatedependents/templatecss/layouts/print.css"/>
 <script type="text/javascript" src="/ucomm/templatedependents/templatesharedcode/scripts/all_compressed.js"></script>
 
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents/templatesharedcode/includes/browsersniffers/ie.html'); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents/templatesharedcode/includes/comments/developersnote.html'); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
+<?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/browsersniffers/ie.html'); ?>
+<?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/comments/developersnote.html'); ?>
+<?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="head" -->
 <link rel="stylesheet" type="text/css" media="screen" href="templates/@TEMPLATE@/main.css" />
 <!-- InstanceEndEditable -->
 </head>
 <body id="fixed">
 <!-- InstanceBeginEditable name="siteheader" -->
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents/templatesharedcode/includes/siteheader/siteheader.shtml'); ?>
+<?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/siteheader/siteheader.shtml'); ?>
 <!-- InstanceEndEditable -->
 <div id="red-header">
 	<div class="clear">
@@ -34,7 +34,7 @@
 </div>
 <!-- close red-header -->
   
-<?php require_once($_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents/templatesharedcode/includes/shelf/shelf.shtml'); ?>
+<?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/shelf/shelf.shtml'); ?>
 
 <div id="container">
 	<div class="clear">
