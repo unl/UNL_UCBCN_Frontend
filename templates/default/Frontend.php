@@ -85,9 +85,36 @@
 <!-- close container -->
 
 <div id="footer">
-	<div id="footer_floater"> <!-- InstanceBeginEditable name="optionalfooter" --> <!-- InstanceEndEditable -->
+	<div id="footer_floater"> <!-- InstanceBeginEditable name="optionalfooter" -->
+		<div class="footer_col">
+			<h3>Yeah, It's Open Source</h3>
+				The University Event Publishing System is an open source project
+				built by the University of Nebraska&ndash;Lincoln which implements
+				the UC Berkeley Calendar specifications.
+				<ul>
+					<li><a href ="http://www.berkeley.edu/">UC Berkeley</a></li>
+					<li><a href="http://groups.sims.berkeley.edu/EventCalendar/">UC Berkeley Calendar Network</a></li>
+				</ul>
+		</div>
+		<div class="footer_col">
+			<h3>How Was This Built?</h3>
+				The University Event Publisher was built by the 
+				<a href="http://www.unl.edu/webdevnet/">UNL Web Developer Network</a>.
+				For more information see <a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">the project documentation.</a></div>
+		<div class="footer_col">
+				<h3>Ongiong Development</h3>
+				The ongoing development is handled through the UNL 
+				<abbr title="PHP Extension and Application Repository">PEAR</a> compatible channel
+				<a href="http://pear.unl.edu/">http://pear.unl.edu/</a>.
+				If you find an error, of have a feature request or just want to get involved this is the place.
+				</div>
+		<div class="footer_col">
+			<h3>Event Publishers</h3>
+			Event publishers can start using the University Event Publisher immediately. Simply
+			<a href="<?php $this->manageruri; ?>">log in</a> using your username and password.</div>
+		<!-- InstanceEndEditable -->
 		<div id="copyright"> <!-- InstanceBeginEditable name="footercontent" -->
-			
+			Yeah, it's open source. &copy; 2006 University of Nebraska&ndash;Lincoln
 			<!-- InstanceEndEditable --> <span><a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> <a href="http://validator.w3.org/check/referer">W3C</a> <a href="http://www-1.unl.edu/feeds/">RSS</a> </span><a href="http://www.unl.edu/" title="UNL Home"><img src="/ucomm/templatedependents/templatecss/images/wordmark.png" alt="UNL's wordmark" id="wordmark" /></a></div>
 	</div>
 </div>
