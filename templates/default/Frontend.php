@@ -42,8 +42,8 @@
 			<div id="titlegraphic">
 				<!-- WDN: see glossary item 'title graphics' -->
 				<!-- InstanceBeginEditable name="titlegraphic" -->
-				<h1>UNL's Event Publishing System</h1>
-				<h2>Plan. Publish. Share.</h2>
+				<h1>UNL Events</h1>
+				<h2>What We Do Is [Y]Our Business</h2>
 				<!-- InstanceEndEditable --></div>
 			<!-- maintitle -->
 		</div>
@@ -111,7 +111,7 @@
 		<div class="footer_col">
 			<h3>Event Publishers</h3>
 			Event publishers can start using the University Event Publisher immediately. Simply
-			<a href="<?php $this->manageruri; ?>">log in</a> using your username and password.</div>
+			<a href="<?php echo $this->manageruri; ?>">log in</a> using your username and password.</div>
 		<!-- InstanceEndEditable -->
 		<div id="copyright"> <!-- InstanceBeginEditable name="footercontent" -->
 			Yeah, it's open source. &copy; 2006 University of Nebraska&ndash;Lincoln

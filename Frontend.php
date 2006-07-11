@@ -46,6 +46,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	{
 		parent::__construct($options);
 		$this->navigation = $this->showNavigation();
+		$this->doctitle = 'Events';
 	}
 	
 	function showNavigation()
