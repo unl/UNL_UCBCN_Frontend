@@ -81,7 +81,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				$this->output = new UNL_UCBCN_Frontend_Month($this->year,$this->month);
 			break;
 			case 'year':
-				$this->output = new UNL_UCBCN_Frontend_Year($this->year);
+				$this->output[] = '<h1>'.$this->year.'</h1>';
+				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year);
 			break;
 		}
 	}
