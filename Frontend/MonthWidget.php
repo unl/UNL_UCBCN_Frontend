@@ -74,7 +74,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			if ( $Day->isFirst() )
 				$this->tbody .= "<tr>\n";
 			if ( $this->dayHasEvents($Day) ) {
-				$this->tbody .= "<td class='selected''><a href='$link'>".$Day->thisDay()."</a></td>\n";
+				$this->tbody .= "<td class='selected'><a href='$link'>".$Day->thisDay()."</a></td>\n";
 			} else if ( $Day->isEmpty() ) {
 				$this->tbody .= "<td class='empty'>".$Day->thisDay()."</td>\n";
 			} else {
