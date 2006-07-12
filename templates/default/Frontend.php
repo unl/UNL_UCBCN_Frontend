@@ -73,10 +73,14 @@
 			<!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
 			
 			<div id="maincontent"> <!-- InstanceBeginEditable name="maincontent" -->
-				<div class="two_col left"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
-				<div class="col right">
-					<?php UNL_UCBCN::displayRegion($this->right); ?>
-				</div>
+				<?php if (isset($this->right)) { ?>
+					<div class="two_col left"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
+					<div class="col right">
+						<?php UNL_UCBCN::displayRegion($this->right); ?>
+					</div>
+				<?php } else {
+					UNL_UCBCN::displayRegion($this->output);
+				} ?>
 				<!-- InstanceEndEditable --> </div>
 			 </div>
 		<!-- close main right -->

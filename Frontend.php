@@ -67,6 +67,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 					$id = $_GET['id'];
 				}
 				$this->output = $this->getEventInstance($id);
+				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
 			break;
 			case 'day':
 				$this->output = new UNL_UCBCN_Frontend_Day(array(
@@ -74,6 +75,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 											'year'		=> $this->year,
 											'month'		=> $this->month,
 											'day'		=> $this->day));
+				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
 			break;
 			case 'month':
 				$this->output = new UNL_UCBCN_Frontend_Month($this->year,$this->month);
@@ -82,7 +84,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				$this->output = new UNL_UCBCN_Frontend_Year($this->year);
 			break;
 		}
-		$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
 	}
 	
 	/**
