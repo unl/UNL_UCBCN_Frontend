@@ -1,4 +1,4 @@
-<table id="wp-calendar">
+<table class="wp-calendar">
 	<caption><?php echo $this->caption; ?></caption>
    <thead>
 	<tr>
