@@ -2,3 +2,60 @@
  * default.css
  * Everything goes in here.
  */
+#maincontent a{background:none;}
+#maincontent a:hover{text-decoration:underline;}
+    
+    
+/* Event list */
+table {width:100%;border-collapse:collapse}
+table tr:hover, table tr.alt:hover{
+	background:#ffffcc;
+}
+table tr.alt{
+	background:#e8f5fa;
+	border-top:1px solid #8ebcd6;
+	border-bottom:1px solid #8ebcd6;
+}
+table thead th{
+	background:#3e83c9;color:#fff;	
+	padding:7px;
+	text-align:left;
+}
+table thead th.date a, table thead th.title a{
+	color:#FFFFFF;
+	text-decoration:none;
+	}
+table td{
+	padding:7px;}
+table td.date{width:20%;}
+table td.title{width:80%;}
+h2.sec_main{padding: 0 0 12px 12px!important;background-position:0 2px; }
+
+
+/* Calendar Widget */
+table#wp-calendar thead th{
+	background:#fff;border-top:1px solid #999;border-bottom:3px double #999; color:#333;
+	text-align:left;
+}
+
+table#wp-calendar td, table#wp-calendar th{
+	text-align:center;
+	padding:4px;
+}
+table#wp-calendar td{
+	border:1px solid #ddd;
+}
+table#wp-calendar td#next{
+	border-right:1px solid #999;background:#eee;
+	border-bottom:1px solid #999;
+}
+table#wp-calendar td#prev{
+ 	border-left:1px solid #999;background:#eee;
+	border-bottom:1px solid #999;
+}
+table#wp-calendar tr:hover{
+	background:none;
+}
+table#wp-calendar td:hover{
+	background:#ffffcc;
+}
