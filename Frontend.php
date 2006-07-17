@@ -55,6 +55,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		$n[] = '<ul>';
 		$n[] = '<li><a href="'.$this->uri.'">Today\'s Events</a></li>';
 		$n[] = '<li><a href="'.$this->uri.'?'.date('\m=m\&\a\m\p\;\y=Y').'">This Month</a></li>';
+		$n[] = '<li><a href="'.$this->uri.'?'.date('\y=Y').'">This Year</a></li>';
 		$n[] = '</ul>';
 		return implode("\n",$n);
 	}

@@ -13,7 +13,7 @@
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/comments/developersnote.html'); ?>
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="head" -->
-<link rel="stylesheet" type="text/css" media="screen" href="templates/@TEMPLATE@/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="templates/@TEMPLATE@/frontend_main.css" />
 <!-- InstanceEndEditable -->
 </head>
 <body id="fixed">
