@@ -51,6 +51,6 @@
  */
 
 /* import stylesheets and hide from ie/mac \*/
-@import url("default.css");
-@import url("ieonly.css"); 
+@import url("frontend_default.css");
+@import url("frontend_ieonly.css"); 
 /* end import/hide */
