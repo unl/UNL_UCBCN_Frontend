@@ -1,4 +1,5 @@
-<table id="wp-calendar">
+<div class="month_cal">
+<table class="wp-calendar">
 	<caption><?php echo $this->caption; ?></caption>
    <thead>
 	<tr>
@@ -18,3 +19,4 @@
 		<?php echo $this->tbody; ?>
 	</tbody>
 </table>
+</div>
