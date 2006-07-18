@@ -45,17 +45,11 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		$NMonth = $Month->nextMonth('object');
 		$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&amp;m='.$NMonth->thisMonth().'&amp;d='.$NMonth->thisDay();
 		
-		$this->tfoot = 
-			'<tr>
-				<td abbr="'.Calendar_Util_Textual::thisMonthName($PMonth).'" colspan="3" id="prev">
-						<a href="'.$prev.'" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'"><< </a></td>
-				<td class="pad"> </td>
-				<td abbr="'.Calendar_Util_Textual::thisMonthName($NMonth).'" colspan="3" id="next" class="pad">
-						<a href="'.$next.'" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> >></a>
-				</td>
-			</tr>';
-		
-		$this->caption = '<a href="?y='.$Month->thisYear().'&amp;m='.$Month->thisMonth().'">'.Calendar_Util_Textual::thisMonthName($Month).'</a>&nbsp;<a href="?y='.$Month->thisYear().'">'.$Month->thisYear().'</a>';
+		$this->caption = '
+<a href="'.$prev.'" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'"><< </a>
+<a href="?y='.$Month->thisYear().'&amp;m='.$Month->thisMonth().'">'.Calendar_Util_Textual::thisMonthName($Month).'</a>&nbsp;<a href="?y='.$Month->thisYear().'">'.$Month->thisYear().'</a>
+<a href="'.$next.'" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> >></a>
+';
 		
 		//Determine selected days
 		$selectedDays = array();
