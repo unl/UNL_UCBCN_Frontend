@@ -12,9 +12,7 @@
 		<th abbr="Sunday" scope="col" title="Sunday">Sun</th>
 	</tr>
 	</thead>
-	<tfoot>
-		<?php echo $this->tfoot; ?>
-	</tfoot>
+	<tfoot></tfoot>
 	<tbody>
 		<?php echo $this->tbody; ?>
 	</tbody>
