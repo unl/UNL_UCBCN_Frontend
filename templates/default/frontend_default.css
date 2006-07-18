@@ -62,6 +62,7 @@ table.wp-calendar td:hover{
 table.wp-calendar td.pad:hover{background:none}
 
 /* month view */
+.month_cal table.wp-calendar{margin:0 0 10px 0;}
 .month_cal table.wp-calendar td{
 	width:90px;
 	text-align:left;background:#fafafa;
@@ -73,12 +74,17 @@ table.wp-calendar td.pad:hover{background:none}
 .month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
 
-
-
-
-
-
-
+.month_cal table.wp-calendar caption{margin-left:275px;}
+.month_cal table.wp-calendar caption li{height:34px;background:url(images/caption_middle.gif) repeat-x left top;display:block;float:left;}
+.month_cal table.wp-calendar caption li#monthvalue, .month_cal table.wp-calendar caption li#yearvalue{
+margin-top:-2px;padding:6px 3px 0;}
+.month_cal table.wp-calendar caption a{color:#fff;}
+.month_cal table.wp-calendar caption a#prev_month, .month_cal table.wp-calendar caption a#next_month{text-indent:-9999em;
+	display:block;background:#fff url(images/month_prev.gif) no-repeat; width:25px; height:30px;}
+.month_cal table.wp-calendar caption a#next_month{background:url(images/month_next.gif) no-repeat;}
+.month_cal table.wp-calendar caption a#prev_month:hover, .month_cal table.wp-calendar caption a#next_month:hover{
+background-position:0 -34px;
+}
 
 
 

@@ -12,7 +12,6 @@
 	</tr>
 	</thead>
 	<tfoot>
-		<?php echo $this->tfoot; ?>
 	</tfoot>
 	<tbody>
 		<?php echo $this->tbody; ?>
