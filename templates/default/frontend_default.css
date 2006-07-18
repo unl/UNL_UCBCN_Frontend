@@ -31,7 +31,7 @@ table td.date{width:20%;}
 table td.title{width:80%;}
 h2.sec_main{padding: 0 0 12px 12px!important;background-position:0 2px; }
 
-
+table td.empty{color:#ddd;}
 /* Calendar Widget */
 table.wp-calendar thead th{
 	background:#fff;border-top:1px solid #999;border-bottom:3px double #999; color:#333;
@@ -60,4 +60,26 @@ table.wp-calendar td:hover{
 	background:#ffffcc;
 }
 table.wp-calendar td.pad:hover{background:none}
+
+/* month view */
+.month_cal table.wp-calendar td, .month_cal table.wp-calendar th{
+	width:50px;
+	text-align:left;
+	height:50px;
+}
+.month_cal table.wp-calendar td{font-size:0.8em;}
+#maincontent .month_cal ul{padding:0;margin:0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
