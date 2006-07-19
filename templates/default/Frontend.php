@@ -53,7 +53,7 @@
 			<h4 id="sec_nav">Navigation</h4>
 			<!-- InstanceBeginEditable name="navcontent" -->
 			<div id="navlinks">
-				<?php echo $this->navigation; ?>
+				
 			</div>
 			<!-- InstanceEndEditable -->
 			<div id="nav_end"></div>
@@ -72,7 +72,9 @@
 		<div id="main_right" class="mainwrapper">
 			<!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
 			
-			<div id="maincontent"> <!-- InstanceBeginEditable name="maincontent" -->
+			<div id="maincontent"> 
+			<?php echo $this->navigation; ?>
+			<!-- InstanceBeginEditable name="maincontent" -->
 				<?php if (isset($this->right)) { ?>
 					<div class="two_col left"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
 					<div class="col right">
