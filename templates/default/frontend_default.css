@@ -62,20 +62,20 @@ table.wp-calendar td:hover{
 table.wp-calendar td.pad:hover{background:none}
 
 /* month view */
+
 .month_cal table.wp-calendar{margin:0 0 10px 0;}
 .month_cal table.wp-calendar td{
-	width:90px;
-	text-align:left;background:#fafafa;
-	
-}
+	width:124px;
+	text-align:left;background:#fafafa;}
+
 .month_cal table.wp-calendar td:hover{background:#ffffcc;}
-.month_cal table.wp-calendar td{float:left;overflow:auto;display:block;height:90px;}
-.month_cal table.wp-calendar th{text-align:center;width:92px;display:block;float:left;margin-bottom:1px;}
+.month_cal table.wp-calendar td{float:left;overflow:auto;display:block;height:124px;}
+.month_cal table.wp-calendar th{text-align:center;width:126px;display:block;float:left;margin-bottom:1px;}
 .month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
 
 /*caption nav*/
-table.wp-calendar caption{margin-left:25px;}
+table.wp-calendar caption{position:absolute;right:0;top:0;margin-top:30px;}
 .month_cal table.wp-calendar caption{margin-left:275px;}
 table.wp-calendar caption li{height:34px;background:url(images/caption_middle.gif) repeat-x left top;display:block;float:left;}
 table.wp-calendar caption li#monthvalue, table.wp-calendar caption li#yearvalue{
@@ -88,6 +88,15 @@ table.wp-calendar caption a#prev_month:hover, table.wp-calendar caption a#next_m
 background-position:0 -34px;
 }
 
+/*
+#maincontent .two_col {
+				float:left;
+				width:100%;
+				padding:0 10px;
+				}*/
+#navigation{display:none;}
+#container div.clear .mainwrapper, #container div.clear .altwrapper {
+			width: 960px;}
 
 
 
