@@ -7,7 +7,7 @@
     
     
 /* Event list */
-table {width:100%;border-collapse:collapse}
+table {clear:both;width:100%;border-collapse:collapse}
 table tr:hover, table tr.alt:hover{
 	background:#ffffcc;
 }
@@ -61,9 +61,11 @@ table.wp-calendar td:hover{
 }
 table.wp-calendar td.pad:hover{background:none}
 
+
+table.wp-calendar{clear:both;margin:48px 0 10px 0;}
+
 /*caption nav*/
-table.wp-calendar{clear:both;margin:10px 0;}
-table.wp-calendar caption{position:absolute;right:0;top:0;margin-top:35px;}
+table.wp-calendar caption{position:absolute;right:0;top:0;margin-top:10px;}
 .month_cal table.wp-calendar caption{margin-left:275px;}
 table.wp-calendar caption li{height:34px;background:url(images/caption_middle.gif) repeat-x left top;display:block;float:left;}
 table.wp-calendar caption li#monthvalue, table.wp-calendar caption li#yearvalue{
@@ -77,7 +79,6 @@ background-position:0 -34px;
 }
 
 /* month view */
-
 .month_cal table.wp-calendar{margin:45px 0 20px 0;}
 .month_cal table.wp-calendar td{
 	width:124px;
@@ -88,17 +89,35 @@ background-position:0 -34px;
 .month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:126px;display:block;float:left;margin-bottom:1px;}
 .month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
+.month_cal table.wp-calendar caption{margin-top:35px;}
 
 
-
-ul#frontend_view_selector{width:300px;float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
+ul#frontend_view_selector{float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
 ul#frontend_view_selector li{display:block;float:right;margin:0 0 -1px 10px;border: 1px solid #999; padding:4px;}
 
 ul#frontend_view_selector li{display:block;float:right;margin:0 0 -1px 10px;border: 1px solid #999; padding:4px;}
 
+/*year view*/
+.year_cal table.wp-calendar caption{display:none}
+.year_cal table tr:hover{
+	background:none;
+}
+h1.year_main{	 padding: 0 0 0 20px!important; margin:0;
+                 background: url(images/date.gif) no-repeat 0 27px;}
+
+/*overwrite UNL template to expand to full width */
 #navigation{display:none;}
 #container div.clear .mainwrapper, #container div.clear .altwrapper {
 			width: 960px;}
+#maincontent .two_col {
+				clear:both;
+				width:690px;
+				padding:15px 10px 0 0;
+				}
+h2.sec_main{	 padding: 0 0 15px 20px!important; 
+                 background: url(images/date.gif) no-repeat 0 0;}
+			
+			
 
 
 
