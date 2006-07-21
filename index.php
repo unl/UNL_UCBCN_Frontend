@@ -27,6 +27,12 @@ if (isset($_GET['id'])&&!empty($_GET['id'])) {
 	$view = 'event';
 }
 
+if (isset($_GET['format'])) {
+	$format = $_GET['format'];
+} else {
+	$format = 'html';
+}
+
 $front = new UNL_UCBCN_Frontend(array('dsn'=>'mysqli://eventcal:eventcal@localhost/eventcal',
 											'template'		=> 'default',
 											'uri'			=> '',
@@ -35,7 +41,7 @@ $front = new UNL_UCBCN_Frontend(array('dsn'=>'mysqli://eventcal:eventcal@localho
 											'month'			=> $m,
 											'day'			=> $d));
 
-$front->run($view);
+$front->run($view,$format);
 UNL_UCBCN::displayRegion($front);
 
 ?>

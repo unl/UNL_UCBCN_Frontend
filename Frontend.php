@@ -60,7 +60,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		return implode("\n",$n);
 	}
 	
-	function run($view='')
+	function run($view=NULL,$format=NULL)
 	{
 		switch($view) {
 			case 'event':
@@ -70,6 +70,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				$this->output = $this->getEventInstance($id);
 				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
 			break;
+			default:
 			case 'day':
 				$this->output = new UNL_UCBCN_Frontend_Day(array(
 											'dsn'		=> $this->dsn,
@@ -84,6 +85,24 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			case 'year':
 				$this->output[] = '<h1 class="year_main">'.$this->year.'</h1>';
 				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year);
+			break;
+		}
+		switch($format) {
+			case 'xml':
+				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_XML');
+			break;
+			case 'hcalendar':
+				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_hcalendar');
+			break;
+			case 'ics':
+				// Add header for ics file..?
+			case 'ical':
+			case 'icalendar':
+				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_icalendar');
+			break;
+			case 'html':
+			default:
+				// Standard template works for html.
 			break;
 		}
 	}
