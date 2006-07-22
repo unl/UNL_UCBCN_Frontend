@@ -6,25 +6,28 @@
 </tr>
 </thead>
 <tfoot></tfoot>
-<tbody>
+<tbody class="vcalendar">
 <?php
 $oddrow = false;
 foreach ($this->events as $e) {
 	$eventdatetime = $e->getLink('id','eventdatetime','event_id');
-	$row = '<tr';
+	$row = '<tr class="vevent';
 	if ($oddrow) {
-		$row .= ' class="alt"';
+		$row .= ' alt';
 	}
-	$row .= '>';
+	$row .= '">';
 	$oddrow = !$oddrow;
 	$row .=	'<td class="date">';
 	if (isset($eventdatetime->starttime)) {
-            $row .= date('g:i a',strtotime($eventdatetime->starttime));
+            $row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($eventdatetime->starttime)).'">'.date('g:i a',strtotime($eventdatetime->starttime)).'</abbr>';
     } else {
             $row .= 'Unknown';
     }
+    if (isset($eventdatetime->endtime)) {
+    	$row .= '<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($eventdatetime->endtime)).'">'.date('g:i a',strtotime($eventdatetime->endtime)).'</abbr>';
+    }
 	$row .= '</td>' .
-			'<td class="title"><a href="?id='.$eventdatetime->id.'">'.$e->title.'</a></td>' .
+			'<td class="title summary"><a class="url" href="?id='.$eventdatetime->id.'">'.$e->title.'</a></td>' .
 			'</tr>';
 	echo $row;
 } ?>
