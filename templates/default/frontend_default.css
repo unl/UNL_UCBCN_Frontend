@@ -78,17 +78,13 @@ table.wp-calendar caption li{height:34px;background:url(images/caption_middle.gi
 table.wp-calendar caption li#monthvalue, table.wp-calendar caption li#yearvalue{
 margin-top:-2px;padding:6px 3px 0;}
 table.wp-calendar caption a{color:#fff;}
+table.wp-calendar caption a:hover{color:#fff;}
 table.wp-calendar caption a#prev_month, table.wp-calendar caption a#next_month{text-indent:-9999em;
 	display:block;background:#fff url(images/month_prev.gif) no-repeat; width:25px; height:30px;}
 table.wp-calendar caption a#next_month{background:url(images/month_next.gif) no-repeat;}
 table.wp-calendar caption a#prev_month:hover, table.wp-calendar caption a#next_month:hover{
 background-position:0 -34px;
 }
-
-/* day view*/
-* html .day_cal{padding-top:30px;}
-* html table.wp-calendar{margin:10px 0 0;}
-* html table.wp-calendar caption{padding:0 0 0 75px;}
 
 /* month view */
 .month_cal table.wp-calendar{margin:45px 0 20px 0;}
@@ -118,12 +114,13 @@ ul#frontend_view_selector li{display:block;float:right;margin:0 0 -1px 10px;bord
 ul#frontend_view_selector li{display:block;float:right;margin:0 0 -1px 10px;border: 1px solid #999; padding:4px;}
 
 /*year view*/
+.year_cal table.wp-calendar{margin:0;}
 .year_cal table.wp-calendar caption{display:none}
 .year_cal table tr:hover{
 	background:none;
 }
-h1.year_main{	 padding: 0 0 0 20px!important; margin:0;
-                 background: url(images/date.gif) no-repeat 0 27px;}
+h1.year_main{	padding: 0 0 0 20px!important; margin:40px 0 10px;
+                 background: url(images/date.gif) no-repeat 0 0;}
 
 /*overwrite UNL template to expand to full width */
 #navigation{display:none;}
@@ -135,8 +132,12 @@ h1.year_main{	 padding: 0 0 0 20px!important; margin:0;
 				padding:15px 10px 0 0;
 				}
 
-			
-			
+/* day view*/
+* html .day_cal, * html .month_cal table.wp-calendar{margin:10px 0 0;padding-top:30px;}
+* html table.wp-calendar{margin:10px 0 0;}
+* html table.wp-calendar caption{padding:0 0 0 75px;}
+* html .month_cal table.wp-calendar caption{margin-top:0;margin-left:0;padding-left:805px;}
+* html h1.year_main{margin:15px 0 10px;}		
 
 
 
