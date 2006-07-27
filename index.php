@@ -40,7 +40,16 @@ $front = new UNL_UCBCN_Frontend(array('dsn'=>'mysqli://eventcal:eventcal@localho
 											'year'			=> $y,
 											'month'			=> $m,
 											'day'			=> $d));
-
+if (isset($_GET['calendar_shortname'])&&!empty($_GET['calendar_shortname'])) {
+	$front->calendar = $front->factory('calendar');
+	$front->calendar->shortname = $_GET['calendar_shortname'];
+	if (!$front->calendar->find()) {
+		header('HTTP/1.0 404 Not Found');
+		$front->output[] = new UNL_UCBCN_Error('The calendar you requested could not be found.');
+	} else {
+		$front->calendar->fetch();
+	}
+}
 $front->run($view,$format);
 UNL_UCBCN::displayRegion($front);
 

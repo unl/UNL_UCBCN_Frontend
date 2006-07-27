@@ -99,7 +99,11 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
 											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
 									'ORDER BY eventdatetime.starttime ASC');
-			return $res->numRows();
+			if (!PEAR::isError($res)) {
+				return $res->numRows();
+			} else {
+				return new UNL_UCBCN_Error($res->getMessage());
+			}
 		} else {
 			$eventdatetime = $this->factory('eventdatetime');
 			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
