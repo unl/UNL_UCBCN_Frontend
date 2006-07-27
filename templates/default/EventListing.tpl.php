@@ -27,7 +27,8 @@ foreach ($this->events as $e) {
     	$row .= '<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($eventdatetime->endtime)).'">'.date('g:i a',strtotime($eventdatetime->endtime)).'</abbr>';
     }
 	$row .= '</td>' .
-			'<td class="title summary"><a class="url" href="?id='.$eventdatetime->id.'">'.$e->title.'</a></td>' .
+			'<td><a class="url title" href="?id='.$eventdatetime->id.'">'.$e->title.'</a>' .
+					'<blockquote class="summary">'.$e->description.'</blockquote></td>' .
 			'</tr>';
 	echo $row;
 } ?>
