@@ -81,21 +81,27 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 	
 	function dayEventList($day)
 	{
+		$return = array();
 		$eventdatetime = $this->factory('eventdatetime');
-		$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
 		if (isset($this->calendar)) {
-			$eventdatetime->joinAdd($this->calendar);
+			$eventdatetime->query('SELECT DISTINCT eventdatetime.* FROM event,calendar_has_event,eventdatetime ' .
+									'WHERE calendar_has_event.calendar_id='.$this->calendar->id.' ' .
+											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
+											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
+									'ORDER BY eventdatetime.starttime ASC');
+		} else {
+			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
+			$eventdatetime->find();
 		}
-		if ($eventdatetime->find()) {
-			$return = array();
-			$return[] = '<ul>';
-			while ($eventdatetime->fetch()) {
-				$event = $eventdatetime->getLink('event_id');
-				if (isset($event) && is_object($event)) {
-					$return[] = '<li><a href="?id='.$eventdatetime->id.'">'.$event->title.'</a></li>';
-				}
+		$return[] = '<ul>';
+		while ($eventdatetime->fetch()) {
+			$event = $eventdatetime->getLink('event_id');
+			if (isset($event) && is_object($event)) {
+				$return[] = '<li><a href="?id='.$eventdatetime->id.'">'.$event->title.'</a></li>';
 			}
-			$return[] = '</ul>';
+		}
+		$return[] = '</ul>';
+		if (count($return)>2) {
 			return implode("\n",$return);
 		} else {
 			return '';

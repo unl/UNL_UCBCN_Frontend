@@ -89,11 +89,11 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
 			break;
 			case 'month':
-				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month);
+				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month,$this->calendar);
 			break;
 			case 'year':
 				$this->output[] = '<h1 class="year_main">'.$this->year.'</h1>';
-				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year);
+				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year,$this->calendar);
 			break;
 		}
 		switch($format) {

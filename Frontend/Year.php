@@ -12,13 +12,14 @@ class UNL_UCBCN_Frontend_Year extends UNL_UCBCN
 {
 	public $year;
 	public $monthwidgets = array();
-	
-	function __construct($y)
+	public $calendar;
+	function __construct($y,$calendar)
 	{
 		$this->year = $y;
+		$this->calendar = $calendar;
 		$m = 1;
 		for ($m=1;$m<=12;$m++) {
-			$this->monthwidgets[] = new UNL_UCBCN_Frontend_MonthWidget($this->year,$m);
+			$this->monthwidgets[] = new UNL_UCBCN_Frontend_MonthWidget($this->year,$m,$this->calendar);
 		}
 	}
 }
