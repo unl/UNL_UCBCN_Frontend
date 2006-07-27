@@ -36,22 +36,23 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 	 * @param int $y Year
 	 * @param int $m Month
 	 */
-	function __construct($y,$m)
+	function __construct($y,$m,$calendar=NULL)
 	{
 		$this->year = $y;
 		$this->month = $m;
+		$this->calendar = $calendar;
 		$Month = new Calendar_Month_Weekdays($y, $m);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
-		$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&amp;m='.$PMonth->thisMonth().'&amp;d='.$PMonth->thisDay();
+		$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&amp;m='.$PMonth->thisMonth();
 		$NMonth = $Month->nextMonth('object');
-		$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&amp;m='.$NMonth->thisMonth().'&amp;d='.$NMonth->thisDay();
+		$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&amp;m='.$NMonth->thisMonth();
 		
-$this->caption = '<ul>
-<li><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'"><< </a></li>
-<li id="monthvalue"><a href="?y='.$Month->thisYear().'&amp;m='.$Month->thisMonth().'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
-<li id="yearvalue"><a href="?y='.$Month->thisYear().'">'.$Month->thisYear().'</a></li>
-<li><a href="'.$next.'" id="next_month" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> >></a></li>
-</ul>';
+		$this->caption = '<ul>
+		<li><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'"><< </a></li>
+		<li id="monthvalue"><a href="?y='.$Month->thisYear().'&amp;m='.$Month->thisMonth().'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
+		<li id="yearvalue"><a href="?y='.$Month->thisYear().'">'.$Month->thisYear().'</a></li>
+		<li><a href="'.$next.'" id="next_month" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> >></a></li>
+		</ul>';
 
 		//Determine selected days
 		$selectedDays = array();
@@ -68,7 +69,7 @@ $this->caption = '<ul>
 			// isFirst() to find start of week
 			if ( $Day->isFirst() )
 				$this->tbody .= "<tr>\n";
-			if ( $this->dayHasEvents($Day) ) {
+			if ( $this->dayHasEvents($Day,$this->calendar) ) {
 				$this->tbody .= "<td class='selected'><a href='$link'>".$Day->thisDay()."</a></td>\n";
 			} else if ( $Day->isEmpty() ) {
 				$this->tbody .= "<td class='empty'>".$Day->thisDay()."</td>\n";
@@ -90,12 +91,20 @@ $this->caption = '<ul>
 	 */
 	function dayHasEvents($day,$calendar = NULL)
 	{
-		$eventdatetime = $this->factory('eventdatetime');
-		$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
+		
 		if (isset($calendar)) {
-			$eventdatetime->joinAdd($calendar);
+			$db =& $calendar->getDatabaseConnection();
+			$res =& $db->query('SELECT DISTINCT eventdatetime.id FROM event,calendar_has_event,eventdatetime ' .
+									'WHERE calendar_has_event.calendar_id='.$calendar->id.' ' .
+											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
+											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
+									'ORDER BY eventdatetime.starttime ASC');
+			return $res->numRows();
+		} else {
+			$eventdatetime = $this->factory('eventdatetime');
+			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
+			return $eventdatetime->find();
 		}
-		return $eventdatetime->find();
 	}
 	
 }

@@ -40,21 +40,27 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 	
 	function showEventListing()
 	{
+		$eventlist = new UNL_UCBCN_EventListing();
 		$day = new Calendar_Day($this->year,$this->month,$this->day);
 		$eventdatetime = $this->factory('eventdatetime');
 		if (isset($this->calendar)) {
-			$eventdatetime->joinAdd($this->calendar);
+			$eventdatetime->query('SELECT DISTINCT eventdatetime.* FROM event,calendar_has_event,eventdatetime ' .
+									'WHERE calendar_has_event.calendar_id='.$this->calendar->id.' ' .
+											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
+											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
+									'ORDER BY eventdatetime.starttime ASC');
+		} else {
+			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
+			$eventdatetime->find();
 		}
-		$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
-		if ($eventdatetime->find()) {
-			$eventlist = new UNL_UCBCN_EventListing();
-			while ($eventdatetime->fetch()) {
-				// Populate the events to display.
-				$event = $eventdatetime->getLink('event_id');
-				if ($event) {
-					$eventlist->events[] = $event;
-				}
+		while ($eventdatetime->fetch()) {
+			// Populate the events to display.
+			$event = $eventdatetime->getLink('event_id');
+			if ($event) {
+				$eventlist->events[] = $event;
 			}
+		}
+		if (count($eventlist->events)) {
 			return $eventlist;
 		} else {
 			return 'Sorry, no events were found for today!';

@@ -45,6 +45,14 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	function __construct($options)
 	{
 		parent::__construct($options);
+		if (!isset($this->calendar)) {
+			$this->calendar = $this->factory('calendar');
+			if (isset($_GET['calendar_id'])) {
+				$this->calendar->get($_GET['calendar_id']);
+			} elseif (!$this->calendar->get(1)) {
+				return new UNL_UCBCN_Error('No calendar specified or could be found.');
+			}
+		}
 		$this->navigation = $this->showNavigation();
 		$this->doctitle = 'Events';
 	}
@@ -68,7 +76,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 					$id = $_GET['id'];
 				}
 				$this->output = $this->getEventInstance($id);
-				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
+				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
 			break;
 			default:
 			case 'day':
@@ -76,8 +84,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 											'dsn'		=> $this->dsn,
 											'year'		=> $this->year,
 											'month'		=> $this->month,
-											'day'		=> $this->day));
-				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month);
+											'day'		=> $this->day,
+											'calendar'	=> $this->calendar));
+				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
 			break;
 			case 'month':
 				$this->output = new UNL_UCBCN_Frontend_Month($this->year,$this->month);
