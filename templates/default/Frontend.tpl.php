@@ -42,8 +42,8 @@
 			<div id="titlegraphic">
 				<!-- WDN: see glossary item 'title graphics' -->
 				<!-- InstanceBeginEditable name="titlegraphic" -->
-				<h1>UNL Events</h1>
-				<h2>What We Do Is [Y]Our Business</h2>
+				<h1><?php echo $this->calendar->name; ?> Events</h1>
+				<h2>What We Do Is Your Business</h2>
 				<!-- InstanceEndEditable --></div>
 			<!-- maintitle -->
 		</div>
