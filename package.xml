@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+<package packagerversion="1.4.10" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_UCBCN_Frontend</name>
  <channel>pear.unl.edu</channel>
- <summary>This package provides a viewing frontend to the calendar data.</summary>
- <description>This class extends the UNL UCBerkeley Calendar backend system to create
+ <summary>A public frontend for a University Event Publishing system.</summary>
+ <description>This class extends the UNL UCBCN backend system to create
 			a client frontend. It allows users to view the calendar in a list view, thirty
-			day view, subscribable feeds, downloadable .ics files etc.</description>
+			day view.</description>
  <lead>
   <name>Brett Bieber</name>
   <user>saltybeagle</user>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2006-06-15</date>
- <time>16:56:43</time>
+ <date>2006-07-28</date>
+ <time>08:38:00</time>
  <version>
-  <release>0.0.1</release>
-  <api>0.0.1</api>
+  <release>0.2.0</release>
+  <api>0.1.0</api>
  </version>
  <stability>
-  <release>alpha</release>
-  <api>alpha</api>
+  <release>beta</release>
+  <api>beta</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
- <notes>Initial Release... this is really bare-bones.</notes>
+ <notes>* Add Month, Year, Day views.
+		* Add configuration variables to better play with the manager.
+		* Month widget for Month navigation.
+		* Dependency on Calendar
+		* EventInstance view combines event+eventdatetime
+		* Error handling for frontend
+		* css files prefixed with frontend_
+		* Switch to using .tpl template files_
+		* Frontend now uses UNL CSS templaes by default
+		* Calendar Shortname or ID can be used to select the calendar displayed.</notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -38,30 +47,24 @@
    <dir name="templates">
     <dir name="default">
      <dir name="images">
-      <file name="account_bottom.gif" role="data" />
-      <file name="account_head.gif" role="data" />
-      <file name="account_middle.gif" role="data" />
+      <file name="calnav.gif" role="data" />
+      <file name="caption_middle.gif" role="data" />
       <file name="date.gif" role="data" />
-      <file name="dott.gif" role="data" />
-      <file name="dott.png" role="data" />
-      <file name="head.gif" role="data" />
-      <file name="heading.gif" role="data" />
-      <file name="nav_calendar.png" role="data" />
-      <file name="nav_create.png" role="data" />
-      <file name="nav_import.png" role="data" />
-      <file name="nav_search.png" role="data" />
-      <file name="nav_subscribe.png" role="data" />
-      <file name="title.gif" role="data" />
+      <file name="month_next.gif" role="data" />
+      <file name="month_prev.gif" role="data" />
      </dir> <!-- /templates/default/images -->
-     <file name="default.css" role="data" />
-     <file name="EventListing.php" role="data" />
-     <file name="Frontend.php" role="data" />
-     <file name="Frontend_Day.php" role="data" />
-     <file name="Frontend_Month.php" role="data" />
-     <file name="Frontend_MonthWidget.php" role="data" />
-     <file name="Frontend_Year.php" role="data" />
-     <file name="ieonly.css" role="data" />
-     <file name="main.css" role="data" />
+     <file name="Error.tpl.php" role="data" />
+     <file name="EventInstance.tpl.php" role="data" />
+     <file name="EventListing.tpl.php" role="data" />
+     <file name="Frontend.tpl.php" role="data" />
+     <file name="Frontend_Day.tpl.php" role="data" />
+     <file name="frontend_default.css" role="data" />
+     <file name="Frontend_hcalendar.tpl.php" role="data" />
+     <file name="frontend_ieonly.css" role="data" />
+     <file name="frontend_main.css" role="data" />
+     <file name="Frontend_Month.tpl.php" role="data" />
+     <file name="Frontend_MonthWidget.tpl.php" role="data" />
+     <file name="Frontend_Year.tpl.php" role="data" />
     </dir> <!-- /templates/default -->
    </dir> <!-- /templates -->
    <file name="Frontend.php" role="php">
@@ -147,9 +150,31 @@
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2006-06-15</date>
+   <date>2006-07-27</date>
    <license uri="http://www.php.net/license">PHP License</license>
    <notes>Initial Release... this is really bare-bones.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2006-07-28</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>* Add Month, Year, Day views.
+		* Add configuration variables to better play with the manager.
+		* Month widget for Month navigation.
+		* Dependency on Calendar
+		* EventInstance view combines event+eventdatetime
+		* Error handling for frontend
+		* css files prefixed with frontend_
+		* Switch to using .tpl template files_
+		* Frontend now uses UNL CSS templaes by default
+		* Calendar Shortname or ID can be used to select the calendar displayed.</notes>
   </release>
  </changelog>
 </package>

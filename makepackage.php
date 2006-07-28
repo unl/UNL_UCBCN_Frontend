@@ -28,7 +28,7 @@ $pfm = new PEAR_PackageFileManager2();
 $pfm->setOptions(array(
 	'packagedirectory' => dirname(__FILE__),
 	'baseinstalldir' => 'UNL/UCBCN',
-	'filelistgenerator' => 'file',
+	'filelistgenerator' => 'cvs',
 	'ignore' => array(	'package.xml',
 						'.project',
 						'*.tgz',
@@ -47,16 +47,25 @@ $pfm->setOptions(array(
 ));
 $pfm->setPackage('UNL_UCBCN_Frontend');
 $pfm->setPackageType('php'); // this is a PEAR-style php script package
-$pfm->setSummary('This package provides a viewing frontend to the calendar data.');
-$pfm->setDescription('This class extends the UNL UCBerkeley Calendar backend system to create
+$pfm->setSummary('A public frontend for a University Event Publishing system.');
+$pfm->setDescription('This class extends the UNL UCBCN backend system to create
 			a client frontend. It allows users to view the calendar in a list view, thirty
-			day view, subscribable feeds, downloadable .ics files etc.');
+			day view.');
 $pfm->setChannel('pear.unl.edu');
-$pfm->setAPIStability('alpha');
-$pfm->setReleaseStability('alpha');
-$pfm->setAPIVersion('0.0.1');
-$pfm->setReleaseVersion('0.0.1');
-$pfm->setNotes('Initial Release... this is really bare-bones.');
+$pfm->setAPIStability('beta');
+$pfm->setReleaseStability('beta');
+$pfm->setAPIVersion('0.1.0');
+$pfm->setReleaseVersion('0.2.0');
+$pfm->setNotes('* Add Month, Year, Day views.
+		* Add configuration variables to better play with the manager.
+		* Month widget for Month navigation.
+		* Dependency on Calendar
+		* EventInstance view combines event+eventdatetime
+		* Error handling for frontend
+		* css files prefixed with frontend_
+		* Switch to using .tpl template files_
+		* Frontend now uses UNL CSS templaes by default
+		* Calendar Shortname or ID can be used to select the calendar displayed.');
 
 $pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->setLicense('PHP License', 'http://www.php.net/license');
