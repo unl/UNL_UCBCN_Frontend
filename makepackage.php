@@ -23,9 +23,9 @@ require_once 'PEAR/Frontend.php';
  */
 PEAR::setErrorHandling(PEAR_ERROR_DIE);
 chdir(dirname(__FILE__));
-//$pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
-$pfm = new PEAR_PackageFileManager2();
-$pfm->setOptions(array(
+$pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
+//$pfm = new PEAR_PackageFileManager2();
+//$pfm->setOptions(array(
 	'packagedirectory' => dirname(__FILE__),
 	'baseinstalldir' => 'UNL/UCBCN',
 	'filelistgenerator' => 'cvs',
@@ -67,7 +67,7 @@ $pfm->setNotes('* Add Month, Year, Day views.
 		* Frontend now uses UNL CSS templaes by default
 		* Calendar Shortname or ID can be used to select the calendar displayed.');
 
-$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
+//$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->setLicense('PHP License', 'http://www.php.net/license');
 $pfm->clearDeps();
 $pfm->setPhpDep('5.0.0');
