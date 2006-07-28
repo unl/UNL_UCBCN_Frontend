@@ -55,17 +55,8 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.1.0');
-$pfm->setReleaseVersion('0.2.0');
-$pfm->setNotes('* Add Month, Year, Day views.
-		* Add configuration variables to better play with the manager.
-		* Month widget for Month navigation.
-		* Dependency on Calendar
-		* EventInstance view combines event+eventdatetime
-		* Error handling for frontend
-		* css files prefixed with frontend_
-		* Switch to using .tpl template files_
-		* Frontend now uses UNL CSS templaes by default
-		* Calendar Shortname or ID can be used to select the calendar displayed.');
+$pfm->setReleaseVersion('0.2.5');
+$pfm->setNotes('* Fix');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->setLicense('PHP License', 'http://www.php.net/license');
