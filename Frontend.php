@@ -104,7 +104,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_hcalendar');
 			break;
 			case 'ics':
-				// Add header for ics file..?
+				// We'll be outputting a ics file
+				header('Content-type: text/calendar');
+				header('Content-Disposition: attachment; filename="events.ics"');
 			case 'ical':
 			case 'icalendar':
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_icalendar');
