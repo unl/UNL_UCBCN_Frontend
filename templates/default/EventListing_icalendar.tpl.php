@@ -3,13 +3,6 @@
  * This is the output for an event listing in icalendar format.
  * @package UNL_UCBCN_Frontend
  */
-?>
-BEGIN:VCALENDAR
-CALSCALE:GREGORIAN
-X-WR-TIMEZONE;VALUE=TEXT:US/Central
-METHOD:PUBLISH
-VERSION:2.0
-<?php
 foreach ($this->events as $e) {
 	$eventdatetime = $e->getLink('id','eventdatetime','event_id');
 	$out = array();
@@ -29,4 +22,3 @@ foreach ($this->events as $e) {
 	$out[] = 'END:VEVENT';
 	echo implode("\n",$out);
 } ?>
-END:VCALENDAR
