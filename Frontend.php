@@ -27,6 +27,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	var $day;
 	/** URI to the management frontend */
 	public $uri = '';
+	/** Format of URI's  querystring|rest */
+	public $uriformat = 'querystring';
 	/** URI to the management interface UNL_UCBCN_Manager */
 	public $manageruri = '';
 	/** Navigation */
@@ -62,8 +64,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		$n = array();
 		$n[] = '<ul id="frontend_view_selector">';
 		$n[] = '<li id="todayview"><a href="'.$this->uri.'">Today\'s Events</a></li>';
-		$n[] = '<li id="monthview"><a href="'.$this->uri.'?'.date('\m=m\&\a\m\p\;\y=Y').'">This Month</a></li>';
-		$n[] = '<li id="yearview"><a href="'.$this->uri.'?'.date('\y=Y').'">This Year</a></li>';
+		$n[] = '<li id="monthview"><a href="'.self::formatURL(array('y'=>date('Y'),'m'=>date('m'))).'">This Month</a></li>';
+		$n[] = '<li id="yearview"><a href="'.self::formatURL(array('y'=>date('Y'))).'">This Year</a></li>';
 		$n[] = '</ul>';
 		return implode("\n",$n);
 	}
@@ -127,6 +129,51 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	function getEventInstance($id)
 	{
 		return new UNL_UCBCN_EventInstance($id);
+	}
+	
+	/**
+	 * Returns a formatted URL.
+	 * 
+	 * @param array Associative array of the values to add to the URL
+	 * @param bool If true and format is querystring, ampersands will be &amp;
+	 */
+	function formatURL($values,$encode = true)
+	{
+		$order = array('calendar','y','m','d','id');
+		global $_UNL_UCBCN;
+		$url = '?';
+		if (isset($_UNL_UCBCN['uri'])) {
+			$url = $_UNL_UCBCN['uri'];
+		}
+		if (isset($_UNL_UCBCN['uriformat'])) {
+			$format = $_UNL_UCBCN['uriformat'];
+		} else {
+			$format = 'querystring';
+		}
+		switch($format) {
+			case 'rest':
+			case 'REST':
+				foreach ($order as $val) {
+					if (isset($values[$val])) {
+						$url .= $values[$val].'/';
+					}
+				}
+			break;
+			case 'querystring':
+			default:
+				foreach ($order as $val) {
+					if (isset($values[$val])) {
+						$url .= $val.'='.$values[$val];
+						if ($encode == true) {
+							$url .= '&amp;';
+						} else {
+							$url .= '&';
+						}
+					}
+				}
+			break;
+		}
+		return $url;
 	}
 }
 ?>

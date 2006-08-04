@@ -55,16 +55,20 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 		}
 		while ($eventdatetime->fetch()) {
 			// Populate the events to display.
-			$event = $eventdatetime->getLink('event_id');
-			if ($event) {
-				$eventlist->events[] = $event;
-			}
+			$eventlist->events[] = new UNL_UCBCN_EventInstance($eventdatetime);
 		}
 		if (count($eventlist->events)) {
 			return $eventlist;
 		} else {
 			return 'Sorry, no events were found for today!';
 		}
+	}
+	
+	function getURL()
+	{
+		return UNL_UCBCN_Frontend::formatURL(array(	'd'=>$this->day,
+														'm'=>$this->month,
+														'y'=>$this->year));
 	}
 	
 }

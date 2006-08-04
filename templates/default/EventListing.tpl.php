@@ -10,7 +10,6 @@
 <?php
 $oddrow = false;
 foreach ($this->events as $e) {
-	$eventdatetime = $e->getLink('id','eventdatetime','event_id');
 	$row = '<tr class="vevent';
 	if ($oddrow) {
 		$row .= ' alt';
@@ -18,17 +17,17 @@ foreach ($this->events as $e) {
 	$row .= '">';
 	$oddrow = !$oddrow;
 	$row .=	'<td class="date">';
-	if (isset($eventdatetime->starttime)) {
-            $row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($eventdatetime->starttime)).'">'.date('g:i a',strtotime($eventdatetime->starttime)).'</abbr>';
+	if (isset($e->eventdatetime->starttime)) {
+            $row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
     } else {
             $row .= 'Unknown';
     }
-    if (isset($eventdatetime->endtime)) {
-    	$row .= '<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($eventdatetime->endtime)).'">'.date('g:i a',strtotime($eventdatetime->endtime)).'</abbr>';
+    if (isset($e->eventdatetime->endtime)) {
+    	$row .= '<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
     }
 	$row .= '</td>' .
-			'<td><a class="url title" href="?id='.$eventdatetime->id.'">'.$e->title.'</a>' .
-					'<blockquote class="summary">'.$e->description.'</blockquote></td>' .
+			'<td><a class="url title" href="'.$e->getURL().'">'.$e->event->title.'</a>' .
+					'<blockquote class="summary">'.$e->event->description.'</blockquote></td>' .
 			'</tr>';
 	echo $row;
 } ?>

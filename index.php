@@ -36,6 +36,7 @@ if (isset($_GET['format'])) {
 $front = new UNL_UCBCN_Frontend(array('dsn'=>'mysqli://eventcal:eventcal@localhost/eventcal',
 											'template'		=> 'default',
 											'uri'			=> '',
+											'uriformat'		=> 'querystring',
 											'manageruri'	=> '',
 											'year'			=> $y,
 											'month'			=> $m,

@@ -43,14 +43,16 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		$this->calendar = $calendar;
 		$Month = new Calendar_Month_Weekdays($y, $m, 0);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
-		$prev = $_SERVER['PHP_SELF'].'?y='.$PMonth->thisYear().'&amp;m='.$PMonth->thisMonth();
+		$prev = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$PMonth->thisYear(),
+														'm'=>$PMonth->thisMonth()));
 		$NMonth = $Month->nextMonth('object');
-		$next = $_SERVER['PHP_SELF'].'?y='.$NMonth->thisYear().'&amp;m='.$NMonth->thisMonth();
+		$next = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$NMonth->thisYear(),
+														'm'=>$NMonth->thisMonth()));
 		
 		$this->caption = '<ul>
 		<li><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'"><< </a></li>
-		<li id="monthvalue"><a href="?y='.$Month->thisYear().'&amp;m='.$Month->thisMonth().'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
-		<li id="yearvalue"><a href="?y='.$Month->thisYear().'">'.$Month->thisYear().'</a></li>
+		<li id="monthvalue"><a href="'.UNL_UCBCN_Frontend::formatURL(array('y'=>$Month->thisYear(),'m'=>$Month->thisMonth())).'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
+		<li id="yearvalue"><a href="'.UNL_UCBCN_Frontend::formatURL(array('y'=>$Month->thisYear())).'">'.$Month->thisYear().'</a></li>
 		<li><a href="'.$next.'" id="next_month" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> >></a></li>
 		</ul>';
 
@@ -61,10 +63,9 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		while ( $Day = $Month->fetch() ) {
 	
 	    	// Build a link string for each day
-			$link = $_SERVER['PHP_SELF'].
-			'?y='.$Day->thisYear().
-			'&amp;m='.$Day->thisMonth().
-			'&amp;d='.$Day->thisDay();
+			$link = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Day->thisYear(),
+															'm'=>$Day->thisMonth(),
+															'd'=>$Day->thisDay()));
 			
 			// isFirst() to find start of week
 			if ( $Day->isFirst() )
