@@ -142,7 +142,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		$order = array('calendar','y','m','d','id');
 		global $_UNL_UCBCN;
 		$url = '?';
-		if (isset($_UNL_UCBCN['uri'])) {
+		if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
 			$url = $_UNL_UCBCN['uri'];
 		}
 		if (isset($_UNL_UCBCN['uriformat'])) {
