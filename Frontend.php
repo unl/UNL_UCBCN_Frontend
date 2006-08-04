@@ -43,6 +43,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	public $doctitle;
 	/** Section Title */
 	public $sectitle;
+	public $view = 'day';
+	public $format = 'html';
 	
 	function __construct($options)
 	{
@@ -70,9 +72,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		return implode("\n",$n);
 	}
 	
-	function run($view=NULL,$format=NULL)
+	function run()
 	{
-		switch($view) {
+		switch($this->view) {
 			case 'event':
 				if (isset($_GET['id'])) {
 					$id = $_GET['id'];
@@ -98,7 +100,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year,$this->calendar);
 			break;
 		}
-		switch($format) {
+		switch($this->format) {
 			case 'xml':
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_XML');
 			break;
@@ -174,6 +176,66 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			break;
 		}
 		return $url;
+	}
+	
+	/**
+	 * This function attempts to determine the view parameters for the frontend output.
+	 * 
+	 * @return array options to be sent to the constructor.
+	 */
+	function determineView($method='GET')
+	{
+		$view = array();
+		switch ($method) {
+			case 'GET':
+			case '_GET':
+			case 'get':
+			default:
+				$method = '_GET';
+			break;
+			case 'post':
+			case 'POST':
+			case '_POST':
+				$method = '_POST';
+			break;
+		}
+		$view['view'] = 'day';
+		if (isset($GLOBALS[$method]['y'])&&!empty($GLOBALS[$method]['y'])) {
+			$view['year'] = (int)$GLOBALS[$method]['y'];
+			$view['view'] = 'year';
+		} else {
+			$view['year'] = date('Y');
+		}
+		if (isset($GLOBALS[$method]['m'])&&!empty($GLOBALS[$method]['m'])) {
+			$view['view'] = 'month';
+			$view['month'] = (int)$GLOBALS[$method]['m'];
+		} else {
+			$view['month'] = date('m');
+		}
+		if (isset($GLOBALS[$method]['d'])&&!empty($GLOBALS[$method]['d'])) {
+			$view['view'] = 'day';
+			$view['day'] = (int)$GLOBALS[$method]['d'];
+		} else {
+			$view['day'] = date('j');
+		}
+		if (isset($GLOBALS[$method]['id'])&&!empty($GLOBALS[$method]['id'])) {
+			$view['view'] = 'event';
+		}
+		
+		if (isset($GLOBALS[$method]['format'])) {
+			$view['format'] = $GLOBALS[$method]['format'];
+		} else {
+			$view['format'] = 'html';
+		}
+		return $view;
+	}
+	
+	/**
+	 * Get's a uniqe key for this object for reference in cache.
+	 */
+	function getCacheKey()
+	{
+		return md5(serialize(array_merge($this->determineView(),array($this->calendar->id))));
 	}
 }
 ?>
