@@ -10,6 +10,7 @@ foreach ($this->events as $e) {
 	if (isset($e->eventdatetime->starttime)) {
         $out[] = 'DTSTART;TZID=US/Central:'.date('Ymd\THis',strtotime($e->eventdatetime->starttime));
     }
+    $out[] = 'UID:'.$e->eventdatetime->id;
 	$out[] = 'DTSTAMP:'.date('Ymd\THis',strtotime($e->event->datecreated));
 	$out[] = 'SUMMARY:'.strip_tags($e->event->title);
 	$out[] = 'DESCRIPTION:'.strip_tags($e->event->description);
