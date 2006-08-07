@@ -72,6 +72,36 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		return implode("\n",$n);
 	}
 	
+	/**
+	 * This function is called before the run() function to handle
+	 * any details prior to populating the data in the object, and 
+	 * sends output headers.
+	 * 
+	 * @param bool $cache_hit if data is already cached or not.
+	 */
+	function preRun($cache_hit=false)
+	{
+		switch($this->format) {
+			case 'ics':
+				// We'll be outputting a ics file
+				header('Content-type: text/calendar');
+				header('Content-Disposition: attachment; filename="events.ics"');
+			break;
+		}
+		/*
+		if ($cache_hit == true) {
+			// cached output is about to be sent to the browser.
+		} else {
+			// output is not already cached.
+		}
+		*/
+	}
+	
+	/**
+	 * Runs/builds the frontend object with the display parameters set.
+	 * This function will populate all of the output and member variables with the
+	 * data for the current view.
+	 */
 	function run()
 	{
 		switch($this->view) {
@@ -108,9 +138,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_hcalendar');
 			break;
 			case 'ics':
-				// We'll be outputting a ics file
-				header('Content-type: text/calendar');
-				header('Content-Disposition: attachment; filename="events.ics"');
 			case 'ical':
 			case 'icalendar':
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_icalendar');
