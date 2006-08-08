@@ -18,11 +18,15 @@ foreach ($this->events as $e) {
 	$oddrow = !$oddrow;
 	$row .=	'<td class="date">';
 	if (isset($e->eventdatetime->starttime)) {
-            $row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
+		if (strpos($e->eventdatetime->starttime,'00:00:00')) {
+			$row .= '<span class="dtstart">All day</span>';
+		} else {
+        	$row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
+		}
     } else {
-            $row .= 'Unknown';
+        $row .= 'Unknown';
     }
-    if (isset($e->eventdatetime->endtime)) {
+    if (isset($e->eventdatetime->endtime) && ($e->eventdatetime->endtime != $e->eventdatetime->starttime)) {
     	$row .= '<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
     }
 	$row .= '</td>' .
