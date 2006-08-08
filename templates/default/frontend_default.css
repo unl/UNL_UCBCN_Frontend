@@ -116,6 +116,7 @@ ul#frontend_view_selector li{display:block;float:right;margin:0 0 -1px 10px;bord
 /*year view*/
 .year_cal table.wp-calendar{margin:0;}
 .year_cal table.wp-calendar caption{display:none}
+.year_cal table tr{vertical-align:top}
 .year_cal table tr:hover{
 	background:none;
 }
@@ -135,8 +136,8 @@ h1.year_main{	padding: 0 0 0 20px!important; margin:40px 0 10px;
 /* day view*/
 * html .day_cal, * html .month_cal table.wp-calendar{margin:10px 0 0;padding-top:30px;}
 * html table.wp-calendar{margin:10px 0 0;}
-* html table.wp-calendar caption{padding:0 0 0 75px;}
-* html .month_cal table.wp-calendar caption{margin-top:0;margin-left:0;padding-left:805px;}
+* html table.wp-calendar caption{padding:0 0 0 55px;}
+* html .month_cal table.wp-calendar caption{margin-top:0;margin-left:0;padding-left:785px;}
 * html h1.year_main{margin:15px 0 10px;}		
 
 
