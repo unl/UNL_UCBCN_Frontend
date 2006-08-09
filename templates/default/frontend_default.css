@@ -71,7 +71,7 @@ table.wp-calendar td:hover{
 table.wp-calendar td.pad:hover{background:none}
 
 /*caption nav*/
-table.wp-calendar caption ul{position:absolute;top:0;left:0;margin:-38px 0 0 -21px}
+table.wp-calendar caption ul{position:absolute;top:0;left:0;margin:-38px 0 0 -26px}
 table.wp-calendar caption li{height:34px;background:url(images/caption_middle.gif) repeat-x 0 -2px;display:block;float:left;}
 table.wp-calendar caption li#monthvalue, table.wp-calendar caption li#yearvalue{
 margin-top:0;padding:6px 3px 0;}
@@ -111,7 +111,7 @@ background-position:0 -34px;
 
 
 ul#frontend_view_selector{width:927px;float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
-ul#frontend_view_selector li{display:block;float:right;margin:0 0 -1px 10px;border: 1px solid #999; padding:4px;}
+ul#frontend_view_selector li{display:block;float:left;margin:0 0 -1px 4px;border: 1px solid #999; padding:4px;}
 
 /*year view*/
 .year_cal table.wp-calendar{margin:0;}
@@ -135,9 +135,10 @@ h1.year_main{	padding: 0 0 0 20px!important; margin:40px 0 10px;
 				padding:15px 10px 0 0;
 				}
 
-
+.three_col{width:700px;margin-top:13px;}
 /* IE */
 * html .day_cal{margin-top:45px;}
+* html .three_col{margin-top:-30px;}
 
 * html .col{margin-top:10px;}
 
