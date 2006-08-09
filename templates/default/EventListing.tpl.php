@@ -1,8 +1,8 @@
 <table>
 <thead>
 <tr>
-<th scope="col" class="date"><a href="?orderby=starttime">Time</a></th>
-<th scope="col" class="title"><a href="?orderby=title">Event Title</a></th>
+<th scope="col" class="date"><a href="<?php echo $GLOBALS['_UNL_UCBCN']['uri']; ?>?orderby=starttime">Time</a></th>
+<th scope="col" class="title"><a href="<?php echo $GLOBALS['_UNL_UCBCN']['uri']; ?>?orderby=title">Event Title</a></th>
 </tr>
 </thead>
 <tfoot></tfoot>
