@@ -69,9 +69,9 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 			if ( $Day->isFirst() )
 				$this->tbody .= "<tr>\n";
 			if ( $Day->isEmpty() ) {
-				$this->tbody .= "<td class='empty'>".$Day->thisDay()."</td>\n";
+				$this->tbody .= "<td class='empty'><a href='".$link."'>".$Day->thisDay()."</a></td>\n";
 			} else {
-				$this->tbody .= "<td>".$Day->thisDay().$this->dayEventList($Day)."</td>\n";
+				$this->tbody .= "<td><a href='".$link."'>".$Day->thisDay().'</a>'.$this->dayEventList($Day)."</td>\n";
 			}
 			
 			// isLast() to find end of week
