@@ -106,8 +106,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	{
 		switch($this->view) {
 			case 'event':
-				if (isset($_GET['id'])) {
-					$id = $_GET['id'];
+				if (isset($_GET['eventdatetime_id'])) {
+					$id = $_GET['eventdatetime_id'];
 				}
 				$this->output[] = $this->getEventInstance($id);
 				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
@@ -245,7 +245,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		} else {
 			$view['day'] = date('j');
 		}
-		if (isset($GLOBALS[$method]['id'])&&!empty($GLOBALS[$method]['id'])) {
+		if (isset($GLOBALS[$method]['eventdatetime_id'])&&!empty($GLOBALS[$method]['eventdatetime_id'])) {
 			$view['view'] = 'event';
 		}
 		
