@@ -108,7 +108,7 @@
 				<a href="http://www.unl.edu/webdevnet/">UNL Web Developer Network</a>.
 				For more information see <a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">the project documentation.</a></div>
 		<div class="footer_col">
-				<h3>Ongiong Development</h3>
+				<h3>Ongoing Development</h3>
 				The ongoing development is handled through the UNL 
 				<abbr title="PHP Extension and Application Repository">PEAR</abbr> compatible channel
 				<a href="http://pear.unl.edu/">http://pear.unl.edu/</a>.
