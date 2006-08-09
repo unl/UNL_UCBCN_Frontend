@@ -25,6 +25,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	var $month;
 	/** Day to show events for */
 	var $day;
+	/** Specific eventdatetime_id (if used) */
+	var $eventdatetime_id = NULL;
 	/** URI to the management frontend */
 	public $uri = '';
 	/** Format of URI's  querystring|rest */
@@ -168,7 +170,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function formatURL($values,$encode = true)
 	{
-		$order = array('calendar','y','m','d','id');
+		$order = array('calendar','y','m','d','eventdatetime_id');
 		global $_UNL_UCBCN;
 		$url = '?';
 		if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
@@ -247,6 +249,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		}
 		if (isset($GLOBALS[$method]['eventdatetime_id'])&&!empty($GLOBALS[$method]['eventdatetime_id'])) {
 			$view['view'] = 'event';
+			$view['eventdatetime_id'] = $GLOBALS[$method]['eventdatetime_id'];
 		}
 		
 		if (isset($GLOBALS[$method]['format'])) {
