@@ -7,13 +7,13 @@ UNL_UCBCN::outputTemplate('UNL_UCBCN_EventListing','EventListing_icalendar');
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:UNL_UCBCN//UNL Event Publisher
-X-WR-CALNAME:<?php echo $this->calendar->name; ?>
+X-WR-CALNAME:<?php echo $this->calendar->name."\n"; ?>
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE:US/Central
 METHOD:PUBLISH
 VERSION:2.0
 TZID:US/Central
-LAST-MODIFIED:<?php echo date('Ymd\THis\Z'); ?>
+LAST-MODIFIED:<?php echo date('Ymd\THis\Z')."\n"; ?>
 BEGIN:STANDARD
 DTSTART:20051030T070000
 TZOFFSETTO:-0600
