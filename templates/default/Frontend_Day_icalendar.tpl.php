@@ -11,6 +11,7 @@ X-WR-CALNAME:<?php echo $this->calendar->name."\n"; ?>
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE:US/Central
 METHOD:PUBLISH
+BEGIN:VTIMEZONE
 VERSION:2.0
 TZID:US/Central
 LAST-MODIFIED:<?php echo date('Ymd\THis\Z')."\n"; ?>
