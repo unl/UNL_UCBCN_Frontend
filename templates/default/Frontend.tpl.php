@@ -76,10 +76,11 @@
 			<?php echo $this->navigation; ?>
 			<!-- InstanceBeginEditable name="maincontent" -->
 				<?php if (isset($this->right)) { ?>
-					<div class="two_col left"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
-					<div class="col right">
+					<div class="col left">
 						<?php UNL_UCBCN::displayRegion($this->right); ?>
 					</div>
+					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
+					
 				<?php } else {
 					UNL_UCBCN::displayRegion($this->output);
 				} ?>
