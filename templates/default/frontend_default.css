@@ -110,7 +110,7 @@ background-position:0 -34px;
 
 
 
-ul#frontend_view_selector{width:927px;float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
+ul#frontend_view_selector{position:relative;width:927px;float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
 ul#frontend_view_selector li{display:block;float:left;margin:0 0 -1px 4px;border: 1px solid #999; padding:4px;}
 
 /*year view*/
@@ -137,7 +137,7 @@ h1.year_main{	padding: 0 0 0 20px!important; margin:40px 0 10px;
 
 .three_col{width:700px;margin-top:13px;}
 /* IE */
-* html .day_cal{margin-top:45px;}
+* html .day_cal, * html .three_col h1{margin-top:45px;}
 * html .three_col{margin-top:-30px;}
 
 * html .col{margin-top:10px;}
