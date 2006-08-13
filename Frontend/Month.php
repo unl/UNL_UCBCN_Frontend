@@ -39,7 +39,7 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		$this->year = $y;
 		$this->month = $m;
 		$this->calendar = $calendar;
-		$Month = new Calendar_Month_Weekdays($y, $m);
+		$Month = new Calendar_Month_Weekdays($y, $m, 0);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
 		$prev = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$PMonth->thisYear(),
 														'm'=>$PMonth->thisMonth()));
