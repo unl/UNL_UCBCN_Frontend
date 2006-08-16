@@ -63,8 +63,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				return new UNL_UCBCN_Error('No calendar specified or could be found.');
 			}
 		}
-		$this->navigation = $this->showNavigation();
-		$this->doctitle = 'Events';
 	}
 	
 	function showNavigation()
@@ -110,6 +108,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function run()
 	{
+		$this->doctitle = 'Events';
+		$this->navigation = $this->showNavigation();
 		switch($this->view) {
 			case 'event':
 				if (isset($_GET['eventdatetime_id'])) {
