@@ -42,15 +42,22 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		$Month = new Calendar_Month_Weekdays($y, $m, 0);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
 		$prev = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$PMonth->thisYear(),
-														'm'=>$PMonth->thisMonth()));
+														'm'=>$PMonth->thisMonth(),
+														'calendar'=>$this->calendar->id));
 		$NMonth = $Month->nextMonth('object');
 		$next = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$NMonth->thisYear(),
-														'm'=>$NMonth->thisMonth()));
+														'm'=>$NMonth->thisMonth(),
+														'calendar'=>$this->calendar->id));
 		
 		$this->caption = '<ul>
 		<li><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'"><< </a></li>
-		<li id="monthvalue"><a href="'.UNL_UCBCN_Frontend::formatURL(array('y'=>$Month->thisYear(),'m'=>$Month->thisMonth())).'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
-		<li id="yearvalue"><a href="'.UNL_UCBCN_Frontend::formatURL(array('y'=>$Month->thisYear())).'">'.$Month->thisYear().'</a></li>
+		<li id="monthvalue"><a href="'.
+						UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Month->thisYear(),
+																'm'=>$Month->thisMonth(),
+																'calendar'=>$this->calendar->id)).'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
+		<li id="yearvalue"><a href="'.
+						UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Month->thisYear(),
+																'calendar'=>$this->calendar->id)).'">'.$Month->thisYear().'</a></li>
 		<li><a href="'.$next.'" id="next_month" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> >></a></li>
 		</ul>';
 		
@@ -63,7 +70,8 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 			// Build a link string for each day
 			$link = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Day->thisYear(),
 															'm'=>$Day->thisMonth(),
-															'd'=>$Day->thisDay()));
+															'd'=>$Day->thisDay(),
+															'calendar'=>$this->calendar->id));
 			
 			// isFirst() to find start of week
 			if ( $Day->isFirst() )
@@ -96,7 +104,7 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		}
 		$return[] = '<ul>';
 		while ($eventdatetime->fetch()) {
-			$einstance = new UNL_UCBCN_EventInstance($eventdatetime);
+			$einstance = new UNL_UCBCN_EventInstance($eventdatetime,$this->calendar);
 			$return[] = '<li><a href="'.$einstance->getURL().'">'.$einstance->event->title.'</a></li>';
 		}
 		$return[] = '</ul>';

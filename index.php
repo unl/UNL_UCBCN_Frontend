@@ -8,7 +8,8 @@ $front = new UNL_UCBCN_Frontend(array_merge(array('dsn'=>'mysqli://eventcal:even
 											'template'		=> 'default',
 											'uri'			=> '',
 											'uriformat'		=> 'querystring',
-											'manageruri'	=> ''),
+											'manageruri'	=> '',
+											'default_calendar_id' => 1),
 											UNL_UCBCN_Frontend::determineView()));
 if (isset($_GET['calendar_shortname'])&&!empty($_GET['calendar_shortname'])) {
 	$front->calendar = $front->factory('calendar');

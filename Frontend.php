@@ -45,8 +45,12 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	public $doctitle;
 	/** Section Title */
 	public $sectitle;
+	/** View to be displayed */
 	public $view = 'day';
+	/** format of view */
 	public $format = 'html';
+	/** Default calendar to display. */
+	public $default_calendar_id = 1;
 	
 	function __construct($options)
 	{
@@ -55,7 +59,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			$this->calendar = $this->factory('calendar');
 			if (isset($_GET['calendar_id'])) {
 				$this->calendar->get($_GET['calendar_id']);
-			} elseif (!$this->calendar->get(1)) {
+			} elseif (!$this->calendar->get($this->default_calendar_id)) {
 				return new UNL_UCBCN_Error('No calendar specified or could be found.');
 			}
 		}
@@ -68,8 +72,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		$n = array();
 		$n[] = '<ul id="frontend_view_selector">';
 		$n[] = '<li id="todayview"><a href="'.$this->uri.'">Today\'s Events</a></li>';
-		$n[] = '<li id="monthview"><a href="'.self::formatURL(array('y'=>date('Y'),'m'=>date('m'))).'">This Month</a></li>';
-		$n[] = '<li id="yearview"><a href="'.self::formatURL(array('y'=>date('Y'))).'">This Year</a></li>';
+		$n[] = '<li id="monthview"><a href="'.self::formatURL(array('y'=>date('Y'),'m'=>date('m'),'calendar'=>$this->calendar->id)).'">This Month</a></li>';
+		$n[] = '<li id="yearview"><a href="'.self::formatURL(array('y'=>date('Y'),'calendar'=>$this->calendar->id)).'">This Year</a></li>';
 		$n[] = '</ul>';
 		return implode("\n",$n);
 	}
@@ -186,7 +190,23 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			case 'REST':
 				foreach ($order as $val) {
 					if (isset($values[$val])) {
-						$url .= $values[$val].'/';
+						if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
+							/* A calendar needs to be formmatted into the URL.
+							 * We need to take care to not include it if it is the
+							 * default calendar.
+							 */ 
+							if (is_numeric($values[$val])) {
+								$cid = $values[$val];
+							} else {
+								$cid = UNL_UCBCN_Frontend::getCalendarID($values[$val]);
+							}
+							if ($cid != $_UNL_UCBCN['default_calendar_id']) {
+								// This is link is not for the default calendar, add it to the url.
+								$url .= UNL_UCBCN_Frontend::getCalendarShortname($cid).'/';
+							}
+						} else {
+							$url .= $values[$val].'/';
+						}
 					}
 				}
 			break;
@@ -194,7 +214,19 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			default:
 				foreach ($order as $val) {
 					if (isset($values[$val])) {
-						$url .= $val.'='.$values[$val];
+						if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
+							if (is_numeric($values[$val])) {
+								$cid = $values[$val];
+							} else {
+								$cid = UNL_UCBCN_Frontend::getCalendarID($values[$val]);
+							}
+							if ($cid != $_UNL_UCBCN['default_calendar_id']) {
+								// This is link is not for the default calendar, add it to the url.
+								$url .= 'calendar_id='.$values[$val];
+							}
+						} else {
+							$url .= $val.'='.$values[$val];
+						}
 						if ($encode == true) {
 							$url .= '&amp;';
 						} else {
@@ -266,6 +298,37 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	function getCacheKey()
 	{
 		return md5(serialize(array_merge($this->determineView(),array($this->calendar->id))));
+	}
+	
+	/**
+	 * Returns a calendar shortname for the calendar with the given ID.
+	 * @param int Calendar ID within the database.
+	 * @return int on success, false on error.
+	 */
+	function getCalendarShortname($id)
+	{
+		$c = UNL_UCBCN::factory('calendar');
+		if ($c->get($id)) {
+			return $c->shortname;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Gets the calendar id from a shortname.
+	 * @param string shortname
+	 * @return int id on success, false on error.
+	 */
+	function getCalendarID($shortname)
+	{
+		$c = UNL_UCBCN::factory('calendar');
+		$c->shortname = $shortname;
+		if ($c->find() && $c->fetch()) {
+			return $c->id;
+		} else {
+			return false;
+		}
 	}
 }
 ?>
