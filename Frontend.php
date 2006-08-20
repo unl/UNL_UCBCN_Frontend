@@ -49,8 +49,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	public $view = 'day';
 	/** format of view */
 	public $format = 'html';
-	/** Default calendar to display. */
-	public $default_calendar_id = 1;
 	
 	function __construct($options)
 	{
