@@ -26,8 +26,10 @@ foreach ($this->events as $e) {
     } else {
         $row .= 'Unknown';
     }
-    if (isset($e->eventdatetime->endtime) && ($e->eventdatetime->endtime != $e->eventdatetime->starttime)) {
-    	$row .= '<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
+    if (isset($e->eventdatetime->endtime) &&
+    	($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
+    	($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
+    	$row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
     }
 	$row .= '</td>' .
 			'<td><a class="url title" href="'.$e->getURL().'">'.$e->event->title.'</a>' .
