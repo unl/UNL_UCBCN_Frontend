@@ -122,6 +122,7 @@ ul#frontend_view_selector li{display:block;float:left;margin:0 0 -1px 4px;border
 .year_cal table.wp-calendar caption li#yearvalue{margin:0;padding:0;}
 .year_cal table.wp-calendar caption ul{padding:0 0 18px 0!important;position:relative;margin:0;color:#333;}
 .year_cal table.wp-calendar caption a#prev_month, .year_cal table.wp-calendar caption a#next_month{display:none}
+.year_cal table.wp-calendar caption a:hover{color:#cc0000;}
 
 .year_cal table td{border:none;}
 .year_cal table.wp-calendar td{border:1px solid #ddd;}
