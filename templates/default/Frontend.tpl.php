@@ -113,7 +113,7 @@
 				The ongoing development is handled through the UNL 
 				<abbr title="PHP Extension and Application Repository">PEAR</abbr> compatible channel
 				<a href="http://pear.unl.edu/">http://pear.unl.edu/</a>.
-				If you find an error, of have a feature request or just want to get involved this is the place.
+				If you find an error, or have a feature request or just want to get involved this is the place.
 				</div>
 		<div class="footer_col">
 			<h3>Event Publishers</h3>
