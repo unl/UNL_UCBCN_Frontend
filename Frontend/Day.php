@@ -46,6 +46,7 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 		if (isset($this->calendar)) {
 			$eventdatetime->query('SELECT DISTINCT eventdatetime.* FROM event,calendar_has_event,eventdatetime ' .
 									'WHERE calendar_has_event.calendar_id='.$this->calendar->id.' ' .
+											'AND (calendar_has_event.status =\'posted\' OR calendar_has_event.status =\'archived\') '.
 											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
 											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
 									'ORDER BY eventdatetime.starttime ASC');

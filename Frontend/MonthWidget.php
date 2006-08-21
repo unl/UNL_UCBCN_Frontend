@@ -103,6 +103,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			$db =& $calendar->getDatabaseConnection();
 			$res =& $db->query('SELECT DISTINCT eventdatetime.id FROM event,calendar_has_event,eventdatetime ' .
 									'WHERE calendar_has_event.calendar_id='.$calendar->id.' ' .
+											'AND (calendar_has_event.status =\'posted\' OR calendar_has_event.status =\'archived\') '.
 											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
 											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
 									'ORDER BY eventdatetime.starttime ASC');
