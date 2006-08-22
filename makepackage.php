@@ -56,7 +56,12 @@ $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.1.0');
 $pfm->setReleaseVersion('0.2.5');
-$pfm->setNotes('* Fix');
+$pfm->setNotes("* Fix eventinstance display to have location and contact information details.\n" .
+		"* Add event start and end times to month view.\n" .
+		"* CSS fixes from Alvin Woon\n" .
+		"* Better output cache handling (preRun function for http header output).\n" .
+		"* Fixes to allow viewing individual eventdatetime instances.\n" .
+		"* Frontend should only output events with the status of posted or archived (not pending).\n");
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->setLicense('PHP License', 'http://www.php.net/license');
