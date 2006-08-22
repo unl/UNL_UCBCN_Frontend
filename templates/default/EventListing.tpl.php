@@ -19,7 +19,7 @@ foreach ($this->events as $e) {
 	$row .=	'<td class="date">';
 	if (isset($e->eventdatetime->starttime)) {
 		if (strpos($e->eventdatetime->starttime,'00:00:00')) {
-			$row .= '<span class="dtstart">All day</span>';
+			$row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($this->eventdatetime->starttime)).'">All day</abbr>';
 		} else {
         	$row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
 		}
