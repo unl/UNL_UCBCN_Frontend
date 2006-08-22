@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.10" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.4.11" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_UCBCN_Frontend</name>
  <channel>pear.unl.edu</channel>
  <summary>A public frontend for a University Event Publishing system.</summary>
@@ -12,10 +12,10 @@
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2006-07-28</date>
- <time>09:17:52</time>
+ <date>2006-08-22</date>
+ <time>13:03:11</time>
  <version>
-  <release>0.2.0</release>
+  <release>0.2.5</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -23,16 +23,13 @@
   <api>beta</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
- <notes>* Add Month, Year, Day views.
-		* Add configuration variables to better play with the manager.
-		* Month widget for Month navigation.
-		* Dependency on Calendar
-		* EventInstance view combines event+eventdatetime
-		* Error handling for frontend
-		* css files prefixed with frontend_
-		* Switch to using .tpl template files_
-		* Frontend now uses UNL CSS templaes by default
-		* Calendar Shortname or ID can be used to select the calendar displayed.</notes>
+ <notes>* Fix eventinstance display to have location and contact information details.
+* Add event start and end times to month view.
+* CSS fixes from Alvin Woon
+* Better output cache handling (preRun function for http header output).
+* Fixes to allow viewing individual eventdatetime instances.
+* Frontend should only output events with the status of posted or archived (not pending).
+ </notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -49,14 +46,20 @@
       <file name="date.gif" role="data" />
       <file name="month_next.gif" role="data" />
       <file name="month_prev.gif" role="data" />
+      <file name="year_box.gif" role="data" />
+      <file name="year_box.png" role="data" />
      </dir> <!-- /templates/default/images -->
      <file name="Error.tpl.php" role="data" />
      <file name="EventInstance.tpl.php" role="data" />
+     <file name="EventInstance_icalendar.tpl.php" role="data" />
      <file name="EventListing.tpl.php" role="data" />
+     <file name="EventListing_icalendar.tpl.php" role="data" />
      <file name="Frontend.tpl.php" role="data" />
      <file name="Frontend_Day.tpl.php" role="data" />
+     <file name="Frontend_Day_icalendar.tpl.php" role="data" />
      <file name="frontend_default.css" role="data" />
      <file name="Frontend_hcalendar.tpl.php" role="data" />
+     <file name="Frontend_icalendar.tpl.php" role="data" />
      <file name="frontend_ieonly.css" role="data" />
      <file name="frontend_main.css" role="data" />
      <file name="Frontend_Month.tpl.php" role="data" />
@@ -127,7 +130,7 @@
    <package>
     <name>UNL_UCBCN</name>
     <channel>pear.unl.edu</channel>
-    <min>0.0.1</min>
+    <min>0.2.5</min>
    </package>
    <package>
     <name>Calendar</name>
@@ -172,6 +175,25 @@
 		* Switch to using .tpl template files_
 		* Frontend now uses UNL CSS templaes by default
 		* Calendar Shortname or ID can be used to select the calendar displayed.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.2.5</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2006-08-22</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>* Fix eventinstance display to have location and contact information details.
+* Add event start and end times to month view.
+* CSS fixes from Alvin Woon
+* Better output cache handling (preRun function for http header output).
+* Fixes to allow viewing individual eventdatetime instances.
+* Frontend should only output events with the status of posted or archived (not pending).
+   </notes>
   </release>
  </changelog>
 </package>
