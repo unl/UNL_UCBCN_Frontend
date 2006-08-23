@@ -68,19 +68,20 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	{
 		$n = array();
 		
-			if($this->view=='year'){
-			$n[] = '<ul id="frontend_view_selector" class="year">';
-			}
-				else if($this->view=='month'){
+		switch ($this->view) {
+			case 'year':
+				$n[] = '<ul id="frontend_view_selector" class="year">';
+			break;
+			case 'month':
 				$n[] = '<ul id="frontend_view_selector" class="month">';
-				}	
-					else if($this->view=='day' || $this->view=='event'){
-					$n[] = '<ul id="frontend_view_selector" class="event">';
-					}
-						else{
-						$n[] = '<ul id="frontend_view_selector">';
-						}
-					
+			break;
+			case 'day':
+			case 'event':
+				$n[] = '<ul id="frontend_view_selector" class="event">';
+			break;
+			default:
+				$n[] = '<ul id="frontend_view_selector">';
+		}
 		$n[] = '<li id="todayview"><a href="'.self::formatURL(array('calendar'=>$this->calendar->id)).'">Today\'s Events</a></li>';
 		$n[] = '<li id="monthview"><a href="'.self::formatURL(array('y'=>date('Y'),'m'=>date('m'),'calendar'=>$this->calendar->id)).'">This Month</a></li>';
 		$n[] = '<li id="yearview"><a href="'.self::formatURL(array('y'=>date('Y'),'calendar'=>$this->calendar->id)).'">This Year</a></li>';
