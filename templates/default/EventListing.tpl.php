@@ -5,7 +5,6 @@
 <th scope="col" class="title"><a href="<?php echo $GLOBALS['_UNL_UCBCN']['uri']; ?>?orderby=title">Event Title</a></th>
 </tr>
 </thead>
-<tfoot></tfoot>
 <tbody class="vcalendar">
 <?php
 $oddrow = false;

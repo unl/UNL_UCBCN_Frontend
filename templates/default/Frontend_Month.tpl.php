@@ -12,7 +12,6 @@
 		<th abbr="Saturday" scope="col" title="Saturday">Sat</th>
 	</tr>
 	</thead>
-	<tfoot></tfoot>
 	<tbody>
 		<?php echo $this->tbody; ?>
 	</tbody>

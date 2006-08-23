@@ -26,7 +26,6 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 	var $caption;
 	
 	var $thead;
-	var $tfoot;
 	var $tbody;
 	
 	/**

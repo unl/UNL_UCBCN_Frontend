@@ -24,7 +24,6 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 	var $days = array();
 	
 	var $thead;
-	var $tfoot;
 	var $tbody;
 	
 	/**
