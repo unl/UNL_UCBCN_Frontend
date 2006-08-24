@@ -43,10 +43,12 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		$Month = new Calendar_Month_Weekdays($y, $m, 0);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
 		$prev = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$PMonth->thisYear(),
-														'm'=>$PMonth->thisMonth()));
+														'm'=>$PMonth->thisMonth(),
+														'calendar'=>$this->calendar->id));
 		$NMonth = $Month->nextMonth('object');
 		$next = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$NMonth->thisYear(),
-														'm'=>$NMonth->thisMonth()));
+														'm'=>$NMonth->thisMonth(),
+														'calendar'=>$this->calendar->id));
 		
 		$this->caption = '<ul>
 		<li><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'">&lt;&lt; </a></li>
