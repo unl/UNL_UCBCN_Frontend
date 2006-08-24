@@ -107,11 +107,21 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 			$einstance = new UNL_UCBCN_EventInstance($eventdatetime,$this->calendar);
 			$li = '<li>';
 			if (strpos($eventdatetime->starttime,'00:00:00')===false) {
-				$li .= date('ga',strtotime($eventdatetime->starttime));
+				$starttime = strtotime($eventdatetime->starttime);
+				$li .= date('g',$starttime);
+				if (substr($eventdatetime->starttime,14,2)!='00') {
+					$li .= ':'.substr($eventdatetime->starttime,14,2);
+				}
+				$li .= date('a',$starttime);
 				if (isset($eventdatetime->endtime) &&
 			    	($eventdatetime->endtime != $eventdatetime->starttime) &&
 			    	($eventdatetime->endtime > $eventdatetime->starttime)) {
-			    		$li .= '-'.date('ga',strtotime($eventdatetime->endtime));
+			    		$endtime = strtotime($eventdatetime->endtime);
+			    		$li .= '-'.date('g',$endtime);
+						if (substr($eventdatetime->endtime,14,2)!='00') {
+							$li .= ':'.substr($eventdatetime->endtime,14,2);
+						}
+						$li .= date('a',$endtime);
 		    	}
 		    	$li .= ': ';
 			}
