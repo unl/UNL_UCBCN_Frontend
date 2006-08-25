@@ -118,7 +118,7 @@
 		<div class="footer_col">
 			<h3>Event Publishers</h3>
 			Event publishers can start using the University Event Publisher immediately. Simply
-			<a href="<?php echo $this->manageruri; ?>">log in</a> using your username and password.</div>
+			<a href="<?php echo $this->manageruri; ?>">log in</a> using your My.UNL (Blackboard) username and password.</div>
 		<!-- InstanceEndEditable -->
 		<div id="copyright"> <!-- InstanceBeginEditable name="footercontent" -->
 			Yeah, it's open source. &copy; 2006 University of Nebraska&ndash;Lincoln
