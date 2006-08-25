@@ -78,6 +78,18 @@
 				<?php if (isset($this->right)) { ?>
 					<div class="col left">
 						<?php UNL_UCBCN::displayRegion($this->right); ?>
+						<h3 class="recentcals">Recently updated calendars:</h3>
+						<ul class="recentcals">
+						<?php
+						$mdb2 = UNL_UCBCN::getDatabaseConnection();
+						$res = $mdb2->query('SELECT calendar.name, calendar.id FROM calendar, calendar_has_event ' .
+								'WHERE calendar.id = calendar_has_event.calendar_id ' .
+								'GROUP BY calendar.id ORDER BY calendar_has_event.datelastupdated DESC LIMIT 5');
+						while ($row = $res->fetchRow()) {
+							echo '<li><a href="'.UNL_UCBCN_Frontend::formatURL(array('calendar'=>$row[1])).'">'.$row[0].'</a></li>';
+						}
+						?>
+						</ul>
 					</div>
 					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
 					
