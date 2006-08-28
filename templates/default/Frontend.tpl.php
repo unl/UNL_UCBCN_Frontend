@@ -78,6 +78,7 @@
 				<?php if (isset($this->right)) { ?>
 					<div class="col left">
 						<?php UNL_UCBCN::displayRegion($this->right); ?>
+						<div class="recentcals">
 						<h3 class="recentcals">Recently updated calendars:</h3>
 						<ul class="recentcals">
 						<?php
@@ -89,7 +90,7 @@
 							echo '<li><a href="'.UNL_UCBCN_Frontend::formatURL(array('calendar'=>$row[1])).'">'.$row[0].'</a></li>';
 						}
 						?>
-						</ul>
+						</ul></div>
 					</div>
 					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
 					
