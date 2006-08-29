@@ -175,9 +175,10 @@ div.recentcals{
 	
 }
 #maincontent ul.recentcals li{margin-right:6px}
+#maincontent ul.recentcals li:hover{background:none}
 /* IE */
 * html .day_cal, * html .three_col h1{margin-top:45px;}
-* html .three_col{margin-top:-30px;}
+* html .three_col{margin:-30px 0 10px 0;}
 * html .three_col table td{padding:7px!important;}
 
 * html .col{margin-top:10px;}
