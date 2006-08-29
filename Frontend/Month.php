@@ -48,17 +48,17 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 														'm'=>$NMonth->thisMonth(),
 														'calendar'=>$this->calendar->id));
 		
-		$this->caption = '<ul>
-		<li><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'">&lt;&lt; </a></li>
-		<li id="monthvalue"><a href="'.
+		$this->caption = '
+		<span><a href="'.$prev.'" id="prev_month" title="View events for '.Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().'">&lt;&lt; </a></span>
+		<span id="monthvalue"><a href="'.
 						UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Month->thisYear(),
 																'm'=>$Month->thisMonth(),
-																'calendar'=>$this->calendar->id)).'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></li>
-		<li id="yearvalue"><a href="'.
+																'calendar'=>$this->calendar->id)).'">'.Calendar_Util_Textual::thisMonthName($Month).'</a></span>
+		<span id="yearvalue"><a href="'.
 						UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Month->thisYear(),
-																'calendar'=>$this->calendar->id)).'">'.$Month->thisYear().'</a></li>
-		<li><a href="'.$next.'" id="next_month" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> &gt;&gt;</a></li>
-		</ul>';
+																'calendar'=>$this->calendar->id)).'">'.$Month->thisYear().'</a></span>
+		<span><a href="'.$next.'" id="next_month" title="View events for '.Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().'"> &gt;&gt;</a></span>
+		';
 		
 		//Determine selected days
 		$selectedDays = array();
