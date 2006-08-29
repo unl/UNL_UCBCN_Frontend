@@ -125,7 +125,7 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		    	}
 		    	$li .= ': ';
 			}
-			$li .= '<a href="'.$einstance->getURL().'">'.$einstance->event->title.'</a></li>';
+			$li .= '<a href="'.$einstance->getURL().'">'.UNL_UCBCN_Frontend::dbStringToHtml($einstance->event->title).'</a></li>';
 			$return[] = $li;
 		}
 		$return[] = '</ul>';

@@ -328,5 +328,16 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			return false;
 		}
 	}
+	
+	/**
+	 * This function converts a string stored in the database to html output.
+	 * 
+	 * & becomes &amp; etc.
+	 * @param string Normally a varchar string from the database.
+	 */
+	function dbStringToHtml($t)
+	{
+		return str_replace('& ','&amp; ',$t);
+	}
 }
 ?>

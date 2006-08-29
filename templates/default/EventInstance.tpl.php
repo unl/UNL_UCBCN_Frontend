@@ -1,7 +1,7 @@
 <div class='vcalendar'>
 	<div class='vevent'>
-		<h1 class='title'><?php echo $this->event->title; ?></h1>
-		<?php if (isset($this->event->subtitle)) echo '<h2>'.$this->event->subtitle.'</h2>'; ?>
+		<h1 class='title'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->title); ?></h1>
+		<?php if (isset($this->event->subtitle)) echo '<h2>'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'</h2>'; ?>
 		<div class='two_col left'>
 			<div class='date'>
 				<h2><?php echo date('l, F jS',strtotime($this->eventdatetime->starttime)); ?></h2>
@@ -24,7 +24,7 @@
 					?>
 				</h3>
 			</div>
-			<p class='summary'><?php echo $this->event->description; ?></p>
+			<p class='summary'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
 			<?php if (isset($this->event->listingcontactname) ||
 						isset($this->event->listingcontactphone) ||
 						isset($this->event->listingcontactemail)) { ?>
@@ -41,7 +41,7 @@
 			<?php
 			$loc = $this->eventdatetime->getLink('location_id');
 			if (!PEAR::isError($loc)) {
-				echo '<div class="location">'.$loc->name.'</div>';
+				echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</div>';
 			}
 			?>
 		</div>
