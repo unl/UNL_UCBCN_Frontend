@@ -158,7 +158,6 @@ div.recentcals{
 	background:url(http://events.unl.edu/templates/default/images/recent_bot.gif) no-repeat left bottom;
 	width:222px;
 	padding:0 0 10px 0;
-
 }
 #maincontent h3.recentcals{
 	font-size:0.8em;position:relative;
@@ -171,10 +170,9 @@ div.recentcals{
 #maincontent ul.recentcals{
 	padding:21px 0 10px 34px;
 	margin:-14px 0 0 0;
-	background:url(http://events.unl.edu/templates/default/images/recent_mid.gif) repeat-y left top;
-	
+	background:url(http://events.unl.edu/templates/default/images/recent_mid.gif) repeat-y right top;
 }
-#maincontent ul.recentcals li{margin-right:6px}
+#maincontent ul.recentcals li{height:1%;margin-right:7px;}
 #maincontent ul.recentcals li:hover{background:none}
 /* IE */
 * html .day_cal, * html .three_col h1{margin-top:45px;}

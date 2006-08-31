@@ -28,7 +28,7 @@
 			<ul>
 				<li class="first"><a href="http://www.unl.edu/">UNL</a></li>
 				<li>Events</li>
-			</ul>
+			</ul><img src="templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
 			<!-- InstanceEndEditable --> </div>
 	</div>
 </div>
@@ -45,7 +45,7 @@
 				<h1><?php echo $this->calendar->name; ?> Events</h1>
 				<?php if ($this->calendar->id == $GLOBALS['_UNL_UCBCN']['default_calendar_id']) { ?>
 				<h2>What We Do Is Your Business</h2>
-				<?php } ?><img src="templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
+				<?php } ?>
 				<!-- InstanceEndEditable --></div>
 			<!-- maintitle -->
 		</div>
