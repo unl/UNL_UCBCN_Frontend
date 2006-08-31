@@ -45,7 +45,7 @@
 				<h1><?php echo $this->calendar->name; ?> Events</h1>
 				<?php if ($this->calendar->id == $GLOBALS['_UNL_UCBCN']['default_calendar_id']) { ?>
 				<h2>What We Do Is Your Business</h2>
-				<?php } ?>
+				<?php } ?><img src="templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
 				<!-- InstanceEndEditable --></div>
 			<!-- maintitle -->
 		</div>
