@@ -43,6 +43,11 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		$this->calendar = $calendar;
 	}
 	
+	/**
+	 * Returns a string identifying this month widget.
+	 *
+	 * @return string A string of the form monthwidget_2006-05_1
+	 */
 	function getCacheKey()
 	{
 	    $str = 'monthwidget_'.$this->year.'-'.$this->month;
@@ -57,6 +62,11 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 	    // Do stuff here if needed.
 	}
 	
+	/**
+	 * This function populates the month widget... checks for each 
+	 * day of this month whether the day has events.
+	 *
+	 */
 	function run()
 	{
 	    $Month = new Calendar_Month_Weekdays($this->year, $this->month, 0);
