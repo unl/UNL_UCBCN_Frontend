@@ -339,5 +339,34 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	{
 		return str_replace('& ','&amp; ',$t);
 	}
+	
+/**
+	 * This function checks if a calendar has events on the day requested.
+	 * @param object Calendar_Day object
+	 * @param calendar UNL_UCBCN_Calendar object
+	 * @return bool true or false
+	 */
+	function dayHasEvents($epoch,$calendar = NULL)
+	{
+		
+		if (isset($calendar)) {
+			$db =& $calendar->getDatabaseConnection();
+			$res =& $db->query('SELECT DISTINCT eventdatetime.id FROM event,calendar_has_event,eventdatetime ' .
+									'WHERE calendar_has_event.calendar_id='.$calendar->id.' ' .
+											'AND (calendar_has_event.status =\'posted\' OR calendar_has_event.status =\'archived\') '.
+											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
+											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$epoch).'%\' ' .
+									'ORDER BY eventdatetime.starttime ASC');
+			if (!PEAR::isError($res)) {
+				return $res->numRows();
+			} else {
+				return new UNL_UCBCN_Error($res->getMessage());
+			}
+		} else {
+			$eventdatetime = $this->factory('eventdatetime');
+			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$epoch).'%\'');
+			return $eventdatetime->find();
+		}
+	}
 }
 ?>

@@ -9,12 +9,13 @@
  */
 
 require_once 'UNL/UCBCN.php';
+require_once 'UNL/UCBCN/Frontend.php';
 require_once 'Calendar/Calendar.php';
 require_once 'Calendar/Month/Weekdays.php';
 require_once 'Calendar/Util/Textual.php';
 
 class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
-{	
+{
 
 	/** Calendar UNL_UCBCN_Calendar Object **/
 	var $calendar;
@@ -40,7 +41,25 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		$this->year = $y;
 		$this->month = $m;
 		$this->calendar = $calendar;
-		$Month = new Calendar_Month_Weekdays($y, $m, 0);
+	}
+	
+	function getCacheKey()
+	{
+	    $str = 'monthwidget_'.$this->year.'-'.$this->month;
+	    if (isset($this->calendar)) {
+	        $str .= '_'.$this->calendar->id;
+	    }
+	    return $str;
+	}
+	
+	function preRun($cache_hit)
+	{
+	    // Do stuff here if needed.
+	}
+	
+	function run()
+	{
+	    $Month = new Calendar_Month_Weekdays($this->year, $this->month, 0);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
 		$prev = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$PMonth->thisYear(),
 														'm'=>$PMonth->thisMonth(),
@@ -77,7 +96,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			// isFirst() to find start of week
 			if ( $Day->isFirst() )
 				$this->tbody .= "<tr>\n";
-			if ( $this->dayHasEvents($Day,$this->calendar) ) {
+			if ( UNL_UCBCN_Frontend::dayHasEvents($Day->getTimestamp(),$this->calendar) ) {
 				$this->tbody .= "<td class='selected'><a href='$link'>".$Day->thisDay()."</a></td>\n";
 			} else if ( $Day->isEmpty() ) {
 				$this->tbody .= "<td class='empty'>".$Day->thisDay()."</td>\n";
@@ -88,35 +107,6 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			// isLast() to find end of week
 			if ( $Day->isLast() )
 				$this->tbody .= "</tr>\n";
-		}
-	}
-	
-	/**
-	 * This function checks if a calendar has events on the day requested.
-	 * @param object Calendar_Day object
-	 * @param calendar UNL_UCBCN_Calendar object
-	 * @return bool true or false
-	 */
-	function dayHasEvents($day,$calendar = NULL)
-	{
-		
-		if (isset($calendar)) {
-			$db =& $calendar->getDatabaseConnection();
-			$res =& $db->query('SELECT DISTINCT eventdatetime.id FROM event,calendar_has_event,eventdatetime ' .
-									'WHERE calendar_has_event.calendar_id='.$calendar->id.' ' .
-											'AND (calendar_has_event.status =\'posted\' OR calendar_has_event.status =\'archived\') '.
-											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
-											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
-									'ORDER BY eventdatetime.starttime ASC');
-			if (!PEAR::isError($res)) {
-				return $res->numRows();
-			} else {
-				return new UNL_UCBCN_Error($res->getMessage());
-			}
-		} else {
-			$eventdatetime = $this->factory('eventdatetime');
-			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
-			return $eventdatetime->find();
 		}
 	}
 	
