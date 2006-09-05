@@ -155,25 +155,27 @@ h1.year_main{	padding: 0 0 0 20px!important; margin:40px 0 10px;
 
 /* recently updated calendars */
 div.recentcals{
-	background:url(http://events.unl.edu/templates/default/images/recent_bot.gif) no-repeat left bottom;
+	background:url(images/recent_bot.gif) no-repeat left bottom;
 	width:222px;
 	padding:0 0 10px 0;
+	
 }
 #maincontent h3.recentcals{
 	font-size:0.8em;position:relative;
 	margin:10px 0 0 0;
-	padding:12px 0 0 12px;
-	background:url(http://events.unl.edu/templates/default/images/recent.gif) no-repeat left top;
+	padding:8px 0 5px 12px;
+	background:url(images/recent.gif) no-repeat left top;
 	width:222px;
 	height:15px;
 }
 #maincontent ul.recentcals{
-	padding:21px 0 10px 34px;
+	list-style:none;
+	padding:21px 0 10px 14px;
 	margin:-14px 0 0 0;
-	background:url(http://events.unl.edu/templates/default/images/recent_mid.gif) repeat-y right top;
+	background:url(images/recent_mid.gif) repeat-y right top;
 }
-#maincontent ul.recentcals li{height:1%;margin-right:7px;}
-#maincontent ul.recentcals li:hover{background:none}
+#maincontent ul.recentcals li{background:url(images/widget_list.gif) no-repeat 0 5px;padding:0 0 0 15px;height:1%;margin-right:7px;position:relative;}
+#maincontent ul.recentcals li:hover{background:url(images/widget_list_hover.gif) no-repeat 0 5px;}
 /* IE */
 * html .day_cal, * html .three_col h1{margin-top:45px;}
 * html .three_col{margin:-30px 0 10px 0;}
@@ -186,4 +188,5 @@ div.recentcals{
 * html table.wp-calendar caption span#monthvalue, * html table.wp-calendar caption span#yearvalue{padding:6px 3px 0;}
 * html .year_cal table.wp-calendar caption ul{margin:0;}
 
+* html #maincontent h3.recentcals{padding:6px 0 5px 12px}
 * html .month_cal {margin-top:7px;}
