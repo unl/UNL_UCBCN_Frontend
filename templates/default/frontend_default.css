@@ -23,7 +23,7 @@ table thead th{
 	padding:7px;
 	
 }
-.day_cal table thead th{text-align:left!important;}
+.day_cal table thead th, .event_cal table thead th{text-align:left!important;}
 table thead th.date a, table thead th.title a{
 	color:#FFFFFF;
 	text-decoration:none;
@@ -34,8 +34,8 @@ table td{
 	}
 table td.date{width:20%;}
 table td.title{width:80%;}
-h2.sec_main{	 padding: 0 0 15px 20px!important; 
-                 background: url(images/date.gif) no-repeat 0 0;}
+h4.sec_main{	 padding: 0 0 15px 30px!important; 
+                 background: url(images/date1.gif) no-repeat 0 0;}
 
 table td.empty{color:#ddd;}
 
@@ -84,6 +84,61 @@ table.wp-calendar caption a#next_month{background:url(images/monthviewnav_next.g
 table.wp-calendar caption a#prev_month:hover, table.wp-calendar caption a#next_month:hover{
 background-position:0 -45px;
 }
+
+/* event view*/
+
+.event_cal h1.title{padding: 7px 0 10px 37px!important; 
+                 background: url(images/event_one.gif) no-repeat 0 0;}
+
+.event_cal table{width:auto;border:1px solid #8ebcd6;border-top:none;border-right:1px solid #4081a6;border-bottom:1px solid #4081a6;}
+.event_cal table td.date, .event_cal table td.title{width:auto;}
+.event_cal table td.date{color:#cc0000;}
+.event_cal table thead{display:none;}
+
+/*- Menu Tabs G--------------------------- */
+
+    #tabsG {
+      float:left;
+      width:auto;
+      font-size:93%;
+      line-height:normal;
+      }
+    #tabsG ul {
+	margin:0;
+	padding:10px 10px 0 5px;
+	list-style:none;
+      }
+    #tabsG li {
+      display:inline;
+      margin:0;
+      padding:0;
+      }
+    #tabsG a {
+      float:left;
+      background:url(images/tableftG.gif) no-repeat left top;
+      margin:0;
+      padding:0 0 0 4px;
+      text-decoration:none;
+      }
+   #tabsG a span {
+      float:left;
+      display:block;
+      background:url(images/tabrightG.gif) no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#FFF;
+      }
+    /* Commented Backslash Hack hides rule from IE5-Mac \*/
+    #tabsG a span {float:none;cursor:text;}
+    /* End IE5-Mac hack */
+    #tabsG a:hover {
+      color:#FFF!important;
+      }
+    #tabsG a:hover, #tabsG a#event_selected {
+      background-position:0% -42px;
+      }
+    #tabsG a:hover span, #tabsG a#event_selected span {
+      background-position:100% -42px;
+      } 
 
 /* day view*/
 .col{margin-top:48px;}
@@ -138,8 +193,8 @@ ul#frontend_view_selector.month li#monthview, ul#frontend_view_selector.day li#t
 .year_cal table tr:hover{
 	background:none;
 }
-h1.year_main{	padding: 0 0 0 20px!important; margin:40px 0 10px;
-                 background: url(images/date.gif) no-repeat 0 0;}
+h1.year_main{	padding: 4px 0 10px 30px!important; margin:40px 0 10px;
+                 background: url(images/date1.gif) no-repeat 0 0;}
 
 /*overwrite UNL template to expand to full width */
 #navigation{display:none;}
