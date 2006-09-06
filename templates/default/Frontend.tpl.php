@@ -29,7 +29,6 @@
 				<li class="first"><a href="http://www.unl.edu/">UNL</a></li>
 				<li>Events</li>
 			</ul><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
-			<a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">Search</a>
 			<!-- InstanceEndEditable --> </div>
 	</div>
 </div>
