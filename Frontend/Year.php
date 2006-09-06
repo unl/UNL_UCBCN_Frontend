@@ -8,6 +8,10 @@
  * @package UNL_UCBCN_Frontend
  * @author Brett Bieber
  */
+
+require_once 'UNL/UCBCN.php';
+require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
+
 class UNL_UCBCN_Frontend_Year extends UNL_UCBCN
 {
 	public $year;
