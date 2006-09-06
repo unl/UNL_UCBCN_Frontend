@@ -1,3 +1,4 @@
+<div class="day_cal">
 <?php
 if (is_a($this->output,'UNL_UCBCN_EventListing')) {
     if ($dt = strtotime($this->query)) {
@@ -9,3 +10,4 @@ if (is_a($this->output,'UNL_UCBCN_EventListing')) {
 }
 UNL_UCBCN::displayRegion($this->output);
 ?>
+</div>

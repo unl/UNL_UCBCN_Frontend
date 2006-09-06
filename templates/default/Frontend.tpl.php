@@ -78,7 +78,7 @@
 			<?php echo $this->navigation; ?>
 			<!-- InstanceBeginEditable name="maincontent" -->
 			<form id="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
-				<input type='search' name='q' value="<?php if (isset($_GET['q'])) { echo htmlentities($_GET['q']); } ?>" />
+				<input type='search' name='q' id='searchinput' value="<?php if (isset($_GET['q'])) { echo htmlentities($_GET['q']); } ?>" />
 				<input type='submit' name='submit' value="Search" />
 				<input type='hidden' name='search' value='search' />
 			</form>

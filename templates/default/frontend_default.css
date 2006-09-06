@@ -196,13 +196,13 @@ h1.year_main{	padding: 4px 0 10px 30px!important; margin:40px 0 10px;
                  background: url(images/date1.gif) no-repeat 0 0;}
 
 /*search view*/
-#event_search {
-	position:absolute;
-	top:0px;
-	right:0px;
-	width:280px;
+form#event_search {
+	float:right;
+	margin:-27px 0 0 0;
+	position:relative;
 	}
-
+form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
+ 	  border-color:#ccc #fff #fff #ccc;}
 #maincontent h1.results {
 	margin:2em 0 0.5em 0;
 	}
@@ -249,8 +249,6 @@ div.recentcals{
 
 * html .col{margin-top:10px;}
 
-* html table.wp-calendar caption{position:absolute;}
-* html table.wp-calendar caption ul{position:relative;margin:0 0 0 -30px;}
 * html table.wp-calendar caption span#monthvalue, * html table.wp-calendar caption span#yearvalue{padding:6px 3px 0;}
 * html .year_cal table.wp-calendar caption ul{margin:0;}
 
