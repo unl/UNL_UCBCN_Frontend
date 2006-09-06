@@ -10,9 +10,6 @@
  */
 require_once 'UNL/UCBCN.php';
 require_once 'UNL/UCBCN/EventInstance.php';
-require_once 'UNL/UCBCN/Frontend/Day.php';
-require_once 'UNL/UCBCN/Frontend/Month.php';
-require_once 'UNL/UCBCN/Frontend/Year.php';
 require_once 'Date.php';
 
 class UNL_UCBCN_Frontend extends UNL_UCBCN
@@ -110,6 +107,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		$this->navigation = $this->showNavigation();
 		switch($this->view) {
 			case 'event':
+			    require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
 				if (isset($_GET['eventdatetime_id'])) {
 					$id = $_GET['eventdatetime_id'];
 				}
@@ -118,6 +116,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			break;
 			default:
 			case 'day':
+			    require_once 'UNL/UCBCN/Frontend/Day.php';
+			    require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
 				$this->output[] = new UNL_UCBCN_Frontend_Day(array(
 											'dsn'		=> $this->dsn,
 											'year'		=> $this->year,
@@ -127,11 +127,21 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
 			break;
 			case 'month':
+			    require_once 'UNL/UCBCN/Frontend/Month.php';
 				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month,$this->calendar);
 			break;
 			case 'year':
-				$this->output[] = '<h1 class="year_main">'.$this->year.'</h1>';
+			    require_once 'UNL/UCBCN/Frontend/Year.php';
 				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year,$this->calendar);
+			break;
+			case 'search':
+			    require_once 'UNL/UCBCN/Frontend/Search.php';
+			    if (isset($_GET['q'])) {
+			        $q = $_GET['q'];
+			    } else {
+			        $q = NULL;
+			    }
+			    $this->output[] = new UNL_UCBCN_Frontend_Search(array('calendar'=>$this->calendar,'query'=>$q));
 			break;
 		}
 		switch($this->format) {
@@ -172,7 +182,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function formatURL($values,$encode = true)
 	{
-		$order = array('calendar','y','m','d','eventdatetime_id');
+		$order = array('calendar','search','y','m','d','eventdatetime_id');
 		global $_UNL_UCBCN;
 		$url = '?';
 		if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
@@ -282,6 +292,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			$view['eventdatetime_id'] = $GLOBALS[$method]['eventdatetime_id'];
 		}
 		
+		if (isset($GLOBALS[$method]['search'])) {
+		    $view['view'] = 'search';
+		}
+		
 		if (isset($GLOBALS[$method]['format'])) {
 			$view['format'] = $GLOBALS[$method]['format'];
 		} else {
@@ -295,7 +309,12 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function getCacheKey()
 	{
-		return md5(serialize(array_merge($this->determineView(),array($this->calendar->id))));
+	    if ($this->view == 'search') {
+	        // Right now we aren't caching search reseults pages.
+	        return false;
+	    } else {
+	        return md5(serialize(array_merge($this->determineView(),array($this->calendar->id))));
+	    }
 	}
 	
 	/**

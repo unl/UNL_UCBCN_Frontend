@@ -29,6 +29,7 @@
 				<li class="first"><a href="http://www.unl.edu/">UNL</a></li>
 				<li>Events</li>
 			</ul><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
+			<a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">Search</a>
 			<!-- InstanceEndEditable --> </div>
 	</div>
 </div>
@@ -77,6 +78,11 @@
 			<div id="maincontent"> 
 			<?php echo $this->navigation; ?>
 			<!-- InstanceBeginEditable name="maincontent" -->
+			<form id="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
+				<input type='search' name='q' value="<?php if (isset($_GET['q'])) { echo htmlentities($_GET['q']); } ?>" />
+				<input type='submit' name='submit' value="Search" />
+				<input type='hidden' name='search' value='search' />
+			</form>
 				<?php if (isset($this->right)) { ?>
 					<div class="col left">
 						<?php UNL_UCBCN::displayRegion($this->right); ?>
@@ -114,15 +120,19 @@
 				built by the University of Nebraska&ndash;Lincoln which implements
 				the UC Berkeley Calendar specifications.
 				<ul>
+					<li><a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">UNL Event Publisher</a></li>
 					<li><a href ="http://www.berkeley.edu/">UC Berkeley</a></li>
 					<li><a href="http://groups.sims.berkeley.edu/EventCalendar/">UC Berkeley Calendar Network</a></li>
 				</ul>
 		</div>
 		<div class="footer_col">
 			<h3>How Was This Built?</h3>
-				The University Event Publisher was built by the 
+				<p>The University Event Publisher was built by the 
 				<a href="http://www.unl.edu/webdevnet/">UNL Web Developer Network</a>.
-				For more information see <a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">the project documentation.</a></div>
+				For more information see <a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">the project documentation.</a></p>
+				<p>The UNL Event publisher is a <br />
+					<a href="http://microformats.org/"><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/microformats.png" alt="microformats community mark" /> Microformats</a> Enabled hCalendar</p>
+		</div>
 		<div class="footer_col">
 				<h3>Ongoing Development</h3>
 				The ongoing development is handled through the UNL 

@@ -1,3 +1,4 @@
+<h1 class="year_main"><?php echo $this->year; ?></h1>
 <div class="year_cal">
 <table>
 <tr>
