@@ -34,7 +34,7 @@ table td{
 	}
 table td.date{width:20%;}
 table td.title{width:80%;}
-h4.sec_main{	 padding: 0 0 15px 30px!important; 
+.three_col h4.sec_main{	 padding: 0 0 15px 30px!important; 
                  background: url(images/date1.gif) no-repeat 0 0;}
 
 table td.empty{color:#ddd;}
