@@ -1,4 +1,4 @@
-/* getElementsByClassName by a guy with a yeallowish website. */
+/* getElementsByClassName by some guy with a yeallowish website. */
 function getElementsByClassName(oElm, strTagName, strClassName){
     var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
     var arrReturnElements = new Array();
