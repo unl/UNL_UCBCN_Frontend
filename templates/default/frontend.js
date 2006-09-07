@@ -54,6 +54,13 @@ function getCalendarDate()
    return dateString;
 }
 
+/* Go to a given URL */
+function gotoURL(location) {
+
+	document.location=location;
+
+}
+
 /* output an icon to indicate today date */
 function todayHilite(){
 	x = new Date ();
@@ -63,9 +70,20 @@ function todayHilite(){
 	for(j=0;j<td0.length;j++){
 		var td1 = td0[j].getElementsByTagName('td');
 		var verify = getElementsByClassName(td0[j], "span", "monthvalue");
-		if(verify[0].id == getCalendarDate()){ 
+		
+		//make td clickable if there's an event (only in month widget)
 		for(i=0;i<td1.length;i++){
+			if (td1[i].className == 'selected'){
+				td1[i].style.cursor = 'pointer';
+				td1[i].onclick = function(){
+					var daylink = this.getElementsByTagName('a');
+					var link = daylink[0].getAttribute("href");
+					gotoURL(link);
+				}
+			}
 			
+			//insert icon to indicate today	
+			if(verify[0].id == getCalendarDate()){
 				try{
 					if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 						td1[i].setAttribute("id","today");
@@ -79,9 +97,9 @@ function todayHilite(){
 					}
 				}
 				catch(e){}	
+			}
+		}	
 			
-		}	
-		}	
 	}
 	
 }
