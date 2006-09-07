@@ -70,10 +70,23 @@ table.wp-calendar td:hover{
 }
 table.wp-calendar td.pad:hover{background:none}
 
+table.wp-calendar td#today{
+	position:relative;
+}
+table.wp-calendar td#today img{
+	position:absolute;
+	margin: -15px 0 0 -22px;
+}
+.month_cal table.wp-calendar td#today img{
+	position:absolute;
+	top:0;
+	right:0;
+	margin: 0;
+}
 /*caption nav*/
 table.wp-calendar caption{position:absolute;top:0;left:0;margin:-38px 0 0 0}
 table.wp-calendar caption span{display:block;height:31px;background:url(images/monthviewnav_mid.gif) repeat-x 0 0;float:left;}
-table.wp-calendar caption span#monthvalue, table.wp-calendar caption span#yearvalue{
+table.wp-calendar caption span.monthvalue, table.wp-calendar caption span.yearvalue{
 margin-top:0;padding:8px 3px 0;}
 table.wp-calendar caption a{margin-bottom:5px;color:#fff;}
 table.wp-calendar caption a:hover{color:#fff;}
@@ -180,7 +193,7 @@ ul#frontend_view_selector.month li#monthview, ul#frontend_view_selector.day li#t
 .year_cal table.wp-calendar{margin:0 0 15px 0;}
 
 .year_cal table.wp-calendar caption span{padding:0;margin:0;height:auto;background:none;float:none;display:inline;}
-.year_cal table.wp-calendar caption span#monthvalue{margin:0;padding:0 0 0 15px;background:url(images/year_box.gif) no-repeat 0 1px;}
+.year_cal table.wp-calendar caption span.monthvalue{margin:0;padding:0 5px 0 15px;background:url(images/year_box.gif) no-repeat 0 1px;}
 .year_cal table.wp-calendar caption {text-align:left;padding:0 0 2px 0;position:relative;margin:0;}
 .year_cal table.wp-calendar caption a#prev_month, .year_cal table.wp-calendar caption a#next_month{display:none}
 .year_cal table.wp-calendar caption a{color:#333;}
@@ -202,7 +215,7 @@ form#event_search {
 	position:relative;
 	}
 form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
- 	  border-color:#ccc #fff #fff #ccc;}
+ 	  border-color:#ccc #fff #fff #ccc;padding:2px}
 #maincontent h1.results {
 	margin:2em 0 0.5em 0;
 	}
@@ -249,7 +262,7 @@ div.recentcals{
 
 * html .col{margin-top:10px;}
 
-* html table.wp-calendar caption span#monthvalue, * html table.wp-calendar caption span#yearvalue{padding:6px 3px 0;}
+* html table.wp-calendar caption span.monthvalue, * html table.wp-calendar caption span.yearvalue{padding:6px 3px 0;}
 * html .year_cal table.wp-calendar caption ul{margin:0;}
 
 * html #maincontent h3.recentcals{padding:6px 0 5px 12px}

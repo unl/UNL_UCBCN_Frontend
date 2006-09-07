@@ -12,10 +12,10 @@
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2006-08-22</date>
- <time>13:03:11</time>
+ <date>2006-09-07</date>
+ <time>14:59:06</time>
  <version>
-  <release>0.2.5</release>
+  <release>0.3.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -23,19 +23,14 @@
   <api>beta</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
- <notes>* Fix eventinstance display to have location and contact information details.
-* Add event start and end times to month view.
-* CSS fixes from Alvin Woon
-* Better output cache handling (preRun function for http header output).
-* Fixes to allow viewing individual eventdatetime instances.
-* Frontend should only output events with the status of posted or archived (not pending).
- </notes>
+ <notes>* Fix</notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
     <file name="Day.php" role="php" />
     <file name="Month.php" role="php" />
     <file name="MonthWidget.php" role="php" />
+    <file name="Search.php" role="php" />
     <file name="Year.php" role="php" />
    </dir> <!-- /Frontend -->
    <dir name="templates">
@@ -44,8 +39,23 @@
       <file name="calnav.gif" role="data" />
       <file name="caption_middle.gif" role="data" />
       <file name="date.gif" role="data" />
+      <file name="date1.gif" role="data" />
+      <file name="eventbeta.png" role="data" />
+      <file name="event_one.gif" role="data" />
+      <file name="microformats.png" role="data" />
+      <file name="monthviewnav_mid.gif" role="data" />
+      <file name="monthviewnav_next.gif" role="data" />
+      <file name="monthviewnav_prev.gif" role="data" />
       <file name="month_next.gif" role="data" />
       <file name="month_prev.gif" role="data" />
+      <file name="recent.gif" role="data" />
+      <file name="recent_bot.gif" role="data" />
+      <file name="recent_mid.gif" role="data" />
+      <file name="tableftG.gif" role="data" />
+      <file name="tabrightG.gif" role="data" />
+      <file name="todayimage.png" role="data" />
+      <file name="widget_list.gif" role="data" />
+      <file name="widget_list_hover.gif" role="data" />
       <file name="year_box.gif" role="data" />
       <file name="year_box.png" role="data" />
      </dir> <!-- /templates/default/images -->
@@ -64,6 +74,7 @@
      <file name="frontend_main.css" role="data" />
      <file name="Frontend_Month.tpl.php" role="data" />
      <file name="Frontend_MonthWidget.tpl.php" role="data" />
+     <file name="Frontend_Search.tpl.php" role="data" />
      <file name="Frontend_Year.tpl.php" role="data" />
     </dir> <!-- /templates/default -->
    </dir> <!-- /templates -->
@@ -192,8 +203,20 @@
 * CSS fixes from Alvin Woon
 * Better output cache handling (preRun function for http header output).
 * Fixes to allow viewing individual eventdatetime instances.
-* Frontend should only output events with the status of posted or archived (not pending).
-   </notes>
+* Frontend should only output events with the status of posted or archived (not pending).</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2006-09-07</date>
+   <license uri="http://www.php.net/license">PHP License</license>
+   <notes>* Fix</notes>
   </release>
  </changelog>
 </package>
