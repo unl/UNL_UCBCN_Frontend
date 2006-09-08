@@ -70,17 +70,17 @@ table.wp-calendar td:hover{
 }
 table.wp-calendar td.pad:hover{background:none}
 
-table.wp-calendar td#today{
-	position:relative;
-}
-table.wp-calendar td#today div{
+table.wp-calendar #today_image{
 	width:43px;
 	height:25px;
 	position:absolute;
-	margin: -15px 0 0 -22px;
+	margin:-36px 0 0 -22px;
 	background:url(images/todayimage.png) no-repeat 0 0;
 }
-.month_cal table.wp-calendar td#today div{
+.month_cal table.wp-calendar td#today {
+	position:relative;
+}
+.month_cal table.wp-calendar td#today #today_image{
 	position:absolute;
 	top:0;
 	right:0;
@@ -270,3 +270,4 @@ div.recentcals{
 
 * html #maincontent h3.recentcals{padding:6px 0 5px 12px}
 * html .month_cal {margin-top:7px;}
+* html table.wp-calendar td#today #today_image{margin: -15px 0 0 -22px;}
