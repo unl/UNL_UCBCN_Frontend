@@ -73,11 +73,14 @@ table.wp-calendar td.pad:hover{background:none}
 table.wp-calendar td#today{
 	position:relative;
 }
-table.wp-calendar td#today img{
+table.wp-calendar td#today div{
+	width:43px;
+	height:25px;
 	position:absolute;
 	margin: -15px 0 0 -22px;
+	background:url(images/todayimage.png) no-repeat 0 0;
 }
-.month_cal table.wp-calendar td#today img{
+.month_cal table.wp-calendar td#today div{
 	position:absolute;
 	top:0;
 	right:0;

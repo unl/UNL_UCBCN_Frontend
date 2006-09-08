@@ -88,12 +88,9 @@ function todayHilite(){
 					if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 						td1[i].setAttribute("id","today");
 						
-							var imageToday = document.createElement("img");
+							var imageToday = document.createElement("div");
 							imageToday.setAttribute("id","today_image");
-							imageToday.setAttribute("src","templates/default/images/todayimage.png");
-							imageToday.setAttribute("alt",x);
-							td1[i].appendChild(imageToday);		
-															
+							td1[i].appendChild(imageToday);
 					}
 				}
 				catch(e){}	
