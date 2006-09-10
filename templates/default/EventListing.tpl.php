@@ -32,7 +32,7 @@ foreach ($this->events as $e) {
     }
 	$row .= '</td>' .
 			'<td><a class="url summary" href="'.$e->getURL().'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>' .
-					'<blockquote class="summary">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote></td>' .
+					'<blockquote class="description">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote></td>' .
 			'</tr>';
 	echo $row;
 } ?>

@@ -39,7 +39,7 @@
 					?></td></tr>
 			
 			<tr><td class="date">Description:</td>	
-			<td><p class='summary'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
+			<td><p class='description'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
 			<?php if (isset($this->event->listingcontactname) ||
 						isset($this->event->listingcontactphone) ||
 						isset($this->event->listingcontactemail)) { ?>
