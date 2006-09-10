@@ -102,7 +102,7 @@ background-position:0 -45px;
 
 /* event view*/
 
-.event_cal h1.eventtitle{padding: 7px 0 10px 37px!important; 
+.event_cal h1.summary{padding: 7px 0 10px 37px!important; 
                  background: url(images/event_one.gif) no-repeat 0 0;}
 
 .event_cal table{width:auto;border:1px solid #8ebcd6;border-top:none;border-right:1px solid #4081a6;border-bottom:1px solid #4081a6;}

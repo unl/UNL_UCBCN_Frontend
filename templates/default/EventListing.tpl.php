@@ -31,7 +31,7 @@ foreach ($this->events as $e) {
     	$row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
     }
 	$row .= '</td>' .
-			'<td><a class="url eventtitle" href="'.$e->getURL().'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>' .
+			'<td><a class="url summary" href="'.$e->getURL().'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>' .
 					'<blockquote class="summary">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote></td>' .
 			'</tr>';
 	echo $row;
