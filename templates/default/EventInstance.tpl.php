@@ -1,7 +1,7 @@
 <div class="event_cal">
 <div class='vcalendar'>
 	<div class='vevent'>
-		<h1 class='title'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->title); ?></h1>
+		<h1 class='eventtitle'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->title); ?></h1>
 		<?php if (isset($this->event->subtitle)) echo '<h2>'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'</h2>'; ?>
 <div id="tabsG">
   <ul>
