@@ -26,6 +26,6 @@
 			echo '&lt;div class="location"&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'&lt;/div&gt;';
 		} ?>
 	</description>
-	<pubDate><?php date('r',strtotime($this->event->datecreated)); ?></pubDate>
+	<pubDate><?php echo date('r',strtotime($this->event->datecreated)); ?></pubDate>
 	<guid><?php echo $this->url; ?></guid>
 </item>

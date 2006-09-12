@@ -108,7 +108,7 @@
 						<ul>
 						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Log in</a> </li>
 						<li><a href="http://supportcenteronline.com/ics/support/default.asp?deptID=583&task=knowledge&questionID=2169">Get a Blackboard account</a> </li>
-						<li><a href="http://ucommdev.unl.edu/webdev/community/viewtopic.php?p=985#985">Feedbacks</a> </li>
+						<li><a href="http://ucommdev.unl.edu/webdev/community/viewtopic.php?p=985#985">Feedback</a> </li>
 						</ul></div>					
 					</div>
 					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
