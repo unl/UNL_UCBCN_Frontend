@@ -241,8 +241,11 @@ form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
 	margin:0;
 	padding:0;
 }
+p#feeds a{float:left;}
 p#feeds a#icsformat{display:block;text-indent:-9999px;background:url(images/ics.gif) no-repeat;width:40px;height:26px;}
+p#feeds a#rssformat{display:block;text-indent:-9999px;background:url(images/rss.gif) no-repeat;width:40px;height:26px;}
 #maincontent .event_cal p#feeds{float:none}
+
 /* recently updated calendars */
 div.cal_widget{
 	background:url(images/recent_bot.gif) no-repeat left bottom;

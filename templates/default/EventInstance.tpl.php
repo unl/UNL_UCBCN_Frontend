@@ -61,7 +61,7 @@
 			?></td></tr>
 			<tr><td class="date">Subscription:</td>
 		<td>
-			<?php echo('<p id="feeds"><a id="icsformat" href="'.$this->url.'format=ics">ics format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a></p>'); ?>
+			<?php echo('<p id="feeds"><a id="icsformat" href="'.$this->url.'format=ics">ics format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a><a id="rssformat" href="'.$this->url.'format=rss">rss format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a></p>'); ?>
 			</td></tr>
 			</tbody>
 
