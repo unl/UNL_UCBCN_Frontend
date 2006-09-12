@@ -87,6 +87,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				header('Content-type: text/calendar');
 				header('Content-Disposition: attachment; filename="events.ics"');
 			break;
+			case 'rss':
+			    header('Content-type: text/xml');
+		    break;
 		}
 		/*
 		if ($cache_hit == true) {
