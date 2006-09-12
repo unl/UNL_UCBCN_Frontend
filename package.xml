@@ -12,8 +12,8 @@
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2006-09-07</date>
- <time>14:59:06</time>
+ <date>2006-09-12</date>
+ <time>11:12:54</time>
  <version>
   <release>0.3.0</release>
   <api>0.1.0</api>
@@ -23,7 +23,8 @@
   <api>beta</api>
  </stability>
  <license uri="http://www.php.net/license">PHP License</license>
- <notes>* Fix</notes>
+ <notes>* Add search capabilities to the frontend.
+				* CSS Fixes from Alvin Woon.</notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -42,6 +43,8 @@
       <file name="date1.gif" role="data" />
       <file name="eventbeta.png" role="data" />
       <file name="event_one.gif" role="data" />
+      <file name="front-login.gif" role="data" />
+      <file name="ics.gif" role="data" />
       <file name="microformats.png" role="data" />
       <file name="monthviewnav_mid.gif" role="data" />
       <file name="monthviewnav_next.gif" role="data" />
@@ -51,6 +54,8 @@
       <file name="recent.gif" role="data" />
       <file name="recent_bot.gif" role="data" />
       <file name="recent_mid.gif" role="data" />
+      <file name="searchinfo.gif" role="data" />
+      <file name="searchinfo.png" role="data" />
       <file name="tableftG.gif" role="data" />
       <file name="tabrightG.gif" role="data" />
       <file name="todayimage.png" role="data" />
@@ -62,11 +67,14 @@
      <file name="Error.tpl.php" role="data" />
      <file name="EventInstance.tpl.php" role="data" />
      <file name="EventInstance_icalendar.tpl.php" role="data" />
+     <file name="EventInstance_rss.tpl.php" role="data" />
      <file name="EventListing.tpl.php" role="data" />
      <file name="EventListing_icalendar.tpl.php" role="data" />
+     <file name="frontend.js" role="data" />
      <file name="Frontend.tpl.php" role="data" />
      <file name="Frontend_Day.tpl.php" role="data" />
      <file name="Frontend_Day_icalendar.tpl.php" role="data" />
+     <file name="Frontend_Day_rss.tpl.php" role="data" />
      <file name="frontend_default.css" role="data" />
      <file name="Frontend_hcalendar.tpl.php" role="data" />
      <file name="Frontend_icalendar.tpl.php" role="data" />
@@ -74,6 +82,7 @@
      <file name="frontend_main.css" role="data" />
      <file name="Frontend_Month.tpl.php" role="data" />
      <file name="Frontend_MonthWidget.tpl.php" role="data" />
+     <file name="Frontend_rss.tpl.php" role="data" />
      <file name="Frontend_Search.tpl.php" role="data" />
      <file name="Frontend_Year.tpl.php" role="data" />
     </dir> <!-- /templates/default -->
@@ -214,9 +223,10 @@
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-09-07</date>
+   <date>2006-09-12</date>
    <license uri="http://www.php.net/license">PHP License</license>
-   <notes>* Fix</notes>
+   <notes>* Add search capabilities to the frontend.
+				* CSS Fixes from Alvin Woon.</notes>
   </release>
  </changelog>
 </package>
