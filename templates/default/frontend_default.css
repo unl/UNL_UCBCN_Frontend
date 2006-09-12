@@ -236,11 +236,13 @@ form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
 .three_col{width:700px;margin-top:13px;}
 
 /* feeds */
-p#feeds{
+#maincontent p#feeds{
 	float:right;
+	margin:0;
+	padding:0;
 }
 p#feeds a#icsformat{display:block;text-indent:-9999px;background:url(images/ics.gif) no-repeat;width:40px;height:26px;}
-.event_cal p#feeds a#icsformat{float:none}
+#maincontent .event_cal p#feeds{float:none}
 /* recently updated calendars */
 div.cal_widget{
 	background:url(images/recent_bot.gif) no-repeat left bottom;
