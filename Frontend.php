@@ -156,6 +156,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			case 'icalendar':
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_icalendar');
 			break;
+			case 'rss':
+				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_rss');
+			break;
 			case 'html':
 			default:
 				// Standard template works for html.
