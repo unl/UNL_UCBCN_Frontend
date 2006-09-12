@@ -14,6 +14,32 @@ function getElementsByClassName(oElm, strTagName, strClassName){
     return (arrReturnElements)
 }
 
+/* cookie function */
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
 /* body onload by simon collison */
 function addLoadEvent(func) {
   var oldonload = window.onload;
@@ -29,7 +55,13 @@ function addLoadEvent(func) {
   }
 }
 
-addLoadEvent(todayHilite);
+addLoadEvent(function() {
+  var cookie_frontend = readCookie('searchtips');
+  todayHilite();
+  if(!cookie_frontend){
+  searchinfo(); 
+  }
+});
 
 /* If anyone found a better way to return full month string without concatenation, let me know */
 function getCalendarDate()
@@ -101,4 +133,27 @@ function todayHilite(){
 	
 }
 
+/* search info */
+function searchinfo(){
 
+	var search = document.forms.event_search.q;
+	search.onclick = function(){
+								var flagappeared = document.getElementById('search_term');
+									if(!flagappeared.className){
+										createCookie('searchtips','searchterms',7);
+										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
+										flagappeared.className = 'appeared';										
+									}
+								};
+	var top_off = document.forms.event_search.getElementsByTagName('a');
+	top_off[0].onclick = function(){
+									var formseaarch = document.forms.event_search.q;
+									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
+									formseaarch.focus();
+									};
+}
+
+
+
+	
+	

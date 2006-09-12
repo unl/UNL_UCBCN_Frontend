@@ -59,6 +59,10 @@
 				echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</div>';
 			}
 			?></td></tr>
+			<tr><td class="date">Subscription:</td>
+		<td>
+			<?php echo('<p id="feeds"><a id="icsformat" href="'.$this->url.'format=ics">ics format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a></p>'); ?>
+			</td></tr>
 			</tbody>
 
 </table>

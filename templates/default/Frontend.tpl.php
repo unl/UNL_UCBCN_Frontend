@@ -78,17 +78,21 @@
 			<div id="maincontent"> 
 			<?php echo $this->navigation; ?>
 			<!-- InstanceBeginEditable name="maincontent" -->
-			<form id="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
+			<form id="event_search" name="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
 				<input type='search' name='q' id='searchinput' value="<?php if (isset($_GET['q'])) { echo htmlentities($_GET['q']); } ?>" />
 				<input type='submit' name='submit' value="Search" />
 				<input type='hidden' name='search' value='search' />
+			<p id="search_term">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
+			<a href="#" title="close search tip">(close message)</a>
+			</p>
+			
 			</form>
 				<?php if (isset($this->right)) { ?>
 					<div class="col left">
 						<?php UNL_UCBCN::displayRegion($this->right); ?>
-						<div class="recentcals">
-						<h3 class="recentcals">Recently updated calendars:</h3>
-						<ul class="recentcals">
+						<div class="cal_widget">
+						<h3>Recently updated calendars:</h3>
+						<ul>
 						<?php
 						$mdb2 = UNL_UCBCN::getDatabaseConnection();
 						$res = $mdb2->query('SELECT calendar.name, calendar.id FROM calendar, calendar_has_event ' .
@@ -99,6 +103,13 @@
 						}
 						?>
 						</ul></div>
+						<div class="cal_widget">
+						<h3>Have a Blackboard account?</h3>
+						<ul>
+						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Log in</a> </li>
+						<li><a href="http://supportcenteronline.com/ics/support/default.asp?deptID=583&task=knowledge&questionID=2169">Get a Blackboard account</a> </li>
+						<li><a href="http://ucommdev.unl.edu/webdev/community/viewtopic.php?p=985#985">Feedbacks</a> </li>
+						</ul></div>					
 					</div>
 					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
 					

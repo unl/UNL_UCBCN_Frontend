@@ -8,4 +8,5 @@ echo date('l, F jS',$day->getTimeStamp());
 <?php
 	UNL_UCBCN::displayRegion($this->output);
 ?>
+<?php echo('<p id="feeds"><a id="icsformat" title="ics format for events on '.date('l, F jS',$day->getTimeStamp()).'" href="'.$this->url.'format=ics">ics format for events on '.date('l, F jS',$day->getTimeStamp()).'</a></p>'); ?>
 </div>

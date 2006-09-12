@@ -18,9 +18,9 @@ foreach ($this->events as $e) {
 	$row .=	'<td class="date">';
 	if (isset($e->eventdatetime->starttime)) {
 		if (strpos($e->eventdatetime->starttime,'00:00:00')) {
-			$row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->starttime)).'">All day</abbr>';
+			$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">All day</abbr>';
 		} else {
-        	$row .= '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
+        	$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
 		}
     } else {
         $row .= 'Unknown';
@@ -28,13 +28,18 @@ foreach ($this->events as $e) {
     if (isset($e->eventdatetime->endtime) &&
     	($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
     	($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
-    	$row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
+    	$row .= '-<abbr class="dtend" title="'.date('c',strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
     }
 	$row .= '</td>' .
-			'<td><a class="url summary" href="'.$e->getURL().'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>' .
+			'<td><a class="url summary" href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>' .
 					'<blockquote class="description">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote></td>' .
 			'</tr>';
+	
 	echo $row;
-} ?>
+}
+
+ ?>
+
 </tbody>
 </table>
+
