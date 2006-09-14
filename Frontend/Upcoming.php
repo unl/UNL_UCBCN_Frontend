@@ -45,7 +45,7 @@ class UNL_UCBCN_Frontend_Upcoming extends UNL_UCBCN
 		if (count($eventlist->events)) {
 			return $eventlist;
 		} else {
-			return 'Sorry, no events were found for today!';
+			return 'Sorry, no events were found!';
 		}
 	}
 	
