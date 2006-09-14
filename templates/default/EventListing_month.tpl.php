@@ -2,6 +2,7 @@
 <?php
 
 foreach ($this->events as $e) {
+    $li = '<li>';
     if (strpos($e->eventdatetime->starttime,'00:00:00')===false) {
 		$starttime = strtotime($e->eventdatetime->starttime);
 		$li .= date('g',$starttime);
@@ -22,6 +23,7 @@ foreach ($this->events as $e) {
     	$li .= ': ';
 	}
 	$li .= '<a href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a></li>';
+	echo $li;
 }
 ?>
 </ul>

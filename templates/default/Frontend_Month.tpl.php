@@ -13,7 +13,18 @@
 	</tr>
 	</thead>
 	<tbody>
-		<?php echo $this->tbody; ?>
+		<?php
+		    UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Day','Frontend_Day_monthday');
+		    foreach ($this->weeks as $week) {
+		        echo '<tr>';
+		        foreach ($week as $day) {
+		            echo '<td>';
+		            UNL_UCBCN::displayRegion($day);
+		            echo '</td>';
+		        }
+		        echo '</tr>';
+		    }
+		?>
 	</tbody>
 </table>
 </div>

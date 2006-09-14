@@ -8,6 +8,7 @@
  */
 
 require_once 'UNL/UCBCN/Frontend.php';
+require_once 'UNL/UCBCN/Frontend/Day.php';
 require_once 'Calendar/Calendar.php';
 require_once 'Calendar/Month/Weekdays.php';
 require_once 'Calendar/Util/Textual.php';
@@ -20,11 +21,13 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 	var $year;
 	/** Month the user is viewing. */
 	var $month;
-	/** array of days */
-	var $days = array();
 	
-	var $thead;
-	var $tbody;
+	/**
+	 * Contains an array of Frontend_Day objects
+	 *
+	 * @var array
+	 */
+	var $weeks = array();
 	
 	/**
 	 * This function constructs the month widget and populates the heading,
@@ -33,7 +36,7 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 	 * @param int $y Year
 	 * @param int $m Month
 	 */
-	function __construct($y,$m,$calendar=NULL)
+	function __construct($y,$m,$calendar,$dsn)
 	{
 		$this->year = $y;
 		$this->month = $m;
@@ -64,78 +67,19 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		$selectedDays = array();
 		$Month->build($selectedDays);
 		
+		$week = count($this->weeks);
 		while ( $Day = $Month->fetch() ) {
-
-			// Build a link string for each day
-			$link = UNL_UCBCN_Frontend::formatURL(array(	'y'=>$Day->thisYear(),
-															'm'=>$Day->thisMonth(),
-															'd'=>$Day->thisDay(),
-															'calendar'=>$this->calendar->id));
-			
-			// isFirst() to find start of week
-			if ( $Day->isFirst() )
-				$this->tbody .= "<tr>\n";
-			if ( $Day->isEmpty() ) {
-				$this->tbody .= "<td class='empty'><a href='".$link."'>".$Day->thisDay()."</a></td>\n";
-			} else {
-				$this->tbody .= "<td><a href='".$link."'>".$Day->thisDay().'</a>'.$this->dayEventList($Day)."</td>\n";
-			}
-			
-			// isLast() to find end of week
-			if ( $Day->isLast() )
-				$this->tbody .= "</tr>\n";
+		    $this->weeks[$week][] = new UNL_UCBCN_Frontend_Day(array(
+		                                    'dsn'       => $dsn,
+											'year'		=> $this->year,
+											'month'		=> $this->month,
+											'day'		=> $Day->thisDay(),
+											'calendar'	=> $this->calendar));
+		    if ( $Day->isLast() ) {
+		        $week++;
+		    }
 		}
 	}
-	
-	function dayEventList($day)
-	{
-		$return = array();
-		$eventdatetime = $this->factory('eventdatetime');
-		if (isset($this->calendar)) {
-			$eventdatetime->query('SELECT DISTINCT eventdatetime.* FROM event,calendar_has_event,eventdatetime ' .
-									'WHERE calendar_has_event.calendar_id='.$this->calendar->id.' ' .
-											'AND (calendar_has_event.status =\'posted\' OR calendar_has_event.status =\'archived\') '.
-											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
-											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\' ' .
-									'ORDER BY eventdatetime.starttime ASC');
-		} else {
-			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$day->getTimestamp()).'%\'');
-			$eventdatetime->find();
-		}
-		$return[] = '<ul>';
-		while ($eventdatetime->fetch()) {
-			$einstance = new UNL_UCBCN_EventInstance($eventdatetime,$this->calendar);
-			$li = '<li>';
-			if (strpos($eventdatetime->starttime,'00:00:00')===false) {
-				$starttime = strtotime($eventdatetime->starttime);
-				$li .= date('g',$starttime);
-				if (substr($eventdatetime->starttime,14,2)!='00') {
-					$li .= ':'.substr($eventdatetime->starttime,14,2);
-				}
-				$li .= date('a',$starttime);
-				if (isset($eventdatetime->endtime) &&
-			    	($eventdatetime->endtime != $eventdatetime->starttime) &&
-			    	($eventdatetime->endtime > $eventdatetime->starttime)) {
-			    		$endtime = strtotime($eventdatetime->endtime);
-			    		$li .= '-'.date('g',$endtime);
-						if (substr($eventdatetime->endtime,14,2)!='00') {
-							$li .= ':'.substr($eventdatetime->endtime,14,2);
-						}
-						$li .= date('a',$endtime);
-		    	}
-		    	$li .= ': ';
-			}
-			$li .= '<a href="'.$einstance->getURL().'">'.UNL_UCBCN_Frontend::dbStringToHtml($einstance->event->title).'</a></li>';
-			$return[] = $li;
-		}
-		$return[] = '</ul>';
-		if (count($return)>2) {
-			return implode("\n",$return);
-		} else {
-			return '';
-		}
-	}
-	
 }
 
 ?>

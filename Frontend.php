@@ -131,7 +131,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			break;
 			case 'month':
 			    require_once 'UNL/UCBCN/Frontend/Month.php';
-				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month,$this->calendar);
+				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month,$this->calendar,$this->dsn);
 			break;
 			case 'year':
 			    require_once 'UNL/UCBCN/Frontend/Year.php';
