@@ -39,7 +39,9 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 				$sql .= 'eventdatetime.starttime LIKE \''.date('Y-m-d',$t).'%\' ORDER BY eventdatetime.starttime';
 			} else {
 				// Do a textual search.
-				$sql .= 'event.title LIKE \'%'.$mdb2->escape($this->query).'%\' ORDER BY event.title';
+				$sql .= 'event.title LIKE \'%'.$mdb2->escape($this->query).'%\' AND '.
+				        '(eventdatetime.starttime>=\''.date('Y-m-d').' 00:00:00\' OR '.
+						'eventdatetime.endtime>\''.date('Y-m-d').' 00:00:00\') ORDER BY event.title';
 			}
 			
 			$res = $mdb2->query($sql);
