@@ -239,7 +239,7 @@ form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
 #maincontent p#feeds{
 	float:right;
 	margin:0;
-	padding:0;
+	padding:1em 0 0 0;
 }
 p#feeds a{float:left;display:block;text-indent:-9999px;height:20px;}
 p#feeds a#icsformat{background:url(images/ics.gif) no-repeat;width:35px;}

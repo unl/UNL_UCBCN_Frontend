@@ -15,6 +15,7 @@
 <!-- InstanceBeginEditable name="head" -->
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend_main.css" />
 <script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend.js"></script>
+<link rel="alternate" type="application/rss+xml" title="<?php echo $this->calendar->name; ?> Events" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" />
 <!-- InstanceEndEditable -->
 </head>
 <body id="fixed">
