@@ -202,12 +202,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
 			$url = $_UNL_UCBCN['uri'];
 		}
-		if (isset($_UNL_UCBCN['uriformat'])) {
-			$format = $_UNL_UCBCN['uriformat'];
-		} else {
-			$format = 'querystring';
-		}
-		switch($format) {
+		switch(UNL_UCBCN_Frontend::uriFormat()) {
 			case 'rest':
 			case 'REST':
 				foreach ($order as $val) {
@@ -230,6 +225,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 							$url .= $values[$val].'/';
 						}
 					}
+				}
+				// Final check for the format (rss, ics, etc).
+				if (isset($values['format'])) {
+				    $url .= '?format='.$values['format'];
 				}
 			break;
 			case 'querystring':
@@ -256,9 +255,67 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 						}
 					}
 				}
+			    // Final check for the format (rss, ics, etc).
+				if (isset($values['format'])) {
+				    $url .= 'format='.$values['format'];
+				}
 			break;
 		}
 		return $url;
+	}
+	
+	/**
+	 * This function is for reformmating URL address. IE, you have the 
+	 * url to the object, but simply want to change the format to ics etc.
+	 * 
+	 * @param string $url Url of the form http://
+	 * @param array $values
+	 */
+	function reformatURL($url,$values)
+	{
+		if (isset($values['format'])) {
+		    switch(UNL_UCBCN_Frontend::uriFormat()) {
+				case 'rest':
+				case 'REST':
+				    $url .= '?format='.$values['format'];
+			    break;
+			    case 'querystring':
+				default:
+				    $url .= 'format='.$values['format'];
+				break;
+		    }
+		}
+		return $url;
+	}
+	
+	/**
+	 * Sets and/or returns the uri format.
+	 * 
+	 * @param string $set optional string, pass it to set the uriFormat, don't pass it to retrieve.
+	 */
+	function uriFormat($set=NULL)
+	{
+	    global $_UNL_UCBCN;
+	    if (isset($set)) {
+	        switch($set){
+	            case 'rest':
+	            case 'REST':
+	                $format = 'rest';
+	            break;
+	            default:
+	            case 'querystring':
+	                $format = 'querystring';
+	            break;
+	        }
+	        $_UNL_UCBCN['uriformat'] = $format;
+	    } else {
+		    if (isset($_UNL_UCBCN['uriformat'])) {
+				$format = $_UNL_UCBCN['uriformat'];
+			} else {
+				$format = 'querystring';
+			}
+	    }
+	    return $format;
 	}
 	
 	/**
