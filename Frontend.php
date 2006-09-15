@@ -109,6 +109,14 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	{
 		$this->navigation = $this->showNavigation();
 		switch($this->view) {
+			case 'upcoming':
+				require_once 'UNL/UCBCN/Frontend/Upcoming.php';
+				require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
+				$this->output[] = new UNL_UCBCN_Frontend_Upcoming(array(
+													'dsn'=>$this->dsn,
+													'calendar'=>$this->calendar));
+				$this->right = new UNL_UCBCN_Frontend_MonthWidget(date('Y'),date('m'),$this->calendar);
+			break;
 			case 'event':
 			    require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
 				if (isset($_GET['eventdatetime_id'])) {
@@ -188,7 +196,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function formatURL($values,$encode = true)
 	{
-		$order = array('calendar','search','y','m','d','eventdatetime_id');
+		$order = array('calendar','upcoming','search','y','m','d','eventdatetime_id');
 		global $_UNL_UCBCN;
 		$url = '?';
 		if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
@@ -300,6 +308,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		
 		if (isset($GLOBALS[$method]['search'])) {
 		    $view['view'] = 'search';
+		}
+		if (isset($GLOBALS[$method]['upcoming'])) {
+		    $view['view'] = 'upcoming';
 		}
 		
 		if (isset($GLOBALS[$method]['format'])) {
