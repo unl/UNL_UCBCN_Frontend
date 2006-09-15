@@ -108,7 +108,7 @@
 						<h3>Have a Blackboard account?</h3>
 						<ul>
 						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Log in</a> </li>
-						<li><a href="http://supportcenteronline.com/ics/support/default.asp?deptID=583&task=knowledge&questionID=2169">Get a Blackboard account</a> </li>
+						<li><a href="http://supportcenteronline.com/ics/support/default.asp?deptID=583&amp;task=knowledge&amp;questionID=2169">Get a Blackboard account</a> </li>
 						<li><a href="http://www1.unl.edu/comments/">Feedback</a> </li>
 						</ul></div>					
 					</div>
