@@ -33,7 +33,8 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
             $sql = 'SELECT DISTINCT eventdatetime.id FROM event, eventdatetime, calendar_has_event WHERE ' .
 						'eventdatetime.event_id = event.id AND 
 						calendar_has_event.event_id = event.id AND 
-						calendar_has_event.status != \'pending\' AND ';
+						calendar_has_event.status != \'pending\' AND 
+						calendar_has_event.calendar_id = '.$this->calendar->id.' AND ';
 			if ($t = strtotime($this->query)) {
 				// This is a time...
 				$sql .= 'eventdatetime.starttime LIKE \''.date('Y-m-d',$t).'%\' ORDER BY eventdatetime.starttime';
