@@ -9,7 +9,7 @@ foreach ($this->events as $e) {
 		if (substr($e->eventdatetime->starttime,14,2)!='00') {
 			$li .= ':'.substr($e->eventdatetime->starttime,14,2);
 		}
-		$li .= date('a',$starttime);
+		$li .= date('',$starttime);
 		if (isset($e->eventdatetime->endtime) &&
 	    	($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
 	    	($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
