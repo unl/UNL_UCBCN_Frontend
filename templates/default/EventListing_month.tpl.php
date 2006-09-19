@@ -18,7 +18,7 @@ foreach ($this->events as $e) {
 				if (substr($e->eventdatetime->endtime,14,2)!='00') {
 					$li .= ':'.substr($e->eventdatetime->endtime,14,2);
 				}
-				$li .= date('a',$endtime);
+				$li .= date('',$endtime);
     	}
     	$li .= ': ';
 	}

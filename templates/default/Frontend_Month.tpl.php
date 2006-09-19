@@ -1,4 +1,4 @@
-<div class="month_cal">
+<div class="month_cal" id="month_viewcal">
 <table class="wp-calendar">
 	<caption><?php echo $this->caption; ?></caption>
    <thead>

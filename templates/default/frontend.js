@@ -9,9 +9,9 @@ function getElementsByClassName(oElm, strTagName, strClassName){
         oElement = arrElements[i];      
         if(oRegExp.test(oElement.className)){
             arrReturnElements.push(oElement);
-        }   
+        }
     }
-    return (arrReturnElements)
+    return (arrReturnElements);
 }
 
 /* cookie function */
@@ -56,14 +56,21 @@ function addLoadEvent(func) {
 }
 
 addLoadEvent(function() {
-  var cookie_frontend = readCookie('searchtips');
+  //attach monthdisplay() if it's a month view
+  if (document.getElementById('month_viewcal')){
+  monthdisplay(); 
+  }
+  
+  // attach today icon
   todayHilite();
-  if(!cookie_frontend){
+  
+  //attach search tips if cookie does not exist
+  if(readCookie('searchtips') ==null){
   searchinfo(); 
   }
 });
 
-/* If anyone found a better way to return full month string without concatenation, let me know */
+/* If anyone found a better way to return full month string without partial truncation, let me know */
 function getCalendarDate()
 {
    var months = new Array(13);
@@ -87,11 +94,7 @@ function getCalendarDate()
 }
 
 /* Go to a given URL */
-function gotoURL(location) {
-
-	document.location=location;
-
-}
+function gotoURL(location) {document.location=location;}
 
 /* output an icon to indicate today date */
 function todayHilite(){
@@ -152,8 +155,249 @@ function searchinfo(){
 									formseaarch.focus();
 									};
 }
+/*
+ * Clean and simple month display
+ * Call from: addLoadEvent
+ * Call to: createButton(), truncate()
+ */
+function monthdisplay(){
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	for(j=0;j<td0.length;j++){
+		var td1 = td0[j].getElementsByTagName('td');
+		for(i=0;i<td1.length;i++){
+			var listevent = td1[i].getElementsByTagName('li');
+			if(listevent.length != 0){
+				if (listevent.length > 4){
+					var how_many_more = listevent.length - 4;
+					for( var d=4; d<listevent.length; d++){
+						listevent[d].style.display = 'none';
+					}
+					createButton("+"+how_many_more+" more", td1[i], showMoreEvents, "more_event");
+				}
+				else{
+					createButton("full view", td1[i], showMoreEvents, "more_event");
+				}
+				for (k=0;k<listevent.length;k++){
+				var listText = listevent[k].getElementsByTagName('a');
+					for(x=0; x<listText.length; x++){
+					  truncate(listText[x]);
+					}
+				}
+			}
+		}
+	}
+}
 
+/*
+ * Create <a href> buttons
+ * Call from: monthdisplay()
+ * Call to: showMoreEvents()
+ */
+function createButton(linktext, attachE, actionFunc, classN){
+	var morelink = document.createElement("a");
+	morelink.style.display = 'inline';
+	var text = document.createTextNode(linktext);
+	morelink.className=classN;
+	morelink.href = '#';
+	morelink.onclick = actionFunc;
+	morelink.appendChild(text);
+	attachE.appendChild(morelink);
+}
 
+/*
+ * Truncate text 
+ * Call from: monthdisplay()
+ * Call to: Del()
+ */
+function truncate(t){
+	var len = 11;
+	var trunc = t.innerHTML;
+	// rinse text to weed out any html tags
+	trunc = Del(trunc);
+	if (trunc.length > len) {
+	   /* Truncate the content of the P, then go back to the end of the
+	      previous word to ensure that we don't truncate in the middle of
+	      a word */
+	    trunc = trunc.substring(0, len);
+	    trunc = trunc.replace(/\w+$/, '');
+		/* Add an ellipses to the end and make it a link that expands
+       	   the paragraph back to its original size */
+   try{	 
+   	trunc += '...<span style="display:none">'+t.innerHTML;
+	t.innerHTML = trunc;
+	}catch(e){};
+	}						
+}
 
+/*
+ * Weed out HTML tags
+ * Call from: truncate()
+ * Call to: none
+ */	
+function Del(Word) {
+a = Word.indexOf("<");
+b = Word.indexOf(">");
+len = Word.length;
+c = Word.substring(0, a);
+if(b == -1)
+b = a;
+d = Word.substring((b + 1), len);
+Word = c + d;
+tagCheck = Word.indexOf("<");
+if(tagCheck != -1)
+Word = Del(Word);
+return Word;
+}
+
+/*
+ * onclick function to view the rest of the events. All the actions are here :)
+ * Call from: createButton()
+ * Call to: showDate(), adjustPos(), closeULbox();
+ */	
+var zInde = 1000;
+function showMoreEvents(){
+
+	var ul = this.previousSibling;
+	var tdcell = ul.parentNode;
+	var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
+
+	//if it's today, give different id to td to counteract position relative for today TD and hide today icon
+	if(monthL[0].id == getCalendarDate()){
+	if(tdcell.id == 'today'){
+	document.getElementById('today_image').style.display = 'none';
+	tdcell.setAttribute("id","tt");
+	}
+	}
 	
+	//stack ulbox according to 'who click first' and restack if it is clicked again.
+	ul.className = "ul_box";
+	ul.style.zIndex = zInde;
+	zInde++;
+	ul.onclick = function(){
+	this.style.zIndex = zInde+1;
+	zInde++;
+	};
 	
+	var li = ul.getElementsByTagName('li');
+	
+	//get the month value and pass it through showDate function
+	var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
+	var yearL = getElementsByClassName(document, "span", "yearvalue");
+	showDate(ul, li, monthL[0].id, yearL[0].firstChild.childNodes[0].nodeValue);
+	
+	for (i=0;i<li.length;i++){
+		var listText = li[i].getElementsByTagName('a');
+			for(x=0; x<listText.length; x++){
+				var everything = listText[x].getElementsByTagName('span');
+				if (everything.length > 0){
+				listText[x].innerHTML = everything[0].innerHTML;
+				}
+			}
+	}
+		var para = document.createElement("li");
+		para.className = 'close_eventbox';
+		var text = document.createTextNode("close");
+		var elip_link = document.createElement('a');
+		elip_link.href = '#';
+		elip_link.onclick = closeULbox;
+		elip_link.appendChild(text);
+		para.appendChild(elip_link);
+		ul.appendChild(para);
+
+	//find position and adjust accordingly so there's no overflow on ul_box
+	adjustPos(ul, tdcell);
+	return false;
+}
+
+/*
+ * contruct the date when ul_box is brought up. Format: September 12, 2006
+ * Call from: showMoreEvents()
+ * Call to: none
+ */	
+function showDate(ulList, liList, m, y){
+	var date = ulList.parentNode.firstChild.childNodes[0].nodeValue;
+	var dateUL = document.createElement("li");
+	var dateTEXT = document.createTextNode(m+' '+date+','+' '+y);
+	var dateLink = document.createElement('a');
+	dateUL.className="dateUL";
+	dateLink.href = ulList.parentNode.firstChild;
+	dateLink.appendChild(dateTEXT);
+	dateUL.appendChild(dateLink);
+	ulList.insertBefore(dateUL,liList[0]);
+}
+
+/*
+ * calculate pop up position and apply bottom and right = 0 to prevent overflow.
+ * Call from: showMoreEvents()
+ * Call to: findPos()
+ */	
+function adjustPos(ulL, tD){
+	var pos = findPos(ulL.parentNode.parentNode.parentNode.parentNode);
+	var ulpos = findPos(ulL);
+	var tdHeight = tD.clientHeight;
+	var version=0;
+	var widthOffset;
+	
+	var theWidth = 0;
+    if (window.innerWidth) {
+	theWidth = window.innerWidth
+    } else if (document.documentElement &&
+                document.documentElement.clientWidth) {
+	theWidth = document.documentElement.clientWidth
+    } else if (document.body) {
+	theWidth = document.body.clientWidth
+    }
+    
+	widthOffset = ((theWidth-pos[0])/ulpos[0])*100;
+   	if(ulpos[1]+ulL.clientHeight > 1000){
+	ulL.style.bottom = '0';
+	}
+	if (widthOffset < 120){
+	ulL.style.right = '0';
+	}		
+}
+
+/*
+ * return offset value x and y of an object
+ * Call from: adjustPos()
+ * Call to: none
+ */	
+function findPos(obj)
+{
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		curleft = obj.offsetLeft
+		curtop = obj.offsetTop
+		while (obj = obj.offsetParent) {
+			curleft += obj.offsetLeft
+			curtop += obj.offsetTop
+		}
+	}
+	return [curleft,curtop];
+}
+
+/*
+ * close and retruncate ul_box
+ * Call from: showMoreEvents()
+ * Call to: truncate()
+ */	
+function closeULbox(){
+var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
+var ul = this.parentNode.parentNode;
+	
+if(monthL[0].id == getCalendarDate()){
+document.getElementById('today_image').style.display = 'inline';
+ul.parentNode.id = "today";
+}
+ul.removeChild(ul.lastChild);
+ul.removeChild(ul.getElementsByTagName('li')[0]);
+var listevent = ul.getElementsByTagName('li');
+for (k=0;k<listevent.length;k++){
+				var listText = listevent[k].getElementsByTagName('a');
+					for(x=0; x<listText.length; x++){
+					  truncate(listText[x]);
+					}
+				}
+ul.className = 'none';
+return false;
+}
