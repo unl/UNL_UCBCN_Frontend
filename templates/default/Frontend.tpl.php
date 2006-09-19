@@ -29,6 +29,11 @@
 			<!-- WDN: see glossary item 'breadcrumbs' -->
 			<ul>
 				<li class="first"><a href="http://www.unl.edu/">UNL</a></li>
+				<?php
+				if (!empty($this->calendar->website) && ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id'])) {
+				    echo '<li><a href="'.$this->calendar->website.'">'.$this->calendar->name.'</a></li>';
+				}
+			    ?>
 				<li>Events</li>
 			</ul><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
 			<!-- InstanceEndEditable --> </div>
