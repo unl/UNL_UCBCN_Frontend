@@ -27,6 +27,10 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 	var $output;
 	/** URL of events on this day. */
 	var $url;
+	/** Display ongoing events? */
+	var $ongoing = true;
+	/** no events message */
+	var $noevents = 'Sorry, no events were found for today!';
 	
 	function __construct($options)
 	{
@@ -38,7 +42,9 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 			}
 		}
 		$this->output[] = $this->showEventListing();
-		$this->output[] = $this->showOngoingEventListing();
+		if ($this->ongoing===true) {
+		    $this->output[] = $this->showOngoingEventListing();
+		}
 		$this->url = $this->getURL();
 	}
 	
@@ -54,7 +60,7 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 		if (count($eventlist->events)) {
 			return $eventlist;
 		} else {
-			return 'Sorry, no events were found for today!';
+			return $this->noevents;
 		}
 	}
 	
