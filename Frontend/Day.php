@@ -37,7 +37,8 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 				return new UNL_UCBCN_Error('No calendar specified or could be found.');
 			}
 		}
-		$this->output = $this->showEventListing();
+		$this->output[] = $this->showEventListing();
+		$this->output[] = $this->showOngoingEventListing();
 		$this->url = $this->getURL();
 	}
 	
@@ -54,6 +55,22 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 			return $eventlist;
 		} else {
 			return 'Sorry, no events were found for today!';
+		}
+	}
+	
+	function showOngoingEventListing()
+	{
+	    $options = array(   'year'=>$this->year,
+		                    'month'=>$this->month,
+		                    'day'=>$this->day,
+		                    'calendar'=>$this->calendar);
+	    // Fetch the day evenlisting for this day.
+		$eventlist = new UNL_UCBCN_EventListing('ongoing',$options);
+	    
+		if (count($eventlist->events)) {
+			return $eventlist;
+		} else {
+			return NULL;
 		}
 	}
 	
