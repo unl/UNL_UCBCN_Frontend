@@ -1,5 +1,5 @@
 <?php if ($this->type == 'ongoing') {
-    echo '<h1 class="'.$this->type.'">Ongoing Events:</h1>';
+    echo '<h4 class="'.$this->type.'">Ongoing Events:</h4>';
 } ?>
 <table class='<?php echo $this->type; ?>'>
 <thead>

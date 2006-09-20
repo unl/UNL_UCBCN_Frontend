@@ -33,7 +33,7 @@ table td{
 	}
 table td.date{width:20%;}
 table td.title{width:80%;}
-.three_col h4.sec_main{	 padding: 0 0 15px 30px!important; 
+.three_col h4.sec_main{	 padding: 0 0 11px 30px!important; 
                  background: url(images/date1.gif) no-repeat 0 0;}
 
 table td.empty{color:#ddd;}
@@ -86,6 +86,10 @@ table.wp-calendar #today_image{
 	right:0;
 	margin: 0;
 }
+
+h4.ongoing{background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:2px 0 7px 34px;}
+table.ongoing{margin:5px 0 0 0;}
+table.ongoing td, table.ongoing th{border:none;padding:4px;}
 
 /*caption nav*/
 table.wp-calendar caption{position:absolute;top:0;left:0;margin:-38px 0 0 0}
@@ -169,7 +173,8 @@ background-position:0 -45px;
 	vertical-align:top;
 	float:left;
 	display:block;
-	height:12.3em;
+	min-height:12.3em;
+	_height:12.3em;
 	}
 #maincontent .month_cal table.wp-calendar td a{background:#ddd;padding:0 4px;float:left;margin:-5px 0 0 -6px}	
 #maincontent .month_cal table.wp-calendar td a:active{color:#333;}
