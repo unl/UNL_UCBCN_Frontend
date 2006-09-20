@@ -22,7 +22,7 @@ foreach ($this->events as $e) {
 	if ($this->type == 'ongoing') {
 	    $row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('M jS',strtotime($e->eventdatetime->starttime)).'</abbr>';
 	    $row .= '-<abbr class="dtend" title="'.date('c',strtotime($e->eventdatetime->endtime)).'">'.date('M jS',strtotime($e->eventdatetime->endtime)).'</abbr>';
-	} elseif ($this->type == 'upcoming') {
+	} elseif ($this->type == 'upcoming' || $this->type == 'search') {
 		if (strpos($e->eventdatetime->starttime,'00:00:00')) {
 			$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('M jS',strtotime($e->eventdatetime->starttime)).'</abbr>';
 		} else {

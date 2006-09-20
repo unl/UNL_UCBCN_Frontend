@@ -47,6 +47,7 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 			
 			$res = $mdb2->query($sql);
 			$this->output = new UNL_UCBCN_EventListing();
+			$this->output->type = 'search';
 			while ($row = $res->fetchRow()) {
 				$this->output->events[] =  new UNL_UCBCN_EventInstance($row[0]);
 			}
