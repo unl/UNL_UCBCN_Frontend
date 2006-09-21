@@ -4,7 +4,7 @@
 <table class='<?php echo $this->type; ?>'>
 <thead>
 <tr>
-<th scope="col" class="date">Time/Location</th>
+<th scope="col" class="date">Time</th>
 <th scope="col" class="title">Event Title</th>
 </tr>
 </thead>
