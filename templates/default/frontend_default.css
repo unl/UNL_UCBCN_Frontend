@@ -86,6 +86,8 @@ table.wp-calendar #today_image{
 	right:0;
 	margin: 0;
 }
+span.location{font-size:0.75em;color:#3A8103;}
+
 
 h4.ongoing{background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:2px 0 7px 34px;}
 table.ongoing{margin:5px 0 0 0;}
