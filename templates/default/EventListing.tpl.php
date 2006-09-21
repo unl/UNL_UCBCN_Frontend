@@ -4,8 +4,8 @@
 <table class='<?php echo $this->type; ?>'>
 <thead>
 <tr>
-<th scope="col" class="date"><a href="<?php echo $GLOBALS['_UNL_UCBCN']['uri']; ?>?orderby=starttime">Time</a></th>
-<th scope="col" class="title"><a href="<?php echo $GLOBALS['_UNL_UCBCN']['uri']; ?>?orderby=title">Event Title</a></th>
+<th scope="col" class="date">Time/Location</th>
+<th scope="col" class="title">Event Title</th>
 </tr>
 </thead>
 <tbody class="vcalendar">
@@ -43,6 +43,10 @@ foreach ($this->events as $e) {
 	    	($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
 	    	$row .= '-<abbr class="dtend" title="'.date('c',strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
 	    }
+	}
+	if (isset($e->eventdatetime->location_id)) {
+	    $l = $e->eventdatetime->getLink('location_id');
+	    $row .= '<br /><span class="location">'.$l->name.'</span>';
 	}
 	$row .= '</td>' .
 			'<td><a class="url summary" href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>';
