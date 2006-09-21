@@ -80,7 +80,7 @@
 		
 		<div id="main_right" class="mainwrapper">
 			<!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
-			
+		
 			<div id="maincontent"> 
 			<?php echo $this->navigation; ?>
 			<!-- InstanceBeginEditable name="maincontent" -->
@@ -115,7 +115,17 @@
 						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Log in</a> </li>
 						<li><a href="http://supportcenteronline.com/ics/support/default.asp?deptID=583&amp;task=knowledge&amp;questionID=2169">Get a Blackboard account</a> </li>
 						<li><a href="http://www1.unl.edu/comments/">Feedback</a> </li>
-						</ul></div>					
+						</ul></div>
+						
+						    
+      <div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
+        <span>Subscribe to UNL's events</span> 
+        <ul id="droplist">
+          <li id="eventrss"><a href="<?php echo $this->uri; ?>/?&format=rss" title="RSS feed">RSS feed</a></li>
+          <li id="eventical"><a href="<?php echo $this->uri; ?>/?&format=ical" title=".ical format">.ical format</a></li>
+          </ul>
+      </div>
+											
 					</div>
 					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
 					

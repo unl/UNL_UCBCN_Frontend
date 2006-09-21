@@ -67,12 +67,26 @@ addLoadEvent(function() {
   
   // attach today icon
   todayHilite();
-  
+  dropdown();
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
   searchinfo(); 
   }
 });
+
+
+/*IE drop down*/
+var g_bH = false; 
+  function dropdown(p_strId) {
+    g_bH = false;
+    var l_E = document.getElementById(p_strId);
+    if(l_E && document.defaultView) {
+      if(document.defaultView.getComputedStyle(l_E, 'hover')) {
+        g_bH = true;
+      }
+    }
+    l_E = null;
+  }
 
 /* If anyone found a better way to return full month string without partial truncation, let me know */
 function getCalendarDate()
