@@ -49,7 +49,11 @@
 				<?php if (isset($this->event->listingcontactphone)) echo '<div class="tel">'.$this->event->listingcontactphone.'</div>'; ?>
 				<?php if (isset($this->event->listingcontactemail)) echo '<div class="mailto">'.$this->event->listingcontactemail.'</div>'; ?>
 		
-			<?php } ?></td></tr>
+			<?php } 
+			if (isset($this->event->webpageurl)) {
+			    echo 'Website: <a class="url" href="'.$this->event->webpageurl.'">'.$this->event->webpageurl.'</a>';
+			}
+			?></td></tr>
 		
 		<tr class="alt"><td class="date">Location:</td>
 		<td>
