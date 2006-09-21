@@ -44,12 +44,12 @@ foreach ($this->events as $e) {
 	    	$row .= '-<abbr class="dtend" title="'.date('c',strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
 	    }
 	}
-	if (isset($e->eventdatetime->location_id)) {
-	    $l = $e->eventdatetime->getLink('location_id');
-	    $row .= '<br /><span class="location">'.$l->name.'</span>';
-	}
 	$row .= '</td>' .
 			'<td><a class="url summary" href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>';
+	if (isset($e->eventdatetime->location_id)) {
+	    $l = $e->eventdatetime->getLink('location_id');
+	    $row .= ' <span class="location">'.$l->name.'</span>';
+	}
 	if ($this->type != 'ongoing') {
 	    $row .=	'<blockquote class="description">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote>';
 	}
