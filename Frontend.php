@@ -363,6 +363,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			$view['eventdatetime_id'] = $GLOBALS[$method]['eventdatetime_id'];
 		}
 		
+		if (isset($GLOBALS[$method]['month'])) {
+		    $view['view'] = 'month';
+		}
 		if (isset($GLOBALS[$method]['search'])) {
 		    $view['view'] = 'search';
 		}
