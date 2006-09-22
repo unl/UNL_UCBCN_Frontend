@@ -96,11 +96,13 @@ var g_bH = false;
       }
     }
     l_E = null;
+   try{ 
    var dr = document.getElementById('droplist').style;
    if (document.getElementById('maincontent').clientHeight < 780){
    dr.margin = '-64px 2px 0 0';
    dr.borderTop = '1px solid #ccc';
    }
+   }catch(e){};
   }
 
 /*
