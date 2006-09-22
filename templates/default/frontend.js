@@ -197,7 +197,9 @@ function searchinfo(){
 									var formseaarch = document.forms.event_search.q;
 									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
 									formseaarch.focus();
+									return false;
 									};
+									
 }
 /*
  * Clean and simple month display
