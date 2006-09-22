@@ -1,3 +1,36 @@
+/* body onload by simon collison */
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+
+/*this is the event loader*/
+addLoadEvent(function() {
+  
+  //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
+  if (document.getElementById('month_viewcal') && BrowserDetect.browser != 'Safari'){
+  monthdisplay(); 
+  }
+  
+  todayHilite();
+  dropdown();
+  
+  //attach search tips if cookie does not exist
+  if(readCookie('searchtips') ==null){
+  searchinfo(); 
+  }
+});
+
+/*------------------------ GENERIC FUNCTIONS --------------------------*/ 
 /* getElementsByClassName by some guy with a yeallowish website. */
 function getElementsByClassName(oElm, strTagName, strClassName){
     var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
@@ -43,52 +76,38 @@ function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
 
-/* body onload by simon collison */
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      if (oldonload) {
-        oldonload();
-      }
-      func();
-    }
-  }
-}
+/* Go to a given URL */
+function gotoURL(location) {document.location=location;}
+/*------------------------------------------------------------------------*/
 
-addLoadEvent(function() {
-  
-  //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
-  if (document.getElementById('month_viewcal') && BrowserDetect.browser != 'Safari'){
-  monthdisplay(); 
-  }
-  
-  // attach today icon
-  todayHilite();
-  dropdown();
-  //attach search tips if cookie does not exist
-  if(readCookie('searchtips') ==null){
-  searchinfo(); 
-  }
-});
-
-
-/*IE drop down*/
+/*
+ * subscriber drop down for ie, adjust css when min height is triggered
+ * Call from: closeULbox(), showMoreEvents(), todayHilite()
+ * Call to: none
+ */
 var g_bH = false; 
   function dropdown(p_strId) {
     g_bH = false;
     var l_E = document.getElementById(p_strId);
+
     if(l_E && document.defaultView) {
       if(document.defaultView.getComputedStyle(l_E, 'hover')) {
-        g_bH = true;
+        g_bH = true;    
       }
     }
     l_E = null;
+   var dr = document.getElementById('droplist').style;
+   if (document.getElementById('maincontent').clientHeight < 780){
+   dr.margin = '-64px 2px 0 0';
+   dr.borderTop = '1px solid #ccc';
+   }
   }
 
-/* If anyone found a better way to return full month string without partial truncation, let me know */
+/*
+ * Return full month strings
+ * Call from: closeULbox(), showMoreEvents(), todayHilite()
+ * Call to: none
+ */
 function getCalendarDate()
 {
    var months = new Array(13);
@@ -111,10 +130,11 @@ function getCalendarDate()
    return dateString;
 }
 
-/* Go to a given URL */
-function gotoURL(location) {document.location=location;}
-
-/* output an icon to indicate today date */
+/*
+ * today icon
+ * Call from: addLoadEvent
+ * Call to: none
+ */
 function todayHilite(){
 	x = new Date ();
 	y = x.getDate ();
@@ -154,7 +174,11 @@ function todayHilite(){
 	
 }
 
-/* search info */
+/*
+ * Search box tips
+ * Call from: none
+ * Call to: none
+ */
 function searchinfo(){
 
 	var search = document.forms.event_search.q;
