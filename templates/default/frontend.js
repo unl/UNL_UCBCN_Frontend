@@ -107,8 +107,12 @@ var g_bH = false;
    }catch(e){};
   }
 
+/*
+ * Toggle off monthview() based on cookie
+ * Call from: none
+ * Call to: none
+ */
 function fullview(){
-
 	if (readCookie('monthview') ==null){
 	createCookie('monthview','showallevents',1);
 	window.location.reload();
@@ -121,7 +125,7 @@ return false;
 }
 
 /*
- * Return full month strings
+ * Return full month strings based on javascript date function
  * Call from: closeULbox(), showMoreEvents(), todayHilite()
  * Call to: none
  */
@@ -145,6 +149,30 @@ function getCalendarDate()
    var monthname   = months[monthnumber];
    var dateString = monthname;
    return dateString;
+}
+
+/*
+ * Return full month strings based on input value
+ * Call from: showMoreEvents()
+ * Call to: none
+ */
+function getCalendarName(t)
+{
+   var months = new Array(13);
+   months[0]  = "January";
+   months[1]  = "February";
+   months[2]  = "March";
+   months[3]  = "April";
+   months[4]  = "May";
+   months[5]  = "June";
+   months[6]  = "July";
+   months[7]  = "August";
+   months[8]  = "September";
+   months[9]  = "October";
+   months[10] = "November";
+   months[11] = "December";
+   var monthname   = months[t];
+   return monthname;
 }
 
 /*
@@ -342,9 +370,19 @@ function showMoreEvents(){
 	var li = ul.getElementsByTagName('li');
 	
 	//get the month value and pass it through showDate function
-	var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
+	//var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
 	var yearL = getElementsByClassName(document, "span", "yearvalue");
-	showDate(ul, li, monthL[0].id, yearL[0].firstChild.childNodes[0].nodeValue);
+	var now         = new Date();
+ 	var monthnumber = now.getMonth();
+	var monthval = getCalendarName(tdcell.childNodes[1].childNodes[0].nodeValue-1);
+
+	if (tdcell.className == 'prev'){
+	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
+	}else if (tdcell.className == 'next'){
+	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
+	}else{
+	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
+	}
 	
 	for (i=0;i<li.length;i++){
 		var listText = li[i].getElementsByTagName('a');
