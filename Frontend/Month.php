@@ -38,8 +38,8 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 	 */
 	function __construct($y,$m,$calendar,$dsn)
 	{
-		$this->year = $y;
-		$this->month = $m;
+		$this->year = (int) $y;
+		$this->month = (int) $m;
 		$this->calendar = $calendar;
 		$Month = new Calendar_Month_Weekdays($y, $m, 0);
 		$PMonth = $Month->prevMonth('object'); // Get previous month as object
@@ -71,8 +71,8 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 		while ( $Day = $Month->fetch() ) {
 		    $this->weeks[$week][] = new UNL_UCBCN_Frontend_Day(array(
 		                                    'dsn'       => $dsn,
-											'year'		=> $this->year,
-											'month'		=> $this->month,
+											'year'		=> $Day->thisYear(),
+											'month'		=> $Day->thisMonth(),
 											'day'		=> $Day->thisDay(),
 											'calendar'	=> $this->calendar,
 		                                    'ongoing'   => false,

@@ -18,7 +18,15 @@
 		    foreach ($this->weeks as $week) {
 		        echo '<tr>';
 		        foreach ($week as $day) {
-		            echo '<td>';
+		            $class = '';
+		            if (is_object($day) && get_class($day) == 'UNL_UCBCN_Frontend_Day') {
+			            if ($day->month < $this->month) {
+			                $class = 'prev';
+			            } elseif ($day->month > $this->month) {
+			                $class = 'next';
+			            }
+		            }
+		            echo '<td class="'.$class.'">';
 		            UNL_UCBCN::displayRegion($day);
 		            echo '</td>';
 		        }
