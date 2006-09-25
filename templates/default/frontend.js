@@ -15,11 +15,13 @@ function addLoadEvent(func) {
 
 /*this is the event loader*/
 addLoadEvent(function() {
-  
+
   //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
-  if (document.getElementById('month_viewcal') && BrowserDetect.browser != 'Safari'){
+  if (document.getElementById('month_viewcal') && BrowserDetect.browser != 'Safari' && readCookie('monthview') ==null){
   monthdisplay(); 
-  }
+  var viewall = document.getElementById('monthfullview');
+  viewall.className = 'monthfullview_unchecked';
+  }  
   
   todayHilite();
   dropdown();
@@ -104,6 +106,19 @@ var g_bH = false;
    }
    }catch(e){};
   }
+
+function fullview(){
+
+	if (readCookie('monthview') ==null){
+	createCookie('monthview','showallevents',1);
+	window.location.reload();
+	
+	}else{
+	eraseCookie('monthview');
+	window.location.reload();
+	}
+return false;
+}
 
 /*
  * Return full month strings

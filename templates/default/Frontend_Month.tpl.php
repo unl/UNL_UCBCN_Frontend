@@ -27,4 +27,5 @@
 		?>
 	</tbody>
 </table>
+<a href="#" id="monthfullview" onclick="fullview()">View all events</a>
 </div>

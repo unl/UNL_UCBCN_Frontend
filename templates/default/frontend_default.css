@@ -291,6 +291,8 @@ a#frontend_login:hover{background-position:0 -21px;}
 #maincontent div.cal_widget ul li{background:url(images/widget_list.gif) no-repeat 0 5px;padding:0 0 0 15px;height:1%;margin-right:7px;position:relative;}
 #maincontent div.cal_widget ul li:hover{background:url(images/widget_list_hover.gif) no-repeat 0 5px;}
 
+a#monthfullview{background:url(images/checkbox.gif) no-repeat;background-position:0 -14px; padding: 0 0 0 17px;}
+a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 
 #subscribe {
   float: right;
@@ -328,7 +330,7 @@ a#frontend_login:hover{background-position:0 -21px;}
   list-style-type: none;
   background: #eee;
 }
-#subscribe li#eventrss{border-bottom:1px solid #ccc;}
+#subscribe li#eventrss{border-bottom:1px solid #ddd;}
 #subscribe li#eventrss a{background:url(images/rss.gif) no-repeat;  padding: 3px 0 3px 26px;}
 #subscribe li#eventical a{background:url(images/ics.gif) no-repeat;}
 #subscribe li a {
