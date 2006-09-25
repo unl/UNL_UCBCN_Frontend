@@ -180,6 +180,7 @@ background-position:0 -45px;
 	}
 #maincontent .month_cal table.wp-calendar td a{background:#ddd;padding:0 4px;float:left;margin:-5px 0 0 -6px}	
 #maincontent .month_cal table.wp-calendar td a:active{color:#333;}
+#maincontent .month_cal table.wp-calendar td span.monthvalue_ID{display:none}
 #maincontent .month_cal table.wp-calendar td ul{position:relative;list-style:none;clear:both;padding:4px 0 0 0;margin:0;}
 #maincontent .month_cal table.wp-calendar td ul.ul_box{width:200px;z-index:1000;position:absolute;margin:0;_margin:-18px 0 0 -87px;background:#ECF7FD;border:1px solid #7DB0E2;border-color:#e0e0e0 #AACBEB #AACBEB #e0e0e0;padding:4px;}
 #maincontent .month_cal table.wp-calendar td ul.ul_box li{line-height:1.5;display:list-item!important;background:none;padding:1px 0;}
