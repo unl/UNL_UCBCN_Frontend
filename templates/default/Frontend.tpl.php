@@ -99,19 +99,6 @@
 					<div class="col left">
 						<?php UNL_UCBCN::displayRegion($this->right); ?>
 						<div class="cal_widget">
-						<h3>Recently updated calendars:</h3>
-						<ul>
-						<?php
-						$mdb2 = UNL_UCBCN::getDatabaseConnection();
-						$res = $mdb2->query('SELECT calendar.name, calendar.id FROM calendar, calendar_has_event ' .
-								'WHERE calendar.id = calendar_has_event.calendar_id ' .
-								'GROUP BY calendar.id ORDER BY calendar_has_event.datelastupdated DESC LIMIT 5');
-						while ($row = $res->fetchRow()) {
-							echo '<li><a href="'.UNL_UCBCN_Frontend::formatURL(array('calendar'=>$row[1])).'">'.$row[0].'</a></li>';
-						}
-						?>
-						</ul></div>
-						<div class="cal_widget">
 						<h3>Have a Blackboard account?</h3>
 						<ul>
 						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Log in</a> </li>
