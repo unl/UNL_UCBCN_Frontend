@@ -38,8 +38,8 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 	 */
 	function __construct($y,$m,$calendar=NULL)
 	{
-		$this->year = $y;
-		$this->month = $m;
+		$this->year = intval($y);
+		$this->month = intval($m);
 		$this->calendar = $calendar;
 	}
 	
@@ -103,21 +103,22 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 															'd'=>$Day->thisDay(),
 															'calendar'=>$this->calendar->id));
 			
+			$class = '';
+		    if ($Day->thisMonth()<$this->month) {
+		        $class = 'prev';
+		    } elseif ($Day->thisMonth()>$this->month) {
+		        $class = 'next';
+		    }
+			
 			// isFirst() to find start of week
 			if ( $Day->isFirst() )
 				$this->tbody .= "<tr>\n";
 			if ( UNL_UCBCN_Frontend::dayHasEvents($Day->getTimestamp(),$this->calendar) ) {
-				$this->tbody .= "<td class='selected'><a href='$link'>".$Day->thisDay()."</a></td>\n";
+				$this->tbody .= "<td class='selected {$class}'><a href='$link'>".$Day->thisDay()."</a></td>\n";
 			} else if ( $Day->isEmpty() ) {
-			    $class = '';
-			    if ($Day->thisMonth()<$this->month) {
-			        $class = 'prev';
-			    } elseif ($Day->thisMonth()>$this->month) {
-			        $class = 'next';
-			    }
 				$this->tbody .= "<td class='{$class}'>".$Day->thisDay()."</td>\n";
 			} else {
-				$this->tbody .= "<td>".$Day->thisDay()."</td>\n";
+				$this->tbody .= "<td class='{$class}'>".$Day->thisDay()."</td>\n";
 			}
 			
 			// isLast() to find end of week
