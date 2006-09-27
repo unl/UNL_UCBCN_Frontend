@@ -201,7 +201,7 @@ function todayHilite(){
 			}
 			
 			//insert icon to indicate today	
-			if(verify[0].id == getCalendarDate()){
+			if(verify[0].id == getCalendarDate() && td1[i].className != 'selected prev' && td1[i].className != 'selected next'){
 				try{
 					if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 						td1[i].setAttribute("id","today");
