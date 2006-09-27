@@ -115,7 +115,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			    } elseif ($Day->thisMonth()>$this->month) {
 			        $class = 'next';
 			    }
-				$this->tbody .= "<td class='empty {$class}'>".$Day->thisDay()."</td>\n";
+				$this->tbody .= "<td class='{$class}'>".$Day->thisDay()."</td>\n";
 			} else {
 				$this->tbody .= "<td>".$Day->thisDay()."</td>\n";
 			}
