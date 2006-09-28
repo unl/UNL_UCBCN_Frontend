@@ -201,7 +201,7 @@ function todayHilite(){
 			}
 			
 			//insert icon to indicate today	
-			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') <= 0 && td1[i].className.indexOf('next') <= 0){
+			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
 				try{
 					if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 						td1[i].setAttribute("id","today");
@@ -219,6 +219,9 @@ function todayHilite(){
 	
 }
 
+function compare(g){
+
+}
 /*
  * Search box tips
  * Call from: none
