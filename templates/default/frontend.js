@@ -485,7 +485,7 @@ function adjustPos(ulL, tD){
     }
     
 	widthOffset = ((theWidth-pos[0])/ulpos[0])*100;
-   	if(ulpos[1]+ulL.clientHeight > footpos[1]){
+   	if(ulpos[1]+ulL.clientHeight > (footpos[1]-20)){
 	ulL.style.bottom = '0';
 	}
 	if (widthOffset < 120){
