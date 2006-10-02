@@ -17,7 +17,7 @@ function addLoadEvent(func) {
 addLoadEvent(function() {
 
   //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
-  if (document.getElementById('month_viewcal') && BrowserDetect.browser != 'Safari' && readCookie('monthview') ==null){
+  if (document.getElementById('month_viewcal') && readCookie('monthview') ==null){
   monthdisplay(); 
   var viewall = document.getElementById('monthfullview');
   viewall.className = 'monthfullview_unchecked';
@@ -469,6 +469,7 @@ function showDate(ulList, liList, m, y){
 function adjustPos(ulL, tD){
 	var pos = findPos(ulL.parentNode.parentNode.parentNode.parentNode);
 	var ulpos = findPos(ulL);
+	var footpos = findPos(document.getElementById('footer'));
 	var tdHeight = tD.clientHeight;
 	var version=0;
 	var widthOffset;
@@ -484,7 +485,7 @@ function adjustPos(ulL, tD){
     }
     
 	widthOffset = ((theWidth-pos[0])/ulpos[0])*100;
-   	if(ulpos[1]+ulL.clientHeight > 1000){
+   	if(ulpos[1]+ulL.clientHeight > footpos[1]){
 	ulL.style.bottom = '0';
 	}
 	if (widthOffset < 120){
@@ -524,6 +525,7 @@ if(monthL[0].id == getCalendarDate()){
 document.getElementById('today_image').style.display = 'inline';
 ul.parentNode.id = "today";
 }
+ul.className = 'none';
 ul.removeChild(ul.lastChild);
 ul.removeChild(ul.getElementsByTagName('li')[0]);
 var listevent = ul.getElementsByTagName('li');
@@ -533,6 +535,6 @@ for (k=0;k<listevent.length;k++){
 					  truncate(listText[x]);
 					}
 				}
-ul.className = 'none';
+
 return false;
 }
