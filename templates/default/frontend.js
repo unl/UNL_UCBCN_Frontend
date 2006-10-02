@@ -25,7 +25,6 @@ addLoadEvent(function() {
   
   todayHilite();
   dropdown();
-  
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
   searchinfo(); 
@@ -100,7 +99,8 @@ var g_bH = false;
     l_E = null;
    try{ 
    var dr = document.getElementById('droplist').style;
-   if (document.getElementById('maincontent').clientHeight < 780){
+   var rightCol = getElementsByClassName(document, "div", "col");
+   if (document.getElementById('maincontent').clientHeight < rightCol[0].clientHeight){
    dr.margin = '-64px 2px 0 0';
    dr.borderTop = '1px solid #ccc';
    }
@@ -191,12 +191,14 @@ function todayHilite(){
 		
 		//make td clickable if there's an event (only in month widget)
 		for(i=0;i<td1.length;i++){
-			if (td1[i].className == 'selected'){
+			if (td1[i].className.indexOf('selected') >= 0){
 				td1[i].style.cursor = 'pointer';
 				td1[i].onclick = function(){
 					var daylink = this.getElementsByTagName('a');
-					var link = daylink[0].getAttribute("href");
-					gotoURL(link);
+					var link = daylink[0].getAttribute("href", 2);
+					ajaxEngine(link);
+  					//gotoURL(link);
+					return false;
 				}
 			}
 			
@@ -218,10 +220,41 @@ function todayHilite(){
 	}
 	
 }
-
-function compare(g){
-
+/*
+var MonthByFigures;
+function restartCache(html) {
+   MonthByFigures = new Array();
 }
+function monthpreCache(){
+var liList = document.getElementById('monthview');
+var tList = liList.getElementsByTagName('a');
+var link = tList[0].getAttribute("href", 2);
+var cachedSum = MonthByFigures[link];
+   if (cachedSum) {
+     
+   } else {
+  
+ajaxCaller.get(link+'?&format=hcalendar', null, MonthCache, true, null);
+}
+}
+function MonthCache(text, headers, callingContext) { }*/
+
+
+function ajaxEngine(urlPath){
+	$('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	hash =  urlPath;
+  	window.location.hash = hash;	
+	ajaxCaller.get(urlPath+'?&format=hcalendar', null, onSumResponse, false, null);	
+}
+
+function onSumResponse(text, headers, callingContext) {
+  $('load').innerHTML=""
+  document.getElementById("updatecontent").innerHTML = text;
+  dropdown();
+}
+
+
+
 /*
  * Search box tips
  * Call from: none

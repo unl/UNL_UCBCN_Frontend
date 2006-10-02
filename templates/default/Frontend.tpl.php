@@ -14,7 +14,11 @@
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="head" -->
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend_main.css" />
+<script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/util.js"></script>
+<script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/ajaxCaller.js"></script>
 <script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend.js"></script>
+
+
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->calendar->name; ?> Events" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" />
 <!-- InstanceEndEditable -->
 </head>
@@ -82,7 +86,7 @@
 		
 		<div id="main_right" class="mainwrapper">
 			<!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
-		
+		<div id="load"></div>
 			<div id="maincontent"> 
 			<?php echo $this->navigation; ?>
 			<!-- InstanceBeginEditable name="maincontent" -->
@@ -116,7 +120,9 @@
       </div>
 											
 					</div>
-					<div class="three_col right"><?php UNL_UCBCN::displayRegion($this->output); ?></div>
+					<div id="updatecontent" class="three_col right">
+					<?php UNL_UCBCN::displayRegion($this->output); ?>
+					</div>
 					
 				<?php } else {
 					UNL_UCBCN::displayRegion($this->output);

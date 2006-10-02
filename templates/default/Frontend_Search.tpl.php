@@ -10,4 +10,5 @@ if (is_a($this->output,'UNL_UCBCN_EventListing')) {
 }
 UNL_UCBCN::displayRegion($this->output);
 ?>
+
 </div>
