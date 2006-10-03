@@ -33,8 +33,20 @@ table td{
 	}
 table td.date{width:20%;}
 table td.title{width:80%;}
-#maincontent .three_col h4.sec_main{	 padding: 2px 0 11px 30px!important; 
+#maincontent .three_col h4.sec_main{float:left;font-size:1.5em;padding: 4px 0 7px 30px!important; 
                  background: url(images/date1.gif) no-repeat 0 0;font-style:normal;}
+#maincontent h4.ongoing{font-size:1.5em;background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:6px 0 7px 34px;}
+
+
+#maincontent p#day_nav{margin:5px 0 0px 0;padding:0;float:right;position:relative;}
+#maincontent p#day_nav a{float:left;margin:0 0 0 3px}
+a.permalink{font-size:0.6em;}
+#maincontent a.prev, #maincontent a.next{text-indent:-9999px;height:17px;width:16px;display:block;}
+#maincontent a.prev{background:url(images/nav_prev.gif) no-repeat 0 -17px}
+#maincontent a.next{background:url(images/nav_next.gif) no-repeat 0 -17px}
+#maincontent a.prev:hover, #maincontent a.next:hover, #maincontent a#dc.prev, #maincontent a#ac.next{background-position:0 1px;}
+.noentry{clear:both;}
+
 
 table td.empty{color:#ddd;}
 
@@ -89,7 +101,6 @@ table.wp-calendar #today_image{
 span.location{font-size:0.75em;color:#3A8103;}
 
 
-#maincontent h4.ongoing{font-style:normal;background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:4px 0 7px 34px;}
 table.ongoing{margin:5px 0 0 0;}
 table.ongoing td, table.ongoing th{border:none;padding:4px;}
 

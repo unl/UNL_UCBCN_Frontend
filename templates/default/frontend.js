@@ -176,7 +176,7 @@ function getCalendarName(t)
 }
 
 /*
- * today icon
+ * today icon and ajax initialization for month widget
  * Call from: addLoadEvent
  * Call to: none
  */
@@ -189,19 +189,18 @@ function todayHilite(){
 		var td1 = td0[j].getElementsByTagName('td');
 		var verify = getElementsByClassName(td0[j], "span", "monthvalue");
 		
+		//month widget caption navigation
+			
+		//if in day view (only), execute....
+		if (document.getElementById('frontend_view_selector').className == 'day'){
+			for(i=0;i<td1.length;i++){
+			monthWidget(td0,td1);
+			}
+		}
+		
 		//make td clickable if there's an event (only in month widget)
 		for(i=0;i<td1.length;i++){
-			if (td1[i].className.indexOf('selected') >= 0){
-				td1[i].style.cursor = 'pointer';
-				td1[i].onclick = function(){
-					var daylink = this.getElementsByTagName('a');
-					var link = daylink[0].getAttribute("href", 2);
-					ajaxEngine(link);
-  					//gotoURL(link);
-					return false;
-				}
-			}
-			
+						
 			//insert icon to indicate today	
 			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
 				try{
@@ -220,30 +219,70 @@ function todayHilite(){
 	}
 	
 }
-/*
-var MonthByFigures;
-function restartCache(html) {
-   MonthByFigures = new Array();
-}
-function monthpreCache(){
-var liList = document.getElementById('monthview');
-var tList = liList.getElementsByTagName('a');
-var link = tList[0].getAttribute("href", 2);
-var cachedSum = MonthByFigures[link];
-   if (cachedSum) {
-     
-   } else {
-  
-ajaxCaller.get(link+'?&format=hcalendar', null, MonthCache, true, null);
-}
-}
-function MonthCache(text, headers, callingContext) { }*/
 
+document.onkeydown = checkKeyNav;
+function checkKeyNav(e) {
+var nav_prev1 = document.getElementById('day_nav');
+var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2);
+var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2);
 
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+	if(keycode == 39){
+	ajaxEngine(linknext);
+	nav_prev1.getElementsByTagName('a')[1].id = 'ac';
+	return false;
+	}
+	else if(keycode == 37){
+	ajaxEngine(linkprev);
+	nav_prev1.getElementsByTagName('a')[0].id = 'dc';
+	return false;
+	}
+}
+
+function monthNav(){
+	var nav_prev1 = document.getElementById('day_nav');
+	var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2);
+	var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2);
+	nav_prev1.getElementsByTagName('a')[0].onclick=function(){ajaxEngine(linkprev);return false;};
+	nav_prev1.getElementsByTagName('a')[1].onclick=function(){ajaxEngine(linknext);return false;};
+}
+
+function monthWidget(t0,tD){
+	monthNav();
+	
+	if (tD[i].className.indexOf('selected') >= 0){
+				tD[i].style.cursor = 'pointer';
+				tD[i].onclick = function(){
+					var daylink = this.getElementsByTagName('a');
+					var link = daylink[0].getAttribute("href", 2);
+					ajaxEngine(link);
+  					//gotoURL(link);
+					return false;
+				}
+	}
+	
+	var spanarrow = t0[j].getElementsByTagName('span');
+	var spanlinkprev = spanarrow[0].childNodes[0].getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+	var spanlinknext = spanarrow[3].childNodes[0].getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+	spanarrow[3].childNodes[0].onclick=function(){ajaxMonthEngine(spanlinknext);return false;};
+ 	spanarrow[0].childNodes[0].onclick=function(){ajaxMonthEngine(spanlinkprev);return false;};
+}
+
+function ajaxMonthEngine(urlPath){
+	$('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	ajaxCaller.get(urlPath, null, onMonthResponse, false, null);	
+}
+
+function onMonthResponse(text, headers, callingContext) {
+  $('load').innerHTML=""
+  document.getElementById("monthwidget").innerHTML = text;
+  dropdown();
+  todayHilite();
+}
 function ajaxEngine(urlPath){
 	$('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-	hash =  urlPath;
-  	window.location.hash = hash;	
 	ajaxCaller.get(urlPath+'?&format=hcalendar', null, onSumResponse, false, null);	
 }
 
@@ -251,6 +290,7 @@ function onSumResponse(text, headers, callingContext) {
   $('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
   dropdown();
+  monthNav();
 }
 
 

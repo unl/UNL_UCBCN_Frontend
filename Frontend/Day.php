@@ -34,7 +34,7 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 	/** Display ongoing events? */
 	var $ongoing = true;
 	/** no events message */
-	var $noevents = 'Sorry, no events were found for today!';
+	var $noevents = '<p class="noentry">Sorry, no events were found for today!</p>';
 	
 	function __construct($options)
 	{

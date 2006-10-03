@@ -3,9 +3,9 @@
 <?php
 $day = new Calendar_Day($this->year,$this->month,$this->day);
 echo date('l, F jS',$day->getTimeStamp());
-?>
+?> <a class="permalink" href="<?php echo $this->url; ?>">(link)</a>
 </h4>
-<a class="permalink" href="<?php echo $this->url; ?>">Link</a>
+<p id="day_nav">
 <?php
 	$prev = $day->prevDay('object');
 	echo '<a class="url prev" href="'.UNL_UCBCN_Frontend::formatURL(array(	'd'=>$prev->thisDay(),
@@ -16,7 +16,7 @@ echo date('l, F jS',$day->getTimeStamp());
 	echo '<a class="url next" href="'.UNL_UCBCN_Frontend::formatURL(array(	'd'=>$next->thisDay(),
 															'm'=>$next->thisMonth(),
 															'y'=>$next->thisYear(),
-															'calendar'=>$this->calendar->id)).'">Next Day</a>';
+															'calendar'=>$this->calendar->id)).'">Next Day</a></p>';
 
 	UNL_UCBCN::displayRegion($this->output);
 	echo '<p id="feeds">

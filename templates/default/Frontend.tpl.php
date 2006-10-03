@@ -105,7 +105,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 			</form>
 				<?php if (isset($this->right)) { ?>
 					<div class="col left">
-						<?php UNL_UCBCN::displayRegion($this->right); ?>
+						<div id="monthwidget"><?php UNL_UCBCN::displayRegion($this->right); ?></div>
 						<div class="cal_widget">
 						<h3>Have a Blackboard account?</h3>
 						<ul>
