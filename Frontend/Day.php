@@ -27,6 +27,10 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 	var $output;
 	/** URL of events on this day. */
 	var $url;
+	/** URL to the next day */
+	var $next_url;
+	/** URL to the previous day */
+	var $prev_url;
 	/** Display ongoing events? */
 	var $ongoing = true;
 	/** no events message */
