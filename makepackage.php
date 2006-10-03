@@ -65,7 +65,7 @@ $pfm->setLicense('PHP License', 'http://www.php.net/license');
 $pfm->clearDeps();
 $pfm->setPhpDep('5.0.0');
 $pfm->setPearinstallerDep('1.4.3');
-$pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.2.5');
+$pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.3.0');
 $pfm->addPackageDepWithChannel('required', 'Calendar', 'pear.php.net', '0.5.3');
 foreach (array('Frontend.php','UNL_UCBCN_Frontend_setup.php','index.php') as $file) {
 	$pfm->addReplacement($file, 'pear-config', '@PHP_BIN@', 'php_bin');
