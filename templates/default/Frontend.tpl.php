@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- InstanceBeginEditable name="doctitle" -->
-<title><?php echo $this->doctitle; ?></title>
+<title>UNL <?php
+if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
+    echo '| '.$this->calendar->name.' ';
+}
+?>| Events</title>
 <!-- InstanceEndEditable -->
 <link rel="stylesheet" type="text/css" media="screen" href="/ucomm/templatedependents/templatecss/layouts/main.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/ucomm/templatedependents/templatecss/layouts/print.css"/>

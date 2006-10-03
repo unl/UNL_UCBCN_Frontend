@@ -57,11 +57,8 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.3.0');
-$pfm->setReleaseVersion('0.3.0');
-$pfm->setNotes('* Add search capabilities to the frontend.
-				* CSS Fixes from Alvin Woon.
-				* Fix Bug #21 multi-day events only show on their start day
-				* Fix Bug #23 Month view, incorrect day shown in certain cases');
+$pfm->setReleaseVersion('0.3.1');
+$pfm->setNotes('* Fix Bug #24: html doctitles not generated correctly for calendars other than default');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->setLicense('PHP License', 'http://www.php.net/license');

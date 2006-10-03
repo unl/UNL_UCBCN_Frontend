@@ -38,8 +38,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	public $uniquebody;
 	/** Main content of the page sent to the client. */
 	public $output;
-	/** Page Title */
-	public $doctitle;
 	/** Section Title */
 	public $sectitle;
 	/** View to be displayed */
@@ -58,7 +56,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				return new UNL_UCBCN_Error('No calendar specified or could be found.');
 			}
 		}
-		$this->doctitle = 'Events';
 	}
 	
 	function showNavigation()
@@ -141,6 +138,11 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			    require_once 'UNL/UCBCN/Frontend/Month.php';
 				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month,$this->calendar,$this->dsn);
 			break;
+			case 'monthwidget':
+			    require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
+			    UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_hcalendar');
+			    $this->output[] = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
+		    break;
 			case 'year':
 			    require_once 'UNL/UCBCN/Frontend/Year.php';
 				$this->output[] = new UNL_UCBCN_Frontend_Year($this->year,$this->calendar);
@@ -371,6 +373,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		}
 		if (isset($GLOBALS[$method]['upcoming'])) {
 		    $view['view'] = 'upcoming';
+		}
+		if (isset($GLOBALS[$method]['monthwidget'])) {
+		    $view['view'] = 'monthwidget';
 		}
 		
 		if (isset($GLOBALS[$method]['format'])) {
