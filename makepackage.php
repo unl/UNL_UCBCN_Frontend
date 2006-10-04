@@ -63,6 +63,7 @@ $pfm->setNotes('* Fix Bug #24: html doctitles not generated correctly for calend
 				* New Feature Next and Previous links for each Day.');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
+$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
 $pfm->setLicense('PHP License', 'http://www.php.net/license');
 $pfm->clearDeps();
 $pfm->setPhpDep('5.0.0');
