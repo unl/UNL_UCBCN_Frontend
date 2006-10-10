@@ -210,6 +210,7 @@ function todayHilite(){
 							td1[i].setAttribute("class","today");
 							if (todayFlag == 0){
 								td1[i].setAttribute("id","onselect");
+								
 							}
 							var imageToday = document.createElement("div");
 							imageToday.setAttribute("id","today_image");
@@ -715,10 +716,12 @@ function closeULbox(){
 var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
 var ul = this.parentNode.parentNode;
 	
-if(monthL[0].id == getCalendarDate()){
+/* -- Today icon is moving!!! Bug -- */
+/*if(monthL[0].id == getCalendarDate()){
 document.getElementById('today_image').style.display = 'inline';
 ul.parentNode.id = "today";
-}
+}*/
+
 ul.className = 'none';
 ul.removeChild(ul.lastChild);
 ul.removeChild(ul.getElementsByTagName('li')[0]);
