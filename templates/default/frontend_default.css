@@ -207,7 +207,7 @@ background-position:0 -45px;
 	min-height:12.3em;
 	_height:12.3em;
 	}
-#maincontent .month_cal table.wp-calendar td a{background:#ddd;padding:0 4px;float:left;margin:-5px 0 0 -6px}	
+#maincontent .month_cal table.wp-calendar td a{background:#ddd;padding:0 4px;float:left;color:#900!important;margin:-5px 0 0 -6px}	
 #maincontent .month_cal table.wp-calendar td a:active{color:#333;}
 #maincontent .month_cal table.wp-calendar td span.monthvalue_ID{display:none}
 #maincontent .month_cal table.wp-calendar td ul{position:relative;list-style:none;clear:both;padding:4px 0 0 0;margin:0;}
