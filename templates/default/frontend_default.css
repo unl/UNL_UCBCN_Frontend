@@ -64,7 +64,13 @@ table.wp-calendar td{
 	border:1px solid #ddd;
 }
 table.wp-calendar td.selected{
-	background:#ECF7FD;
+	background-color:#ECF7FD;
+}
+table.wp-calendar td#onselect{
+	background-color:#3e83c9;
+}
+table.wp-calendar td#onselect a{
+	color:#fff!important;
 }
 table.wp-calendar td#next{
 	background:url(images/calnav.gif) no-repeat;
@@ -89,10 +95,19 @@ table.wp-calendar #today_image{
 	margin:-32px 0 0 -12px;
 	background:url(images/todayimage.png) no-repeat 0 0;
 }
-.month_cal table.wp-calendar td#today {
+table.wp-calendar td.today {
+	background:#ECF7FD;
+}
+.month_cal table.wp-calendar td#onselect {
+	background:#eee;
+}
+.month_cal table.wp-calendar td#onselect a{
+	color:#900;
+}
+.month_cal table.wp-calendar td#onselect {
 	position:relative;z-index:1;
 }
-.month_cal table.wp-calendar td#today #today_image{
+.month_cal table.wp-calendar td #today_image{
 	position:absolute;
 	top:0;
 	right:0;
@@ -374,6 +389,6 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 
 * html #maincontent div.cal_widget h3{padding:6px 0 5px 12px}
 * html .month_cal {margin-top:7px;}
-* html table.wp-calendar td#today #today_image{margin: -15px 0 0 -23px;}
-* html table.wp-calendar td#today{border:none;border-left:1px solid #ddd;border-top:1px solid #ddd;}
+* html table.wp-calendar td #today_image{margin: -15px 0 0 -23px;}
+* html table.wp-calendar td.today{border:none;border-left:1px solid #ddd;border-top:1px solid #ddd;}
 

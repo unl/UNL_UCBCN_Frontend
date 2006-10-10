@@ -94,21 +94,7 @@ var ajaxCaller = {
       urlVars = new Array();
     }
 
-    this._debug("_callServer() called. About to request URL\n"
-                + "call key: [" + this.calls.length + "]\n"
-                + "url: [" + url + "]\n"
-                + "callback function: [" + callbackFunction + "]\n"
-                + "treat response as xml?: [" + expectingXML + "]\n"
-                + "Request method?: [" + requestMethod + "]\n"
-                + "calling context: [" + callingContext + "]\n"
-                + "explicit body type: [" + explicitBodyType + "]\n"
-                + "explicit body: [" + explicitBody + "]\n"
-                + "urlVars: [" + util.describe(urlVars) + "]\n"
-                + "bodyVars: [" + util.describe(bodyVars) + "]"
-              );
-
-
-    var xReq = this._createXMLHttpRequest();
+	var xReq = this._createXMLHttpRequest();
     xReq.onreadystatechange = function() {
        ajaxCaller._onResponseStateChange(call);
        
@@ -177,9 +163,7 @@ var ajaxCaller = {
     if (xReq.readyState == 4) {
     
     //Transmit to actual callback
-      this._debug("Call " + util.describe(call)
-                + " with context [" + call.callingContext+"]"
-                + " to " + call.url + " has returned.");
+     
       callbackFunction = call.callbackFunction;
       if (!callbackFunction) { // Maybe still loading, e.g. in another JS file
         setTimeout(function() {

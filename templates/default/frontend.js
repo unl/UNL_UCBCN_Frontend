@@ -180,117 +180,271 @@ function getCalendarName(t)
  * Call from: addLoadEvent
  * Call to: none
  */
+var todayFlag = 0;
 function todayHilite(){
 	x = new Date ();
 	y = x.getDate ();
 	var td0 = getElementsByClassName(document, "table", "wp-calendar");
 	var spanID = document.getElementById(getCalendarDate());
-	for(j=0;j<td0.length;j++){
-		var td1 = td0[j].getElementsByTagName('td');
-		var verify = getElementsByClassName(td0[j], "span", "monthvalue");
+		var td1 = td0[0].getElementsByTagName('td');
+		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
 		
 		//month widget caption navigation
 			
 		//if in day view (only), execute....
 		if (document.getElementById('frontend_view_selector').className == 'day'){
+			monthNav(); 
+			monthCaptionSwitch(td0[0]);
 			for(i=0;i<td1.length;i++){
-			monthWidget(td0,td1);
+			monthWidget(td0[0],td1);
 			}
 		}
-		
-		//make td clickable if there's an event (only in month widget)
+	
+		//indicate today
 		for(i=0;i<td1.length;i++){
-						
 			//insert icon to indicate today	
 			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
-				try{
-					if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
-						td1[i].setAttribute("id","today");
-						
+				if (document.getElementById('onselect') == null){
+					try{
+						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
+							td1[i].setAttribute("class","today");
+							if (todayFlag == 0){
+								td1[i].setAttribute("id","onselect");
+							}
 							var imageToday = document.createElement("div");
 							imageToday.setAttribute("id","today_image");
 							td1[i].appendChild(imageToday);
+							break;
+						}
 					}
+					catch(e){}	
 				}
-				catch(e){}	
+				/*else{
+					try{
+						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
+							td1[i].setAttribute("class","today");
+							var imageToday = document.createElement("div");
+							imageToday.setAttribute("id","today_image");
+							td1[i].appendChild(imageToday);
+							break;
+						}
+					}
+					catch(e){}	
+				}*/
 			}
-		}	
+			/* else if(td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 1){
+					if(document.getElementById('onselect') == null){
+						td1[i].setAttribute("id","onselect");
+						//ajaxEngine(td1[i].getAttribute("href", 2)+'?&format=hcalendar');
+						break;
+					}
+					else{
+						//document.getElementById('onselect').id = 'none';
+						//td1[i].setAttribute("id","onselect");
+						//ajaxEngine(td1[i].getAttribute("href", 2)+'?&format=hcalendar');
+						break;
+					}
+			}*/
 			
-	}
-	
+		}			
 }
+
+
 
 document.onkeydown = checkKeyNav;
 function checkKeyNav(e) {
 var nav_prev1 = document.getElementById('day_nav');
-var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2);
-var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2);
+var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
+var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
 
 var keycode;
 if (window.event) keycode = window.event.keyCode;
 else if (e) keycode = e.which;
 	if(keycode == 39){
-	ajaxEngine(linknext);
 	nav_prev1.getElementsByTagName('a')[1].id = 'ac';
+	new ajaxEngine(linknext);
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	var td1 = td0[0].getElementsByTagName('td');
+	for(i=0;i<td1.length;i++){	
+		if(td1[i].getAttribute("id") == 'onselect'){			
+			td1[i].id = 'none';
+			td1[i+1].id = 'onselect';
+			if(document.getElementById('onselect').className.indexOf('next') > 0){
+				var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+				new ajaxMonthEngine(val_month);
+			}
+			break;
+		}		
+	}
 	return false;
 	}
+	
 	else if(keycode == 37){
-	ajaxEngine(linkprev);
 	nav_prev1.getElementsByTagName('a')[0].id = 'dc';
+	new ajaxEngine(linkprev);
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	var td1 = td0[0].getElementsByTagName('td');
+	for(i=0;i<td1.length;i++){
+		if(td1[i].getAttribute("id") == 'onselect'){
+			td1[i].id = 'none';
+			td1[i-1].id = 'onselect';
+			if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
+				var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+				new ajaxMonthEngine(val_month);
+				
+			}	
+		}	
+	}
 	return false;
 	}
 }
 
 function monthNav(){
 	var nav_prev1 = document.getElementById('day_nav');
-	var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2);
-	var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2);
-	nav_prev1.getElementsByTagName('a')[0].onclick=function(){ajaxEngine(linkprev);return false;};
-	nav_prev1.getElementsByTagName('a')[1].onclick=function(){ajaxEngine(linknext);return false;};
+	var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
+	var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
+		
+	nav_prev1.getElementsByTagName('a')[0].onclick=function(){
+	var currentOnselect = document.getElementById('onselect');
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	var td1 = td0[0].getElementsByTagName('td');
+		for(i=0;i<td1.length;i++){				
+				if(td1[i].getAttribute("id") == 'onselect'){
+					if(i == 0){
+						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(val_month);
+						break;							
+					}
+					else{
+						td1[i-1].id = 'onselect';
+						currentOnselect.id = 'none';
+						if(document.getElementById('onselect').className.indexOf('prev') > 0){
+							var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+							new ajaxMonthEngine(val_month);
+							break;
+						}
+					}				
+				}				
+		}
+	ajaxEngine(linkprev);	
+	return false;};
+	
+	nav_prev1.getElementsByTagName('a')[1].onclick=function(){
+	var currentOnselect = document.getElementById('onselect');
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	var td1 = td0[0].getElementsByTagName('td');
+		for(i=0;i<td1.length;i++){				
+				if(td1[i].getAttribute("id") == 'onselect'){
+					if(i == td1.length - 1){
+						var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(val_month);
+					}
+					else{
+						td1[i+1].id = 'onselect';
+						currentOnselect.id = 'none';
+						if(document.getElementById('onselect').className.indexOf('next') > 0){
+							var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+							new ajaxMonthEngine(val_month);
+						}
+					}
+				break;
+				}									
+		}
+	ajaxEngine(linknext);	
+	return false;};
 }
 
 function monthWidget(t0,tD){
-	monthNav();
-	
 	if (tD[i].className.indexOf('selected') >= 0){
-				tD[i].style.cursor = 'pointer';
+			tD[i].style.cursor = 'pointer';
+			var daylink = tD[i].getElementsByTagName('a');
 				tD[i].onclick = function(){
-					var daylink = this.getElementsByTagName('a');
-					var link = daylink[0].getAttribute("href", 2);
-					ajaxEngine(link);
+					if(this.className.indexOf('next') > 0){
+						var nextmonth = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(nextmonth);	
+					}
+					else if(this.className.indexOf('prev') > 0){
+						var prevmonth = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(prevmonth);	
+					}
+					if(document.getElementById('onselect')){
+						var link = daylink[0].getAttribute("href", 2)+'?&format=hcalendar';
+						document.getElementById('onselect').id = 'none';
+						this.id = 'onselect';
+						new ajaxEngine(link);
+					}
+					else{
+						var link = daylink[0].getAttribute("href", 2)+'?&format=hcalendar';
+						this.id = 'onselect';
+						new ajaxEngine(link);
+					}
   					//gotoURL(link);
 					return false;
 				}
 	}
-	
-	var spanarrow = t0[j].getElementsByTagName('span');
+}
+function monthCaptionSwitch(eT){
+	var spanarrow = eT.getElementsByTagName('span');
 	var spanlinkprev = spanarrow[0].childNodes[0].getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
 	var spanlinknext = spanarrow[3].childNodes[0].getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-	spanarrow[3].childNodes[0].onclick=function(){ajaxMonthEngine(spanlinknext);return false;};
- 	spanarrow[0].childNodes[0].onclick=function(){ajaxMonthEngine(spanlinkprev);return false;};
+	spanarrow[3].childNodes[0].onclick=function(){new ajaxMonthCaptionEngine(spanlinknext);return false;};
+ 	spanarrow[0].childNodes[0].onclick=function(){new ajaxMonthCaptionEngine(spanlinkprev);return false;};
+}
+function ajaxMonthCaptionEngine(urlPath){
+	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	ajaxCaller.get(urlPath, null, onMonthCaptionResponse, false, null);	
 }
 
+function onMonthCaptionResponse(text, headers, callingContext) {
+  document.getElementById('load').innerHTML=""
+  document.getElementById("monthwidget").innerHTML = text;
+  todayHilite();
+}
 function ajaxMonthEngine(urlPath){
-	$('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
 	ajaxCaller.get(urlPath, null, onMonthResponse, false, null);	
 }
 
 function onMonthResponse(text, headers, callingContext) {
-  $('load').innerHTML=""
+  if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
+  var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
+  }
+  document.getElementById('load').innerHTML=""
   document.getElementById("monthwidget").innerHTML = text;
-  dropdown();
   todayHilite();
+  fun(tdlink);	
+
+}
+function fun(ss){
+var td0 = getElementsByClassName(document, "table", "wp-calendar");
+var td1 = td0[0].getElementsByTagName('a');
+var td2 = td0[0].getElementsByTagName('td');
+	for(l=0;l<td1.length;l++){
+		if(td1[l].getAttribute("href", 2) == ss){
+		td1[l].parentNode.id = 'onselect';
+		break;
+		}
+		/*else{
+			for(j=td2.length; j >= 0; j--){
+				if(td2[j-1].className.indexOf('next') < 0 && td2[j-1].className.indexOf('prev') < 0){
+					td2[j-1].id = 'onselect';
+					break;	
+				}
+			}
+		}*/	
+	}
 }
 function ajaxEngine(urlPath){
-	$('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-	ajaxCaller.get(urlPath+'?&format=hcalendar', null, onSumResponse, false, null);	
+	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	ajaxCaller.get(urlPath, null, onSumResponse, false, null);		
+	todayFlag++;
 }
 
 function onSumResponse(text, headers, callingContext) {
-  $('load').innerHTML=""
+  document.getElementById('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
   dropdown();
-  monthNav();
+  monthNav(); 
 }
 
 

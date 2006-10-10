@@ -18,7 +18,6 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="head" -->
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend_main.css" />
-<script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/util.js"></script>
 <script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/ajaxCaller.js"></script>
 <script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend.js"></script>
 
