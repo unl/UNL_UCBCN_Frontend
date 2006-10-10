@@ -211,7 +211,7 @@ background-position:0 -45px;
 #maincontent .month_cal table.wp-calendar td a:active{color:#333;}
 #maincontent .month_cal table.wp-calendar td span.monthvalue_ID{display:none}
 #maincontent .month_cal table.wp-calendar td ul{position:relative;list-style:none;clear:both;padding:4px 0 0 0;margin:0;}
-#maincontent .month_cal table.wp-calendar td ul.ul_box{width:200px;z-index:1000;position:absolute;margin:0;_margin:-18px 0 0 -87px;background:#ECF7FD;border:1px solid #7DB0E2;border-color:#e0e0e0 #AACBEB #AACBEB #e0e0e0;padding:4px;}
+#maincontent .month_cal table.wp-calendar td ul.ul_box{width:200px;z-index:1000;position:absolute;margin:0;background:#ECF7FD;border:1px solid #7DB0E2;border-color:#e0e0e0 #AACBEB #AACBEB #e0e0e0;padding:4px;}
 #maincontent .month_cal table.wp-calendar td ul.ul_box li{line-height:1.5;display:list-item!important;background:none;padding:1px 0;}
 #maincontent .month_cal table.wp-calendar td ul.ul_box li.close_eventbox{border:none;width:30px;}
 #maincontent .month_cal table.wp-calendar td ul.ul_box li.close_eventbox:hover{background:none;}
@@ -221,7 +221,7 @@ background-position:0 -45px;
 .month_cal table.wp-calendar td.empty{background:#fff;}
 #maincontent .month_cal table.wp-calendar td ul li.dateUL{padding:1px 3px;background:#7DB0E2;}
 #maincontent .month_cal table.wp-calendar td ul.ul_box li.dateUL:hover{background:#7DB0E2;}
-#maincontent .month_cal table.wp-calendar td ul li.dateUL a{color:#fff;}
+#maincontent .month_cal table.wp-calendar td ul li.dateUL a{color:#fff!important;}
 #maincontent .month_cal table.wp-calendar td ul li{padding:0;border-bottom:1px solid #ddd;background:#fff;margin:2px 0 0 0;}
 #maincontent .month_cal table.wp-calendar td ul li:hover{background:#eee;}
 #maincontent .month_cal table.wp-calendar td a.more_event{background:none;text-decoration:underline;border:none;margin:3px 0 0 35px;}
@@ -391,4 +391,13 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 * html .month_cal {margin-top:7px;}
 * html table.wp-calendar td #today_image{margin: -15px 0 0 -23px;}
 * html table.wp-calendar td.today{border:none;border-left:1px solid #ddd;border-top:1px solid #ddd;}
+* html #maincontent .month_cal table.wp-calendar td ul.ul_box{margin:-18px 0 0 -87px;}
 
+*+html h1.year_main{margin:15px 0 10px 0}
+*+html #maincontent .month_cal table.wp-calendar td ul.ul_box{margin:-18px 0 0 -87px;}
+*+html table.wp-calendar td #today_image{margin: -15px 0 0 -23px;}
+*+html table.wp-calendar td.today{border:none;border-left:1px solid #ddd;border-top:1px solid #ddd;}
+*+html #maincontent p#search_term{filter:alpha(opacity: 0);background:url(images/searchinfo.gif) no-repeat;margin:13px 0 0 -275px;padding:18px 20px 0 10px;}
+*+html .col{margin-top:10px;}
+*+html table.wp-calendar caption span.monthvalue, *+html table.wp-calendar caption span.yearvalue{padding:6px 3px 0;}
+*+html .month_cal {margin-top:7px;}
