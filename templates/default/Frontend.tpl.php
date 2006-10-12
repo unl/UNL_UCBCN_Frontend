@@ -10,7 +10,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 ?>| Events</title>
 <!-- InstanceEndEditable -->
 <link rel="stylesheet" type="text/css" media="screen" href="/ucomm/templatedependents/templatecss/layouts/main.css" />
-<link rel="stylesheet" type="text/css" media="print" href="/ucomm/templatedependents/templatecss/layouts/print.css"/>
+<link rel="stylesheet" type="text/css" media="print" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/print.css"/>
 <script type="text/javascript" src="/ucomm/templatedependents/templatesharedcode/scripts/all_compressed.js"></script>
 
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/browsersniffers/ie.html'); ?>
