@@ -203,12 +203,12 @@ function todayHilite(){
 			
 			var eventLink = getElementsByClassName(document, "a", "url");
 			for(a=0; a<eventLink.length; a++){
-			var linkURL = eventLink[a].getAttribute("href", 2)+'?&format=hcalendar';
+			
 			eventLink[a].onclick = function(){
+									var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
 								   new ajaxEngine(linkURL);
 								   return false;
 								   }
-		
 			}
 			
 			
