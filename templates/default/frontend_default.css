@@ -27,6 +27,7 @@ table thead th.date a, table thead th.title a{
 	color:#FFFFFF;
 	text-decoration:none;
 	}
+table thead th.title{font-style:normal;}
 table td{
 	padding:7px;
 	border-top:1px solid #8ebcd6;
