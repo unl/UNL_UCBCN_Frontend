@@ -480,13 +480,16 @@ function searchinfo(){
 									if(!flagappeared.className){
 										createCookie('searchtips','searchterms',7);
 										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
+										flagappeared.style.zIndex = '1';
 										flagappeared.className = 'appeared';										
 									}
 								};
 	var top_off = document.forms.event_search.getElementsByTagName('a');
 	top_off[0].onclick = function(){
+									var flagappeared = document.getElementById('search_term');
 									var formseaarch = document.forms.event_search.q;
 									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
+									flagappeared.style.zIndex = '0';
 									formseaarch.focus();
 									return false;
 									};
