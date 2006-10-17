@@ -175,6 +175,17 @@ function getCalendarName(t)
    return monthname;
 }
 
+function eventLink(){
+	var eventLink = getElementsByClassName(document, "a", "url");
+		for(a=0; a<eventLink.length; a++){
+			eventLink[a].onclick = function(){
+								   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
+								   new ajaxEngine(linkURL);
+								   return false;
+								   }
+		}
+}
+
 /*
  * today icon and ajax initialization for month widget
  * Call from: addLoadEvent
@@ -186,32 +197,19 @@ function todayHilite(){
 	y = x.getDate ();
 	var td0 = getElementsByClassName(document, "table", "wp-calendar");
 	var spanID = document.getElementById(getCalendarDate());
-	var td1 = td0[0].getElementsByTagName('td');
-	var verify = getElementsByClassName(td0[0], "span", "monthvalue");
+		var td1 = td0[0].getElementsByTagName('td');
+		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
 		
 		//month widget caption navigation
 			
 		//if in day view (only), execute....
 		if (document.getElementById('frontend_view_selector').className == 'day'){
-			if(document.getElementById('day_nav') != null){
 			monthNav(); 
-			}
+			eventLink();
 			monthCaptionSwitch(td0[0]);
 			for(i=0;i<td1.length;i++){
 			monthWidget(td0[0],td1);
 			}
-			
-			var eventLink = getElementsByClassName(document, "a", "url");
-			for(a=0; a<eventLink.length; a++){
-			
-			eventLink[a].onclick = function(){
-									var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
-								   new ajaxEngine(linkURL);
-								   return false;
-								   }
-			}
-			
-			
 		}
 	
 		//indicate today
@@ -268,7 +266,6 @@ function todayHilite(){
 
 document.onkeydown = checkKeyNav;
 function checkKeyNav(e) {
-try{
 var nav_prev1 = document.getElementById('day_nav');
 var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
 var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
@@ -314,14 +311,12 @@ else if (e) keycode = e.which;
 	return false;
 	}
 }
-catch(e){};
-}
 
 function monthNav(){
 	var nav_prev1 = document.getElementById('day_nav');
 	var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
 	var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
-
+		
 	nav_prev1.getElementsByTagName('a')[0].onclick=function(){
 	var currentOnselect = document.getElementById('onselect');
 	var td0 = getElementsByClassName(document, "table", "wp-calendar");
@@ -462,7 +457,9 @@ function onSumResponse(text, headers, callingContext) {
   document.getElementById('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
   dropdown();
-  todayHilite();
+  if(document.getElementById('day_nav') != null){
+  monthNav(); 
+  }
 }
 
 
@@ -480,16 +477,13 @@ function searchinfo(){
 									if(!flagappeared.className){
 										createCookie('searchtips','searchterms',7);
 										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
-										flagappeared.style.zIndex = '1';
 										flagappeared.className = 'appeared';										
 									}
 								};
 	var top_off = document.forms.event_search.getElementsByTagName('a');
 	top_off[0].onclick = function(){
-									var flagappeared = document.getElementById('search_term');
 									var formseaarch = document.forms.event_search.q;
 									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
-									flagappeared.style.zIndex = '0';
 									formseaarch.focus();
 									return false;
 									};
