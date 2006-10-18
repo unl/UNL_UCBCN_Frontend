@@ -176,14 +176,17 @@ function getCalendarName(t)
 }
 
 function eventLink(){
-	var eventLink = getElementsByClassName(document, "a", "url");
-		for(a=0; a<eventLink.length; a++){
-			eventLink[a].onclick = function(){
-								   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
-								   new ajaxEngine(linkURL);
-								   return false;
-								   }
-		}
+	var tbodyObj = document.getElementsByTagName('tbody');
+	for(tb=0; tb<tbodyObj.length; tb++){
+		var eventLink = getElementsByClassName(tbodyObj[tb], "a", "url");
+			for(a=0; a<eventLink.length; a++){
+				eventLink[a].onclick = function(){
+									   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
+									   new ajaxEngine(linkURL);
+									   return false;
+									   }
+			}
+	}
 }
 
 /*
@@ -221,8 +224,7 @@ function todayHilite(){
 						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 							td1[i].setAttribute("class","today");
 							if (todayFlag == 0){
-								td1[i].setAttribute("id","onselect");
-								
+								td1[i].setAttribute("id","onselect");								
 							}
 							var imageToday = document.createElement("div");
 							imageToday.setAttribute("id","today_image");
@@ -339,7 +341,7 @@ function monthNav(){
 					}				
 				}				
 		}
-	ajaxEngine(linkprev);	
+	new ajaxEngine(linkprev);	
 	return false;};
 	
 	nav_prev1.getElementsByTagName('a')[1].onclick=function(){
@@ -363,7 +365,7 @@ function monthNav(){
 				break;
 				}									
 		}
-	ajaxEngine(linknext);	
+	new ajaxEngine(linknext);	
 	return false;};
 }
 
@@ -456,9 +458,9 @@ function ajaxEngine(urlPath){
 function onSumResponse(text, headers, callingContext) {
   document.getElementById('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
-  dropdown();
+  new eventLink();
   if(document.getElementById('day_nav') != null){
-  monthNav(); 
+  new monthNav(); 
   }
 }
 
@@ -470,10 +472,13 @@ function onSumResponse(text, headers, callingContext) {
  * Call to: none
  */
 function searchinfo(){
-
+	var nav_prev1 = document.getElementById('day_nav');
 	var search = document.forms.event_search.q;
 	search.onclick = function(){
 								var flagappeared = document.getElementById('search_term');
+								if(nav_prev1.style.display != 'inline'){
+								nav_prev1.style.display = 'none';
+								}
 									if(!flagappeared.className){
 										createCookie('searchtips','searchterms',7);
 										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
@@ -483,6 +488,7 @@ function searchinfo(){
 	var top_off = document.forms.event_search.getElementsByTagName('a');
 	top_off[0].onclick = function(){
 									var formseaarch = document.forms.event_search.q;
+									nav_prev1.style.display = 'inline';
 									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
 									formseaarch.focus();
 									return false;
