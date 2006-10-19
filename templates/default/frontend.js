@@ -17,10 +17,19 @@ function addLoadEvent(func) {
 addLoadEvent(function() {
 
   //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
-  if (document.getElementById('month_viewcal') && readCookie('monthview') ==null){
-  monthdisplay(); 
-  var viewall = document.getElementById('monthfullview');
-  viewall.className = 'monthfullview_unchecked';
+  if (document.getElementById('month_viewcal')){
+  	if(readCookie('monthview') ==null){
+  		monthdisplay(); 
+  		var viewall = document.getElementById('monthfullview');
+  		viewall.className = 'monthfullview_unchecked';
+  	}
+  	else{
+  		var monthID = document.getElementById('month_viewcal');
+ 		var LImonth = monthID.getElementsByTagName('ul');
+  			for(m=0; m<LImonth.length; m++){
+  				LImonth[m].className = 'unhide';
+  			}
+  	}
   }  
   
   todayHilite();
@@ -550,7 +559,7 @@ function createButton(linktext, attachE, actionFunc, classN){
  * Call to: Del()
  */
 function truncate(t){
-	var len = 11;
+	var len = 12;
 	var trunc = t.innerHTML;
 	// rinse text to weed out any html tags
 	trunc = Del(trunc);
@@ -559,7 +568,7 @@ function truncate(t){
 	      previous word to ensure that we don't truncate in the middle of
 	      a word */
 	    trunc = trunc.substring(0, len);
-	    trunc = trunc.replace(/\w+$/, '');
+	    //trunc = trunc.replace(/\w+$/, '');
 		/* Add an ellipses to the end and make it a link that expands
        	   the paragraph back to its original size */
    try{	 
