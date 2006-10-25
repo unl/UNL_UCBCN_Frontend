@@ -5,13 +5,33 @@
  * 
  * This file contains functions used throughout the frontend views.
  * 
- * @package UNL_UCBCN_Frontend
- * @author Brett Bieber
+ * @package	UNL_UCBCN_Frontend
+ * @author	Brett Bieber
+ * @todo	Add new output formats such as serialized PHP, XML, and JSON.
+ */
+
+/**
+ * Require the backend UNL_UCBCN to extend it.
  */
 require_once 'UNL/UCBCN.php';
+
+/**
+ * Event instance is a simple class used to hold details about a single event instance
+ * which is a UNL_UCBCN_Event and a UNL_UCBCN_Location.
+ */
 require_once 'UNL/UCBCN/EventInstance.php';
+
+/**
+ * The PEAR Date class is used for its knowledge about dates & times.
+ */
 require_once 'Date.php';
 
+/**
+ * This is the basic frontend output class through which all output to the public is generated.
+ * This class handles the determination of what view the user requested and what information to send.
+ * 
+ * @package UNL_UCBCN_Frontend
+ */
 class UNL_UCBCN_Frontend extends UNL_UCBCN
 {
 	/** Calendar UNL_UCBCN_Calendar Object **/
