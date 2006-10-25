@@ -215,6 +215,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 * 
 	 * @param array Associative array of the values to add to the URL
 	 * @param bool If true and format is querystring, ampersands will be &amp;
+	 * @return string URL to a frontend which has the data in the format requested.
 	 */
 	function formatURL($values,$encode = true)
 	{
@@ -292,6 +293,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 * 
 	 * @param string $url Url of the form http://
 	 * @param array $values
+	 * @return string The URL reformatted to a different output format.
 	 */
 	function reformatURL($url,$values)
 	{
@@ -314,6 +316,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 * Sets and/or returns the uri format.
 	 * 
 	 * @param string $set optional string, pass it to set the uriFormat, don't pass it to retrieve.
+	 * @return string rest or querystring
 	 */
 	function uriFormat($set=NULL)
 	{
