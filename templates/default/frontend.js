@@ -215,8 +215,11 @@ function todayHilite(){
 		//month widget caption navigation
 			
 		//if in day view (only), execute....
-		if (document.getElementById('frontend_view_selector').className == 'day'){
-			monthNav(); 
+		var idSelector = document.getElementById('frontend_view_selector');
+		if (idSelector.className == 'day' || idSelector.className == 'event'){
+			if(idSelector.className == 'day'){
+				monthNav(); 
+				}
 			eventLink();
 			monthCaptionSwitch(td0[0]);
 			for(i=0;i<td1.length;i++){
