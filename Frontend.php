@@ -479,7 +479,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 									'WHERE calendar_has_event.calendar_id='.$calendar->id.' ' .
 											'AND (calendar_has_event.status =\'posted\' OR calendar_has_event.status =\'archived\') '.
 											'AND calendar_has_event.event_id = eventdatetime.event_id ' .
-											'AND eventdatetime.starttime LIKE \''.date('Y-m-d',$epoch).'%\' ' .
+											'AND (eventdatetime.starttime LIKE \''.date('Y-m-d',$epoch).'%\' 
+												OR (eventdatetime.starttime<\''.date('Y-m-d 00:00:00',$epoch).'\' AND eventdatetime.endtime > \''.date('Y-m-d 00:00:00',$epoch).'\'))' .
 									'ORDER BY eventdatetime.starttime ASC');
 			if (!PEAR::isError($res)) {
 				return $res->numRows();

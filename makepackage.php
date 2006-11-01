@@ -61,7 +61,8 @@ $pfm->setReleaseVersion('0.3.1');
 $pfm->setNotes('* Fix Bug #24: html doctitles not generated correctly for calendars other than default
 				* New Feature some AJAX calls for day navigation.
 				* New Feature Next and Previous links for each Day.
-				* Implement  Request #26  	 Search should look in description, location, and event type.');
+				* Implement  Request #26  	 Search should look in description, location, and event type.
+				* Fix  Bug #30  	 Ongoing events will not activate link to that day.');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
