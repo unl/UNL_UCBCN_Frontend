@@ -109,10 +109,8 @@ var g_bH = false;
    try{ 
    var dr = document.getElementById('droplist').style;
    var rightCol = getElementsByClassName(document, "div", "col");
-   if (document.getElementById('maincontent').clientHeight < rightCol[0].clientHeight){
-   dr.margin = '-64px 2px 0 0';
-   dr.borderTop = '1px solid #ccc';
-   }
+ rightCol[0].style.Height = '768px';
+ dr.position = 'relative';
    }catch(e){};
   }
 
