@@ -42,7 +42,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 				}
 			    ?>
 				<li>Events</li>
-			</ul><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/eventbeta.png" alt="Event publishing system is still in beta phase" id="badge" />
+			</ul>
 			<!-- InstanceEndEditable --> </div>
 	</div>
 </div>

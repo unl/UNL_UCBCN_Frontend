@@ -51,7 +51,7 @@ a.permalink{font-size:0.6em;}
 #maincontent a.prev:hover, #maincontent a.next:hover, #maincontent a#dc.prev, #maincontent a#ac.next{background-position:0 1px;}
 .noentry{clear:both;}
 
-
+#maincontent .tel{margin-left:0}
 table td.empty{color:#ddd;}
 
 /* Calendar Widget */
