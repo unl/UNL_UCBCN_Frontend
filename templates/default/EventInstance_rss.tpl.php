@@ -23,7 +23,11 @@
 	    }
 		$loc = $this->eventdatetime->getLink('location_id');
 		if (!PEAR::isError($loc)) {
-			echo '&lt;div class="location"&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'&lt;/div&gt;';
+			echo '&lt;div class="location"&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
+			if (isset($this->eventdatetime->room)) {
+			    echo ' Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+			}
+			echo '&lt;/div&gt;';
 		} ?>
 	</description>
 	<pubDate><?php echo date('r',strtotime($this->event->datecreated)); ?></pubDate>

@@ -62,7 +62,8 @@ $pfm->setNotes('* Fix Bug #24: html doctitles not generated correctly for calend
 				* New Feature some AJAX calls for day navigation.
 				* New Feature Next and Previous links for each Day.
 				* Implement  Request #26  	 Search should look in description, location, and event type.
-				* Fix  Bug #30  	 Ongoing events will not activate link to that day.');
+				* Fix  Bug #30  	 Ongoing events will not activate link to that day.
+				* Fix  Bug #28  	 Room Number doesn\'t show up on Live Calendar.');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');

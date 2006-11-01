@@ -19,7 +19,11 @@ $out[] = 'SUMMARY:'.strip_tags($this->event->title);
 $out[] = 'DESCRIPTION:'.strip_tags($this->event->description);
 if (isset($e->eventdatetime->location_id)) {
     $l = $e->eventdatetime->getLink('location_id');
-    $out[] = 'LOCATION:'.$l->name;
+    $loc =  'LOCATION:'.$l->name;
+    if (isset($this->eventdatetime->room)) {
+		$loc .=  ' Room '.$this->eventdatetime->room;
+	}
+    $out[] = $loc;
 }
 $out[] = 'URL:'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics'));
 //$out[] = 'UID:EC9439B1-FF65-11D6-9973-003065F99D04';

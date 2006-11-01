@@ -60,7 +60,11 @@
 			<?php
 			$loc = $this->eventdatetime->getLink('location_id');
 			if (!PEAR::isError($loc)) {
-				echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</div>';
+				echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
+				if (isset($this->eventdatetime->room)) {
+				    echo '<br />Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+				}
+				echo '</div>';
 			}
 			?></td></tr>
 			<tr><td class="date">Subscription:</td>
