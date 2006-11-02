@@ -45,8 +45,7 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 				// Do a textual search.
 				$sql .= '(event.title LIKE \'%'.$mdb2->escape($this->query).'%\' OR '.
 				        'event.description LIKE \'%'.$mdb2->escape($this->query).'%\' OR '.
-				        '(location.name LIKE \'%'.$mdb2->escape($this->query).'%\') OR '.
-				        '(event_has_eventtype.event_id = event.id AND event_has_eventtype.eventtype_id = eventtype.id AND eventtype.name LIKE \'%'.$mdb2->escape($this->query).'%\')) AND '.
+				        '(location.name LIKE \'%'.$mdb2->escape($this->query).'%\')) AND '.
 				        '(eventdatetime.starttime>=\''.date('Y-m-d').' 00:00:00\' OR '.
 						'eventdatetime.endtime>\''.date('Y-m-d').' 00:00:00\') ORDER BY event.title';
 			}
@@ -59,7 +58,7 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 					$this->output->events[] =  new UNL_UCBCN_EventInstance($row[0]);
 				}
 			} else {
-			    $this->output = new UNL_UCBCN_Error('Error, the search could not be completed: '.$res->getMessage());
+			    $this->output = new UNL_UCBCN_Error('Error, the search could not be completed: '.$res->getMessage().'<br />Query:'.htmlentities($sql));
 			}
         } else {
             $this->output = 'Enter a search string to search for events.';
