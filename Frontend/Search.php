@@ -4,16 +4,34 @@
  * 
  * 
  * @package UNL_UCBCN_Frontend
+ * @todo Add searching eventtype.
  * @author Brett Bieber
  */
+
 
 require_once 'UNL/UCBCN/Frontend.php';
 require_once 'UNL/UCBCN/EventListing.php';
 
+/**
+ * Container for search results for the frontend.
+ *
+ * @package UNL_UCBCN_Frontend
+ */
 class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 {
+    /**
+     * Calendar we are searching
+     *
+     * @var object UNL_UCBCN_Calendar
+     */
     var $calendar;
     var $output;
+    
+    /**
+     * actual search string user entered
+     *
+     * @var string
+     */
     var $query;
     var $starttime;
     var $endtime;
@@ -25,6 +43,16 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 		$this->run();
 	}
     
+	/**
+	 * Runs the query on the database from the calendar, currently supports two types of
+	 * searches - textual or date and time hinted by passing a string supported by the strtotime() function.
+	 * 
+	 * Text searches:
+	 * Title, Description, Location
+	 * 
+	 * @todo Add searching event_has_eventtype for matching event types.
+	 *
+	 */
     function run()
     {
         $this->query = trim($this->query);
