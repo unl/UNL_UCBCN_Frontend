@@ -31,7 +31,7 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
         if (!empty($this->query)) {
             $mdb2 = $this->calendar->getDatabaseConnection();
             $sql = 'SELECT DISTINCT eventdatetime.id 
-					FROM event, event_has_eventtype, eventtype, eventdatetime, calendar_has_event, location
+					FROM event, eventdatetime, calendar_has_event, location
 					WHERE 
 						eventdatetime.event_id = event.id AND 
 						calendar_has_event.event_id = event.id AND 
