@@ -47,7 +47,7 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
 				        'event.description LIKE \'%'.$mdb2->escape($this->query).'%\' OR '.
 				        '(location.name LIKE \'%'.$mdb2->escape($this->query).'%\')) AND '.
 				        '(eventdatetime.starttime>=\''.date('Y-m-d').' 00:00:00\' OR '.
-						'eventdatetime.endtime>\''.date('Y-m-d').' 00:00:00\') ORDER BY event.title';
+						'eventdatetime.endtime>\''.date('Y-m-d').' 00:00:00\') ORDER BY eventdatetime.starttime ASC';
 			}
 			
 			$res = $mdb2->query($sql);
