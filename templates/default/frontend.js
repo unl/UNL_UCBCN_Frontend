@@ -203,6 +203,7 @@ function eventLink(){
  */
 var todayFlag = 0;
 function todayHilite(){
+	try {
 	x = new Date ();
 	y = x.getDate ();
 	var td0 = getElementsByClassName(document, "table", "wp-calendar");
@@ -271,57 +272,57 @@ function todayHilite(){
 					}
 			}*/
 			
-		}			
+		}
+	} catch(e) {}
 }
 
 
 
 document.onkeydown = checkKeyNav;
 function checkKeyNav(e) {
-var nav_prev1 = document.getElementById('day_nav');
-var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
-var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
-
-var keycode;
-if (window.event) keycode = window.event.keyCode;
-else if (e) keycode = e.which;
-	if(keycode == 39){
-	nav_prev1.getElementsByTagName('a')[1].id = 'ac';
-	new ajaxEngine(linknext);
-	var td0 = getElementsByClassName(document, "table", "wp-calendar");
-	var td1 = td0[0].getElementsByTagName('td');
-	for(i=0;i<td1.length;i++){	
-		if(td1[i].getAttribute("id") == 'onselect'){			
-			td1[i].id = 'none';
-			td1[i+1].id = 'onselect';
-			if(document.getElementById('onselect').className.indexOf('next') > 0){
-				var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-				new ajaxMonthEngine(val_month);
-			}
-			break;
-		}		
-	}
-	return false;
-	}
+	try {
+		var nav_prev1 = document.getElementById('day_nav');
+		var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
+		var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
 	
-	else if(keycode == 37){
-	nav_prev1.getElementsByTagName('a')[0].id = 'dc';
-	new ajaxEngine(linkprev);
-	var td0 = getElementsByClassName(document, "table", "wp-calendar");
-	var td1 = td0[0].getElementsByTagName('td');
-	for(i=0;i<td1.length;i++){
-		if(td1[i].getAttribute("id") == 'onselect'){
-			td1[i].id = 'none';
-			td1[i-1].id = 'onselect';
-			if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
-				var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-				new ajaxMonthEngine(val_month);
-				
-			}	
-		}	
-	}
-	return false;
-	}
+		var keycode;
+		if (window.event) keycode = window.event.keyCode;
+		else if (e) keycode = e.which;
+		if (keycode == 39) {
+			nav_prev1.getElementsByTagName('a')[1].id = 'ac';
+			new ajaxEngine(linknext);
+			var td0 = getElementsByClassName(document, "table", "wp-calendar");
+			var td1 = td0[0].getElementsByTagName('td');
+			for (i=0;i<td1.length;i++){
+				if (td1[i].getAttribute("id") == 'onselect') {
+					td1[i].id = 'none';
+					td1[i+1].id = 'onselect';
+					if(document.getElementById('onselect').className.indexOf('next') > 0){
+						var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(val_month);
+					}
+					break;
+				}
+			}
+			return false;
+		} else if (keycode == 37) {
+			nav_prev1.getElementsByTagName('a')[0].id = 'dc';
+			new ajaxEngine(linkprev);
+			var td0 = getElementsByClassName(document, "table", "wp-calendar");
+			var td1 = td0[0].getElementsByTagName('td');
+			for(i=0;i<td1.length;i++){
+				if(td1[i].getAttribute("id") == 'onselect'){
+					td1[i].id = 'none';
+					td1[i-1].id = 'onselect';
+					if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
+						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(val_month);
+					}
+				}
+			}
+			return false;
+		}
+	} catch(e) {}
 }
 
 function monthNav(){
