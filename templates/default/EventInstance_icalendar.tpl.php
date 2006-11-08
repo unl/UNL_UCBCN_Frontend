@@ -17,8 +17,8 @@ if (isset($this->eventdatetime->starttime)) {
 $out[] = 'DTSTAMP:'.date('Ymd\THis',strtotime($this->event->datecreated));
 $out[] = 'SUMMARY:'.strip_tags($this->event->title);
 $out[] = 'DESCRIPTION:'.strip_tags($this->event->description);
-if (isset($e->eventdatetime->location_id)) {
-    $l = $e->eventdatetime->getLink('location_id');
+if (isset($this->eventdatetime->location_id)) {
+    $l = $this->eventdatetime->getLink('location_id');
     $loc =  'LOCATION:'.$l->name;
     if (isset($this->eventdatetime->room)) {
 		$loc .=  ' Room '.$this->eventdatetime->room;
