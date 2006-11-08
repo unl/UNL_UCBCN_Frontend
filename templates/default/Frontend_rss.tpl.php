@@ -1,7 +1,8 @@
 <rss version="2.0">
 	<channel>
 		<title><?php echo $this->calendar->name; ?> Events</title>
-		<link><?php UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id)); ?></link>
+		<link><?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id)); ?></link>
+		<description>Events for <?php echo $this->calendar->name; ?></description>
 		<language>en-us</language>
 		<generator>UNL_UCBCN_Frontend-3.0</generator>
 		<lastBuildDate><?php echo date('r'); ?></lastBuildDate>
