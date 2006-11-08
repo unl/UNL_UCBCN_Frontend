@@ -187,12 +187,26 @@ function eventLink(){
 	for(tb=0; tb<tbodyObj.length; tb++){
 		var eventLink = getElementsByClassName(tbodyObj[tb], "a", "url");
 			for(a=0; a<eventLink.length; a++){
-				eventLink[a].onclick = function(){
-									   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
-									   new ajaxEngine(linkURL);
-									   return false;
-									   }
+				if (isInternalLink(eventLink[a])) {
+					eventLink[a].onclick = function(){
+										   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
+										   new ajaxEngine(linkURL);
+										   return false;
+										   }
+					}
 			}
+	}
+}
+
+/*
+ * Determines whether a link is to the internal system or external.
+ */
+function isInternalLink(link)
+{
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+		return false;
+	} else {
+		return true;
 	}
 }
 
