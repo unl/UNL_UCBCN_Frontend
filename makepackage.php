@@ -64,7 +64,8 @@ $pfm->setNotes('* Fix Bug #24: html doctitles not generated correctly for calend
 				* Implement  Request #26  	 Search should look in description, location, and event type.
 				* Fix  Bug #30  	 Ongoing events will not activate link to that day.
 				* Fix  Bug #28  	 Room Number doesn\'t show up on Live Calendar.
-				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.');
+				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.
+				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');

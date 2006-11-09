@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.11" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.5.0a1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_UCBCN_Frontend</name>
  <channel>pear.unl.edu</channel>
  <summary>A public frontend for a University Event Publishing system.</summary>
@@ -72,8 +72,26 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2006-10-13</date>
- <time>16:08:46</time>
+ <developer>
+  <name>Alvin Woon</name>
+  <user>alvinwoon</user>
+  <email>alvinwoon@gmail.com</email>
+  <active>yes</active>
+ </developer>
+ <developer>
+  <name>Alvin Woon</name>
+  <user>alvinwoon</user>
+  <email>alvinwoon@gmail.com</email>
+  <active>yes</active>
+ </developer>
+ <developer>
+  <name>Alvin Woon</name>
+  <user>alvinwoon</user>
+  <email>alvinwoon@gmail.com</email>
+  <active>yes</active>
+ </developer>
+ <date>2006-11-09</date>
+ <time>16:43:28</time>
  <version>
   <release>0.3.1</release>
   <api>0.3.0</api>
@@ -85,7 +103,12 @@
  <license uri="http://www.php.net/license">PHP License</license>
  <notes>* Fix Bug #24: html doctitles not generated correctly for calendars other than default
 				* New Feature some AJAX calls for day navigation.
-				* New Feature Next and Previous links for each Day.</notes>
+				* New Feature Next and Previous links for each Day.
+				* Implement  Request #26  	 Search should look in description, location, and event type.
+				* Fix  Bug #30  	 Ongoing events will not activate link to that day.
+				* Fix  Bug #28  	 Room Number doesn&apos;t show up on Live Calendar.
+				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.
+				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/</notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -119,6 +142,7 @@
       <file name="nav_prev.gif" role="data" />
       <file name="ongoing.gif" role="data" />
       <file name="recent.gif" role="data" />
+      <file name="recently.gif" role="data" />
       <file name="recent_bot.gif" role="data" />
       <file name="recent_mid.gif" role="data" />
       <file name="rss.gif" role="data" />
@@ -128,6 +152,7 @@
       <file name="tableftG.gif" role="data" />
       <file name="tabrightG.gif" role="data" />
       <file name="todayimage.png" role="data" />
+      <file name="ulnavbar.gif" role="data" />
       <file name="widget_list.gif" role="data" />
       <file name="widget_list_hover.gif" role="data" />
       <file name="year_box.gif" role="data" />
@@ -315,11 +340,16 @@
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-10-13</date>
+   <date>2006-11-09</date>
    <license uri="http://www.php.net/license">PHP License</license>
    <notes>* Fix Bug #24: html doctitles not generated correctly for calendars other than default
 				* New Feature some AJAX calls for day navigation.
-				* New Feature Next and Previous links for each Day.</notes>
+				* New Feature Next and Previous links for each Day.
+				* Implement  Request #26  	 Search should look in description, location, and event type.
+				* Fix  Bug #30  	 Ongoing events will not activate link to that day.
+				* Fix  Bug #28  	 Room Number doesn&apos;t show up on Live Calendar.
+				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.
+				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/</notes>
   </release>
  </changelog>
 </package>
