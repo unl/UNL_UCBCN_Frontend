@@ -145,7 +145,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 				built by the University of Nebraska&ndash;Lincoln which implements
 				the UC Berkeley Calendar specifications.
 				<ul>
-					<li><a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">UNL Event Publisher</a></li>
+					<li><a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Event_Publisher">UNL Event Publisher</a></li>
 					<li><a href ="http://www.berkeley.edu/">UC Berkeley</a></li>
 					<li><a href="http://groups.sims.berkeley.edu/EventCalendar/">UC Berkeley Calendar Network</a></li>
 				</ul>
@@ -172,6 +172,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 		<!-- InstanceEndEditable -->
 		<div id="copyright"> <!-- InstanceBeginEditable name="footercontent" -->
 			Yeah, it's open source. &copy; 2006 University of Nebraska&ndash;Lincoln
+			<a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
 			<!-- InstanceEndEditable --> <span><a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> <a href="http://validator.w3.org/check/referer">W3C</a> <a href="http://www-1.unl.edu/feeds/">RSS</a> </span><a href="http://www.unl.edu/" title="UNL Home"><img src="/ucomm/templatedependents/templatecss/images/wordmark.png" alt="UNL's wordmark" id="wordmark" /></a></div>
 	</div>
 </div>
