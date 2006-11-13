@@ -58,7 +58,7 @@ $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.3.0');
 $pfm->setReleaseVersion('0.3.2');
-$pfm->setNotes('Fixes');
+$pfm->setNotes('Improve queries: Remove table events, and orderby clause from the dayHasEvents query because they are not needed.');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 $pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
