@@ -4,7 +4,7 @@
 	<description>
 		<?php
 		echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->description).'&lt;/div&gt;';
-		if (isset($this->event->subtitle)) echo '&lt;h2&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'&lt;/h2&gt;';
+		if (isset($this->event->subtitle)) echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'&lt;/div&gt;';
 		echo '&lt;small&gt;'.date('l, F jS',strtotime($this->eventdatetime->starttime)).'&lt;/small&gt;';
 		
 		if (isset($this->eventdatetime->starttime)) {
