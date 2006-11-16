@@ -176,6 +176,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			    }
 			    $this->output[] = new UNL_UCBCN_Frontend_Search(array('calendar'=>$this->calendar,'query'=>$q));
 			break;
+			case 'image':
+			    $this->displayImage();
+			break;
 		}
 		switch($this->format) {
 			case 'xml':
@@ -388,6 +391,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			$view['eventdatetime_id'] = $GLOBALS[$method]['eventdatetime_id'];
 		}
 		
+		if (isset($GLOBALS[$method]['image'])) {
+		    $view['view'] = 'image';
+		}
+		
 		if (isset($GLOBALS[$method]['month'])) {
 		    $view['view'] = 'month';
 		}
@@ -464,7 +471,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		return str_replace('& ','&amp; ',$t);
 	}
 	
-/**
+	/**
 	 * This function checks if a calendar has events on the day requested.
 	 * @param object Calendar_Day object
 	 * @param calendar UNL_UCBCN_Calendar object
@@ -491,6 +498,25 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			$eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d',$epoch).'%\'');
 			return $eventdatetime->find();
 		}
+	}
+	
+	/**
+	 * When the image view is set, the image for a given event will be displayed
+	 * to the end user.  $_GET['id'] must be set to the event.id which has the image.
+	 */
+	function displayImage()
+	{
+	    if (isset($_GET['id'])) {
+	        $event = $this->factory('event');
+	        if ($event->get($_GET['id'])) {
+	            header('Content-type: '.$event->imagemime);
+				echo $event->imagedata;
+				exit();
+	        }
+	    }
+	    header('HTTP/1.0 404 Not Found');
+	    echo '404';
+        exit(0);
 	}
 }
 ?>
