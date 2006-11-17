@@ -32,6 +32,8 @@ $pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
 	'ignore' => array(	'package.xml',
 						'.project',
 						'*.tgz',
+						'*.sh',
+						'*.svg',
 						'makepackage.php',
 						'*CVS/*',
 						'.cache',
