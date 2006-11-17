@@ -8,7 +8,9 @@
 		<lastBuildDate><?php echo date('r'); ?></lastBuildDate>
 		<?php
 		UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Day','Frontend_Day_rss');
+		UNL_UCBCN::outputTemplate('UNL_UCBCN_EventListing','EventListing_rss');
 		UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_rss');
+		UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Upcoming','Frontend_hcalendar');
 		UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Search','Frontend_Day_rss');
 		UNL_UCBCN::displayRegion($this->output); ?>
 	</channel>

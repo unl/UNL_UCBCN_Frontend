@@ -62,6 +62,8 @@ $pfm->setAPIVersion('0.3.0');
 $pfm->setReleaseVersion('0.3.2');
 $pfm->setNotes('Improve queries: Remove table events, and orderby clause from the dayHasEvents query because they are not needed.
 Add Event image output.
+* Fix Bug #36: RSS Format in IE7 Text is very large for event calendar
+* Fix Bug in upcoming event rss output, reported by Shravan Manda.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
