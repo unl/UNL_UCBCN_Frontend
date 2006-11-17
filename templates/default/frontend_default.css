@@ -146,7 +146,7 @@ background-position:0 -45px;
 .event_cal table td.date, .event_cal table td.title{width:auto;}
 .event_cal table td.date{color:#cc0000;}
 .event_cal table thead{display:none;}
-img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
+.event_cal table p.description img{float:left;margin:0 5px 2px 0;}
 /*- Menu Tabs G--------------------------- */
 
     #tabsG {

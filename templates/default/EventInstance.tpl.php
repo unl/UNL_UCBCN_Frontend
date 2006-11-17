@@ -40,7 +40,9 @@
 			
 			<tr><td class="date">Description:</td>	
 			<td><p class='description'>
-			
+			<?php if (isset($this->event->imagedata)) { ?>
+				<img src="<?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $this->event->id; ?>" alt="image for event <?php echo $this->event->id; ?>" />
+			<?php } ?>	
 			<?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
 			<?php if (isset($this->event->listingcontactname) ||
 						isset($this->event->listingcontactphone) ||
@@ -55,11 +57,7 @@
 			if (isset($this->event->webpageurl)) {
 			    echo 'Website: <a class="url" href="'.$this->event->webpageurl.'">'.$this->event->webpageurl.'</a>';
 			}
-			?>
-			<?php if (isset($this->event->imagedata)) { ?>
-				<img class="event_description_img" src="<?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $this->event->id; ?>" alt="image for event <?php echo $this->event->id; ?>" />
-			<?php } ?>	
-			</td></tr>
+			?></td></tr>
 		
 		<tr class="alt"><td class="date">Location:</td>
 		<td>
