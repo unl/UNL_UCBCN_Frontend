@@ -44,7 +44,7 @@ table td.title{width:80%;}
 
 #maincontent p#day_nav{margin:5px 0 0px 0;padding:0;float:right;position:relative;}
 #maincontent p#day_nav a{float:left;margin:0 0 0 3px}
-a.permalink{font-size:0.6em;}
+a.permalink{font-size:0.6em;position:relative;}
 #maincontent a.prev, #maincontent a.next{text-indent:-9999px;height:17px;width:16px;display:block;}
 #maincontent a.prev{background:url(images/nav_prev.gif) no-repeat 0 -17px}
 #maincontent a.next{background:url(images/nav_next.gif) no-repeat 0 -17px}
@@ -146,7 +146,7 @@ background-position:0 -45px;
 .event_cal table td.date, .event_cal table td.title{width:auto;}
 .event_cal table td.date{color:#cc0000;}
 .event_cal table thead{display:none;}
-
+.event_cal table p.description img{float:left;margin:0 5px 2px 0;}
 /*- Menu Tabs G--------------------------- */
 
     #tabsG {

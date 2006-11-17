@@ -39,7 +39,11 @@
 					?></td></tr>
 			
 			<tr><td class="date">Description:</td>	
-			<td><p class='description'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
+			<td><p class='description'>
+			<?php if (isset($this->event->imagedata)) { ?>
+				<img src="<?php echo $this->url; ?>image&amp;id=<?php echo $this->event->id; ?>" alt="image for event <?php echo $this->event->id; ?>" />
+			<?php } ?>	
+			<?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
 			<?php if (isset($this->event->listingcontactname) ||
 						isset($this->event->listingcontactphone) ||
 						isset($this->event->listingcontactemail)) { ?>
