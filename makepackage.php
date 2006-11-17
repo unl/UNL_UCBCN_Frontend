@@ -64,11 +64,12 @@ $pfm->setNotes('Improve queries: Remove table events, and orderby clause from th
 Add Event image output.
 * Fix Bug #36: RSS Format in IE7 Text is very large for event calendar
 * Fix Bug in upcoming event rss output, reported by Shravan Manda.
+Switch to BSD License
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
-$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
-$pfm->setLicense('PHP License', 'http://www.php.net/license');
+//$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
+$pfm->setLicense('BSD License', 'http://www.opensource.org/licenses/bsd-license.php');
 $pfm->clearDeps();
 $pfm->setPhpDep('5.0.0');
 $pfm->setPearinstallerDep('1.4.3');

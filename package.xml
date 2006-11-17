@@ -18,97 +18,23 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <developer>
-  <name>Alvin Woon</name>
-  <user>alvinwoon</user>
-  <email>alvinwoon@gmail.com</email>
-  <active>yes</active>
- </developer>
- <date>2006-11-09</date>
- <time>16:43:28</time>
+ <date>2006-11-17</date>
+ <time>16:46:31</time>
  <version>
-  <release>0.3.1</release>
+  <release>0.3.2</release>
   <api>0.3.0</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
- <license uri="http://www.php.net/license">PHP License</license>
- <notes>* Fix Bug #24: html doctitles not generated correctly for calendars other than default
-				* New Feature some AJAX calls for day navigation.
-				* New Feature Next and Previous links for each Day.
-				* Implement  Request #26  	 Search should look in description, location, and event type.
-				* Fix  Bug #30  	 Ongoing events will not activate link to that day.
-				* Fix  Bug #28  	 Room Number doesn&apos;t show up on Live Calendar.
-				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.
-				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/</notes>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
+ <notes>Improve queries: Remove table events, and orderby clause from the dayHasEvents query because they are not needed.
+Add Event image output.
+* Fix Bug #36: RSS Format in IE7 Text is very large for event calendar
+* Fix Bug in upcoming event rss output, reported by Shravan Manda.
+Switch to BSD License
+ </notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -350,6 +276,24 @@
 				* Fix  Bug #28  	 Room Number doesn&apos;t show up on Live Calendar.
 				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.
 				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.2</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2006-11-17</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
+   <notes>Improve queries: Remove table events, and orderby clause from the dayHasEvents query because they are not needed.
+Add Event image output.
+* Fix Bug #36: RSS Format in IE7 Text is very large for event calendar
+* Fix Bug in upcoming event rss output, reported by Shravan Manda.
+Switch to BSD License
+   </notes>
   </release>
  </changelog>
 </package>
