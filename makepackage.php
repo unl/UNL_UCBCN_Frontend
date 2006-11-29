@@ -60,7 +60,7 @@ $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.3.0');
 $pfm->setReleaseVersion('0.3.3');
-$pfm->setNotes('Fixes');
+$pfm->setNotes('Fix  Bug #37  	 month widget for Dec 2006');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 //$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');

@@ -104,9 +104,9 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 															'calendar'=>$this->calendar->id));
 			
 			$class = '';
-		    if ($Day->thisMonth()<$this->month) {
+		    if ($Day->thisMonth('timestamp')<$Month->getTimestamp()) {
 		        $class = 'prev';
-		    } elseif ($Day->thisMonth()>$this->month) {
+		    } elseif ($Day->thisMonth('timestamp')>$Month->getTimestamp()) {
 		        $class = 'next';
 		    }
 			
