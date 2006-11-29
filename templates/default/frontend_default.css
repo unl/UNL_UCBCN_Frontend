@@ -119,6 +119,19 @@ table.wp-calendar td.today {
 }
 span.location{font-size:0.75em;color:#3A8103;}
 
+#maincontent a.returnToday{
+font-size:0.8em;
+padding:0 3px;
+border:1px solid #042579;
+border-color:#6D86C5 #213F8B #213F8B #6D86C5;
+background:#3e83c9;
+color:#fff;
+float:right;
+margin:5px -6px 10px 0;}
+
+#maincontent a.returnToday:hover{
+text-decoration:underline;
+}
 
 table.ongoing{margin:5px 0 0 0;}
 table.ongoing td{border:none;padding:4px;}
@@ -303,13 +316,14 @@ p#feeds a#rssformat{background:url(images/rss.gif) no-repeat;margin-left:5px;wid
 /* recently updated calendars */
 div.cal_widget{
 	background:url(images/recent_bot.gif) no-repeat left bottom;
+	clear:both;
 	width:222px;
 	padding:0 0 10px 0;
 }
 #maincontent div.cal_widget h3{
 	font-size:0.8em;position:relative;
 	margin:10px 0 0 0;
-	padding:8px 0 5px 12px;
+	padding:10px 0 5px 12px;
 	background:url(images/recent.gif) no-repeat left top;
 	width:222px;
 	height:15px;
@@ -393,7 +407,7 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 
 * html #maincontent p#search_term{filter:alpha(opacity: 0);background:url(images/searchinfo.gif) no-repeat;margin:13px 0 0 -275px;padding:18px 20px 0 10px;}
 
-* html #maincontent div.cal_widget h3{padding:6px 0 5px 12px}
+* html #maincontent a.returnToday{margin:5px -6px 0 0;}
 * html .month_cal {margin-top:7px;}
 * html table.wp-calendar td #today_image{margin: -15px 0 0 -23px;}
 * html table.wp-calendar td.today{border:none;border-left:1px solid #ddd;border-top:1px solid #ddd;}

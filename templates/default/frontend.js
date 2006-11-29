@@ -34,6 +34,7 @@ addLoadEvent(function() {
   
   todayHilite();
   dropdown();
+  
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
   searchinfo(); 
@@ -203,11 +204,36 @@ function eventLink(){
  */
 function isInternalLink(link)
 {
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+	var baseURL = document.getElementById('todayview');
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf(baseURL.childNodes[0].getAttribute("href", 2)) < 0 ) {
 		return false;
 	} else {
 		return true;
 	}
+}
+
+/*
+ * Go back to today's date in month widget
+ * Call from: addLoadEvent
+ * Call to: none
+ */
+function returnToday(){
+	x = new Date ();
+	//var widgetDiv = document.getElementById('monthwidget');
+	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	ajaxCaller.get('?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;?&monthwidget&format=hcalendar', null, function(text, headers, callingContext){
+		if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
+			var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
+		}
+		document.getElementById('load').innerHTML=""
+		document.getElementById("monthwidget").innerHTML = text;
+		todayHilite();
+		var today = getElementsByClassName(document, "td", "today");
+		//alert(today.length);
+		today[0].id = 'onselect';		
+	}, false, null);
+	ajaxEngine('?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar');
+	return false;
 }
 
 /*
@@ -224,7 +250,7 @@ function todayHilite(){
 	var spanID = document.getElementById(getCalendarDate());
 		var td1 = td0[0].getElementsByTagName('td');
 		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
-		
+		createButton('Return to today', document.getElementById('monthwidget'), returnToday, 'returnToday');
 		//month widget caption navigation
 			
 		//if in day view (only), execute....
@@ -236,18 +262,18 @@ function todayHilite(){
 			eventLink();
 			monthCaptionSwitch(td0[0]);
 			for(i=0;i<td1.length;i++){
-			monthWidget(td0[0],td1);
+			monthWidget(td1[i]);
 			}
 		}
-	
+		
 		//indicate today
 		for(i=0;i<td1.length;i++){
 			//insert icon to indicate today	
 			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
-				if (document.getElementById('onselect') == null){
+				//if (document.getElementById('onselect') == null){
 					try{
 						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
-							td1[i].setAttribute("class","today");
+							td1[i].className = 'today'
 							if (todayFlag == 0){
 								td1[i].setAttribute("id","onselect");								
 							}
@@ -258,7 +284,7 @@ function todayHilite(){
 						}
 					}
 					catch(e){}	
-				}
+				//}
 				/*else{
 					try{
 						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
@@ -288,6 +314,9 @@ function todayHilite(){
 			
 		}
 	} catch(e) {}
+	if(document.all){
+  			fnLoadPngs();
+  	}
 }
 
 
@@ -394,31 +423,27 @@ function monthNav(){
 	return false;};
 }
 
-function monthWidget(t0,tD){
-	if (tD[i].className.indexOf('selected') >= 0){
-			tD[i].style.cursor = 'pointer';
-			var daylink = tD[i].getElementsByTagName('a');
-				tD[i].onclick = function(){
+function monthWidget(tD){
+	if (tD.className.indexOf('selected') >= 0){
+			tD.style.cursor = 'pointer';
+			var daylink = tD.getElementsByTagName('a')[0];
+				tD.onclick = function(){
+					if(document.getElementById('onselect')){
+							document.getElementById('onselect').id = 'none';						
+					}
+					this.id = 'onselect';
+					
 					if(this.className.indexOf('next') > 0){
 						var nextmonth = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(nextmonth);	
+						new ajaxMonthEngine(nextmonth);
 					}
 					else if(this.className.indexOf('prev') > 0){
 						var prevmonth = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(prevmonth);	
+						new ajaxMonthEngine(prevmonth);
 					}
-					if(document.getElementById('onselect')){
-						var link = daylink[0].getAttribute("href", 2)+'?&format=hcalendar';
-						document.getElementById('onselect').id = 'none';
-						this.id = 'onselect';
-						new ajaxEngine(link);
-					}
-					else{
-						var link = daylink[0].getAttribute("href", 2)+'?&format=hcalendar';
-						this.id = 'onselect';
-						new ajaxEngine(link);
-					}
-  					//gotoURL(link);
+					
+					var link = daylink.getAttribute("href", 2)+'?&format=hcalendar';
+					new ajaxEngine(link);				  				
 					return false;
 				}
 	}
@@ -447,31 +472,27 @@ function ajaxMonthEngine(urlPath){
 
 function onMonthResponse(text, headers, callingContext) {
   if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
-  var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
+   var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
   }
+ 
   document.getElementById('load').innerHTML=""
   document.getElementById("monthwidget").innerHTML = text;
+  fun(tdlink);
   todayHilite();
-  fun(tdlink);	
-
 }
+
+//this function carries over onselect value from prior month widget
 function fun(ss){
 var td0 = getElementsByClassName(document, "table", "wp-calendar");
 var td1 = td0[0].getElementsByTagName('a');
 var td2 = td0[0].getElementsByTagName('td');
-	for(l=0;l<td1.length;l++){
-		if(td1[l].getAttribute("href", 2) == ss){
-		td1[l].parentNode.id = 'onselect';
-		break;
-		}
-		/*else{
-			for(j=td2.length; j >= 0; j--){
-				if(td2[j-1].className.indexOf('next') < 0 && td2[j-1].className.indexOf('prev') < 0){
-					td2[j-1].id = 'onselect';
-					break;	
-				}
-			}
-		}*/	
+//alert(ss);
+for(l=0;l<td1.length;l++){
+		if(td1[l].getAttribute("href", 2).indexOf(ss) >= 0){			
+			//alert(td1[l].getAttribute("href", 2));
+			td1[l].parentNode.id = 'onselect';
+			break;
+		}		
 	}
 }
 function ajaxEngine(urlPath){
