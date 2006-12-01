@@ -1,21 +1,7 @@
-/* body onload by simon collison */
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      if (oldonload) {
-        oldonload();
-      }
-      func();
-    }
-  }
-}
+var glob_handler = {
 
-/*this is the event loader*/
-addLoadEvent(function() {
-
+  init: function() {
+		
   //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
   if (document.getElementById('month_viewcal')){
   	if(readCookie('monthview') ==null){
@@ -39,7 +25,21 @@ addLoadEvent(function() {
   if(readCookie('searchtips') ==null){
   searchinfo(); 
   }
-});
+	  
+  },
+  
+  addEvent: function( obj, type, fn ) {
+    if ( obj.attachEvent ) {
+      obj['e'+type+fn] = fn;
+      obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+      obj.attachEvent( 'on'+type, obj[type+fn] );
+    } else {
+      obj.addEventListener( type, fn, false );
+    }
+  }
+}
+glob_handler.addEvent(window,"load",glob_handler.init);  
+
 
 /*------------------------ GENERIC FUNCTIONS --------------------------*/ 
 /* getElementsByClassName by some guy with a yeallowish website. */
@@ -319,53 +319,70 @@ function todayHilite(){
   	}
 }
 
+var timerID = null;
 
+document.onkeydown = function(e){
+var keycode;
+var arrowNav = document.getElementById('day_nav');
+var td0 = getElementsByClassName(document, "table", "wp-calendar");
+var td1 = td0[0].getElementsByTagName('td');
 
-document.onkeydown = checkKeyNav;
-function checkKeyNav(e) {
-	try {
-		var nav_prev1 = document.getElementById('day_nav');
-		var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
-		var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
+//reset timer
+if (timerID != null) {
+  window.clearTimeout(timerID);
+} 
+
+	//sniff keycode
+	if (window.event){
+		keycode = window.event.keyCode;
+	}
+	else if (e){
+		keycode = e.which;
+	}
 	
-		var keycode;
-		if (window.event) keycode = window.event.keyCode;
-		else if (e) keycode = e.which;
-		if (keycode == 39) {
-			nav_prev1.getElementsByTagName('a')[1].id = 'ac';
-			new ajaxEngine(linknext);
-			var td0 = getElementsByClassName(document, "table", "wp-calendar");
-			var td1 = td0[0].getElementsByTagName('td');
-			for (i=0;i<td1.length;i++){
-				if (td1[i].getAttribute("id") == 'onselect') {
-					td1[i].id = 'none';
-					td1[i+1].id = 'onselect';
-					if(document.getElementById('onselect').className.indexOf('next') > 0){
-						var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(val_month);
-					}
-					break;
+	//if it is right arrow key => next date
+	if (keycode == 39) {
+		arrowNav.getElementsByTagName('a')[1].id = 'ac';
+		
+		for (i=0;i<td1.length;i++){
+			if (td1[i].getAttribute("id") == 'onselect') {
+				td1[i].id = 'none';
+				td1[i+1].id = 'onselect';
+				if(document.getElementById('onselect').className.indexOf('next') > 0){
+					var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+					new ajaxMonthEngine(val_month);
 				}
+				break;
 			}
-			return false;
-		} else if (keycode == 37) {
-			nav_prev1.getElementsByTagName('a')[0].id = 'dc';
-			new ajaxEngine(linkprev);
-			var td0 = getElementsByClassName(document, "table", "wp-calendar");
-			var td1 = td0[0].getElementsByTagName('td');
-			for(i=0;i<td1.length;i++){
-				if(td1[i].getAttribute("id") == 'onselect'){
-					td1[i].id = 'none';
-					td1[i-1].id = 'onselect';
-					if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
-						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(val_month);
-					}
-				}
-			}
-			return false;
 		}
-	} catch(e) {}
+		timerID = window.setTimeout(_ajaxKeyNav, 500);
+	}
+	
+	//if it is left arrow key => previous date
+	else if (keycode == 37) {		 
+		arrowNav.getElementsByTagName('a')[0].id = 'dc';
+			
+		for(i=0;i<td1.length;i++){
+			if(td1[i].getAttribute("id") == 'onselect'){
+				td1[i].id = 'none';
+				td1[i-1].id = 'onselect';
+				
+				if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
+					var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+					new ajaxMonthEngine(val_month);
+				}
+				break;
+			}
+		}
+		timerID = window.setTimeout(_ajaxKeyNav, 500);
+	}
+};
+
+//key nav function call.
+function _ajaxKeyNav(){
+			var url = document.getElementById('onselect').childNodes[0].getAttribute("href", 2)+'?&format=hcalendar';
+			ajaxEngine(url)
+			return false;
 }
 
 function monthNav(){
@@ -455,6 +472,7 @@ function monthCaptionSwitch(eT){
 	spanarrow[3].childNodes[0].onclick=function(){new ajaxMonthCaptionEngine(spanlinknext);return false;};
  	spanarrow[0].childNodes[0].onclick=function(){new ajaxMonthCaptionEngine(spanlinkprev);return false;};
 }
+
 function ajaxMonthCaptionEngine(urlPath){
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
 	ajaxCaller.get(urlPath, null, onMonthCaptionResponse, false, null);	
@@ -495,13 +513,17 @@ for(l=0;l<td1.length;l++){
 		}		
 	}
 }
+ 
 function ajaxEngine(urlPath){
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-	ajaxCaller.get(urlPath, null, onSumResponse, false, null);		
+
+ajaxCaller.get(urlPath, null, onSumResponse, false, null);
+			
 	todayFlag++;
 }
 
 function onSumResponse(text, headers, callingContext) {
+	
   document.getElementById('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
   new eventLink();
@@ -509,7 +531,6 @@ function onSumResponse(text, headers, callingContext) {
   new monthNav(); 
   }
 }
-
 
 
 /*
