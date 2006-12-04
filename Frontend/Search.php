@@ -36,10 +36,14 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
     var $starttime;
     var $endtime;
     
+    /** URL to this search results page. */
+	var $url;
+    
     function __construct($options=array())
 	{
 	    $this->view = 'search';
 		$this->setOptions($options);
+		$this->url = $this->getURL();
 		$this->run();
 	}
     
@@ -92,6 +96,18 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
             $this->output = 'Enter a search string to search for events.';
         }
     }
+    
+    /**
+     * returns the url to this search page.
+     *
+     * @return string
+     */
+    function getURL()
+	{
+		return UNL_UCBCN_Frontend::formatURL(array(	'search'=>'search',
+		                                            'q'=>urlencode($this->query),
+													'calendar'=>$this->calendar->id));
+	}
     
 }
 

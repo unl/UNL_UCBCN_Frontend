@@ -222,7 +222,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function formatURL($values,$encode = true)
 	{
-		$order = array('calendar','upcoming','search','y','m','d','eventdatetime_id');
+		$order = array('calendar','upcoming','search','y','m','d','eventdatetime_id','q');
 		global $_UNL_UCBCN;
 		$url = '?';
 		if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
