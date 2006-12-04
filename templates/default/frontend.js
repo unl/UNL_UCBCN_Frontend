@@ -314,7 +314,7 @@ function todayHilite(){
 			
 		}
 	} catch(e) {}
-	if(document.all){
+	if(window.XMLHttpRequest == false){
   			fnLoadPngs();
   	}
 }
