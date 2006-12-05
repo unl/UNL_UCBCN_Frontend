@@ -39,7 +39,7 @@ table td.date{width:20%;}
 table td.title{width:80%;}
 #maincontent .three_col h4.sec_main{float:left;font-size:1.5em;padding: 4px 0 7px 30px!important; 
                  background: url(images/date1.gif) no-repeat 0 0;font-style:normal;}
-#maincontent h4.ongoing{font-size:1.5em;background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:6px 0 7px 34px;}
+#maincontent h4.ongoing{font-size:1.5em;background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:6px 0 7px 34px;clear:both;}
 
 
 #maincontent p#day_nav{margin:5px 0 0px 0;padding:0;float:right;position:relative;}
@@ -49,15 +49,15 @@ a.permalink{font-size:0.6em;position:relative;}
 #maincontent a.prev{background:url(images/nav_prev.gif) no-repeat 0 -17px}
 #maincontent a.next{background:url(images/nav_next.gif) no-repeat 0 -17px}
 #maincontent a.prev:hover, #maincontent a.next:hover, #maincontent a#dc.prev, #maincontent a#ac.next{background-position:0 1px;}
-.noentry{clear:both;}
-
+#maincontent p.noentry{clear:both;float:left;}
+#maincontent a.returnPrevScreen{font-weight:bold;display:block;font-size:0.8em;padding:2px 3px;background:#cee2f7;color:#6da6db;border:1px solid #a8c2ed;}
 #maincontent .tel{margin-left:0}
 table td.empty{color:#ddd;}
 
 /* Calendar Widget */
 table.wp-calendar thead th{
 	background:#fff;border-top:1px solid #999;border-bottom:3px double #999;color:#333;
-	text-align:left;
+	text-align:left;font-size:8.5pt!important;
 }
 
 table.wp-calendar td, table.wp-calendar th{
@@ -93,8 +93,8 @@ table.wp-calendar td:hover{
 table.wp-calendar td.pad:hover{background:none}
 
 table.wp-calendar #today_image{
-	width:43px;
-	height:25px;
+	width:36px;
+	height:18px;
 	position:absolute;
 	margin:-32px 0 0 -12px;
 	background:url(images/todayimage.png) no-repeat 0 0;
@@ -127,7 +127,7 @@ border-color:#6D86C5 #213F8B #213F8B #6D86C5;
 background:#3e83c9;
 color:#fff;
 float:right;
-margin:5px -6px 10px 0;}
+margin:5px 0 10px 0;}
 
 #maincontent a.returnToday:hover{
 text-decoration:underline;
@@ -152,7 +152,7 @@ background-position:0 -45px;
 
 /* event view*/
 
-.event_cal h1.summary{padding: 7px 0 10px 37px!important; 
+.event_cal h1.summary{padding: 7px 0 10px 37px!important; margin-top:5px;
                  background: url(images/event_one.gif) no-repeat 0 0;}
 
 .event_cal table{width:auto;border:1px solid #8ebcd6;border-top:none;border-right:1px solid #4081a6;border-bottom:1px solid #4081a6;}
@@ -285,8 +285,8 @@ form#event_search {
 	}
 form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
  	  border-color:#ccc #fff #fff #ccc;padding:2px}
-#maincontent h1.results {
-	margin:2em 0 0.5em 0;
+#maincontent h1.results span{
+	background:#ffffcc;
 	}
 #maincontent p#search_term{position:absolute;display:block;opacity:0;width:244px;height:85px;background:url(images/searchinfo.png) no-repeat;margin:-10px 0 0 -45px;padding:18px 20px 0 10px;font-size:11px;line-height:normal;}
 
@@ -396,8 +396,7 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
   background-color: #ddd;
 }
 /* IE */
-* html .day_cal, * html .three_col h1{margin-top:45px;}
-* html .three_col{margin:-30px 0 10px 0;}
+
 * html .three_col table td{padding:7px!important;}
 
 * html .col{margin-top:10px;}
@@ -407,7 +406,7 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 
 * html #maincontent p#search_term{filter:alpha(opacity: 0);background:url(images/searchinfo.gif) no-repeat;margin:13px 0 0 -275px;padding:18px 20px 0 10px;}
 
-* html #maincontent a.returnToday{margin:5px -6px 0 0;}
+
 * html .month_cal {margin-top:7px;}
 * html table.wp-calendar td #today_image{margin: -15px 0 0 -23px;}
 * html table.wp-calendar td.today{border:none;border-left:1px solid #ddd;border-top:1px solid #ddd;}

@@ -20,6 +20,7 @@ var glob_handler = {
   
   todayHilite();
   dropdown();
+  ajaxsearch();
   
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
@@ -184,17 +185,18 @@ function getCalendarName(t)
 }
 
 function eventLink(){
+
 	var tbodyObj = document.getElementsByTagName('tbody');
 	for(tb=0; tb<tbodyObj.length; tb++){
 		var eventLink = getElementsByClassName(tbodyObj[tb], "a", "url");
 			for(a=0; a<eventLink.length; a++){
-				if (isInternalLink(eventLink[a])) {
+				 if (isInternalLink(eventLink[a])) {
 					eventLink[a].onclick = function(){
 										   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
 										   new ajaxEngine(linkURL);
 										   return false;
 										   }
-					}
+				 }
 			}
 	}
 }
@@ -205,7 +207,8 @@ function eventLink(){
 function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf(baseURL.childNodes[0].getAttribute("href", 2)) < 0 ) {
+	//baseURL.childNodes[0].getAttribute("href", 2)
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;
@@ -314,7 +317,7 @@ function todayHilite(){
 			
 		}
 	} catch(e) {}
-	if(window.XMLHttpRequest == false){
+	if(!window.XMLHttpRequest){
   			fnLoadPngs();
   	}
 }
@@ -491,8 +494,7 @@ function ajaxMonthEngine(urlPath){
 function onMonthResponse(text, headers, callingContext) {
   if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
    var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
-  }
- 
+  } 
   document.getElementById('load').innerHTML=""
   document.getElementById("monthwidget").innerHTML = text;
   fun(tdlink);
@@ -516,22 +518,76 @@ for(l=0;l<td1.length;l++){
  
 function ajaxEngine(urlPath){
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-
-ajaxCaller.get(urlPath, null, onSumResponse, false, null);
-			
+	ajaxCaller.get(urlPath, null, onSumResponse, false, null);
 	todayFlag++;
 }
-
+var save;
 function onSumResponse(text, headers, callingContext) {
-	
+  save = document.getElementById('updatecontent').innerHTML;
   document.getElementById('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
   new eventLink();
   if(document.getElementById('day_nav') != null){
-  new monthNav(); 
+ 	 new monthNav(); 
+  }
+  else if(getElementsByClassName(document, "div", "event_cal").length > 0){
+  	if(document.getElementById('returnPrevScreen') == null){
+    	 CBInsertBefore('< Return to events listing', function(){returnPrevScreen(save);return false;}, 'returnPrevScreen');
+  	 }
+  	 else{
+  	 	save = '';
+  	 }
   }
 }
 
+function returnPrevScreen(prev_content){
+ document.getElementById("updatecontent").innerHTML = prev_content;
+ new eventLink(); 
+ save = '';
+}
+
+/*
+ * Create <a href> buttons using insertBefore
+ * Call from: onSumResponse()
+ * Call to: returnPrevScreen()
+ */
+function CBInsertBefore(linktext, actionFunc, classN){
+	var morelink = document.createElement("a");
+	morelink.style.display = 'inline';
+	var text = document.createTextNode(linktext);
+	morelink.className=classN;
+	morelink.href = '#';
+	morelink.onclick = actionFunc;
+	morelink.appendChild(text);
+	var c = document.getElementById('updatecontent');
+	c.insertBefore(morelink, getElementsByClassName(document, "div", "event_cal")[0]);
+}
+/*
+ * Ajax search
+ * Call from: addevent
+ * Call to: onSearchResponse
+ */
+function ajaxsearch(){
+	var searchForm = document.getElementById('event_search');
+	var searchSubmit = searchForm.getElementsByTagName('input')[1];
+	
+	document.event_search.onsubmit = function(){
+		var searchVal = document.getElementById('searchinput').value;	
+		var searchVars = new Array();
+		searchVars['q'] = searchVal;
+		searchVars['format'] = 'hcalendar';
+		searchVars['search'] = 'search';		
+		document.getElementById('load').innerHTML = '<img src="/ucomm/templatedependents/templatecss/images/loading.gif" />';
+		ajaxCaller.get('', searchVars, onSearchResponse, false, null);
+		return false;
+	}
+}
+
+function onSearchResponse(text, headers, callingContext){
+	document.getElementById('load').innerHTML = '';
+	document.getElementById('updatecontent').innerHTML = text;
+	eventLink();
+}
 
 /*
  * Search box tips
@@ -548,20 +604,27 @@ function searchinfo(){
 								}
 									if(!flagappeared.className){
 										createCookie('searchtips','searchterms',7);
-										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
+										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true, finish: window.setTimeout(finishSearch, 8000)});
 										flagappeared.className = 'appeared';										
 									}
 								};
+					
 	var top_off = document.forms.event_search.getElementsByTagName('a');
 	top_off[0].onclick = function(){
 									var formseaarch = document.forms.event_search.q;
 									nav_prev1.style.display = 'inline';
-									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true});
+									Spry.Effect.AppearFade("search_term", {duration: 1000, from: 100, to: 0, toggle: true});
 									formseaarch.focus();
 									return false;
 									};
 									
 }
+
+/*auto fade out */
+function finishSearch(){
+	Spry.Effect.AppearFade("search_term", {duration: 1000, from: 100, to: 0, toggle: true});	
+}
+
 /*
  * Clean and simple month display
  * Call from: addLoadEvent
