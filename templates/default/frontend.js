@@ -368,18 +368,14 @@ if(document.getElementById('day_nav')){
 				
 			for(i=0;i<td1.length;i++){
 				if(td1[i].getAttribute("id") == 'onselect'){
-					td1[i].removeAttribute('id');
-					//td1[i].id = 'none';
-					td1[i-1].id = 'onselect';
-					
+					td1[i].id = 'none';
+					td1[i-1].id = 'onselect';					
 					if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
 						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
 						new ajaxMonthEngine(val_month);
 					}
 				break;	
 				}
-			//alert(td1[i].innerHTML);	
-			//break;	
 			}
 			timerID = window.setTimeout(_ajaxKeyNav, 500);
 			return false;
