@@ -91,9 +91,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 			<!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
 		<div id="load"></div>
 			<div id="maincontent"> 
-			<?php echo $this->navigation; ?>
-			<!-- InstanceBeginEditable name="maincontent" -->
-			<form id="event_search" name="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
+					<form id="event_search" name="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
 				<input type='text' name='q' id='searchinput' value="<?php if (isset($_GET['q'])) { echo htmlentities($_GET['q']); } ?>" />
 				<input type='submit' name='submit' value="Search" />
 				<input type='hidden' name='search' value='search' />
@@ -102,6 +100,9 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 			</p>
 			
 			</form>
+			<?php echo $this->navigation; ?>
+			<!-- InstanceBeginEditable name="maincontent" -->
+	
 				<?php if (isset($this->right)) { ?>
 					<div class="col left">
 						<div id="monthwidget"><?php UNL_UCBCN::displayRegion($this->right); ?></div>

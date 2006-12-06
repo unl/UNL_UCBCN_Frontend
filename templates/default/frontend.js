@@ -290,34 +290,7 @@ function todayHilite(){
 						}
 					}
 					catch(e){}	
-				//}
-				/*else{
-					try{
-						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
-							td1[i].setAttribute("class","today");
-							var imageToday = document.createElement("div");
-							imageToday.setAttribute("id","today_image");
-							td1[i].appendChild(imageToday);
-							break;
-						}
-					}
-					catch(e){}	
-				}*/
-			}
-			/* else if(td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 1){
-					if(document.getElementById('onselect') == null){
-						td1[i].setAttribute("id","onselect");
-						//ajaxEngine(td1[i].getAttribute("href", 2)+'?&format=hcalendar');
-						break;
-					}
-					else{
-						//document.getElementById('onselect').id = 'none';
-						//td1[i].setAttribute("id","onselect");
-						//ajaxEngine(td1[i].getAttribute("href", 2)+'?&format=hcalendar');
-						break;
-					}
-			}*/
-			
+			}			
 		}
 	} catch(e) {}
 	if(!window.XMLHttpRequest){
@@ -325,15 +298,41 @@ function todayHilite(){
   	}
 }
 
-var timerID = null;
+/*
+ * go through each table widget to set marker and launch ajax month engine if applicable
+ * Call from: onkeyup, monthnav
+ * Call to: none
+ */
+function widgetAttachEvent(e){
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	var td1 = td0[0].getElementsByTagName('td');
+	for (i=0;i<td1.length;i++){
+				if (td1[i].getAttribute("id") == 'onselect') {
+					td1[i].id = 'none';
+					if(e == 'prev'){
+						td1[i-1].id = 'onselect';
+						if(document.getElementById('onselect').className.indexOf('prev') > 0){
+							var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+							new ajaxMonthEngine(val_month);
+						}
+					}
+					else{
+						td1[i+1].id = 'onselect';
+						if(document.getElementById('onselect').className.indexOf('next') > 0){
+							var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+							new ajaxMonthEngine(val_month);
+						}
+					}				
+					break;
+				}
+	}
+}
 
+var timerID = null;
 document.onkeyup = function(event){
 if(document.getElementById('day_nav')){
 	
 	var arrowNav = document.getElementById('day_nav');
-	var td0 = getElementsByClassName(document, "table", "wp-calendar");
-	var td1 = td0[0].getElementsByTagName('td');
-
 	//reset timer
 	if (timerID != null) {
 	  window.clearTimeout(timerID);
@@ -347,17 +346,7 @@ if(document.getElementById('day_nav')){
 		//if it is right arrow key => next date
 		if (evt.keyCode == 39) {
 			arrowNav.getElementsByTagName('a')[1].id = 'ac';			
-			for (i=0;i<td1.length;i++){
-				if (td1[i].getAttribute("id") == 'onselect') {
-					td1[i].id = 'none';
-					td1[i+1].id = 'onselect';
-					if(document.getElementById('onselect').className.indexOf('next') > 0){
-						var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(val_month);
-					}
-					break;
-				}
-			}
+			widgetAttachEvent('next');
 			timerID = window.setTimeout(_ajaxKeyNav, 500);
 			return false;
 		}
@@ -365,18 +354,7 @@ if(document.getElementById('day_nav')){
 		//if it is left arrow key => previous date
 		else if (evt.keyCode == 37) {		 
 			arrowNav.getElementsByTagName('a')[0].id = 'dc';
-				
-			for(i=0;i<td1.length;i++){
-				if(td1[i].getAttribute("id") == 'onselect'){
-					td1[i].id = 'none';
-					td1[i-1].id = 'onselect';					
-					if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
-						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(val_month);
-					}
-				break;	
-				}
-			}
+			widgetAttachEvent('prev');			
 			timerID = window.setTimeout(_ajaxKeyNav, 500);
 			return false;
 		}
@@ -397,53 +375,16 @@ function monthNav(){
 	var linknext = nav_prev1.getElementsByTagName('a')[1].getAttribute("href", 2)+'?&format=hcalendar';
 		
 	nav_prev1.getElementsByTagName('a')[0].onclick=function(){
-	var currentOnselect = document.getElementById('onselect');
-	var td0 = getElementsByClassName(document, "table", "wp-calendar");
-	var td1 = td0[0].getElementsByTagName('td');
-		for(i=0;i<td1.length;i++){				
-				if(td1[i].getAttribute("id") == 'onselect'){
-					if(i == 0){
-						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(val_month);
-						break;							
-					}
-					else{
-						td1[i-1].id = 'onselect';
-						currentOnselect.id = 'none';
-						if(document.getElementById('onselect').className.indexOf('prev') > 0){
-							var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-							new ajaxMonthEngine(val_month);
-							break;
-						}
-					}				
-				}				
-		}
-	new ajaxEngine(linkprev);	
-	return false;};
+		widgetAttachEvent('prev');
+		new ajaxEngine(linkprev);	
+		return false;
+	};
 	
 	nav_prev1.getElementsByTagName('a')[1].onclick=function(){
-	var currentOnselect = document.getElementById('onselect');
-	var td0 = getElementsByClassName(document, "table", "wp-calendar");
-	var td1 = td0[0].getElementsByTagName('td');
-		for(i=0;i<td1.length;i++){				
-				if(td1[i].getAttribute("id") == 'onselect'){
-					if(i == td1.length - 1){
-						var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(val_month);
-					}
-					else{
-						td1[i+1].id = 'onselect';
-						currentOnselect.id = 'none';
-						if(document.getElementById('onselect').className.indexOf('next') > 0){
-							var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-							new ajaxMonthEngine(val_month);
-						}
-					}
-				break;
-				}									
-		}
-	new ajaxEngine(linknext);	
-	return false;};
+		widgetAttachEvent('next');	
+		new ajaxEngine(linknext);	
+		return false;
+	};
 }
 
 function monthWidget(tD){
@@ -546,6 +487,7 @@ function onSumResponse(text, headers, callingContext) {
 function returnPrevScreen(prev_content){
  document.getElementById("updatecontent").innerHTML = prev_content;
  new eventLink(); 
+ new monthNav();
  save = '';
 }
 
