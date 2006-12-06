@@ -17,10 +17,12 @@ var glob_handler = {
   			}
   	}
   }  
-  
+  else{
+  ajaxsearch();
+  }
   todayHilite();
   dropdown();
-  ajaxsearch();
+  
   
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
@@ -208,7 +210,7 @@ function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
 	//baseURL.childNodes[0].getAttribute("href", 2)
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;

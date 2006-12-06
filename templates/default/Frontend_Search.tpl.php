@@ -2,9 +2,9 @@
 <?php
 if (is_a($this->output,'UNL_UCBCN_EventListing')) {
     if ($dt = strtotime($this->query)) {
-        echo '<h1 class="results">Search results for events dated '.date('F jS',$dt).'</h1>';
+        echo '<h1 class="results">Search results for events dated <span>'.date('F jS',$dt).'</span><a class="permalink" href="'.$this->url.'">(link)</a></h1>';
     } else {
-        echo '<h1 class="results">Search results for "'.htmlentities($this->query).'"</h1>';
+        echo '<h1 class="results">Search results for "<span>'.htmlentities($this->query).'</span>"<a class="permalink" href="'.$this->url.'">(link)</a></h1>';
     }
     echo '<h3>'.count($this->output->events).' results</h3>';
 }
