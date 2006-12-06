@@ -18,15 +18,16 @@ var glob_handler = {
   	}
   }  
   else{
-  ajaxsearch();
+ 	 if(getElementsByClassName(document, "div", "year_cal").length == 0){
+ 	 	ajaxsearch();
+  	 	todayHilite();
+  		dropdown();
+  	 }	
   }
-  todayHilite();
-  dropdown();
-  
   
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
-  searchinfo(); 
+  	searchinfo(); 
   }
 	  
   },
@@ -210,7 +211,7 @@ function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
 	//baseURL.childNodes[0].getAttribute("href", 2)
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;
@@ -263,11 +264,11 @@ function todayHilite(){
 		if (idSelector.className == 'day' || idSelector.className == 'event'){
 			if(idSelector.className == 'day'){
 				monthNav(); 
-				}
+			}
 			eventLink();
 			monthCaptionSwitch(td0[0]);
 			for(i=0;i<td1.length;i++){
-			monthWidget(td1[i]);
+				monthWidget(td1[i]);
 			}
 		}
 		
@@ -280,7 +281,7 @@ function todayHilite(){
 						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 							td1[i].className = 'today'
 							if (todayFlag == 0){
-								td1[i].setAttribute("id","onselect");								
+							   td1[i].setAttribute("id","onselect");								
 							}
 							var imageToday = document.createElement("div");
 							imageToday.setAttribute("id","today_image");
@@ -326,68 +327,72 @@ function todayHilite(){
 
 var timerID = null;
 
-document.onkeydown = function(e){
-var keycode;
-var arrowNav = document.getElementById('day_nav');
-var td0 = getElementsByClassName(document, "table", "wp-calendar");
-var td1 = td0[0].getElementsByTagName('td');
-
-//reset timer
-if (timerID != null) {
-  window.clearTimeout(timerID);
-} 
-
-	//sniff keycode
-	if (window.event){
-		keycode = window.event.keyCode;
-	}
-	else if (e){
-		keycode = e.which;
-	}
+document.onkeyup = function(event){
+if(document.getElementById('day_nav')){
 	
-	//if it is right arrow key => next date
-	if (keycode == 39) {
-		arrowNav.getElementsByTagName('a')[1].id = 'ac';
+	var arrowNav = document.getElementById('day_nav');
+	var td0 = getElementsByClassName(document, "table", "wp-calendar");
+	var td1 = td0[0].getElementsByTagName('td');
+
+	//reset timer
+	if (timerID != null) {
+	  window.clearTimeout(timerID);
+	} 
+	
+	evt = event || window.event;
+	el = evt.srcElement || evt.target;
+	if (el.name)
+	return true;
 		
-		for (i=0;i<td1.length;i++){
-			if (td1[i].getAttribute("id") == 'onselect') {
-				td1[i].id = 'none';
-				td1[i+1].id = 'onselect';
-				if(document.getElementById('onselect').className.indexOf('next') > 0){
-					var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-					new ajaxMonthEngine(val_month);
+		//if it is right arrow key => next date
+		if (evt.keyCode == 39) {
+			arrowNav.getElementsByTagName('a')[1].id = 'ac';			
+			for (i=0;i<td1.length;i++){
+				if (td1[i].getAttribute("id") == 'onselect') {
+					td1[i].id = 'none';
+					td1[i+1].id = 'onselect';
+					if(document.getElementById('onselect').className.indexOf('next') > 0){
+						var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(val_month);
+					}
+					break;
 				}
-				break;
 			}
+			timerID = window.setTimeout(_ajaxKeyNav, 500);
+			return false;
 		}
-		timerID = window.setTimeout(_ajaxKeyNav, 500);
-	}
-	
-	//if it is left arrow key => previous date
-	else if (keycode == 37) {		 
-		arrowNav.getElementsByTagName('a')[0].id = 'dc';
-			
-		for(i=0;i<td1.length;i++){
-			if(td1[i].getAttribute("id") == 'onselect'){
-				td1[i].id = 'none';
-				td1[i-1].id = 'onselect';
+		
+		//if it is left arrow key => previous date
+		else if (evt.keyCode == 37) {		 
+			arrowNav.getElementsByTagName('a')[0].id = 'dc';
 				
-				if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
-					var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-					new ajaxMonthEngine(val_month);
+			for(i=0;i<td1.length;i++){
+				if(td1[i].getAttribute("id") == 'onselect'){
+					td1[i].removeAttribute('id');
+					//td1[i].id = 'none';
+					td1[i-1].id = 'onselect';
+					
+					if(document.getElementById('onselect').className.indexOf('prev') > 0 || i == 1){
+						var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+						new ajaxMonthEngine(val_month);
+					}
+				break;	
 				}
-				break;
+			//alert(td1[i].innerHTML);	
+			//break;	
 			}
+			timerID = window.setTimeout(_ajaxKeyNav, 500);
+			return false;
 		}
-		timerID = window.setTimeout(_ajaxKeyNav, 500);
-	}
+	return true;	
+}
 };
 
 //key nav function call.
 function _ajaxKeyNav(){
-			var url = document.getElementById('onselect').childNodes[0].getAttribute("href", 2)+'?&format=hcalendar';
-			ajaxEngine(url)
-			return false;
+	var url = document.getElementById('onselect').childNodes[0].getAttribute("href", 2)+'?&format=hcalendar';
+	ajaxEngine(url);
+	return false;
 }
 
 function monthNav(){
