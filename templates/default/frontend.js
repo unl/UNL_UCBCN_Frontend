@@ -339,8 +339,8 @@ if(document.getElementById('day_nav')){
 	  window.clearTimeout(timerID);
 	} 
 	
-	evt = event || window.event;
-	el = evt.srcElement || evt.target;
+	var evt = event || window.event;
+	var el = evt.srcElement || evt.target;
 	if (el.name)
 	return true;
 		
