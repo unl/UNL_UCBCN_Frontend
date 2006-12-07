@@ -20,11 +20,11 @@ var glob_handler = {
   else{
  	 if(getElementsByClassName(document, "div", "year_cal").length == 0){
  	 	ajaxsearch();
-  	 	todayHilite();
-  		dropdown();
+ 		dropdown();
   	 }	
   }
   
+  todayHilite();	
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
   	searchinfo(); 
@@ -141,7 +141,7 @@ return false;
  * Call from: closeULbox(), showMoreEvents(), todayHilite()
  * Call to: none
  */
-function getCalendarDate()
+function getCalendarDate(t)
 {
    var months = new Array(13);
    months[0]  = "January";
@@ -156,35 +156,17 @@ function getCalendarDate()
    months[9]  = "October";
    months[10] = "November";
    months[11] = "December";
-   var now         = new Date();
-   var monthnumber = now.getMonth();
-   var monthname   = months[monthnumber];
-   var dateString = monthname;
-   return dateString;
-}
-
-/*
- * Return full month strings based on input value
- * Call from: showMoreEvents()
- * Call to: none
- */
-function getCalendarName(t)
-{
-   var months = new Array(13);
-   months[0]  = "January";
-   months[1]  = "February";
-   months[2]  = "March";
-   months[3]  = "April";
-   months[4]  = "May";
-   months[5]  = "June";
-   months[6]  = "July";
-   months[7]  = "August";
-   months[8]  = "September";
-   months[9]  = "October";
-   months[10] = "November";
-   months[11] = "December";
-   var monthname   = months[t];
-   return monthname;
+   if(t){
+   	  var monthname   = months[t];
+   	  return monthname;
+   }
+   else{
+	   var now         = new Date();
+	   var monthnumber = now.getMonth();
+	   var monthname   = months[monthnumber];
+	   var dateString = monthname;
+	   return dateString;
+   }
 }
 
 function eventLink(){
@@ -211,7 +193,7 @@ function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
 	//baseURL.childNodes[0].getAttribute("href", 2)
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;
@@ -257,12 +239,10 @@ function todayHilite(){
 	var spanID = document.getElementById(getCalendarDate());
 		var td1 = td0[0].getElementsByTagName('td');
 		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
-		createButton('Return to today', document.getElementById('monthwidget'), returnToday, 'returnToday');
-		//month widget caption navigation
-			
 		//if in day view (only), execute....
 		var idSelector = document.getElementById('frontend_view_selector');
 		if (idSelector.className == 'day' || idSelector.className == 'event'){
+			createButton('Return to today', document.getElementById('monthwidget'), returnToday, 'returnToday');
 			if(idSelector.className == 'day'){
 				monthNav(); 
 			}
@@ -272,12 +252,13 @@ function todayHilite(){
 				monthWidget(td1[i]);
 			}
 		}
-		
+
 		//indicate today
 		for(i=0;i<td1.length;i++){
 			//insert icon to indicate today	
 			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
 				//if (document.getElementById('onselect') == null){
+				
 					try{
 						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
 							td1[i].className = 'today'
@@ -697,7 +678,7 @@ function showMoreEvents(){
 	var yearL = getElementsByClassName(document, "span", "yearvalue");
 	var now         = new Date();
  	var monthnumber = now.getMonth();
-	var monthval = getCalendarName(tdcell.childNodes[1].childNodes[0].nodeValue-1);
+	var monthval = getCalendarDate(tdcell.childNodes[1].childNodes[0].nodeValue-1);
 
 	if (tdcell.className == 'prev'){
 	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
