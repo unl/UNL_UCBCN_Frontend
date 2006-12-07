@@ -196,7 +196,7 @@ function eventLink(){
 				 if (isInternalLink(eventLink[a])) {
 					eventLink[a].onclick = function(){
 										   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
-										   new ajaxEngine(linkURL);
+										   new ajaxEngine(linkURL, 'eventlisting');
 										   return false;
 										   }
 				 }
@@ -211,7 +211,7 @@ function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
 	//baseURL.childNodes[0].getAttribute("href", 2)
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;
@@ -238,7 +238,8 @@ function returnToday(){
 		//alert(today.length);
 		today[0].id = 'onselect';		
 	}, false, null);
-	ajaxEngine('?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar');
+	var backtoDay = '?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar';
+	ajaxEngine(backtoDay, 'eventlisting');
 	return false;
 }
 
@@ -313,14 +314,14 @@ function widgetAttachEvent(e){
 						td1[i-1].id = 'onselect';
 						if(document.getElementById('onselect').className.indexOf('prev') > 0){
 							var val_month = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-							new ajaxMonthEngine(val_month);
+							new ajaxEngine(val_month, 'monthwidget');
 						}
 					}
 					else{
 						td1[i+1].id = 'onselect';
 						if(document.getElementById('onselect').className.indexOf('next') > 0){
 							var val_month = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-							new ajaxMonthEngine(val_month);
+							new ajaxEngine(val_month, 'monthwidget');
 						}
 					}				
 					break;
@@ -365,10 +366,11 @@ if(document.getElementById('day_nav')){
 //key nav function call.
 function _ajaxKeyNav(){
 	var url = document.getElementById('onselect').childNodes[0].getAttribute("href", 2)+'?&format=hcalendar';
-	ajaxEngine(url);
+	ajaxEngine(url, 'eventlisting');
 	return false;
 }
 
+/* top right arrows navigator*/
 function monthNav(){
 	var nav_prev1 = document.getElementById('day_nav');
 	var linkprev = nav_prev1.getElementsByTagName('a')[0].getAttribute("href", 2)+'?&format=hcalendar';
@@ -376,17 +378,18 @@ function monthNav(){
 		
 	nav_prev1.getElementsByTagName('a')[0].onclick=function(){
 		widgetAttachEvent('prev');
-		new ajaxEngine(linkprev);	
+		new ajaxEngine(linkprev, 'eventlisting');	
 		return false;
 	};
 	
 	nav_prev1.getElementsByTagName('a')[1].onclick=function(){
 		widgetAttachEvent('next');	
-		new ajaxEngine(linknext);	
+		new ajaxEngine(linknext, 'eventlisting');	
 		return false;
 	};
 }
 
+/*month widget day TD navigator */
 function monthWidget(tD){
 	if (tD.className.indexOf('selected') >= 0){
 			tD.style.cursor = 'pointer';
@@ -395,77 +398,62 @@ function monthWidget(tD){
 					if(document.getElementById('onselect')){
 							document.getElementById('onselect').id = 'none';						
 					}
-					this.id = 'onselect';
-					
+					this.id = 'onselect';					
 					if(this.className.indexOf('next') > 0){
 						var nextmonth = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(nextmonth);
+						new ajaxEngine(nextmonth, 'monthwidget');
 					}
 					else if(this.className.indexOf('prev') > 0){
 						var prevmonth = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-						new ajaxMonthEngine(prevmonth);
-					}
-					
+						new ajaxEngine(prevmonth, 'monthwidget');
+					}					
 					var link = daylink.getAttribute("href", 2)+'?&format=hcalendar';
-					new ajaxEngine(link);				  				
+					new ajaxEngine(link, 'eventlisting');				  				
 					return false;
 				}
 	}
 }
+
+/*month widget caption month navigator*/
 function monthCaptionSwitch(eT){
 	var spanarrow = eT.getElementsByTagName('span');
 	var spanlinkprev = spanarrow[0].childNodes[0].getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
 	var spanlinknext = spanarrow[3].childNodes[0].getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
-	spanarrow[3].childNodes[0].onclick=function(){new ajaxMonthCaptionEngine(spanlinknext);return false;};
- 	spanarrow[0].childNodes[0].onclick=function(){new ajaxMonthCaptionEngine(spanlinkprev);return false;};
+	spanarrow[3].childNodes[0].onclick=function(){new ajaxEngine(spanlinknext, 'monthwidget');return false;};
+ 	spanarrow[0].childNodes[0].onclick=function(){new ajaxEngine(spanlinkprev, 'monthwidget');return false;};
 }
 
-function ajaxMonthCaptionEngine(urlPath){
+/*this is the main ajax calling engine. make library calls to XHR lib (ajaxcaller.js)*/
+function ajaxEngine(urlPath, section, vars){
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-	ajaxCaller.get(urlPath, null, onMonthCaptionResponse, false, null);	
+	switch (section){
+		case "monthwidget":
+			ajaxCaller.get(urlPath, null, onMonthResponse, false, null);
+			break;
+		case "search":
+			ajaxCaller.get(urlPath, vars, onSumResponse, false, null);
+			break;
+		case "eventlisting":
+			ajaxCaller.get(urlPath, null, onSumResponse, false, null);
+			todayFlag++;
+		break;
+		default : alert("Error: please specify ajaxEngine calling section");
+	}	
 }
 
-function onMonthCaptionResponse(text, headers, callingContext) {
-  document.getElementById('load').innerHTML=""
-  document.getElementById("monthwidget").innerHTML = text;
-  todayHilite();
-}
-function ajaxMonthEngine(urlPath){
-	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-	ajaxCaller.get(urlPath, null, onMonthResponse, false, null);	
-}
-
+/* parse ajax response for month widget */
 function onMonthResponse(text, headers, callingContext) {
   if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
    var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
   } 
-  document.getElementById('load').innerHTML=""
+  document.getElementById('load').innerHTML="";
   document.getElementById("monthwidget").innerHTML = text;
-  fun(tdlink);
+  carryOver(tdlink);
   todayHilite();
 }
 
-//this function carries over onselect value from prior month widget
-function fun(ss){
-var td0 = getElementsByClassName(document, "table", "wp-calendar");
-var td1 = td0[0].getElementsByTagName('a');
-var td2 = td0[0].getElementsByTagName('td');
-//alert(ss);
-for(l=0;l<td1.length;l++){
-		if(td1[l].getAttribute("href", 2).indexOf(ss) >= 0){			
-			//alert(td1[l].getAttribute("href", 2));
-			td1[l].parentNode.id = 'onselect';
-			break;
-		}		
-	}
-}
- 
-function ajaxEngine(urlPath){
-	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
-	ajaxCaller.get(urlPath, null, onSumResponse, false, null);
-	todayFlag++;
-}
-var save;
+/* parse ajax response for event listing and event instance */
+var save;//global variable to store previous content;
 function onSumResponse(text, headers, callingContext) {
   save = document.getElementById('updatecontent').innerHTML;
   document.getElementById('load').innerHTML=""
@@ -482,6 +470,21 @@ function onSumResponse(text, headers, callingContext) {
   	 	save = '';
   	 }
   }
+}
+
+//this function carries over onselect value from prior month widget
+function carryOver(ss){
+var td0 = getElementsByClassName(document, "table", "wp-calendar");
+var td1 = td0[0].getElementsByTagName('a');
+var td2 = td0[0].getElementsByTagName('td');
+//alert(ss);
+for(l=0;l<td1.length;l++){
+		if(td1[l].getAttribute("href", 2).indexOf(ss) >= 0){			
+			//alert(td1[l].getAttribute("href", 2));
+			td1[l].parentNode.id = 'onselect';
+			break;
+		}		
+	}
 }
 
 function returnPrevScreen(prev_content){
@@ -509,6 +512,7 @@ function CBInsertBefore(linktext, actionFunc, classN){
 	var c = document.getElementById('updatecontent');
 	c.insertBefore(morelink, getElementsByClassName(document, "div", "event_cal")[0]);
 }
+
 /*
  * Ajax search
  * Call from: addevent
@@ -525,16 +529,12 @@ function ajaxsearch(){
 		searchVars['format'] = 'hcalendar';
 		searchVars['search'] = 'search';		
 		document.getElementById('load').innerHTML = '<img src="/ucomm/templatedependents/templatecss/images/loading.gif" />';
-		ajaxCaller.get('', searchVars, onSearchResponse, false, null);
+		ajaxEngine('', 'search', searchVars)
 		return false;
 	}
 }
 
-function onSearchResponse(text, headers, callingContext){
-	document.getElementById('load').innerHTML = '';
-	document.getElementById('updatecontent').innerHTML = text;
-	eventLink();
-}
+
 
 /*
  * Search box tips
@@ -565,11 +565,6 @@ function searchinfo(){
 									return false;
 									};
 									
-}
-
-/*auto fade out */
-function finishSearch(){
-	Spry.Effect.AppearFade("search_term", {duration: 1000, from: 100, to: 0, toggle: true});	
 }
 
 /*
