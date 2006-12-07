@@ -211,7 +211,7 @@ function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
 	//baseURL.childNodes[0].getAttribute("href", 2)
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;
@@ -486,8 +486,10 @@ function onSumResponse(text, headers, callingContext) {
 
 function returnPrevScreen(prev_content){
  document.getElementById("updatecontent").innerHTML = prev_content;
- new eventLink(); 
- new monthNav();
+ new eventLink();
+ if(getElementsByClassName(document, "h1", "search").length < 0){
+ 	new monthNav();
+ }
  save = '';
 }
 
