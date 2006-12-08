@@ -1,8 +1,9 @@
+//attaching JS events
 var glob_handler = {
 
   init: function() {
 		
-  //attach monthdisplay() if it's a month view and not safari (safari support will be added soon)
+  //if it is a month view
   if (document.getElementById('month_viewcal')){
   	if(readCookie('monthview') ==null){
   		monthdisplay(); 
@@ -16,7 +17,8 @@ var glob_handler = {
   				LImonth[m].className = 'unhide';
   			}
   	}
-  }  
+  }
+  //if it is event day and instance view
   else{
  	 if(getElementsByClassName(document, "div", "year_cal").length == 0){
  	 	ajaxsearch();
@@ -25,6 +27,7 @@ var glob_handler = {
   }
   
   todayHilite();	
+  
   //attach search tips if cookie does not exist
   if(readCookie('searchtips') ==null){
   	searchinfo(); 
@@ -193,7 +196,7 @@ function isInternalLink(link)
 {
 	var baseURL = document.getElementById('todayview');
 	//baseURL.childNodes[0].getAttribute("href", 2)
-	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('events.unl.edu') < 0 ) {
+	if (link.getAttribute('href').indexOf('http') == 0 && link.getAttribute('href').indexOf('yansmac.unl.edu') < 0 ) {
 		return false;
 	} else {
 		return true;
@@ -329,7 +332,9 @@ if(document.getElementById('day_nav')){
 		if (evt.keyCode == 39) {
 			arrowNav.getElementsByTagName('a')[1].id = 'ac';			
 			widgetAttachEvent('next');
-			timerID = window.setTimeout(_ajaxKeyNav, 500);
+			if(document.getElementById('onselect').childNodes[0].nodeType == 1){
+				timerID = window.setTimeout(_ajaxKeyNav, 500);
+			}
 			return false;
 		}
 		
@@ -337,7 +342,9 @@ if(document.getElementById('day_nav')){
 		else if (evt.keyCode == 37) {		 
 			arrowNav.getElementsByTagName('a')[0].id = 'dc';
 			widgetAttachEvent('prev');			
-			timerID = window.setTimeout(_ajaxKeyNav, 500);
+			if(document.getElementById('onselect').childNodes[0].nodeType == 1){
+				timerID = window.setTimeout(_ajaxKeyNav, 500);
+			}
 			return false;
 		}
 	return true;	
