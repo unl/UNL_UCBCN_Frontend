@@ -58,7 +58,6 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 				<!-- InstanceBeginEditable name="titlegraphic" -->
 				<h1><?php echo $this->calendar->name; ?> Events</h1>
 				<h2>What we do is your business</h2>
-				      } ?>
 				<!-- InstanceEndEditable --></div>
 			<!-- maintitle -->
 		</div>
