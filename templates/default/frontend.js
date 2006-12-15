@@ -478,7 +478,7 @@ for(l=0;l<td1.length;l++){
 function returnPrevScreen(prev_content){
  document.getElementById("updatecontent").innerHTML = prev_content;
  new eventLink();
- if(getElementsByClassName(document, "h1", "search").length < 0){
+ if(document.getElementById('day_nav') != null){
  	new monthNav();
  }
  save = '';
