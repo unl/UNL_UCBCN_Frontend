@@ -3,14 +3,17 @@
  * icalendar output for a single vent instance.
  */
 
+$startu = strtotime($this->eventdatetime->starttime);
+$endu = strtotime($this->eventdatetime->endtime);
+
 $out = array();
 $out[] = 'BEGIN:VEVENT';
 //$out[] = 'SEQUENCE:5';
 if (isset($this->eventdatetime->starttime)) {
 	if (strpos($this->eventdatetime->starttime,'00:00:00')) {
-		$out[] = 'DTSTART;TZID=US/Central:'.date('Ymd',strtotime($this->eventdatetime->starttime));
+		$out[] = 'DTSTART;TZID=US/Central:'.date('Ymd', $startu);
 	} else {
-       	$out[] = 'DTSTART;TZID=US/Central:'.date('Ymd\THis',strtotime($this->eventdatetime->starttime));
+       	$out[] = 'DTSTART;TZID=US/Central:'.date('Ymd\THis', $startu);
 	}
    }
    $out[] = 'UID:'.$this->eventdatetime->id;
@@ -29,9 +32,9 @@ $out[] = 'URL:'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics'
 //$out[] = 'UID:EC9439B1-FF65-11D6-9973-003065F99D04';
 if (isset($this->eventdatetime->endtime)) {
 	if (strpos($this->eventdatetime->endtime,'00:00:00')) {
-		$out[] = 'DTEND;TZID=US/Central:'.date('Ymd',strtotime($this->eventdatetime->endtime));
+		$out[] = 'DTEND;TZID=US/Central:'.date('Ymd', $endu);
 	} else {
-   		$out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis',strtotime($this->eventdatetime->endtime));
+   		$out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $endu);
 	}
    }
 $out[] = 'END:VEVENT';
