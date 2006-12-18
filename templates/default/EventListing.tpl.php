@@ -12,6 +12,10 @@
 <?php
 $oddrow = false;
 foreach ($this->events as $e) {
+    
+    $startu = strtotime($e->eventdatetime->starttime);
+    $endu = strtotime($e->eventdatetime->endtime);
+    
 	$row = '<tr class="vevent';
 	if ($oddrow) {
 		$row .= ' alt';
@@ -20,20 +24,20 @@ foreach ($this->events as $e) {
 	$oddrow = !$oddrow;
 	$row .=	'<td class="date">';
 	if ($this->type == 'ongoing') {
-	    $row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('M jS',strtotime($e->eventdatetime->starttime)).'</abbr>';
-	    $row .= '-<abbr class="dtend" title="'.date('c',strtotime($e->eventdatetime->endtime)).'">'.date('M jS',strtotime($e->eventdatetime->endtime)).'</abbr>';
+	    $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('M jS', $startu).'</abbr>';
+	    $row .= '-<abbr class="dtend" title="'.date('c', $endu).'">'.date('M jS', $endu).'</abbr>';
 	} elseif ($this->type == 'upcoming' || $this->type == 'search') {
 		if (strpos($e->eventdatetime->starttime,'00:00:00')) {
-			$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('M jS',strtotime($e->eventdatetime->starttime)).'</abbr>';
+			$row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('M jS', $startu).'</abbr>';
 		} else {
-        	$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('g:i a M jS',strtotime($e->eventdatetime->starttime)).'</abbr>';
+        	$row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('g:i a M jS', $startu).'</abbr>';
 		}
 	} else {
 		if (isset($e->eventdatetime->starttime)) {
 			if (strpos($e->eventdatetime->starttime,'00:00:00')) {
-				$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">All day</abbr>';
+				$row .= '<abbr class="dtstart" title="'.date('c', $startu).'">All day</abbr>';
 			} else {
-	        	$row .= '<abbr class="dtstart" title="'.date('c',strtotime($e->eventdatetime->starttime)).'">'.date('g:i a',strtotime($e->eventdatetime->starttime)).'</abbr>';
+	        	$row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('g:i a', $startu).'</abbr>';
 			}
 	    } else {
 	        $row .= 'Unknown';
@@ -41,7 +45,16 @@ foreach ($this->events as $e) {
 	    if (isset($e->eventdatetime->endtime) &&
 	    	($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
 	    	($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
-	    	$row .= '-<abbr class="dtend" title="'.date('c',strtotime($e->eventdatetime->endtime)).'">'.date('g:i a',strtotime($e->eventdatetime->endtime)).'</abbr>';
+	    	if (substr($e->eventdatetime->endtime,0,10) != substr($e->eventdatetime->starttime,0,10)) {
+	    	    // Not on the same day
+	    	    if (strpos($e->eventdatetime->endtime,'00:00:00')) {
+	    	        $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS', $endu).'</abbr>';
+	    	    } else {
+	    	        $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS g:i a', $endu).'</abbr>';
+	    	    }
+	    	} else {
+	    	    $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
+	    	}
 	    }
 	}
 	$row .= '</td>' .

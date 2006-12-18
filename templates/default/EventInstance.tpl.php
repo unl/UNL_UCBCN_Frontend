@@ -1,32 +1,37 @@
+<?php
+
+$startu = strtotime($this->eventdatetime->starttime);
+$endu = strtotime($this->eventdatetime->endtime);
+
+?>
 <div class="event_cal">
 <div class='vcalendar'>
 	<div class='vevent'>
 		<h1 class='summary'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->title); ?> <a class="permalink" href="<?php echo $this->url; ?>">(link)</a></h1>
 		<?php if (isset($this->event->subtitle)) echo '<h2>'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'</h2>'; ?>
-<div id="tabsG">
-  <ul>
-    <li><a href="#" id="event_selected" title="Event Detail"><span>Event Detail</span></a></li>
-
-  </ul>
-</div>
-			<table>
-				<thead>
-				<tr>
-<th scope="col" class="date">Event Detail</th>
-
-</tr>
-				</thead>
+		<div id="tabsG">
+		  <ul>
+		    <li><a href="#" id="event_selected" title="Event Detail"><span>Event Detail</span></a></li>
+		
+		  </ul>
+		</div>
+		<table>
+		<thead>
+			<tr>
+				<th scope="col" class="date">Event Detail</th>
+			</tr>
+		</thead>
 		<tbody>
 			<tr><td class="date">Date:</td>
-				<td><?php echo date('l, F jS',strtotime($this->eventdatetime->starttime)); ?></td></tr>
+				<td><?php echo date('l, F jS',$startu); ?></td></tr>
 				
 				<tr class="alt"><td class="date">Time:</td>	
 					<td><?php
 					if (isset($this->eventdatetime->starttime)) {
 						if (strpos($this->eventdatetime->starttime,'00:00:00')) {
-							echo '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($this->eventdatetime->starttime)).'">All day</abbr>';
+							echo '<abbr class="dtstart" title="'.date(DATE_ISO8601, $startu).'">All day</abbr>';
 						} else {
-				        	echo '<abbr class="dtstart" title="'.date(DATE_ISO8601,strtotime($this->eventdatetime->starttime)).'">'.date('g:i a',strtotime($this->eventdatetime->starttime)).'</abbr>';
+				        	echo '<abbr class="dtstart" title="'.date(DATE_ISO8601, $startu).'">'.date('g:i a', $startu).'</abbr>';
 						}
 				    } else {
 				        echo 'Unknown';
@@ -34,11 +39,21 @@
 				    if (isset($this->eventdatetime->endtime) &&
 				    	($this->eventdatetime->endtime != $this->eventdatetime->starttime) &&
 				    	($this->eventdatetime->endtime > $this->eventdatetime->starttime)) {
-				    	echo '-<abbr class="dtend" title="'.date(DATE_ISO8601,strtotime($this->eventdatetime->endtime)).'">'.date('g:i a',strtotime($this->eventdatetime->endtime)).'</abbr>';
+				    	if (substr($this->eventdatetime->endtime,0,10) != substr($this->eventdatetime->starttime,0,10)) {
+				    	    // Not on the same day
+				    	    if (strpos($this->eventdatetime->endtime,'00:00:00')) {
+				    	        echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('l, F jS', $endu).'</abbr>';
+				    	    } else {
+				    	        echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('l, F jS g:i a', $endu).'</abbr>';
+				    	    }
+				    	} else {
+   				    	    echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
+				    	}
 				    }
-					?></td></tr>
-			
-			<tr><td class="date">Description:</td>	
+					?></td>
+		</tr>
+		<tr>
+			<td class="date">Description:</td>	
 			<td><p class='description'>
 			
 			<?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
@@ -59,31 +74,34 @@
 			<?php if (isset($this->event->imagedata)) { ?>
 				<img class="event_description_img" src="<?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $this->event->id; ?>" alt="image for event <?php echo $this->event->id; ?>" />
 			<?php } ?>	
-			</td></tr>
-		
-		<tr class="alt"><td class="date">Location:</td>
-		<td>
-			<?php
-			$loc = $this->eventdatetime->getLink('location_id');
-			if (!PEAR::isError($loc)) {
-				echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
-				if (isset($this->eventdatetime->room)) {
-				    echo '<br />Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+			</td>
+		</tr>
+		<tr class="alt">
+			<td class="date">Location:</td>
+			<td>
+				<?php
+				$loc = $this->eventdatetime->getLink('location_id');
+				if (!PEAR::isError($loc)) {
+					echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
+					if (isset($this->eventdatetime->room)) {
+					    echo '<br />Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+					}
+					echo '</div>';
 				}
-				echo '</div>';
-			}
-			?></td></tr>
-			<tr><td class="date">Subscription:</td>
-		<td>
+				?></td>
+		</tr>
+		<tr>
+			<td class="date">Subscription:</td>
+			<td>
 			<?php
 			echo '<p id="feeds">
 					<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics')).'">ics format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a>
 					<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'rss')).'">rss format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a>
 					</p>'; ?>
-			</td></tr>
-			</tbody>
-
-</table>
+			</td>
+		</tr>
+		</tbody>
+		</table>
 		</div>
 		
 	</div>

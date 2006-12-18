@@ -59,11 +59,10 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.3.0');
-$pfm->setReleaseVersion('0.3.3');
-$pfm->setNotes('Fix  Bug #37  	 month widget for Dec 2006
-Add feed subscription links to Search results page.
-Implement ajax search results, autohide search term.
-Back to events listing button for event instances.');
+$pfm->setReleaseVersion('0.3.4');
+$pfm->setNotes('Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
+Small speed improvements, strtotime is only called once per event.
+');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 //$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
