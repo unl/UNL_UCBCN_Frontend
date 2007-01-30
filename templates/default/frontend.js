@@ -20,7 +20,7 @@ var glob_handler = {
   }
   //if it is event day and instance view
   else{
- 	 if(getElementsByClassName(document, "div", "year_cal").length == 0){
+ 	 if(getElementsByClassName(document, "div", "year_cal").length == 0 && getElementsByClassName(document, "ul", "search").length == 0){
  	 	ajaxsearch();
  		dropdown();
   	 }	
@@ -540,8 +540,9 @@ function searchinfo(){
 									if(!flagappeared.className){
 										createCookie('searchtips','searchterms',7);
 										Spry.Effect.AppearFade("search_term", {duration: 1000, from: 0, to: 100, toggle: true, finish: window.setTimeout(finishSearch, 8000)});
-										flagappeared.className = 'appeared';										
-									}
+										flagappeared.className = 'appeared';
+																						
+									}							
 								};
 					
 	var top_off = document.forms.event_search.getElementsByTagName('a');
@@ -555,6 +556,10 @@ function searchinfo(){
 									
 }
 
+/*auto fade out */
+function finishSearch(){	
+	Spry.Effect.AppearFade("search_term", {duration: 1000, from: 100, to: 0, toggle: true, finish:function(){var nav_prev1 = document.getElementById('day_nav');nav_prev1.style.display = 'inline';}	});
+}
 /*
  * Clean and simple month display
  * Call from: addLoadEvent
