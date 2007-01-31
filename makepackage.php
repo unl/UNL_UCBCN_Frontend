@@ -62,6 +62,7 @@ $pfm->setAPIVersion('0.3.0');
 $pfm->setReleaseVersion('0.3.4');
 $pfm->setNotes('Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
 Small speed improvements, strtotime is only called once per event.
+Javascript fixes for search form.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
