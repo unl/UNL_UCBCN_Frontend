@@ -468,7 +468,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 */
 	function dbStringToHtml($t)
 	{
-		return str_replace('& ','&amp; ',$t);
+	    $t = str_replace('&amp;','&',$t);
+		return str_replace('&','&amp;',$t);
 	}
 	
 	/**
