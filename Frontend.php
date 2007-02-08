@@ -104,6 +104,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				header('Content-type: text/calendar');
 				header('Content-Disposition: attachment; filename="events.ics"');
 			break;
+			case 'xml':
 			case 'rss':
 			    header('Content-type: text/xml');
 		    break;
@@ -182,7 +183,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		}
 		switch($this->format) {
 			case 'xml':
-				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_XML');
+				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_xml');
 			break;
 			case 'hcalendar':
 				UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend','Frontend_hcalendar');
