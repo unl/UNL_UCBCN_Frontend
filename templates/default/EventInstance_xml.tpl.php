@@ -157,7 +157,7 @@
         $document->event_id = $this->event->id;
         if ($document->find()) : ?>
         <Documents>
-        	<?php while ($document->fetch()) : ??>
+        	<?php while ($document->fetch()) : ?>
             <Document>
                 <Title><?php echo $document->name; ?></Title>
                 <URL><?php echo $document->url; ?></URL>
