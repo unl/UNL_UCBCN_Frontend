@@ -226,9 +226,6 @@
         </EventListingContacts>
         <EventStatus>Happening As Scheduled</EventStatus>
         <Classification>Public</Classification>
-        <FeaturedEventTypes>
-            <FeaturedEventType>Homepage</FeaturedEventType>
-        </FeaturedEventTypes>
         <?php if (!empty($this->event->privatecomment)): ?>
         <PrivateComments>
             <PrivateComment><?php echo $this->event->privatecomment; ?></PrivateComment>
