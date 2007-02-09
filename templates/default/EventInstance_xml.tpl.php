@@ -9,7 +9,9 @@
         <DateTime>
             <StartDate><?php echo date('Y-m-d', $startu); ?></StartDate>
             <StartTime><?php echo date('H:i:s', $startu); ?>Z</StartTime>
-            <?php if (isset($this->eventdatetime->endtime) && !empty($this->eventdatetime->endtime)) : ?>
+            <?php if (isset($this->eventdatetime->endtime)
+                    && !empty($this->eventdatetime->endtime)
+                    && ($endu > $startu)) : ?>
             <EndDate><?php echo date('Y-m-d', $endu); ?></EndDate>
             <EndTime><?php echo date('H:i:s', $endu); ?>Z</EndTime>
             <?php endif; ?>
