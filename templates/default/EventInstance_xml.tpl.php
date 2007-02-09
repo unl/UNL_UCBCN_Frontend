@@ -8,9 +8,11 @@
 		?>
         <DateTime>
             <StartDate><?php echo date('Y-m-d', $startu); ?></StartDate>
-            <StartTime><?php echo date('H:m:s', $startu); ?>Z</StartTime>
+            <StartTime><?php echo date('H:i:s', $startu); ?>Z</StartTime>
+            <?php if (isset($this->eventdatetime->endtime) && !empty($this->eventdatetime->endtime)) : ?>
             <EndDate><?php echo date('Y-m-d', $endu); ?></EndDate>
-            <EndTime><?php echo date('H:m:s', $endu); ?>Z</EndTime>
+            <EndTime><?php echo date('H:i:s', $endu); ?>Z</EndTime>
+            <?php endif; ?>
         </DateTime>
         <Locations>
         	<?php
@@ -28,8 +30,6 @@
                     <CityName><?php echo $loc->city; ?></CityName>
                     <PostalZone><?php echo $loc->zip; ?></PostalZone>
                     <CountrySubentityCode><?php echo $loc->state; ?></CountrySubentityCode>
-
-                    <TimezoneOffset>-6:00</TimezoneOffset>
                     <Country>
                         <IdentificationCode xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-1.0" codeListID="ISO3166-1" codeListAgencyID="6" codeListAgencyName="United Nations Economic Commission for Europe" codeListName="Country" codeListVersionID="0.3" languageID="en" codeListURI="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1-semic.txt" codeListSchemeURI="urn:oasis:names:specification:ubl:schema:xsd:CountryIdentificationCode-1.0">US</IdentificationCode>
                         <Name xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-1.0">United States</Name>
