@@ -81,7 +81,7 @@
         <EventTransparency><?php echo $this->event->transparency; ?></EventTransparency>
 
         <Description><?php echo $this->event->description; ?></Description>
-        <ShortDescription><?php echo $this->event->description; ?></ShortDescription>
+        <ShortDescription><?php echo $this->event->shortdescription; ?></ShortDescription>
         <Refreshments><?php echo $this->event->refreshments; ?></Refreshments>
         <?php if (!empty($this->event->webpageurl)): ?>
         <WebPages>
