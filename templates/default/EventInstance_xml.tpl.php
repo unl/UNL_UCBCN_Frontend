@@ -1,6 +1,6 @@
 	<Event>
         <EventID><?php echo $this->event->id; ?></EventID>
-        <EventTitle><?php echo $this->event->title; ?></EventTitle>
+        <EventTitle><?php echo htmlentities($this->event->title); ?></EventTitle>
         <EventSubtitle><?php echo $this->event->subtitle; ?></EventSubtitle>
         <?php 
         $startu = strtotime($this->eventdatetime->starttime);
@@ -209,7 +209,6 @@
         <EventListingContacts>
 
             <EventListingContact>
-                <EventListingContactID>305</EventListingContactID>
                 <ContactName>
                     <FullName><?php echo $this->event->listingcontactname; ?></FullName>
                 </ContactName>
