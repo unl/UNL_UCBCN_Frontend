@@ -23,15 +23,8 @@
                     <LocationType><?php echo $loc->type; ?></LocationType>
                 </LocationTypes>
                 <Address>
-                    <AddressID><?php echo $loc->id; ?></AddressID>
-                    <Room><?php echo $loc->room; ?></Room>
-
-                    <StreetName>Hearst</StreetName>
-                    <AdditionalStreetName>Another Name</AdditionalStreetName>
-                    <BuildingName>Boalt Hall</BuildingName>
-                    <BuildingNumber>222</BuildingNumber>
-                    <Department>Law School</Department>
-
+                    <Room><?php echo $this->eventdatetime->room; ?></Room>
+                    <BuildingName><?php echo $loc->name; ?></BuildingName>
                     <CityName><?php echo $loc->city; ?></CityName>
                     <PostalZone><?php echo $loc->zip; ?></PostalZone>
                     <CountrySubentityCode><?php echo $loc->state; ?></CountrySubentityCode>
@@ -150,146 +143,30 @@
             <?php endwhile; ?>
         </Documents>
         <?php endif; ?>
-        <EventOwners>
-            <EventOwner>
-                <EventOwnerID>306</EventOwnerID>
-
-                    <Name>
-                        <OrganizationName>Haas School of Business</OrganizationName>
-                    </Name>
-                    <ContactInfo>
-                        <ContactName>
-                            <PersonalNameTitle>Ms.</PersonalNameTitle>
-                            <FullName>Kelly June Carter Cash</FullName>
-                            <FirstName>Kelly</FirstName>
-
-                            <MiddleNames>
-                                <MiddleName>June</MiddleName>
-                            </MiddleNames>
-                            <LastName>Cash</LastName>
-                            <PersonalNameSuffix>III</PersonalNameSuffix>
-                        </ContactName>
-
-                        <ProfessionalAffiliations>
-                            <ProfessionalAffiliation>
-                                <JobTitles>
-                                    <JobTitle>Manager</JobTitle>
-                                    <JobTitle>Owner</JobTitle>
-                                </JobTitles>
-                                <OrganizationName>James Earl Jones, Inc.</OrganizationName>
-
-                                <OrganizationWebPages>
-                                    <WebPage>
-                                        <Title>James Earl Jones</Title>
-                                        <URL>http://www.jamesearl.com</URL>
-                                    </WebPage>
-                                    <WebPage>
-                                        <Title>James Earl Jones</Title>
-
-                                        <URL>http://www.jamesearl.com</URL>
-                                    </WebPage>
-                                </OrganizationWebPages>
-                            </ProfessionalAffiliation>
-                        </ProfessionalAffiliations>
-                        <Phones>
-
-                            <Phone>
-                                <PhoneNumber>510-555-1235</PhoneNumber>
-                                <PhoneNumberExtension>6</PhoneNumberExtension>
-                                <PhoneNumberType>Work</PhoneNumberType>
-                            </Phone>
-                        </Phones>
-                        <EmailAddresses>
-                            <EmailAddress>james@jones.com</EmailAddress>
-                        </EmailAddresses>
-                        <Addresses>
-                            <Address>
-                                <AddressID>32</AddressID>
-                                <Postbox>2195</Postbox>
-                                <Floor>2nd</Floor>
-                                <Room>202</Room>
-
-                                <StreetName>Hearst</StreetName>
-                                <AdditionalStreetName>Another Name</AdditionalStreetName>
-                                <BuildingName>Boalt Hall</BuildingName>
-                                <BuildingNumber>222</BuildingNumber>
-                                <InhouseMail>R2205</InhouseMail>
-                                <Department>Law School</Department>
-
-                                <CityName>Berkeley</CityName>
-                                <PostalZone>94720</PostalZone>
-                                <CountrySubentity>California</CountrySubentity>
-                                <CountrySubentityCode>CA</CountrySubentityCode>
-                                <Region>West Coast</Region>
-                                <District>Probably won't use this</District>
-
-                                <TimezoneOffset>-7:00</TimezoneOffset>
-                                <Country>
-                                    <IdentificationCode xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-1.0" codeListID="ISO3166-1" codeListAgencyID="6" codeListAgencyName="United Nations Economic Commission for Europe" codeListName="Country" codeListVersionID="0.3" languageID="en" codeListURI="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1-semic.txt" codeListSchemeURI="urn:oasis:names:specification:ubl:schema:xsd:CountryIdentificationCode-1.0">US</IdentificationCode>
-                                    <Name xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-1.0">United States</Name>
-                                </Country>
-                            </Address>
-                        </Addresses>
-                        <WebPages>
-                            <WebPage>
-                                <Title>Kelly's personal page</Title>
-                                <URL>http://www.kelly.com</URL>
-                            </WebPage>
-                        </WebPages>
-                        <PreferredContactMethod>Email</PreferredContactMethod>
-                    </ContactInfo>
-
-                    <EventOwnerTypes>
-                        <EventOwnerType>Primary</EventOwnerType>
-                    </EventOwnerTypes>
-                    <Images>
-                        <Image>
-                            <Title>Trees</Title>
-
-                            <Description>Trees at UC Berkeley</Description>
-                            <URL>http://www.berkeley.com/trees.jpg</URL>
-                            <Height>100px</Height>
-                            <Width>500px</Width>
-                            <FileSize>500KB</FileSize>
-                        </Image>
-                    </Images>
-                    <WebPages>
-                        <WebPage>
-                            <Title>Haas School of Business</Title>
-                            <URL>http://www.haas.berkeley.edu</URL>
-
-                        </WebPage>
-                    </WebPages>
-                    <Description>Haas is UC Berkeley's esteemed business school.</Description>
-            </EventOwner>
-        </EventOwners>
+        <?php
+        $contact = UNL_UCBCN::factory('publiccontact');
+        $contact->event_id = $this->event->id;
+        if ($contact->find()) : ?>
         <PublicEventContacts>
+        	<?php while ($contact->fetch()) : ?>
             <PublicEventContact>
-                <PublicEventContactID>502</PublicEventContactID>
+                <PublicEventContactID><?php echo $contact->id; ?></PublicEventContactID>
 
                 <ContactName>
-                    <PersonalNameTitle>Mr.</PersonalNameTitle>
-                    <FullName>Joe Donald Norman Namath</FullName>
-                    <FirstName>Joe</FirstName>
-                    <MiddleNames>
-                        <MiddleName>Donald</MiddleName>
-                    </MiddleNames>
-                    <LastName>Namath</LastName>
-                    <PersonalNameSuffix>Jr.</PersonalNameSuffix>
+                    <FullName><?php echo $contact->name; ?></FullName>
                 </ContactName>
                 <ProfessionalAffiliations>
                     <ProfessionalAffiliation>
 
                         <JobTitles>
-                            <JobTitle>Football Player</JobTitle>
-                            <JobTitle>Television Anchor</JobTitle>
+                            <JobTitle><?php echo $contact->jobtitle; ?></JobTitle>
                         </JobTitles>
-                        <OrganizationName>NBC</OrganizationName>
+                        <OrganizationName><?php echo $contact->organization; ?></OrganizationName>
                         <OrganizationWebPages>
                             <WebPage>
 
-                                <Title>NBS</Title>
-                                <URL>http://www.nbc.cm</URL>
+                                <Title><?php echo $contact->name; ?></Title>
+                                <URL><?php echo $contact->webpageurl; ?></URL>
                             </WebPage>
 
                         </OrganizationWebPages>
@@ -297,37 +174,21 @@
                 </ProfessionalAffiliations>
                 <Phones>
                     <Phone>
-                        <PhoneNumber>510-555-1235</PhoneNumber>
-                        <PhoneNumberType>Home</PhoneNumberType>
-
+                        <PhoneNumber><?php echo $contact->phone; ?>/PhoneNumber>
                     </Phone>
                 </Phones>
 
                 <EmailAddresses>
-                    <EmailAddress>joe@namath.com</EmailAddress>
+                    <EmailAddress><?php echo $contact->emailaddress; ?></EmailAddress>
                 </EmailAddresses>
                 <Addresses>
                     <Address>
-                        <AddressID>32</AddressID>
-
-                        <Postbox>2195</Postbox>
-                        <Floor>2nd</Floor>
-                        <Room>202</Room>
-                        <StreetName>Hearst</StreetName>
-                        <AdditionalStreetName>Another Name</AdditionalStreetName>
-                        <BuildingName>Boalt Hall</BuildingName>
-
-                        <BuildingNumber>222</BuildingNumber>
-                        <InhouseMail>R2205</InhouseMail>
-                        <Department>Law School</Department>
-                        <CityName>Berkeley</CityName>
-                        <PostalZone>94720</PostalZone>
-                        <CountrySubentity>California</CountrySubentity>
-
-                        <CountrySubentityCode>CA</CountrySubentityCode>
-                        <Region>West Coast</Region>
-                        <District>Probably won't use this</District>
-                        <TimezoneOffset>-7:00</TimezoneOffset>
+                        <StreetName><?php echo $contact->addressline1; ?></StreetName>
+                        <AdditionalStreetName><?php echo $contact->addressline2; ?></AdditionalStreetName>
+                        <Room><?php echo $contact->room; ?></Room>
+                        <CityName><?php echo $contact->city; ?></CityName>
+                        <PostalZone><?php echo $contact->zip; ?></PostalZone>
+                        <CountrySubentityCode><?php echo $contact->State; ?></CountrySubentityCode>
                         <Country>
                             <IdentificationCode xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-1.0" codeListID="ISO3166-1" codeListAgencyID="6" codeListAgencyName="United Nations Economic Commission for Europe" codeListName="Country" codeListVersionID="0.3" languageID="en" codeListURI="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1-semic.txt" codeListSchemeURI="urn:oasis:names:specification:ubl:schema:xsd:CountryIdentificationCode-1.0">US</IdentificationCode>
 
@@ -337,92 +198,29 @@
                 </Addresses>
                 <WebPages>
                     <WebPage>
-                        <Title>Joe's page</Title>
-                        <URL>http://www.joe.com</URL>
+                        <Title><?php echo $contact->name; ?></Title>
+                        <URL><?php echo $contact->webpageurl; ?></URL>
                     </WebPage>
                 </WebPages>
-                <PreferredContactMethod>Address</PreferredContactMethod>
-                <PublicEventContactTypes>
-                    <PublicEventContactType>Type 1</PublicEventContactType>
-                </PublicEventContactTypes>
-
-                <PublicEventContactParentID>555</PublicEventContactParentID>
             </PublicEventContact>
+            <?php endwhile; ?>
         </PublicEventContacts>
+        <?php endif; ?>
         <EventListingContacts>
 
             <EventListingContact>
                 <EventListingContactID>305</EventListingContactID>
                 <ContactName>
-                    <PersonalNameTitle>Mr.</PersonalNameTitle>
-                    <FullName>Joe Donald Norman Namath</FullName>
-                    <FirstName>Joe</FirstName>
-                    <MiddleNames>
-                        <MiddleName>Norman</MiddleName>
-                    </MiddleNames>
-                    <LastName>Namath</LastName>
-                    <PersonalNameSuffix>Jr.</PersonalNameSuffix>
+                    <FullName><?php echo $this->event->listingcontactname; ?></FullName>
                 </ContactName>
-                <ProfessionalAffiliations>
-                    <ProfessionalAffiliation>
-                        <JobTitles>
-                            <JobTitle>Football Player</JobTitle>
-                        </JobTitles>
-
-                        <OrganizationName>NBC</OrganizationName>
-                        <OrganizationWebPages>
-                            <WebPage>
-                                <Title>NBS</Title>
-                                <URL>http://www.nbc.cm</URL>
-                            </WebPage>
-                        </OrganizationWebPages>
-                    </ProfessionalAffiliation>
-                </ProfessionalAffiliations>
                 <Phones>
                     <Phone>
-                        <PhoneNumber>510-555-1235</PhoneNumber>
-                        <PhoneNumberType>Home</PhoneNumberType>
+                        <PhoneNumber><?php echo $this->event->listingcontactphone; ?></PhoneNumber>
                     </Phone>
                 </Phones>
                 <EmailAddresses>
-                    <EmailAddress>joe@namath.com</EmailAddress>
+                    <EmailAddress><?php echo $this->event->listingcontactemail; ?></EmailAddress>
                 </EmailAddresses>
-
-                <Addresses>
-                    <Address>
-                        <AddressID>32</AddressID>
-                        <Postbox>2195</Postbox>
-                        <Floor>2nd</Floor>
-                        <Room>202</Room>
-                        <StreetName>Hearst</StreetName>
-
-                        <AdditionalStreetName>Another Name</AdditionalStreetName>
-                        <BuildingName>Boalt Hall</BuildingName>
-                        <BuildingNumber>222</BuildingNumber>
-                        <InhouseMail>R2205</InhouseMail>
-                        <Department>Law School</Department>
-                        <CityName>Berkeley</CityName>
-
-                        <PostalZone>94720</PostalZone>
-                        <CountrySubentity>California</CountrySubentity>
-                        <CountrySubentityCode>CA</CountrySubentityCode>
-                        <Region>West Coast</Region>
-                        <District>Probably won't use this</District>
-                        <TimezoneOffset>-7:00</TimezoneOffset>
-
-                        <Country>
-                            <IdentificationCode xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-1.0" codeListID="ISO3166-1" codeListAgencyID="6" codeListAgencyName="United Nations Economic Commission for Europe" codeListName="Country" codeListVersionID="0.3" languageID="en" codeListURI="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1-semic.txt" codeListSchemeURI="urn:oasis:names:specification:ubl:schema:xsd:CountryIdentificationCode-1.0">US</IdentificationCode>
-                            <Name xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-1.0">United States</Name>
-                        </Country>
-
-                    </Address>
-                </Addresses>
-                <WebPages>
-                    <WebPage>
-                        <Title>Joe's page</Title>
-                        <URL>http://www.joe.com</URL>
-                    </WebPage>
-                </WebPages>
             </EventListingContact>
         </EventListingContacts>
         <EventStatus>Happening As Scheduled</EventStatus>
