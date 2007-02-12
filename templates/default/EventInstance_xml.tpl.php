@@ -1,7 +1,7 @@
 	<Event>
         <EventID><?php echo $this->event->id; ?></EventID>
-        <EventTitle><?php echo htmlentities($this->event->title); ?></EventTitle>
-        <EventSubtitle><?php echo $this->event->subtitle; ?></EventSubtitle>
+        <EventTitle><?php echo htmlspecialchars($this->event->title); ?></EventTitle>
+        <EventSubtitle><?php echo htmlspecialchars($this->event->subtitle); ?></EventSubtitle>
         <?php 
         $startu = strtotime($this->eventdatetime->starttime);
 		$endu = strtotime($this->eventdatetime->endtime);
@@ -22,13 +22,13 @@
 			if (!PEAR::isError($loc)) : ?>
             <Location>
                 <LocationID><?php echo $loc->id; ?></LocationID>
-                <LocationName><?php echo $loc->name; ?></LocationName>
+                <LocationName><?php echo htmlspecialchars($loc->name); ?></LocationName>
                 <LocationTypes>
                     <LocationType><?php echo $loc->type; ?></LocationType>
                 </LocationTypes>
                 <Address>
-                    <Room><?php echo $this->eventdatetime->room; ?></Room>
-                    <BuildingName><?php echo $loc->name; ?></BuildingName>
+                    <Room><?php echo htmlspecialchars($this->eventdatetime->room); ?></Room>
+                    <BuildingName><?php echo htmlspecialchars($loc->name); ?></BuildingName>
                     <CityName><?php echo $loc->city; ?></CityName>
                     <PostalZone><?php echo $loc->zip; ?></PostalZone>
                     <CountrySubentityCode><?php echo $loc->state; ?></CountrySubentityCode>
@@ -82,8 +82,8 @@
         </Languages>
         <EventTransparency><?php echo $this->event->transparency; ?></EventTransparency>
 
-        <Description><?php echo htmlentities($this->event->description); ?></Description>
-        <ShortDescription><?php echo htmlentities($this->event->shortdescription); ?></ShortDescription>
+        <Description><?php echo htmlspecialchars($this->event->description); ?></Description>
+        <ShortDescription><?php echo htmlspecialchars($this->event->shortdescription); ?></ShortDescription>
         <Refreshments><?php echo $this->event->refreshments; ?></Refreshments>
         <?php if (!empty($this->event->webpageurl)): ?>
         <WebPages>
