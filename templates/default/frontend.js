@@ -256,26 +256,54 @@ function todayHilite(){
 			}
 		}
 
-		//indicate today
-		for(i=0;i<td1.length;i++){
-			//insert icon to indicate today	
-			if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
-				//if (document.getElementById('onselect') == null){
-				
-					try{
-						if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
-							td1[i].className = 'today'
-							if (todayFlag == 0){
-							   td1[i].setAttribute("id","onselect");								
+		if(idSelector.className == 'day' || idSelector.className == 'month'){	
+			//indicate today
+			for(i=0;i<td1.length;i++){
+				//insert icon to indicate today	
+				if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
+						try{
+							if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
+								td1[i].className = 'today'
+								if (todayFlag == 0){
+								   td1[i].setAttribute("id","onselect");								
+								}
+								var imageToday = document.createElement("div");
+								imageToday.setAttribute("id","today_image");
+								td1[i].appendChild(imageToday);
+								break;
 							}
-							var imageToday = document.createElement("div");
-							imageToday.setAttribute("id","today_image");
-							td1[i].appendChild(imageToday);
-							break;
 						}
+						catch(e){}	
+				}			
+			}
+		}
+		
+		else if(idSelector.className == 'year'){
+	
+			for(q=0;q<td0.length;q++){
+				var verify1 = getElementsByClassName(td0[q], "span", "monthvalue");
+				var td1 = td0[q].getElementsByTagName('td');
+				//indicate today
+				for(i=0;i<td1.length;i++){
+						//insert icon to indicate today	
+					if(verify1[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
+							try{
+								if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
+									td1[i].className = 'today'
+									if (todayFlag == 0){
+									   td1[i].setAttribute("id","onselect");								
+									}
+									var imageToday = document.createElement("div");
+									imageToday.setAttribute("id","today_image");
+									td1[i].appendChild(imageToday);
+									break;
+								}
+							}
+							catch(e){}	
 					}
-					catch(e){}	
-			}			
+					
+				}
+			}
 		}
 	} catch(e) {}
 	if(!window.XMLHttpRequest){
