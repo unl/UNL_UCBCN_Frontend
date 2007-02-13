@@ -102,10 +102,6 @@ table.wp-calendar td.today {
 	background:#ecf4f8;
 	color:#fff;
 }
-.month_cal table.wp-calendar td#onselect.today span.monthvalue_ID {
-	background:#3e83c9;
-	color:#fff;
-}
 .month_cal table.wp-calendar td#onselect {
 	background:#eee;
 }
