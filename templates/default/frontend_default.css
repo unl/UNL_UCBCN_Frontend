@@ -100,6 +100,8 @@ table.wp-calendar #today_image{
 }
 table.wp-calendar td.today {
 	background:#ecf4f8;
+}
+.day_cal table.wp-calendar td.today {
 	color:#fff;
 }
 .month_cal table.wp-calendar td#onselect {
