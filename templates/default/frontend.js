@@ -233,14 +233,15 @@ function returnToday(){
  * Call from: addLoadEvent
  * Call to: none
  */
-var todayFlag = 0;
+
 function todayHilite(){
 	try {
 	x = new Date ();
 	y = x.getDate ();
 	var td0 = getElementsByClassName(document, "table", "wp-calendar");
 	var spanID = document.getElementById(getCalendarDate());
-		var td1 = td0[0].getElementsByTagName('td');
+	
+	var td1 = td0[0].getElementsByTagName('td');
 		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
 		//if in day view (only), execute....
 		var idSelector = document.getElementById('frontend_view_selector');
@@ -256,30 +257,45 @@ function todayHilite(){
 			}
 		}
 
-		if(idSelector.className == 'day' || idSelector.className == 'month'){	
+		if(idSelector.className != 'year'){	
+			var selectedDay = getElementsByClassName(document.getElementById('maincontent'), "h4", "sec_main");
+			var re = new RegExp(/\d+/);
+			var m = re.exec(selectedDay[0].childNodes[0].nodeValue);
+			var dayT;
 			//indicate today
 			for(i=0;i<td1.length;i++){
-				//insert icon to indicate today	
-				if(verify[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
-						try{
-							if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
-								td1[i].className = 'today'
-								if (todayFlag == 0){
-								   td1[i].setAttribute("id","onselect");								
+				
+				if(td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
+					
+					if(td1[i].firstChild.nodeName == 'A'){
+						dayT = td1[i].firstChild.childNodes[0].nodeValue.indexOf(m[0]);
+					}else{
+						dayT = td1[i].firstChild.nodeValue.indexOf(m[0]);
+					}
+					
+					if(m != null && dayT >= 0 && document.getElementById('onselect') == null){
+						td1[i].id = 'onselect';
+					}
+				
+					//insert icon to indicate today	
+					if(verify[0].id == getCalendarDate()){
+							try{
+								if(td1[i].innerHTML.indexOf([y]) >= 0){
+									td1[i].className += ' today'
+									var imageToday = document.createElement("div");
+									imageToday.setAttribute("id","today_image");
+									td1[i].appendChild(imageToday);
+									break;
 								}
-								var imageToday = document.createElement("div");
-								imageToday.setAttribute("id","today_image");
-								td1[i].appendChild(imageToday);
-								break;
 							}
-						}
-						catch(e){}	
-				}			
+							catch(e){}	
+					}
+				}
 			}
 		}
 		
-		else if(idSelector.className == 'year'){
-	
+		else{
+				
 			for(q=0;q<td0.length;q++){
 				var verify1 = getElementsByClassName(td0[q], "span", "monthvalue");
 				var td1 = td0[q].getElementsByTagName('td');
@@ -288,11 +304,9 @@ function todayHilite(){
 						//insert icon to indicate today	
 					if(verify1[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
 							try{
-								if(td1[i].firstChild.nodeValue==y || td1[i].firstChild.childNodes[0].nodeValue==y){
-									td1[i].className = 'today'
-									if (todayFlag == 0){
-									   td1[i].setAttribute("id","onselect");								
-									}
+								if(td1[i].innerHTML.indexOf([y]) >= 0){
+									
+									td1[i].className += ' today'
 									var imageToday = document.createElement("div");
 									imageToday.setAttribute("id","today_image");
 									td1[i].appendChild(imageToday);
@@ -451,7 +465,6 @@ function ajaxEngine(urlPath, section, vars){
 			break;
 		case "eventlisting":
 			ajaxCaller.get(urlPath, null, onSumResponse, false, null);
-			todayFlag++;
 		break;
 		default : alert("Error: please specify ajaxEngine calling section");
 	}	

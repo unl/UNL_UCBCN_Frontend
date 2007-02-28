@@ -98,9 +98,9 @@ table.wp-calendar #today_image{
 	margin:-32px 0 0 -12px;
 	background:url(images/todayimage.png) no-repeat 0 0;
 }
-table.wp-calendar td.today {
+/*table.wp-calendar td.today {
 	background:#ecf4f8;
-}
+}*/
 .day_cal table.wp-calendar td.today {
 	color:#fff;
 }
