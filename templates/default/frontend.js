@@ -261,7 +261,8 @@ function todayHilite(){
 			var selectedDay = getElementsByClassName(document.getElementById('maincontent'), "h4", "sec_main");
 			var re = new RegExp(/\d+/);
 			var m = re.exec(selectedDay[0].childNodes[0].nodeValue);
-			var dayT;
+			var dayT, todayT;
+			var todayFlag = false;
 			//indicate today
 			for(i=0;i<td1.length;i++){
 				
@@ -269,29 +270,33 @@ function todayHilite(){
 					
 					if(td1[i].firstChild.nodeName == 'A'){
 						dayT = td1[i].firstChild.childNodes[0].nodeValue.indexOf(m[0]);
+						todayT = td1[i].firstChild.childNodes[0].nodeValue.indexOf([y]);
 					}else{
 						dayT = td1[i].firstChild.nodeValue.indexOf(m[0]);
+						todayT = td1[i].firstChild.nodeValue.indexOf([y]);
 					}
-					
+				
 					if(m != null && dayT >= 0 && document.getElementById('onselect') == null){
 						td1[i].id = 'onselect';
 					}
 				
 					//insert icon to indicate today	
-					if(verify[0].id == getCalendarDate()){
+					if(verify[0].id == getCalendarDate() && !todayFlag){
 							try{
-								if(td1[i].innerHTML.indexOf([y]) >= 0){
+								
+								if(todayT >= 0){
 									td1[i].className += ' today'
 									var imageToday = document.createElement("div");
 									imageToday.setAttribute("id","today_image");
 									td1[i].appendChild(imageToday);
-									break;
+									todayFlag = true;
 								}
 							}
 							catch(e){}	
 					}
 				}
 			}
+			todayFlag = false;
 		}
 		
 		else{
