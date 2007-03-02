@@ -399,8 +399,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		if (isset($GLOBALS[$method]['s'])&&!empty($GLOBALS[$method]['s'])) {
 			$view['view'] = 'week';
 			$view['startDay'] = (int)$GLOBALS[$method]['s'];
-		} else {
-			$view['startDay'] = 0;
 		}
 		if (isset($GLOBALS[$method]['eventdatetime_id'])&&!empty($GLOBALS[$method]['eventdatetime_id'])) {
 			$view['view'] = 'event';
