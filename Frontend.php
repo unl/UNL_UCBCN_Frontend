@@ -155,6 +155,15 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 											'calendar'	=> $this->calendar));
 				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
 			break;
+			case 'week':
+				require_once 'UNL/UCBCN/Frontend/Week.php';
+				$this->output[] = new UNL_UCBCN_Frontend_Week(array(
+											'dsn'		=> $this->dsn,
+											'year'		=> $this->year,
+											'month'		=> $this->month,
+											'day'		=> $this->day,
+											'calendar'	=> $this->calendar));
+			break;
 			case 'month':
 			    require_once 'UNL/UCBCN/Frontend/Month.php';
 				$this->output[] = new UNL_UCBCN_Frontend_Month($this->year,$this->month,$this->calendar,$this->dsn);
@@ -386,6 +395,12 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			$view['day'] = (int)$GLOBALS[$method]['d'];
 		} else {
 			$view['day'] = date('j');
+		}
+		if (isset($GLOBALS[$method]['s'])&&!empty($GLOBALS[$method]['s'])) {
+			$view['view'] = 'week';
+			$view['startDay'] = (int)$GLOBALS[$method]['s'];
+		} else {
+			$view['startDay'] = 0;
 		}
 		if (isset($GLOBALS[$method]['eventdatetime_id'])&&!empty($GLOBALS[$method]['eventdatetime_id'])) {
 			$view['view'] = 'event';
