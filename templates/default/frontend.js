@@ -210,6 +210,7 @@ function isInternalLink(link)
  */
 function returnToday(){
 	x = new Date ();
+	
 	//var widgetDiv = document.getElementById('monthwidget');
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
 	ajaxCaller.get('?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;?&monthwidget&format=hcalendar', null, function(text, headers, callingContext){
@@ -221,6 +222,7 @@ function returnToday(){
 		todayHilite();
 		var today = getElementsByClassName(document, "td", "today");
 		//alert(today.length);
+		document.getElementById('onselect').id = '';
 		today[0].id = 'onselect';		
 	}, false, null);
 	var backtoDay = '?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar';
