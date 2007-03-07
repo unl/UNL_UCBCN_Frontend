@@ -47,7 +47,8 @@ $pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
 						'Frontend/MonthWidget.php'=>'php',
 						'Frontend/Year.php'=>'php',
                         'Frontend/Search.php'=>'php',
-                        'Frontend/Upcoming.php'=>'php')
+                        'Frontend/Upcoming.php'=>'php',
+                        'Frontend/Week.php'=>'php')
 ));
 $pfm->setPackage('UNL_UCBCN_Frontend');
 $pfm->setPackageType('php'); // this is a PEAR-style php script package

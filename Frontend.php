@@ -396,19 +396,18 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 		} else {
 			$view['day'] = date('j');
 		}
-		if (isset($GLOBALS[$method]['s'])&&!empty($GLOBALS[$method]['s'])) {
+		if (isset($GLOBALS[$method]['s'])) {
 			$view['view'] = 'week';
-			$view['startDay'] = (int)$GLOBALS[$method]['s'];
 		}
 		if (isset($GLOBALS[$method]['eventdatetime_id'])&&!empty($GLOBALS[$method]['eventdatetime_id'])) {
 			$view['view'] = 'event';
 			$view['eventdatetime_id'] = $GLOBALS[$method]['eventdatetime_id'];
 		}
-		
+
 		if (isset($GLOBALS[$method]['image'])) {
 		    $view['view'] = 'image';
 		}
-		
+
 		if (isset($GLOBALS[$method]['month'])) {
 		    $view['view'] = 'month';
 		}

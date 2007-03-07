@@ -10,7 +10,7 @@
 require_once 'UNL/UCBCN/Frontend.php';
 require_once 'UNL/UCBCN/Frontend/Day.php';
 require_once 'Calendar/Calendar.php';
-require_once 'Calendar/Month/Week.php';
+require_once 'Calendar/Week.php';
 
 class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
 {
@@ -20,8 +20,8 @@ class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
 	var $year;
 	/** Month the user is viewing. */
 	var $month;
-	/** Week the user is viewing. */
-	var $week;
+	/** Day included in the week the user is viewing. */
+	var $day;
 	/** start day of the week */
 	var $firstDay = 0;
 	/** Listing of events on this week. */
@@ -57,10 +57,11 @@ class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
 									$this->firstDay);
 		$week->build();
 		while ($day = $week->fetch()) {
-			$this->output[] = new UNL_UCBCN_Frontend_Day(array(	'y'=>$day->thisYear(),
-							'm'=>$day->thisMonth(),
-							'd'=>$day->thisDay(),
-							'calendar'=>$this->calendar));
+			$this->output[] = new UNL_UCBCN_Frontend_Day(array(	'year'=>$day->thisYear(),
+							'month'=>$day->thisMonth(),
+							'day'=>$day->thisDay(),
+							'calendar'=>$this->calendar,
+							'dsn'=>$this->dsn));
 		}
 	}
 	
