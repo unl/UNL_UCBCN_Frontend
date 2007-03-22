@@ -59,8 +59,8 @@ $pfm->setDescription('This class extends the UNL UCBCN backend system to create
 $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
-$pfm->setAPIVersion('0.3.0');
-$pfm->setReleaseVersion('0.3.4');
+$pfm->setAPIVersion('0.5.0');
+$pfm->setReleaseVersion('0.5.0');
 $pfm->setNotes('Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
 Small speed improvements, strtotime is only called once per event.
 Javascript fixes for search form.
@@ -73,7 +73,7 @@ $pfm->setLicense('BSD License', 'http://www.opensource.org/licenses/bsd-license.
 $pfm->clearDeps();
 $pfm->setPhpDep('5.0.0');
 $pfm->setPearinstallerDep('1.4.3');
-$pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.3.0');
+$pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.5.0');
 $pfm->addPackageDepWithChannel('required', 'Calendar', 'pear.php.net', '0.5.3');
 foreach (array('Frontend.php','UNL_UCBCN_Frontend_setup.php','index.php') as $file) {
 	$pfm->addReplacement($file, 'pear-config', '@PHP_BIN@', 'php_bin');

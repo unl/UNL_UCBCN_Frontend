@@ -18,21 +18,22 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2006-12-14</date>
- <time>16:10:49</time>
+ <date>2007-03-22</date>
+ <time>16:25:09</time>
  <version>
-  <release>0.3.3</release>
-  <api>0.3.0</api>
+  <release>0.5.0</release>
+  <api>0.5.0</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
- <notes>Fix  Bug #37  	 month widget for Dec 2006
-Add feed subscription links to Search results page.
-Implement ajax search results, autohide search term.
-Back to events listing button for event instances.</notes>
+ <notes>Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
+Small speed improvements, strtotime is only called once per event.
+Javascript fixes for search form.
+Fix XML output format.
+ </notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -41,6 +42,7 @@ Back to events listing button for event instances.</notes>
     <file name="MonthWidget.php" role="php" />
     <file name="Search.php" role="php" />
     <file name="Upcoming.php" role="php" />
+    <file name="Week.php" role="php" />
     <file name="Year.php" role="php" />
    </dir> <!-- /Frontend -->
    <dir name="templates">
@@ -87,6 +89,7 @@ Back to events listing button for event instances.</notes>
      <file name="EventInstance.tpl.php" role="data" />
      <file name="EventInstance_icalendar.tpl.php" role="data" />
      <file name="EventInstance_rss.tpl.php" role="data" />
+     <file name="EventInstance_xml.tpl.php" role="data" />
      <file name="EventListing.tpl.php" role="data" />
      <file name="EventListing_icalendar.tpl.php" role="data" />
      <file name="EventListing_month.tpl.php" role="data" />
@@ -97,6 +100,7 @@ Back to events listing button for event instances.</notes>
      <file name="Frontend_Day_icalendar.tpl.php" role="data" />
      <file name="Frontend_Day_monthday.tpl.php" role="data" />
      <file name="Frontend_Day_rss.tpl.php" role="data" />
+     <file name="Frontend_Day_xml.tpl.php" role="data" />
      <file name="frontend_default.css" role="data" />
      <file name="Frontend_hcalendar.tpl.php" role="data" />
      <file name="Frontend_icalendar.tpl.php" role="data" />
@@ -107,6 +111,8 @@ Back to events listing button for event instances.</notes>
      <file name="Frontend_rss.tpl.php" role="data" />
      <file name="Frontend_Search.tpl.php" role="data" />
      <file name="Frontend_Upcoming.tpl.php" role="data" />
+     <file name="Frontend_Week.tpl.php" role="data" />
+     <file name="Frontend_xml.tpl.php" role="data" />
      <file name="Frontend_Year.tpl.php" role="data" />
      <file name="print.css" role="data" />
      <file name="util.js" role="data" />
@@ -175,7 +181,7 @@ Back to events listing button for event instances.</notes>
    <package>
     <name>UNL_UCBCN</name>
     <channel>pear.unl.edu</channel>
-    <min>0.3.0</min>
+    <min>0.5.0</min>
    </package>
    <package>
     <name>Calendar</name>
@@ -301,12 +307,45 @@ Switch to BSD License</notes>
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2006-12-14</date>
+   <date>2006-12-18</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
    <notes>Fix  Bug #37  	 month widget for Dec 2006
 Add feed subscription links to Search results page.
 Implement ajax search results, autohide search term.
 Back to events listing button for event instances.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.3.4</release>
+    <api>0.3.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2007-02-28</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
+   <notes>Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
+Small speed improvements, strtotime is only called once per event.
+Javascript fixes for search form.
+Fix XML output format.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.0</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2007-03-22</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
+   <notes>Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
+Small speed improvements, strtotime is only called once per event.
+Javascript fixes for search form.
+Fix XML output format.
+   </notes>
   </release>
  </changelog>
 </package>
