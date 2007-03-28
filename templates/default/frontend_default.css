@@ -395,6 +395,7 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 #subscribe li a:active {
   background-color: #ddd;
 }
+ abbr.dtstart:after, abbr.dtend:after {content:'' }
 /* IE */
 
 * html .three_col table td{padding:7px!important;}
