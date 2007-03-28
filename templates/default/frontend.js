@@ -22,6 +22,7 @@ var glob_handler = {
   else{
  	 if(getElementsByClassName(document, "div", "year_cal").length == 0 && getElementsByClassName(document, "ul", "search").length == 0){
  	 	ajaxsearch();
+ 	 	shortenText();
  		dropdown();
   	 }	
   }
@@ -633,7 +634,7 @@ function monthdisplay(){
 				for (k=0;k<listevent.length;k++){
 				var listText = listevent[k].getElementsByTagName('a');
 					for(x=0; x<listText.length; x++){
-					  truncate(listText[x]);
+					  truncate(listText[x], '12');
 					}
 				}
 			}
@@ -657,13 +658,21 @@ function createButton(linktext, attachE, actionFunc, classN){
 	attachE.appendChild(morelink);
 }
 
+function shortenText(){
+	var text = getElementsByClassName(document, "blockquote", "description");
+	for(var t = 0; t<text.length; t++){
+		truncate(text[t], 350);
+	}
+}
+
+
 /*
  * Truncate text 
  * Call from: monthdisplay()
  * Call to: Del()
  */
-function truncate(t){
-	var len = 12;
+function truncate(t, num){
+	var len = num;
 	var trunc = t.innerHTML;
 	// rinse text to weed out any html tags
 	trunc = Del(trunc);
@@ -676,7 +685,7 @@ function truncate(t){
 		/* Add an ellipses to the end and make it a link that expands
        	   the paragraph back to its original size */
    try{	 
-   	trunc += '...<span style="display:none">'+t.innerHTML;
+   	trunc += ' ...<span style="display:none">'+t.innerHTML;
 	t.innerHTML = trunc;
 	}catch(e){};
 	}						
