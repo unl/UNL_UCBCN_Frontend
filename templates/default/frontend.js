@@ -496,6 +496,7 @@ function onSumResponse(text, headers, callingContext) {
   document.getElementById('load').innerHTML=""
   document.getElementById("updatecontent").innerHTML = text;
   new eventLink();
+  shortenText();
   if(document.getElementById('day_nav') != null){
  	 new monthNav(); 
   }
