@@ -142,7 +142,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 				built by the University of Nebraska&ndash;Lincoln which implements
 				the UC Berkeley Calendar specifications.
 				<ul>
-					<li><a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Event_Publisher">UNL Event Publisher</a></li>
+					<li><a href="http://www1.unl.edu/wdn/wiki/UNL_Event_Publisher">UNL Event Publisher</a></li>
 					<li><a href ="http://www.berkeley.edu/">UC Berkeley</a></li>
 					<li><a href="http://groups.sims.berkeley.edu/EventCalendar/">UC Berkeley Calendar Network</a></li>
 				</ul>
@@ -151,7 +151,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 			<h3>How Was This Built?</h3>
 				<p>The University Event Publisher was built by the 
 				<a href="http://www.unl.edu/webdevnet/">UNL Web Developer Network</a>.
-				For more information see <a href="http://ucommdev.unl.edu/webdev/wiki/index.php/UNL_Calendar_Project">the project documentation.</a></p>
+				For more information see <a href="http://www1.unl.edu/wdn/wiki/UNL_Event_Publisher">the project documentation.</a></p>
 				<p>The UNL Event publisher is a <br />
 					<a href="http://microformats.org/"><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/microformats.png" alt="microformats community mark" /> Microformats</a> Enabled hCalendar</p>
 		</div>

@@ -140,7 +140,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				if (isset($_GET['eventdatetime_id'])) {
 					$id = $_GET['eventdatetime_id'];
 				}
-				$this->output[] = $this->getEventInstance($id);
+				$this->output[] = $this->getEventInstance($id, $this->calendar);
 				$this->right = new UNL_UCBCN_Frontend_MonthWidget($this->year,$this->month,$this->calendar);
 			break;
 			default:
@@ -218,9 +218,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 	 * @param int id
 	 * @return object UNL_UCBCN_EventInstance on success UNL_UCBCN_Error on error.
 	 */
-	function getEventInstance($id)
+	function getEventInstance($id, $calendar=null)
 	{
-		return new UNL_UCBCN_EventInstance($id);
+		return new UNL_UCBCN_EventInstance($id, $calendar);
 	}
 	
 	/**
