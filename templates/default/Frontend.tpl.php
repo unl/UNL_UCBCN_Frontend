@@ -168,7 +168,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 			<a href="<?php echo $this->manageruri; ?>">log in</a> using your My.UNL (Blackboard) username and password.</div>
 		<!-- InstanceEndEditable -->
 		<div id="copyright"> <!-- InstanceBeginEditable name="footercontent" -->
-			Yeah, it's open source. &copy; 2006 University of Nebraska&ndash;Lincoln
+			Yeah, it's open source. &copy; 2007 University of Nebraska&ndash;Lincoln
 			<a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
 			<!-- InstanceEndEditable --> <span><a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> <a href="http://validator.w3.org/check/referer">W3C</a> <a href="http://www-1.unl.edu/feeds/">RSS</a> </span><a href="http://www.unl.edu/" title="UNL Home"><img src="/ucomm/templatedependents/templatecss/images/wordmark.png" alt="UNL's wordmark" id="wordmark" /></a></div>
 	</div>
