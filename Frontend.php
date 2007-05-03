@@ -108,7 +108,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 			    header('Content-type: text/xml');
 			    break;
 			case 'rss':
-			    header('Content-Type: application/rss+xml');
+			    header('Content-type: application/rss+xml');
 			    break;
 		    break;
 		}
