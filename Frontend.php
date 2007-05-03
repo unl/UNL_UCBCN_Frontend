@@ -103,10 +103,13 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
 				// We'll be outputting a ics file
 				header('Content-type: text/calendar');
 				header('Content-Disposition: attachment; filename="events.ics"');
-			break;
+				break;
 			case 'xml':
-			case 'rss':
 			    header('Content-type: text/xml');
+			    break;
+			case 'rss':
+			    header('Content-Type: application/rss+xml');
+			    break;
 		    break;
 		}
 		/*

@@ -18,10 +18,10 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2007-05-01</date>
- <time>12:34:19</time>
+ <date>2007-05-03</date>
+ <time>16:07:37</time>
  <version>
-  <release>0.5.2</release>
+  <release>0.5.3</release>
   <api>0.5.0</api>
  </version>
  <stability>
@@ -29,7 +29,7 @@
   <api>beta</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
- <notes>Remove h1 tag from xml output of upcoming events.</notes>
+ <notes>Send application/rss+xml for rss feeds.</notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -367,6 +367,19 @@ Fix XML output format.</notes>
    <date>2007-05-01</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
    <notes>Remove h1 tag from xml output of upcoming events.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.3</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2007-05-03</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
+   <notes>Send application/rss+xml for rss feeds.</notes>
   </release>
  </changelog>
 </package>
