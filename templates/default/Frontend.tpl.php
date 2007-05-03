@@ -57,7 +57,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 				<!-- WDN: see glossary item 'title graphics' -->
 				<!-- InstanceBeginEditable name="titlegraphic" -->
 				<h1><?php echo $this->calendar->name; ?> Events</h1>
-				<h2>What We Do Is Your Business</h2>
+				<h2>What's Going On</h2>
 				<!-- InstanceEndEditable --></div>
 			<!-- maintitle -->
 		</div>
