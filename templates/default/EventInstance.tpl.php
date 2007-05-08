@@ -82,7 +82,12 @@ $endu = strtotime($this->eventdatetime->endtime);
 				<?php
 				$loc = $this->eventdatetime->getLink('location_id');
 				if (!PEAR::isError($loc)) {
-					echo '<div class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
+					echo '<div class="location">';
+					if (isset($loc->mapurl)) {
+					    echo '<a class="mapurl" href="'.$loc->mapurl.'">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</a>';
+					} else {
+					    echo UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
+					}
 					if (isset($this->eventdatetime->room)) {
 					    echo '<br />Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
 					}

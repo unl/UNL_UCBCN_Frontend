@@ -60,8 +60,8 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.5.0');
-$pfm->setReleaseVersion('0.5.3');
-$pfm->setNotes('Send application/rss+xml for rss feeds.');
+$pfm->setReleaseVersion('0.5.4');
+$pfm->setNotes('Add links to event locations with map urls.');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 //$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');

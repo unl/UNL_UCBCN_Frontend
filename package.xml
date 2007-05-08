@@ -18,10 +18,10 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2007-05-03</date>
- <time>16:07:37</time>
+ <date>2007-05-08</date>
+ <time>12:41:44</time>
  <version>
-  <release>0.5.3</release>
+  <release>0.5.4</release>
   <api>0.5.0</api>
  </version>
  <stability>
@@ -29,7 +29,7 @@
   <api>beta</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
- <notes>Send application/rss+xml for rss feeds.</notes>
+ <notes>Add links to event locations with map urls.</notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -377,9 +377,22 @@ Fix XML output format.</notes>
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2007-05-03</date>
+   <date>2007-05-08</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
    <notes>Send application/rss+xml for rss feeds.</notes>
+  </release>
+  <release>
+   <version>
+    <release>0.5.4</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2007-05-08</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
+   <notes>Add links to event locations with map urls.</notes>
   </release>
  </changelog>
 </package>

@@ -61,7 +61,13 @@ foreach ($this->events as $e) {
 			'<td><a class="url summary" href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>';
 	if (isset($e->eventdatetime->location_id)) {
 	    $l = $e->eventdatetime->getLink('location_id');
-	    $row .= ' <span class="location">'.UNL_UCBCN_Frontend::dbStringToHtml($l->name).'</span>';
+	    $row .= ' <span class="location">';
+	    if (isset($l->mapurl)) {
+		    $row .= '<a class="mapurl" href="'.$l->mapurl.'">'.UNL_UCBCN_Frontend::dbStringToHtml($l->name).'</a>';
+		} else {
+		    $row .= UNL_UCBCN_Frontend::dbStringToHtml($l->name);
+		}
+	    $row .= '</span>';
 	}
 	if ($this->type != 'ongoing') {
 	    $row .=	'<blockquote class="description">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote>';
