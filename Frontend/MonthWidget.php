@@ -92,9 +92,9 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		';
 
 		//Determine selected days
-        $selected_days = $this->dailyEventCount($Month);
-		$Month->build();
-
+		$selectedDays = array();
+		$Month->build($selectedDays);
+		
 		while ( $Day = $Month->fetch() ) {
 	
 	    	// Build a link string for each day
@@ -113,8 +113,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			// isFirst() to find start of week
 			if ( $Day->isFirst() )
 				$this->tbody .= "<tr>\n";
-				//UNL_UCBCN_Frontend::dayHasEvents($Day->getTimestamp(),$this->calendar)
-			if ( in_array($Day->thisDay(), $selected_days) ) {
+			if ( UNL_UCBCN_Frontend::dayHasEvents($Day->getTimestamp(),$this->calendar) ) {
 				$this->tbody .= "<td class='selected {$class}'><a href='$link'>".$Day->thisDay()."</a></td>\n";
 			} else if ( $Day->isEmpty() ) {
 				$this->tbody .= "<td class='{$class}'>".$Day->thisDay()."</td>\n";
@@ -126,30 +125,6 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 			if ( $Day->isLast() )
 				$this->tbody .= "</tr>\n";
 		}
-	}
-	
-	/**
-	 * Determines the days of this month with events.
-	 * 
-	 * @param Calendar_Month $month
-	 * 
-	 * @return an array with values representing the days with events.
-	 */
-	public function dailyEventCount($month)
-	{
-	    $db          =& $this->calendar->getDatabaseConnection();
-	    $nextmonth   = $month->nextMonth('object');
-	    $end_bound   = date('Y-m', $nextmonth->getTimestamp());
-	    $start_bound = date('Y-m', $month->getTimestamp());
-	    
-	    $sql = "SELECT DAYOFMONTH(eventdatetime.starttime) AS day, count(*) AS events FROM calendar_has_event,eventdatetime 
-				WHERE calendar_has_event.calendar_id={$this->calendar->id}
-				AND (calendar_has_event.status ='posted' OR calendar_has_event.status ='archived')
-				AND calendar_has_event.event_id = eventdatetime.event_id 
-				AND (eventdatetime.starttime LIKE '$start_bound%'  
-				OR (eventdatetime.starttime<'$end_bound' AND eventdatetime.endtime > '$start_bound')) GROUP BY DAYOFMONTH(eventdatetime.starttime);";
-	    $res =& $db->queryCol($sql);
-	    return $res;
 	}
 	
 }
