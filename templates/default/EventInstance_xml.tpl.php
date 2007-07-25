@@ -18,8 +18,9 @@
         </DateTime>
         <Locations>
         	<?php
-        	$loc = $this->eventdatetime->getLink('location_id');
-			if (!PEAR::isError($loc)) : ?>
+			if ($this->eventdatetime->location_id) : 
+			$loc = $this->eventdatetime->getLink('location_id');
+			?>
             <Location>
                 <LocationID><?php echo $loc->id; ?></LocationID>
                 <LocationName><?php echo htmlspecialchars($loc->name); ?></LocationName>

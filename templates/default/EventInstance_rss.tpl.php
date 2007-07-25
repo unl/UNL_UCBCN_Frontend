@@ -25,8 +25,8 @@ $endu = strtotime($this->eventdatetime->endtime);
 	    	($this->eventdatetime->endtime > $this->eventdatetime->starttime)) {
 	    	echo '-&lt;small&gt;&lt;abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'"&gt;'.date('g:i a', $endu).'&lt;/abbr&gt;&lt;/small&gt;';
 	    }
-		$loc = $this->eventdatetime->getLink('location_id');
-		if (!PEAR::isError($loc)) {
+		if ($this->eventdatetime->location_id) {
+		    $loc = $this->eventdatetime->getLink('location_id');
 			echo ' | &lt;small&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
 			if (isset($this->eventdatetime->room)) {
 			    echo ' Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);

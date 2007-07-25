@@ -59,7 +59,7 @@ foreach ($this->events as $e) {
 	}
 	$row .= '</td>' .
 			'<td><a class="url summary" href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>';
-	if (isset($e->eventdatetime->location_id)) {
+	if (isset($e->eventdatetime->location_id) && $e->eventdatetime->location_id) {
 	    $l = $e->eventdatetime->getLink('location_id');
 	    $row .= ' <span class="location">';
 	    if (isset($l->mapurl)) {
