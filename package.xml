@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.3" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_UCBCN_Frontend</name>
  <channel>pear.unl.edu</channel>
  <summary>A public frontend for a University Event Publishing system.</summary>
  <description>This class extends the UNL UCBCN backend system to create
-			a client frontend. It allows users to view the calendar in a list view, thirty
-			day view.</description>
+            a client frontend. It allows users to view the calendar in a list view, thirty
+            day view.</description>
  <lead>
   <name>Brett Bieber</name>
   <user>saltybeagle</user>
@@ -18,8 +18,8 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2007-05-08</date>
- <time>12:41:44</time>
+ <date>2007-07-30</date>
+ <time>15:56:23</time>
  <version>
   <release>0.5.4</release>
   <api>0.5.0</api>
@@ -28,8 +28,13 @@
   <release>beta</release>
   <api>beta</api>
  </stability>
- <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
- <notes>Add links to event locations with map urls.</notes>
+ <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+ <notes>Add links to event locations with map urls.
+Vastly improve the functions for determining if days have events within the
+month widgets. Greatly improves the speed of the year view.
+
+Many coding standards and documentation improvements.
+ </notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
    <dir name="Frontend">
@@ -126,6 +131,7 @@
     <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config" />
     <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config" />
    </file>
+   <file name="LICENSE" role="data" />
    <file name="UNL_UCBCN_Frontend_setup.php" role="php">
     <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config" />
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config" />
@@ -390,9 +396,14 @@ Fix XML output format.</notes>
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2007-05-08</date>
-   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Add links to event locations with map urls.</notes>
+   <date>2007-07-30</date>
+   <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+   <notes>Add links to event locations with map urls.
+Vastly improve the functions for determining if days have events within the
+month widgets. Greatly improves the speed of the year view.
+
+Many coding standards and documentation improvements.
+   </notes>
   </release>
  </changelog>
 </package>
