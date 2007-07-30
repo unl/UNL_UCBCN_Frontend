@@ -33,16 +33,46 @@ require_once 'Calendar/Util/Textual.php';
 class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 {
 
-    /** Calendar UNL_UCBCN_Calendar Object **/
+    /**
+     * Calendar UNL_UCBCN_Calendar Object
+     * 
+     * @var UNL_UCBCN_Calendar
+     */
     public $calendar;
-    /** Year for this month widget */
+    
+    /**
+     * Year for this month widget
+     *
+     * @var int 
+     */
     public $year;
-    /** Month for this month widget. */
+    
+    /**
+     * Month for this month widget.
+     * 
+     * @var int
+     */
     public $month;
-    /** Caption for the month widget. */
+    
+    /**
+     * Caption for the month widget.
+     * 
+     * @var string 
+     */
     public $caption;
     
+    /**
+     * Header for the table
+     * 
+     * @var string
+     */
     public $thead;
+    
+    /**
+     * Body for the table
+     * 
+     * @var string
+     */
     public $tbody;
     
     /**

@@ -37,6 +37,12 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
      * @var object UNL_UCBCN_Calendar
      */
     public $calendar;
+    
+    /**
+     * Listing of matching events or error.
+     * 
+     * @var UNL_UCBCN_EventListing
+     */
     public $output;
     
     /**
@@ -45,7 +51,15 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
      * @var string
      */
     public $query;
+    
+    /**
+     * Start time to search
+     */
     public $starttime;
+    
+    /**
+     * end time to search
+     */
     public $endtime;
     
     /** URL to this search results page. */

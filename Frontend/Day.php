@@ -42,25 +42,74 @@ require_once 'Calendar/Day.php';
  */
 class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
 {
-    /** Calendar UNL_UCBCN_Calendar Object **/
+    /**
+     * Calendar UNL_UCBCN_Calendar Object
+     * 
+     * @var UNL_UCBCN_Calendar
+     */
     public $calendar;
-    /** Year the user is viewing. */
+    
+    /**
+     * Year the user is viewing.
+     * 
+     * @var int
+     */
     public $year;
-    /** Month the user is viewing. */
+    
+    /**
+     * Month the user is viewing.
+     * 
+     * @var int
+     */
     public $month;
-    /** Day to show events for */
+    
+    /**
+     * Day to show events for
+     * 
+     * @var int
+     */
     public $day;
-    /** Listing of events on this day. */
+    
+    /**
+     * Listing of events on this day.
+     * 
+     * @var UNL_UCBCN_EventListing
+     */
     public $output;
-    /** URL of events on this day. */
+    
+    /**
+     * URL of events on this day.
+     * 
+     * @var string
+     */
     public $url;
-    /** URL to the next day */
+    
+    /**
+     * URL to the next day
+     * 
+     * @var string
+     */
     public $next_url;
-    /** URL to the previous day */
+    
+    /**
+     * URL to the previous day
+     * 
+     * @var string 
+     */
     public $prev_url;
-    /** Display ongoing events? */
+    
+    /**
+     * Display ongoing events?
+     * 
+     * @var bool
+     */
     public $ongoing = true;
-    /** no events message */
+    
+    /**
+     * no events message
+     * 
+     * @var string
+     */
     public $noevents = '<p class="noentry">Sorry, no new events were found for today!</p>';
     
     /**

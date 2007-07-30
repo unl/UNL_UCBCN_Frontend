@@ -31,8 +31,25 @@ require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
  */
 class UNL_UCBCN_Frontend_Year extends UNL_UCBCN
 {
+    /**
+     * Year to show events for.
+     *
+     * @var int
+     */
     public $year;
+    
+    /**
+     * Array of month widgets - UNL_UCBCN_Frontend_MonthWidget
+     *
+     * @var array
+     */
     public $monthwidgets = array();
+    
+    /**
+     * Calendar to display year for.
+     *
+     * @var UNL_UCBCN_Calendar
+     */
     public $calendar;
     
     /**

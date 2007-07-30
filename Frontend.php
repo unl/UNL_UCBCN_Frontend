@@ -46,35 +46,109 @@ require_once 'Date.php';
  */
 class UNL_UCBCN_Frontend extends UNL_UCBCN
 {
-    /** Calendar UNL_UCBCN_Calendar Object **/
+    /**
+     * Calendar UNL_UCBCN_Calendar Object
+     * 
+     * @var UNL_UCBCN_Calendar
+     */
     public $calendar;
-    /** Year the user is viewing. */
+    
+    /**
+     * Year the user is viewing.
+     * 
+     * @var int
+     */
     public $year;
-    /** Month the user is viewing. */
+    
+    /**
+     * Month the user is viewing.
+     * 
+     * @var int
+     */
     public $month;
-    /** Day to show events for */
+    
+    /**
+     * Day to show events for
+     * 
+     * @var int
+     */
     public $day;
-    /** Specific eventdatetime_id (if used) */
+    
+    /**
+     * Specific eventdatetime_id (if used)
+     * 
+     * @var int
+     */
     public $eventdatetime_id = null;
-    /** URI to the management frontend */
+    
+    /**
+     * URI to the management frontend
+     * 
+     * @var string
+     */
     public $uri = '';
-    /** Format of URI's  querystring|rest */
+    
+    /**
+     * Format of URI's  querystring|rest
+     * 
+     * @var string
+     */
     public $uriformat = 'querystring';
-    /** URI to the management interface UNL_UCBCN_Manager */
+    
+    /**
+     * URI to the management interface UNL_UCBCN_Manager
+     * 
+     * @var string EG: http://events.unl.edu/manager/
+     */
     public $manageruri = '';
-    /** Navigation */
+    
+    /**
+     * Navigation
+     * 
+     * @var string
+     */
     public $navigation;
-    /** Right column (usually the month widget) */
+    
+    /**
+     * Right column (usually the month widget)
+     * 
+     * @var string
+     */
     public $right;
-    /** Unique body ID */
+    
+    /**
+     * Unique body ID
+     * 
+     * @var string
+     */
     public $uniquebody;
-    /** Main content of the page sent to the client. */
+    
+    /**
+     * Main content of the page sent to the client.
+     * 
+     * @var mixed
+     */
     public $output;
-    /** Section Title */
+    
+    /**
+     * Section Title
+     * 
+     * @var string
+     */
     public $sectitle;
-    /** View to be displayed */
+    
+    /**
+     * View to be displayed
+     * 
+     * @var string
+     */
     public $view = 'day';
-    /** format of view */
+    
+    /**
+     * format of view
+     * 
+     * @var string
+     */
     public $format = 'html';
     
     /**

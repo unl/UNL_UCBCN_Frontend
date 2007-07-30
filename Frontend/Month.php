@@ -33,11 +33,25 @@ require_once 'Calendar/Util/Textual.php';
  */
 class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
 {
-    /** Calendar to show events for UNL_UCBCN_Month object */
+    /**
+     * Calendar to show events for UNL_UCBCN_Month object
+     *
+     * @var UNL_UCBCN_Calendar 
+     */
     public $calendar;
-    /** Year the user is viewing. */
+    
+    /**
+     * Year the user is viewing.
+     * 
+     * @var int
+     */
     public $year;
-    /** Month the user is viewing. */
+    
+    /**
+     * Month the user is viewing.
+     * 
+     * @var int
+     */
     public $month;
     
     /**

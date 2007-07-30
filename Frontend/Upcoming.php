@@ -30,11 +30,25 @@ require_once 'UNL/UCBCN/EventListing.php';
  */
 class UNL_UCBCN_Frontend_Upcoming extends UNL_UCBCN
 {
-    /** Calendar UNL_UCBCN_Calendar Object **/
+    /**
+     * Calendar UNL_UCBCN_Calendar Object
+     * 
+     * @var UNL_UCBCN_Calendar
+     */
     public $calendar;
-    /** Listing of events on this day. */
+    
+    /**
+     * Listing of events on this day.
+     * 
+     * @var UNL_UCBCN_EventListing
+     */
     public $output;
-    /** URL of events on this day. */
+    
+    /**
+     * URL to the listing of upcoming events.
+     * 
+     * @var string
+     */
     public $url;
     
     /**

@@ -30,23 +30,68 @@ require_once 'Calendar/Week.php';
  */
 class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
 {
-    /** Calendar to show events for UNL_UCBCN_Month object */
+    /**
+     * Calendar to show events for UNL_UCBCN_Month object
+     * 
+     * @var UNL_UCBCN_Calendar
+     */
     public $calendar;
-    /** Year the user is viewing. */
+    
+    /**
+     * Year the user is viewing.
+     * 
+     * @var int
+     */
     public $year;
-    /** Month the user is viewing. */
+    
+    /**
+     * Month the user is viewing.
+     * 
+     * @var int
+     */
     public $month;
-    /** Day included in the week the user is viewing. */
+    
+    /**
+     * Day included in the week the user is viewing.
+     * 
+     * @var int
+     */
     public $day;
-    /** start day of the week */
+    
+    /**
+     * start day of the week 0 = Sunday
+     * 
+     * @var int
+     */
     public $firstDay = 0;
-    /** Listing of events on this week. */
+    
+    /**
+     * Listing of events on this week. This will be an array of 7 
+     * UNL_UCBCN_Frontend_Day objects.
+     * 
+     * @var array
+     */
     public $output;
-    /** URL of events on this day. */
+    
+    /**
+     * URL to this view.
+     * 
+     * @var string
+     */
     public $url;
-    /** URL to the next week */
+    
+    /**
+     * URL to the next week
+     * 
+     * @var string
+     */
     public $next_url;
-    /** URL to the previous week */
+    
+    /**
+     * URL to the previous week
+     * 
+     * @var string
+     */
     public $prev_url;
     
     /**
