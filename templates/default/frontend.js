@@ -561,10 +561,7 @@ function ajaxsearch(){
 	var searchSubmit = searchForm.getElementsByTagName('input')[1];
 	
 	document.event_search.onsubmit = function(){
-		var searchVal = document.getElementById('searchinput').value;
-		while (searchVal.indexOf('#')>-1) {
-			searchVal = searchVal.replace(/#+/,'');
-		}
+		var searchVal = document.getElementById('searchinput').value;	
 		var searchVars = new Array();
 		searchVars['q'] = searchVal;
 		searchVars['format'] = 'hcalendar';
