@@ -92,8 +92,8 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 		';
 
 		//Determine selected days
+		$Month->build();
         $selected_days = $this->dailyEventCount($Month);
-        $Month->build();
         $ongoing_events = $this->findOngoingEvents($Month);
 		
 
@@ -141,16 +141,15 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
 	public function dailyEventCount($month)
 	{
 	    $db          =& $this->calendar->getDatabaseConnection();
-	    $nextmonth   = $month->nextMonth('object');
-	    $end_bound   = date('Y-m', $nextmonth->getTimestamp());
-	    $start_bound = date('Y-m', $month->getTimestamp());
-	    
+	    $days = $month->fetchAll();
+	    $start_bound = date('Y-m-d', $days[1]->getTimestamp());
+	    $end_bound = date('Y-m-d', $days[count($days)-1]->getTimestamp());
 	    $sql = "SELECT DATE_FORMAT(eventdatetime.starttime,'%m-%d') AS day, count(*) AS events
 				FROM calendar_has_event,eventdatetime 
 				WHERE calendar_has_event.calendar_id={$this->calendar->id}
 				AND (calendar_has_event.status ='posted' OR calendar_has_event.status ='archived')
 				AND calendar_has_event.event_id = eventdatetime.event_id 
-				AND eventdatetime.starttime LIKE '$start_bound%'
+				AND eventdatetime.starttime >= '$start_bound 00:00:00' AND eventdatetime.starttime <= '$end_bound 00:00:00'
 				GROUP BY day;";
 	    $res =& $db->queryCol($sql);
 	    return $res;
