@@ -558,8 +558,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
      */
     function getCacheKey()
     {
-        if ($this->view == 'search') {
-            // Right now we aren't caching search reseults pages.
+        if ($this->view == 'search' || $this->view == 'upcoming') {
+            // Right now we aren't caching search results or upcoming pages.
             return false;
         } else {
             return md5(serialize(array_merge($this->determineView(), 
