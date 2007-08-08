@@ -235,9 +235,15 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
         case 'upcoming':
             include_once 'UNL/UCBCN/Frontend/Upcoming.php';
             include_once 'UNL/UCBCN/Frontend/MonthWidget.php';
+            if (isset($_GET['limit'])) {
+                $limit = intval($_GET['limit']);
+            } else {
+                $limit = 10;
+            }
             $this->output[] = new UNL_UCBCN_Frontend_Upcoming(array(
                                                 'dsn'=>$this->dsn,
-                                                'calendar'=>$this->calendar));
+                                                'calendar'=>$this->calendar,
+                                                'limit'=>$limit));
             $this->right    = new UNL_UCBCN_Frontend_MonthWidget(date('Y'), date('m'), $this->calendar);
             break;
         case 'event':
