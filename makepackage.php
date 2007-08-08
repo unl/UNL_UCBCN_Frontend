@@ -53,6 +53,7 @@ $pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
                         'Frontend/Month.php'=>'php',
                         'Frontend/Day.php'=>'php',
                         'Frontend/MonthWidget.php'=>'php',
+                        'Frontend/NoEvents.php'=>'php',
                         'Frontend/Year.php'=>'php',
                         'Frontend/Search.php'=>'php',
                         'Frontend/Upcoming.php'=>'php',

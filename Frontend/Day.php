@@ -110,7 +110,7 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
      * 
      * @var string
      */
-    public $noevents = '<p class="noentry">Sorry, no new events were found for today!</p>';
+    public $noevents = 'Sorry, no new events were found for today!';
     
     /**
      * Constructor for an individual day.
@@ -150,7 +150,8 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
         if (count($eventlist->events)) {
             return $eventlist;
         } else {
-            return $this->noevents;
+			include_once 'UNL/UCBCN/Frontend/NoEvents.php';
+            return new UNL_UCBCN_Frontend_NoEvents($this->noevents);
         }
     }
     
