@@ -121,7 +121,7 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
                                             'day'     => $Day->thisDay(),
                                             'calendar'=> $this->calendar,
                                             'ongoing' => false,
-                                            'noevents'=> null));
+                                            'noevents'=> ''));
             if ( $Day->isLast() ) {
                 $week++;
             }
