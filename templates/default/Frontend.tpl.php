@@ -114,8 +114,8 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
       <div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
         <span>Subscribe to this calendar</span> 
         <ul id="droplist">
-          <li id="eventrss"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" title="RSS feed">RSS feed</a></li>
-          <li id="eventical"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'ics')); ?>" title=".ical format">.ical format</a></li>
+          <li id="eventrss"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss','upcoming'=>'upcoming')); ?>" title="RSS feed">RSS feed</a></li>
+          <li id="eventical"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'ics','upcoming'=>'upcoming')); ?>" title=".ical format">.ical format</a></li>
           </ul>
       </div>
 											
