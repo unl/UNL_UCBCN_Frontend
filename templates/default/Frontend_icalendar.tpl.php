@@ -7,6 +7,8 @@ UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Search','Frontend_Day_icalendar');
 UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Upcoming','Frontend_Day_icalendar');
 UNL_UCBCN::outputTemplate('UNL_UCBCN_EventListing','EventListing_icalendar');
 UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_icalendar');
+UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_icalendar');
+UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_NoEvents','Frontend_NoEvents_icalendar');
 ob_start(); ?>
 BEGIN:VCALENDAR
 VERSION:2.0
