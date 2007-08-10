@@ -68,7 +68,7 @@ $endu = strtotime($this->eventdatetime->endtime);
 		
 			<?php } 
 			if (isset($this->event->webpageurl)) {
-			    echo 'Website: <a class="url" href="'.$this->event->webpageurl.'">'.$this->event->webpageurl.'</a>';
+			    echo 'Website: <a class="url" href="'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->webpageurl).'">'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->webpageurl).'</a>';
 			}
 			?>
 			<?php if (isset($this->event->imagedata)) { ?>
@@ -84,7 +84,7 @@ $endu = strtotime($this->eventdatetime->endtime);
 				    $loc = $this->eventdatetime->getLink('location_id');
 					echo '<div class="location">';
 					if (isset($loc->mapurl)) {
-					    echo '<a class="mapurl" href="'.$loc->mapurl.'">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</a>';
+					    echo '<a class="mapurl" href="'.UNL_UCBCN_Frontend::dbStringToHtml($loc->mapurl).'">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</a>';
 					} else {
 					    echo UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
 					}
