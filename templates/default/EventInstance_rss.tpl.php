@@ -7,7 +7,7 @@ $endu = strtotime($this->eventdatetime->endtime);
 	<link><?php echo $this->url; ?></link>
 	<description>
 		<?php
-		echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->description).'&lt;/div&gt;';
+		echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml(strip_tags($this->event->description)).'&lt;/div&gt;';
 		if (isset($this->event->subtitle)) echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'&lt;/div&gt;';
 		echo '&lt;small&gt;'.date('l, F jS', $startu).'&lt;/small&gt;';
 		
