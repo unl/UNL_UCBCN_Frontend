@@ -184,8 +184,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
                                                                     'calendar'=>$this->calendar->id)).'">This Month</a></li>';
         $n[] = '<li id="yearview"><a href="'.self::formatURL(array('y'=>date('Y'),
                                                                    'calendar'=>$this->calendar->id)).'">This Year</a></li>';
+        $n[] = '<li id="upcomingview"><a href="'.self::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming')).'">Upcoming</a></li>';
         $n[] = '</ul>';
-        return implode("\n", $n);
+        return implode("\n", $n);//UNL_UCBCN_Frontend::
     }
     
     /**
