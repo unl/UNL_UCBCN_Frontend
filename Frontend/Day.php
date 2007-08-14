@@ -119,13 +119,20 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
      */
     public function __construct($options)
     {
-        parent::__construct($options);
-        if (!isset($this->calendar)) {
+        if (!isset($options['calendar'])) {
             $this->calendar = UNL_UCBCN::factory('calendar');
             if (!$this->calendar->get(1)) {
                 return new UNL_UCBCN_Error('No calendar specified or could be found.');
             }
+        } else {
+            $this->calendar = $options['calendar'];
         }
+        
+        $upcoming = UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming'));
+        $this->noevents = $this->noevents.' Would you like to see the <a href="'.$upcoming.'">upcoming list of events</a>?';
+        
+        parent::__construct($options);
+        
         $this->output[] = $this->showEventListing();
         if ($this->ongoing===true) {
             $this->output[] = $this->showOngoingEventListing();
