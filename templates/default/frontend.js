@@ -588,7 +588,7 @@ function searchinfo(){
 	var flagappeared = document.getElementById('search_term');
 	
 	search.onclick = function(){							
-								if(nav_prev1.style.display != 'inline'){
+								if(nav_prev1 && nav_prev1.style.display != 'inline'){
 									nav_prev1.style.display = 'none';
 								}
 									if(!flagappeared.className){
