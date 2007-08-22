@@ -570,7 +570,7 @@ function ajaxsearch(){
 		searchVars['format'] = 'hcalendar';
 		searchVars['search'] = 'search';		
 		document.getElementById('load').innerHTML = '<img src="/ucomm/templatedependents/templatecss/images/loading.gif" />';
-		ajaxEngine('', 'search', searchVars)
+		ajaxEngine('http://events.unl.edu', 'search', searchVars)
 		return false;
 	}
 }
