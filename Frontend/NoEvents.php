@@ -32,6 +32,11 @@ class UNL_UCBCN_Frontend_NoEvents
      */
     public $message = 'Sorry, no events were found.';
     
+    /**
+     * Constructs an object when no events are present
+     *
+     * @param string $message Message to display when no events are present.
+     */
     public function __construct($message = null)
     {
 		if (isset($message)) {

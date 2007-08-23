@@ -69,12 +69,17 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.5.0');
-$pfm->setReleaseVersion('0.5.4');
-$pfm->setNotes('Add links to event locations with map urls.
-Vastly improve the functions for determining if days have events within the
-month widgets. Greatly improves the speed of the year view.
-
-Many coding standards and documentation improvements.
+$pfm->setReleaseVersion('0.5.5');
+$pfm->setNotes('
+* Add a link to the upcoming view to the default template.
+* Do not cache the upcoming view, and allow the limit to be adjusted.
+* Fix searching within the upcoming view.
+* CSS fixes for IE6
+* Add no events object to hold a message for errors when no events are present - fixes ics output when no events are present.
+* Add RSS and ICS links to upcoming view.
+* Strip tags from rss feed output... this was breaking the rss feed on some instances
+* Change default calendar subscription to upcoming event list.
+* Fix event location URIs so they validate.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
