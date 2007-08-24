@@ -248,7 +248,7 @@ function todayHilite(){
 		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
 		//if in day view (only), execute....
 		var idSelector = document.getElementById('frontend_view_selector');
-		if (idSelector.className == 'day' || idSelector.className == 'event'){
+		if (idSelector.className == 'day' || idSelector.className == 'event' || idSelector.className == 'upcoming'){
 			createButton('Return to today', document.getElementById('monthwidget'), returnToday, 'returnToday');
 			if(idSelector.className == 'day'){
 				monthNav(); 
@@ -560,7 +560,7 @@ function ajaxsearch(){
 	var searchForm = document.getElementById('event_search');
 	var searchSubmit = searchForm.getElementsByTagName('input')[1];
 	var fp = document.getElementById('event_search');
-	var formAction = fp.action;
+	var formAction = 'http://events.unl.edu/housing/search/';
 	formAction = formAction.substring(0,formAction.indexOf('search'));
 	
 	document.event_search.onsubmit = function(){
