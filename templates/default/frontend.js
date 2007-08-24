@@ -659,12 +659,19 @@ function monthdisplay(){
  * Call to: showMoreEvents()
  */
 function createButton(linktext, attachE, actionFunc, classN){
+	var currentView =  document.getElementById('frontend_view_selector').className;
+	var hreflink;	
 	var morelink = document.createElement("a");
 	morelink.style.display = 'inline';
 	var text = document.createTextNode(linktext);
-	morelink.className=classN;
-	morelink.href = '#';
-	morelink.onclick = actionFunc;
+	morelink.className=classN;	
+	if(currentView == 'upcoming'){
+		hreflink = 	document.getElementById('todayview').childNodes[0].href;
+	} else {
+		hreflink = '#';	
+		morelink.onclick = actionFunc;
+	}	
+	morelink.href = hreflink;
 	morelink.appendChild(text);
 	attachE.appendChild(morelink);
 }
