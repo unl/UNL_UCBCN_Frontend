@@ -560,7 +560,7 @@ function ajaxsearch(){
 	var searchForm = document.getElementById('event_search');
 	var searchSubmit = searchForm.getElementsByTagName('input')[1];
 	var fp = document.getElementById('event_search');
-	var formAction = 'search/';
+	var formAction = fp.action;
 	formAction = formAction.substring(0,formAction.indexOf('search'));
 
 	document.event_search.onsubmit = function(){
