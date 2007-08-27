@@ -560,9 +560,9 @@ function ajaxsearch(){
 	var searchForm = document.getElementById('event_search');
 	var searchSubmit = searchForm.getElementsByTagName('input')[1];
 	var fp = document.getElementById('event_search');
-	var formAction = 'http://events.unl.edu/housing/search/';
+	var formAction = 'search/';
 	formAction = formAction.substring(0,formAction.indexOf('search'));
-	
+
 	document.event_search.onsubmit = function(){
 		var searchVal = document.getElementById('searchinput').value;
 		while (searchVal.indexOf('#')>-1) {
@@ -571,7 +571,7 @@ function ajaxsearch(){
 		var searchVars = new Array();
 		searchVars['q'] = searchVal;
 		searchVars['format'] = 'hcalendar';
-		searchVars['search'] = 'search';		
+		searchVars['search'] = 'search';
 		document.getElementById('load').innerHTML = '<img src="/ucomm/templatedependents/templatecss/images/loading.gif" />';
 		ajaxEngine(formAction, 'search', searchVars)
 		return false;
