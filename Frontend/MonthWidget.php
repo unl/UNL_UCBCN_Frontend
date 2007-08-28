@@ -198,7 +198,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
         $db          =& $this->calendar->getDatabaseConnection();
         $days        = $month->fetchAll();
         $start_bound = date('Y-m-d', $days[1]->getTimestamp());
-        $end_bound   = date('Y-m-d', $days[count($days)-1]->getTimestamp());
+        $end_bound   = date('Y-m-d', $days[count($days)]->getTimestamp());
         $sql         = "SELECT DATE_FORMAT(eventdatetime.starttime,'%m-%d') AS day,
                                count(*) AS events
 		                FROM calendar_has_event,eventdatetime 
