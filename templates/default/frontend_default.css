@@ -398,7 +398,8 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
  abbr.dtstart:after, abbr.dtend:after {content:'' }
 /* IE */
 * html tr.vevent td.date{font-size:0.9em!important;}
-* html .three_col table td{padding:7px!important;}
+* html #maincontent .three_col{padding:0;}
+* html #maincontent .three_col table td{padding:7px!important;}
 * html .col{margin-top:10px;}
 * html table.wp-calendar caption span.monthvalue, * html table.wp-calendar caption span.yearvalue{padding:6px 3px 0;}
 * html #maincontent p#search_term{filter:alpha(opacity: 0);background:url(images/searchinfo.gif) no-repeat;margin:13px 0 0 -275px;padding:18px 20px 0 10px;}
