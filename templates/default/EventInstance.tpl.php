@@ -81,7 +81,7 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<td>
 				<?php
 				if (isset($this->eventdatetime->room)) {
-				    echo 'Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+				    echo 'Room: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
 				}
 				if ($loc = $this->eventdatetime->getLocation()) {
 					UNL_UCBCN::displayRegion($loc);
