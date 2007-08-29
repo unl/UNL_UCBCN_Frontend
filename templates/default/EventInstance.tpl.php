@@ -80,18 +80,11 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<td class="date">Location:</td>
 			<td>
 				<?php
-				if ($this->eventdatetime->location_id) {
-				    $loc = $this->eventdatetime->getLink('location_id');
-					echo '<div class="location">';
-					if (isset($loc->mapurl)) {
-					    echo '<a class="mapurl" href="'.UNL_UCBCN_Frontend::dbStringToHtml($loc->mapurl).'">'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name).'</a>';
-					} else {
-					    echo UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
-					}
-					if (isset($this->eventdatetime->room)) {
-					    echo '<br />Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
-					}
-					echo '</div>';
+				if (isset($this->eventdatetime->room)) {
+				    echo 'Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+				}
+				if ($loc = $this->eventdatetime->getLocation()) {
+					UNL_UCBCN::displayRegion($loc);
 				}
 				?></td>
 		</tr>
