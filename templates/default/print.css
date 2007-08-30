@@ -40,3 +40,23 @@ td{padding:3px 0;border-bottom:1px solid #ddd;}
 td.date{padding-right:10px;text-align:right;}
 span.location{font-size:0.75em;color:#3A8103;}
 #maincontent{margin:10px 0;}
+
+.month_cal table.wp-calendar{margin:0 0 20px 0;width:100%!important}
+.month_cal table.wp-calendar tr{border-bottom:1px solid #666;}
+.month_cal table.wp-calendar td{
+	width:92px;
+	text-align:left;
+	vertical-align:top;position:relative;
+	float:left;
+	display:block;
+	min-height:12.3em;
+	_height:12.3em;
+	border:none!important;
+	}
+.month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:92px;display:block;float:left;margin-bottom:1px;}
+.month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
+
+#maincontent .month_cal table.wp-calendar td ul{list-style:circle!important}
+#maincontent .month_cal table.wp-calendar td ul li{overflow:hidden;height:1.8em;padding:0;border-bottom:1px solid #ddd;background:#fff;margin:2px 0 0 0;}
+.month_cal .more_event, #monthfullview, #maincontent .monthvalue_ID, #next_month, #prev_month{display:none!important;}
+
