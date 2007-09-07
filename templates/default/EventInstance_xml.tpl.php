@@ -30,7 +30,7 @@
                 <Address>
                     <Room><?php echo htmlspecialchars($this->eventdatetime->room); ?></Room>
                     <BuildingName><?php echo htmlspecialchars($loc->name); ?></BuildingName>
-                    <CityName><?php echo $loc->city; ?></CityName>
+                    <CityName><?php echo htmlspecialchars($loc->city); ?></CityName>
                     <PostalZone><?php echo $loc->zip; ?></PostalZone>
                     <CountrySubentityCode><?php echo $loc->state; ?></CountrySubentityCode>
                     <Country>
@@ -47,16 +47,16 @@
                 <WebPages>
                     <WebPage>
                         <Title>Location Web Page</Title>
-                        <URL><?php echo $loc->webpageurl; ?></URL>
+                        <URL><?php echo htmlspecialchars($loc->webpageurl); ?></URL>
                     </WebPage>
                 </WebPages>
                 <MapLinks>
-                    <MapLink><?php echo $loc->mapurl; ?></MapLink>
+                    <MapLink><?php echo htmlspecialchars($loc->mapurl); ?></MapLink>
                 </MapLinks>
 
-                <LocationHours><?php echo $loc->hours; ?></LocationHours>
-                <Directions><?php echo $loc->directions; ?></Directions>
-                <AdditionalPublicInfo><?php echo $loc->additionalpublicinfo; ?></AdditionalPublicInfo>
+                <LocationHours><?php echo htmlspecialchars($loc->hours); ?></LocationHours>
+                <Directions><?php echo htmlspecialchars($loc->directions); ?></Directions>
+                <AdditionalPublicInfo><?php echo htmlspecialchars($loc->additionalpublicinfo); ?></AdditionalPublicInfo>
             </Location>
             <?php endif; ?>
         </Locations>
@@ -90,7 +90,7 @@
         <WebPages>
             <WebPage>
                 <Title>Event webpage</Title>
-                <URL><?php echo $this->event->webpageurl; ?></URL>
+                <URL><?php echo htmlspecialchars($this->event->webpageurl); ?></URL>
             </WebPage>
         </WebPages>
         <?php endif; ?>
