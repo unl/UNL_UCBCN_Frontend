@@ -36,8 +36,9 @@ table td{
 	}
 table td.date{width:20%;}
 table td.title{width:80%;}
-#maincontent .three_col h4.sec_main{float:left;font-size:1.5em;padding: 4px 0 7px 30px!important; 
+#maincontent .three_col h4.sec_main, #maincontent .three_col h4.upcoming-header{float:left;font-size:1.5em;padding: 4px 0 7px 30px!important; 
                  background: url(images/date1.gif) no-repeat 0 0;font-style:normal;}
+#maincontent .three_col h4.upcoming-header{background:url(images/newrecurevent.png) no-repeat 0 0;padding:0 0 7px 30px!important;}
 #maincontent h4.ongoing{font-size:1.5em;background:url(images/ongoing.gif) no-repeat 0 0;margin-top:15px;padding:6px 0 7px 34px;clear:both;}
 
 
