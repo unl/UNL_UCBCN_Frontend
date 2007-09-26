@@ -100,10 +100,23 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testGetEventInstance().
      */
     public function testGetEventInstance() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        
+        //check event instance. end with feed page. pass unit test if last final page is not a html page
+        $this->selenium->open("/");
+	    $this->selenium->click("link=Today's Events");
+	    $this->selenium->waitForPageToLoad("30000");
+	    $this->selenium->click("link=Experience International Culture at Home");
+	    $this->selenium->click("link=Experience International Culture at Home");
+	    $this->selenium->click("link=Return to today");
+	    $this->selenium->click("//a[@href='http://events.unl.edu/2007/10/6/']");
+	    $this->selenium->click("rssformat");
+	    $this->selenium->waitForPageToLoad("30000");
+	    try {
+	        $this->assertNotEquals("", $this->selenium->getHtmlSource());
+	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+	        array_push($this->verificationErrors, $e->toString());
+	    }
+
     }
 
     /**
