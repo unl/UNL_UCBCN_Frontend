@@ -210,24 +210,20 @@ function isInternalLink(link)
  * Call to: none
  */
 function returnToday(){
-	x = new Date ();
-	
+	var x = new Date ();	
 	//var widgetDiv = document.getElementById('monthwidget');
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	//due to the way we detect today's date, the left side content has to be loaded before the month widget
+	var backtoDay = '?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar';
+	ajaxEngine(backtoDay, 'eventlisting');
 	ajaxCaller.get('?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;?&monthwidget&format=hcalendar', null, function(text, headers, callingContext){
 		if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
 			var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
 		}
 		document.getElementById('load').innerHTML=""
 		document.getElementById("monthwidget").innerHTML = text;
-		todayHilite();
-		var today = getElementsByClassName(document, "td", "today");
-		//alert(today.length);
-		document.getElementById('onselect').id = '';
-		today[0].id = 'onselect';		
+		todayHilite();			
 	}, false, null);
-	var backtoDay = '?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar';
-	ajaxEngine(backtoDay, 'eventlisting');
 	return false;
 }
 
