@@ -50,7 +50,7 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
     public function testShowNavigation() {
         // testing (only run this in day view)
         $this->selenium->open("/");
-    	$this->selenium->click("link=13");
+	    $this->selenium->click("link=13");
 	    $this->selenium->click("link=14");
 	    $this->selenium->click("link=17");
 	    $this->selenium->click("link=Return to today");
@@ -64,8 +64,16 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
 	    $this->selenium->click("link=Return to today");
 	    $this->selenium->type("searchinput", "hall");
 	    $this->selenium->click("submit");
-	    $this->selenium->click("link=30");
-	    $this->selenium->click("link=16");
+	    try {
+	        $this->assertTrue($this->selenium->isVisible("id=feeds"));
+	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+	        array_push($this->verificationErrors, $e->toString());
+	    }
+	    try {
+	        $this->assertEquals("", $this->selenium->getText("id=maincontent"));
+	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
+	        array_push($this->verificationErrors, $e->toString());
+	    }
     }
 
     /**
