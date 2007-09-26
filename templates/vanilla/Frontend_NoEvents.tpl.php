@@ -1,0 +1,1 @@
+<p>No new events for today.</p>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <title><?php echo $this->calendar->name; ?></title>
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/screen.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/vanilla/screen.css" />
     </head>
     <body>
         <h1><?php echo $this->calendar->name; ?></h1>
