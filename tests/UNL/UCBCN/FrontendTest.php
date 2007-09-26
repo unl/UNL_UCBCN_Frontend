@@ -48,10 +48,24 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testShowNavigation().
      */
     public function testShowNavigation() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // testing (only run this in day view)
+        $this->selenium->open("/");
+    	$this->selenium->click("link=13");
+	    $this->selenium->click("link=14");
+	    $this->selenium->click("link=17");
+	    $this->selenium->click("link=Return to today");
+	    $this->selenium->click("link=Next Day");
+	    $this->selenium->click("link=Previous Day");
+	    $this->selenium->click("link=Previous Day");
+	    $this->selenium->click("next_month");
+	    $this->selenium->click("next_month");
+	    $this->selenium->click("prev_month");
+	    $this->selenium->click("prev_month");
+	    $this->selenium->click("link=Return to today");
+	    $this->selenium->type("searchinput", "hall");
+	    $this->selenium->click("submit");
+	    $this->selenium->click("link=30");
+	    $this->selenium->click("link=16");
     }
 
     /**
