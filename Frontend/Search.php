@@ -101,7 +101,7 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
                         calendar_has_event.status != \'pending\' AND 
                         calendar_has_event.calendar_id = '.$this->calendar->id.' AND 
                         eventdatetime.location_id = location.id AND ';
-            if ($t = strtotime($this->query)) {
+            if (($t = strtotime($this->query)) && ($this->query != 'art')) {
                 // This is a time...
                 $sql .= 'eventdatetime.starttime LIKE \''.date('Y-m-d', $t).'%\' ORDER BY eventdatetime.starttime';
             } else {
