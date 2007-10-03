@@ -120,7 +120,7 @@ table.wp-calendar #today_image{
 	right:0;
 	margin:3px 2px 0 0;
 }
-#maincontent span.location, #maincontent span.location a{text-tranform:uppercase;font-size:0.75em;color:#3A8103;}
+#maincontent span.location, #maincontent span.location a{text-transform:uppercase;font-size:0.75em;color:#3A8103;}
 #maincontent span.location a{font-size:1em;}
 #maincontent a.returnToday{
 font-size:0.8em;
