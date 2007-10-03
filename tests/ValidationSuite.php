@@ -1,7 +1,7 @@
 <?php
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "ValidationTestSuite::main");
+    define("PHPUnit_MAIN_METHOD", "ValidationSuite::main");
 }
 
 
@@ -10,7 +10,7 @@ require_once "PHPUnit/Framework/TestCase.php";
 require_once "PHPUnit/Framework/TestSuite.php";
 require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'URIValidationTest.php';
 
-class ValidationTestSuite extends PHPUnit_Framework_TestSuite
+class ValidationSuite extends PHPUnit_Framework_TestSuite
 {
     function __construct($name)
     {
@@ -42,9 +42,9 @@ class ValidationTestSuite extends PHPUnit_Framework_TestSuite
                                'http://localhost/events/?&search=search&q=Th',  //Search Results
                                'http://localhost/events/?&s=1',                 //Week View
         );        
-        $suite = new PHPUnit_Framework_TestSuite('ValidationTestSuite tests');
+        $suite = new PHPUnit_Framework_TestSuite('ValidationSuite tests');
         /** Add testsuites, if there is. */
-        $suite->addTestSuite('ValidationTestSuite');
+        $suite->addTestSuite('ValidationSuite');
         foreach ($uris_to_check as $uri) {
             if (strpos($uri, 'http://localhost/')===false) {
                 $test      = new URIValidationTest('testURI');
@@ -60,7 +60,7 @@ class ValidationTestSuite extends PHPUnit_Framework_TestSuite
 }
 
 // Call Services_W3C_HTMLValidatorTest::main() if file is executed directly.
-if (PHPUnit_MAIN_METHOD == "ValidationTestSuite::main") {
+if (PHPUnit_MAIN_METHOD == "ValidationSuite::main") {
     ValidationTestSuite::main();
 }
 ?>
