@@ -18,6 +18,8 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 
 require_once 'UNL/UCBCN/FrontendTest.php';
 
+require_once 'ValidationSuite.php';
+
 class UNL_UCBCN_Frontend_AllTests
 {
 	/**
@@ -41,7 +43,7 @@ class UNL_UCBCN_Frontend_AllTests
         $suite = new PHPUnit_Framework_TestSuite('UNL_UCBCN_Frontend tests');
         /** Add testsuites, if there is. */
         $suite->addTestSuite('UNL_UCBCN_FrontendTest');
-
+        $suite->addTestSuite('ValidationSuite');
 
         return $suite;
     }
