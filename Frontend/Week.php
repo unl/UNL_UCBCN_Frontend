@@ -66,6 +66,13 @@ class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
     public $firstDay = 0;
     
     /**
+     * Display ongoing events?
+     * 
+     * @var bool
+     */
+    public $ongoing = true;
+    
+    /**
      * Listing of events on this week. This will be an array of 7 
      * UNL_UCBCN_Frontend_Day objects.
      * 
@@ -109,9 +116,6 @@ class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
             }
         }
         $this->output[] = $this->showWeek();
-        if ($this->ongoing===true) {
-            $this->output[] = $this->showOngoingEventListing();
-        }
         $this->url = $this->getURL();
     }
     
@@ -133,7 +137,8 @@ class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
                             'month'=>$day->thisMonth(),
                             'day'=>$day->thisDay(),
                             'calendar'=>$this->calendar,
-                            'dsn'=>$this->dsn));
+                            'dsn'=>$this->dsn,
+                            'ongoing'=>$this->ongoing));
         }
     }
 
@@ -144,7 +149,7 @@ class UNL_UCBCN_Frontend_Week extends UNL_UCBCN
      */
     public function getURL()
     {
-        return UNL_UCBCN_Frontend::formatURL(array('s'=>$this->startDay,
+        return UNL_UCBCN_Frontend::formatURL(array('s'=>$this->firstDay,
                                                    'd'=>$this->day,
                                                    'm'=>$this->month,
                                                    'y'=>$this->year,
