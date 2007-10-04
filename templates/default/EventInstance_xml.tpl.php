@@ -70,8 +70,8 @@
 	        	if (!PEAR::isError($type)) : ?>
 	            <EventType>
 	                <EventTypeID><?php echo $type->id; ?></EventTypeID>
-	                <EventTypeName><?php echo $type->name; ?></EventTypeName>
-	                <EventTypeDescription><?php echo $type->description; ?></EventTypeDescription>
+	                <EventTypeName><?php echo htmlspecialchars($type->name); ?></EventTypeName>
+	                <EventTypeDescription><?php echo htmlspecialchars($type->description); ?></EventTypeDescription>
 	            </EventType>
 	            <?php 
             	endif;
@@ -101,7 +101,7 @@
         <Webcasts>
         	<?php while ($webcast->fetch()) : ?>
             <Webcast>
-                <Title><?php echo $webcast->title; ?></Title>
+                <Title><?php echo htmlspecialchars($webcast->title); ?></Title>
                 <WebcastStatus><?php echo $webcast->status; ?></WebcastStatus>
                 <DateAvailable><?php echo date('Y-m-d',strtotime($webcast->dateavailable)); ?></DateAvailable>
                 <PlayerType><?php echo $webcast->playertype; ?></PlayerType>
@@ -119,7 +119,7 @@
                     <?php endwhile; ?>
                 </WebcastURLs>
                 <?php endif; ?>
-                <WebcastAdditionalInfo><?php echo $webcast->additionalinfo; ?></WebcastAdditionalInfo>
+                <WebcastAdditionalInfo><?php echo htmlspecialchars($webcast->additionalinfo); ?></WebcastAdditionalInfo>
             </Webcast>
             <?php endwhile; ?>
         </Webcasts>
@@ -140,7 +140,7 @@
         <Documents>
         	<?php while ($document->fetch()) : ?>
             <Document>
-                <Title><?php echo $document->name; ?></Title>
+                <Title><?php echo htmlspecialchars($document->name); ?></Title>
                 <URL><?php echo $document->url; ?></URL>
             </Document>
             <?php endwhile; ?>
@@ -156,19 +156,19 @@
                 <PublicEventContactID><?php echo $contact->id; ?></PublicEventContactID>
 
                 <ContactName>
-                    <FullName><?php echo $contact->name; ?></FullName>
+                    <FullName><?php echo htmlspecialchars($contact->name); ?></FullName>
                 </ContactName>
                 <ProfessionalAffiliations>
                     <ProfessionalAffiliation>
 
                         <JobTitles>
-                            <JobTitle><?php echo $contact->jobtitle; ?></JobTitle>
+                            <JobTitle><?php echo htmlspecialchars($contact->jobtitle); ?></JobTitle>
                         </JobTitles>
-                        <OrganizationName><?php echo $contact->organization; ?></OrganizationName>
+                        <OrganizationName><?php echo htmlspecialchars($contact->organization); ?></OrganizationName>
                         <OrganizationWebPages>
                             <WebPage>
 
-                                <Title><?php echo $contact->name; ?></Title>
+                                <Title><?php echo htmlspecialchars($contact->name); ?></Title>
                                 <URL><?php echo $contact->webpageurl; ?></URL>
                             </WebPage>
 
@@ -177,7 +177,7 @@
                 </ProfessionalAffiliations>
                 <Phones>
                     <Phone>
-                        <PhoneNumber><?php echo $contact->phone; ?>/PhoneNumber>
+                        <PhoneNumber><?php echo htmlspecialchars($contact->phone); ?>/PhoneNumber>
                     </Phone>
                 </Phones>
 
@@ -186,12 +186,12 @@
                 </EmailAddresses>
                 <Addresses>
                     <Address>
-                        <StreetName><?php echo $contact->addressline1; ?></StreetName>
-                        <AdditionalStreetName><?php echo $contact->addressline2; ?></AdditionalStreetName>
-                        <Room><?php echo $contact->room; ?></Room>
-                        <CityName><?php echo $contact->city; ?></CityName>
+                        <StreetName><?php echo htmlspecialchars($contact->addressline1); ?></StreetName>
+                        <AdditionalStreetName><?php echo htmlspecialchars($contact->addressline2); ?></AdditionalStreetName>
+                        <Room><?php echo htmlspecialchars($contact->room); ?></Room>
+                        <CityName><?php echo htmlspecialchars($contact->city); ?></CityName>
                         <PostalZone><?php echo $contact->zip; ?></PostalZone>
-                        <CountrySubentityCode><?php echo $contact->State; ?></CountrySubentityCode>
+                        <CountrySubentityCode><?php echo htmlspecialchars($contact->State); ?></CountrySubentityCode>
                         <Country>
                             <IdentificationCode xmlns="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-1.0" codeListID="ISO3166-1" codeListAgencyID="6" codeListAgencyName="United Nations Economic Commission for Europe" codeListName="Country" codeListVersionID="0.3" languageID="en" codeListURI="http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1-semic.txt" codeListSchemeURI="urn:oasis:names:specification:ubl:schema:xsd:CountryIdentificationCode-1.0">US</IdentificationCode>
 
@@ -201,7 +201,7 @@
                 </Addresses>
                 <WebPages>
                     <WebPage>
-                        <Title><?php echo $contact->name; ?></Title>
+                        <Title><?php echo htmlspecialchars($contact->name); ?></Title>
                         <URL><?php echo $contact->webpageurl; ?></URL>
                     </WebPage>
                 </WebPages>
@@ -213,11 +213,11 @@
 
             <EventListingContact>
                 <ContactName>
-                    <FullName><?php echo $this->event->listingcontactname; ?></FullName>
+                    <FullName><?php echo htmlspecialchars($this->event->listingcontactname); ?></FullName>
                 </ContactName>
                 <Phones>
                     <Phone>
-                        <PhoneNumber><?php echo $this->event->listingcontactphone; ?></PhoneNumber>
+                        <PhoneNumber><?php echo htmlspecialchars($this->event->listingcontactphone); ?></PhoneNumber>
                     </Phone>
                 </Phones>
                 <EmailAddresses>
@@ -229,7 +229,7 @@
         <Classification>Public</Classification>
         <?php if (!empty($this->event->privatecomment)): ?>
         <PrivateComments>
-            <PrivateComment><?php echo $this->event->privatecomment; ?></PrivateComment>
+            <PrivateComment><?php echo htmlspecialchars($this->event->privatecomment); ?></PrivateComment>
         </PrivateComments>
         <?php endif; ?>
     </Event>
