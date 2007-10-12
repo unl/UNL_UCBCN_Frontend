@@ -46,5 +46,17 @@ END:VCALENDAR
 // Convert all line endings: line endings are windows-style, carriage-return, followed by a line feed
 $out = ob_get_contents();
 ob_clean();
-echo str_replace("\n","\r\n",$out);
+$out = explode("\n", $out);
+foreach ($out as $line) {
+    if (strlen($line) < 75) {
+        echo $line."\r\n";
+    } else {
+        $folded = '';
+        while (strlen($line) > 75) {
+            $folded .= substr($line, 0, 74)."\r\n ";
+            $line = substr($line, 74);
+        }
+        echo $folded.$line."\r\n";
+    }
+}
 ?>
