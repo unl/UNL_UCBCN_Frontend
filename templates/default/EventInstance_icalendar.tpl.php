@@ -19,7 +19,7 @@ if (isset($this->eventdatetime->starttime)) {
    $out[] = 'UID:'.$this->eventdatetime->id;
 $out[] = 'DTSTAMP:'.date('Ymd\THis',strtotime($this->event->datecreated));
 $out[] = 'SUMMARY:'.strip_tags($this->event->title);
-$out[] = 'DESCRIPTION:'.strip_tags(str_replace("\n",'\n',$this->event->description));
+$out[] = 'DESCRIPTION:'.str_replace(array("\r","\n"),array('','\n'),strip_tags($this->event->description));
 if (isset($this->eventdatetime->location_id) && $this->eventdatetime->location_id) {
     $l = $this->eventdatetime->getLink('location_id');
     $loc =  'LOCATION:'.$l->name;
