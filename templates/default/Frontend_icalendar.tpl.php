@@ -53,8 +53,8 @@ foreach ($out as $line) {
     } else {
         $folded = '';
         while (strlen($line) > 75) {
-            $folded .= substr($line, 0, 74)."\r\n ";
-            $line = substr($line, 74);
+            $folded .= substr($line, 0, 74)."\r\n";
+            $line = ' '.substr($line, 74);
         }
         echo $folded.$line."\r\n";
     }
