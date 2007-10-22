@@ -61,6 +61,6 @@ class ValidationSuite extends PHPUnit_Framework_TestSuite
 
 // Call Services_W3C_HTMLValidatorTest::main() if file is executed directly.
 if (PHPUnit_MAIN_METHOD == "ValidationSuite::main") {
-    ValidationTestSuite::main();
+    ValidationSuite::main();
 }
 ?>
