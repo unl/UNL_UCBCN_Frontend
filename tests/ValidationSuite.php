@@ -44,7 +44,6 @@ class ValidationSuite extends PHPUnit_Framework_TestSuite
         );        
         $suite = new PHPUnit_Framework_TestSuite('ValidationSuite tests');
         /** Add testsuites, if there is. */
-        $suite->addTestSuite('ValidationSuite');
         foreach ($uris_to_check as $uri) {
             if (strpos($uri, 'http://localhost/')===false) {
                 $test      = new URIValidationTest('testURI');
