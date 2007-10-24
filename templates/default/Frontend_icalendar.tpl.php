@@ -12,7 +12,7 @@ UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_NoEvents','Frontend_NoEvents_icale
 ob_start(); ?>
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:UNL_UCBCN//UNL Event Publisher
+PRODID:-//UNL_UCBCN//NONSGML UNL Event Publisher//EN
 X-WR-CALNAME:<?php echo $this->calendar->name."\n"; ?>
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE:US/Central
