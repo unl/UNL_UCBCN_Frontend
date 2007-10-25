@@ -86,18 +86,18 @@
         <Description><?php echo htmlspecialchars($this->event->description); ?></Description>
         <ShortDescription><?php echo htmlspecialchars($this->event->shortdescription); ?></ShortDescription>
         <Refreshments><?php echo $this->event->refreshments; ?></Refreshments>
-        <?php if (!empty($this->event->webpageurl)): ?>
         <WebPages>
             <WebPage>
                 <Title>Event Instance URL</Title>
                 <URL><?php echo htmlspecialchars($this->url); ?></URL>
             </WebPage>
+            <?php if (!empty($this->event->webpageurl)): ?>
             <WebPage>
                 <Title>Event webpage</Title>
                 <URL><?php echo htmlspecialchars($this->event->webpageurl); ?></URL>
             </WebPage>
+            <?php endif; ?>
         </WebPages>
-        <?php endif; ?>
         <?php
         $webcast = UNL_UCBCN::factory('webcast');
         $webcast->event_id = $this->event->id;
