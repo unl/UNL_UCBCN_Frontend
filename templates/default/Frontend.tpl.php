@@ -103,11 +103,11 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 					<div class="col left">
 						<div id="monthwidget"><?php UNL_UCBCN::displayRegion($this->right); ?></div>
 						<div class="cal_widget">
-						<h3>Have a Blackboard account?</h3>
+						<h3>Contribute/Learn More</h3>
 						<ul>
-						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Log in</a> </li>
-						<li><a href="http://supportcenteronline.com/ics/support/default.asp?deptID=583&amp;task=knowledge&amp;questionID=2169">Get a Blackboard account</a> </li>
-						<li><a href="http://www1.unl.edu/comments/">Feedback</a> </li>
+						<li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Submit an Event</a> </li>
+						<li><a href="http://www1.unl.edu/wdn/wiki/UNL_Calendar_Documentation">Learn More</a></li>
+						<li><a href="http://www1.unl.edu/comments/">Provide Feedback</a> </li>
 						</ul></div>
 						
 						    
