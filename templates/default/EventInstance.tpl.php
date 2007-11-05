@@ -60,8 +60,7 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<?php
 			if (isset($this->eventdatetime->additionalpublicinfo)) {
                 echo '<p>Additional Public Info: '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->additionalpublicinfo).'</p>';
-            } ?>
-			<?php 
+            }
 			if (isset($this->event->webpageurl)) {
 			    echo 'Website: <a class="url" href="'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->webpageurl).'">'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->webpageurl).'</a>';
 			}
