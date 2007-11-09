@@ -21,10 +21,10 @@ if (isset($this->streetaddress1)) {
     echo '</div>';
 }
 if (isset($this->directions)) {
-    echo '<div class="directions">Directions:<br />'.UNL_UCBCN_Frontend::dbStringToHtml($this->directions).'</div>';
+    echo '<div class="directions">Directions: '.UNL_UCBCN_Frontend::dbStringToHtml($this->directions).'</div>';
 }
 if (isset($this->additionalpublicinfo)) {
-    echo '<div class="additionalinfo">Additional Info:<br />'.UNL_UCBCN_Frontend::dbStringToHtml($this->additionalpublicinfo).'</div>';
+    echo '<div class="additionalinfo">Additional Info: '.UNL_UCBCN_Frontend::dbStringToHtml($this->additionalpublicinfo).'</div>';
 }
 ?>
 </div>
