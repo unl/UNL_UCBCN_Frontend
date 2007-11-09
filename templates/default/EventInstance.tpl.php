@@ -58,9 +58,6 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<td><p class='description'>
 			<?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
 			<?php
-            if (isset($this->eventdatetime->directions)) {
-                echo '<p class="directions">Directions: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->directions).'</p>';
-            }
 			if (isset($this->eventdatetime->additionalpublicinfo)) {
                 echo '<p>Additional Public Info: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->additionalpublicinfo).'</p>';
             }
@@ -83,6 +80,9 @@ $endu = strtotime($this->eventdatetime->endtime);
 				if ($loc = $this->eventdatetime->getLocation()) {
 					UNL_UCBCN::displayRegion($loc);
 				}
+                if (isset($this->eventdatetime->directions)) {
+                    echo '<p class="directions">Directions: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->directions).'</p>';
+                }
 				?>
 			</td>
 		</tr>
