@@ -11,7 +11,7 @@ $out[] = 'BEGIN:VEVENT';
 //$out[] = 'SEQUENCE:5';
 if (isset($this->eventdatetime->starttime)) {
     if (strpos($this->eventdatetime->starttime,'00:00:00')) {
-        $out[] = 'DTSTART;TZID=US/Central:'.date('Ymd', $startu);
+        $out[] = 'DTSTART;VALUE=DATE:'.date('Ymd', $startu);
     } else {
            $out[] = 'DTSTART;TZID=US/Central:'.date('Ymd\THis', $startu);
     }
@@ -29,9 +29,10 @@ if (isset($this->eventdatetime->location_id) && $this->eventdatetime->location_i
     $out[] = $loc;
 }
 $out[] = 'URL:'.$this->url;
-if (isset($this->eventdatetime->endtime)) {
+if (isset($this->eventdatetime->endtime)
+    && $endu > $startu) {
     if (strpos($this->eventdatetime->endtime,'00:00:00')) {
-        $out[] = 'DTEND;TZID=US/Central:'.date('Ymd', $endu);
+        $out[] = 'DTEND;VALUE=DATE:'.date('Ymd', $endu);
     } else {
            $out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $endu);
     }
