@@ -35,7 +35,7 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
      *
      * @access protected
      */
-    protected function setUp() {
+    protected function setUpSelenium() {
         $this->selenium = new Testing_Selenium("*firefox", "http://localhost/");
         $result = $this->selenium->start();
     }
@@ -46,7 +46,7 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
      *
      * @access protected
      */
-    protected function tearDown() {
+    protected function tearDownSelenium() {
         $this->selenium->stop();
     }
 
@@ -54,6 +54,7 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testShowNavigation().
      */
     public function testShowNavigation() {
+        $this->setUpSelenium();
         // testing (only run this in day view)
         $this->selenium->open("/events/");
 	    $this->selenium->click("link=13");
@@ -80,16 +81,24 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
 	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
 	        array_push($this->verificationErrors, $e->toString());
 	    }
+	    $this->tearDownSelenium();
     }
 
     /**
-     * @todo Implement testPreRun().
+     * This tests calling the preRun function before cacheable output is sent.
+     * 
+     * An example of the preRun function is sending the content-type header for xml.
      */
     public function testPreRun() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $fp = fopen('http://localhost/events/?format=xml','r');
+        $meta = stream_get_meta_data($fp);
+        $headers = $meta['wrapper_data'];
+        foreach ($headers as $header) {
+            if (preg_match('/Content-Type:[\s]?(.*)$/',$header, $matches)) {
+                $type = $matches[1];
+            }
+        }
+        $this->assertEquals('text/xml', $type);
     }
 
     /**
@@ -106,7 +115,7 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testGetEventInstance().
      */
     public function testGetEventInstance() {
-        
+        $this->setUpSelenium();
         //check event instance. end with feed page. pass unit test if last final page is not a html page
         $this->selenium->open("/");
 	    $this->selenium->click("link=Today's Events");
@@ -122,7 +131,7 @@ class UNL_UCBCN_FrontendTest extends PHPUnit_Framework_TestCase {
 	    } catch (PHPUnit_Framework_AssertionFailedError $e) {
 	        array_push($this->verificationErrors, $e->toString());
 	    }
-
+	    $this->tearDownSelenium();
     }
 
     /**
