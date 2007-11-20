@@ -11,15 +11,15 @@ $out[] = 'BEGIN:VEVENT';
 //$out[] = 'SEQUENCE:5';
 if (isset($this->eventdatetime->starttime)) {
     if (strpos($this->eventdatetime->starttime,'00:00:00')) {
-        $out[] = 'DTSTART;TZID=US/Central:'.date('Ymd', $startu);
+        $out[] = 'DTSTART;VALUE=DATE:'.date('Ymd', $startu);
     } else {
            $out[] = 'DTSTART;TZID=US/Central:'.date('Ymd\THis', $startu);
     }
-   }
-   $out[] = 'UID:'.$this->eventdatetime->id;
+}
+$out[] = 'UID:'.$this->eventdatetime->id.'@'.$_SERVER['SERVER_NAME'];
 $out[] = 'DTSTAMP:'.date('Ymd\THis',strtotime($this->event->datecreated));
 $out[] = 'SUMMARY:'.strip_tags($this->event->title);
-$out[] = 'DESCRIPTION:'.strip_tags($this->event->description);
+$out[] = 'DESCRIPTION:'.preg_replace("/\r\n|\n|\r/", '\n', strip_tags($this->event->description));
 if (isset($this->eventdatetime->location_id) && $this->eventdatetime->location_id) {
     $l = $this->eventdatetime->getLink('location_id');
     $loc =  'LOCATION:'.$l->name;
@@ -28,15 +28,15 @@ if (isset($this->eventdatetime->location_id) && $this->eventdatetime->location_i
     }
     $out[] = $loc;
 }
-$out[] = 'URL:'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics'));
-//$out[] = 'UID:EC9439B1-FF65-11D6-9973-003065F99D04';
-if (isset($this->eventdatetime->endtime)) {
+$out[] = 'URL:'.$this->url;
+if (isset($this->eventdatetime->endtime)
+    && $endu > $startu) {
     if (strpos($this->eventdatetime->endtime,'00:00:00')) {
-        $out[] = 'DTEND;TZID=US/Central:'.date('Ymd', $endu);
+        $out[] = 'DTEND;VALUE=DATE:'.date('Ymd', $endu);
     } else {
            $out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $endu);
     }
-   }
+}
 $out[] = 'END:VEVENT';
 echo implode("\n",$out)."\n";
 ?>
