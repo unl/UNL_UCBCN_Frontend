@@ -1,4 +1,4 @@
-<h4 class="upcoming-header">Upcoming Events</h4>
+<h4 class="upcoming-header">Upcoming Events:</h4>
 <?php
     UNL_UCBCN::displayRegion($this->output);
     echo '<p id="feeds">
