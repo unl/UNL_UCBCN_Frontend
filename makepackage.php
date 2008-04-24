@@ -70,13 +70,26 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.5.0');
-$pfm->setReleaseVersion('0.5.6');
+$pfm->setReleaseVersion('0.5.7');
 $pfm->setNotes('
-* Javascript fixes for searching. (Alvin Woon)
-* Separate Location out into new template file. (Brett Bieber)
-* Fix event check for events starting on the last day of the month, was off by 1. (Brett Bieber)
-* Minor CSS fixes. (Alvin Woon)
-* Enhanced print stylesheet for month view. (Alvin Woon)
+Bugfix Release:
+* Events which were not \'all-day events\' and start on the last day displayed in the month widget were not showing up. - bsteere
+* Fix searches for the word \'art\' - ART is a timezone identifier for Argentina, and would simply return the current time offset by a few hours. Fix provided by Mark Kornblum at Cornish.
+* Fix mismatched variable name in getURL, pass through an ongoing event boolean when each day is constructed.
+
+Template Updates:
+UNL template -
+* Compatibility updates for the icalendar format - 75 char limit etc.
+* Ensure special chars are encoded in the XML output.
+* Add additional public info and directions to the event instance output.
+* Minor CSS tweaks.
+* Add class to upcoming events header to allow styling.
+* When you try to go back to today from event instance page on another month, return to today icon breaks.
+* Increase default calendar subscription links to 100 upcoming items.
+
+NEW Vanilla Template -
+* Vanilla template can be used for frontend output - not dependent on the UNL templates.
+To use the vanilla template, just enter \'vanilla\' when prompted for which template to use.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
@@ -104,7 +117,7 @@ $task->addParamGroup('questionCreate', array(
     ));
 $task->addParamGroup('fileSetup', array(
     $task->getParam('docroot', 'Path to root of webserver', 'string', '/Library/WebServer/Documents/events'),
-    $task->getParam('template', 'Template style to use', 'string', 'default')
+    $task->getParam('template', 'Template style to use, default (UNL) or vanilla', 'string', 'default')
     ));
 
 $pfm->addPostinstallTask($task, 'UNL_UCBCN_Frontend_setup.php');
