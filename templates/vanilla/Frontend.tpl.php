@@ -27,7 +27,7 @@
                 built by the <a href="http://www.unl.edu/">University of Nebraska&ndash;Lincoln</a>
                 which implements the UC Berkeley Calendar specifications.
             <ul>
-                <li><a href="http://www1.unl.edu/wdn/wiki/UNL_Event_Publisher">UNL Event Publisher</a></li>
+                <li><a href="http://code.google.com/p/unl-event-publisher/">UNL Event Publisher</a></li>
             </ul>
         </div>
     </body>
