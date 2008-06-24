@@ -11,7 +11,7 @@
  * @copyright 2008 Regents of the University of Nebraska
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @version   CVS: $id$
- * @link      http://pear.unl.edu/
+ * @link      http://code.google.com/p/unl-event-publisher/
  */
 
 require_once 'UNL/UCBCN/Frontend.php';
@@ -26,7 +26,7 @@ require_once 'UNL/UCBCN/EventListing.php';
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2008 Regents of the University of Nebraska
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
- * @link      http://pear.unl.edu/
+ * @link      http://code.google.com/p/unl-event-publisher/
  */
 class UNL_UCBCN_Frontend_Upcoming extends UNL_UCBCN
 {
