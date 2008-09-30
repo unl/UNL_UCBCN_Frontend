@@ -103,13 +103,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
     public $manageruri = '';
     
     /**
-     * Navigation
-     * 
-     * @var string
-     */
-    public $navigation;
-    
-    /**
      * Right column (usually the month widget)
      * 
      * @var string
@@ -161,32 +154,16 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
         parent::__construct($options);
         if (!isset($this->calendar)) {
             $this->calendar = $this->factory('calendar');
-            if (isset($_GET['calendar_id'])) {
-                $this->calendar->get($_GET['calendar_id']);
-            } elseif (!$this->calendar->get($this->default_calendar_id)) {
-                return new UNL_UCBCN_Error('No calendar specified or could be found.');
+            if (PEAR::isError($this->calendar)) {
+                throw new Exception($this->calendar->message);
+            } else {
+                if (isset($_GET['calendar_id'])) {
+                    $this->calendar->get($_GET['calendar_id']);
+                } elseif (!$this->calendar->get($this->default_calendar_id)) {
+                    return new UNL_UCBCN_Error('No calendar specified or could be found.');
+                }
             }
         }
-    }
-    
-    /**
-     * Displays the navigation for the frontend.
-     * 
-     * @return string of html
-     */
-    function showNavigation()
-    {
-        $n   = array();
-        $n[] = '<ul id="frontend_view_selector" class="'.$this->view.'">';
-        $n[] = '<li id="todayview"><a href="'.self::formatURL(array('calendar'=>$this->calendar->id)).'">Today\'s Events</a></li>';
-        $n[] = '<li id="monthview"><a href="'.self::formatURL(array('y'=>date('Y'),
-                                                                    'm'=>date('m'),
-                                                                    'calendar'=>$this->calendar->id)).'">This Month</a></li>';
-        $n[] = '<li id="yearview"><a href="'.self::formatURL(array('y'=>date('Y'),
-                                                                   'calendar'=>$this->calendar->id)).'">This Year</a></li>';
-        $n[] = '<li id="upcomingview"><a href="'.self::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming')).'">Upcoming</a></li>';
-        $n[] = '</ul>';
-        return implode("\n", $n);//UNL_UCBCN_Frontend::
     }
     
     /**
@@ -231,7 +208,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
      */
     function run()
     {
-        $this->navigation = $this->showNavigation();
         switch($this->view) {
         case 'upcoming':
             include_once 'UNL/UCBCN/Frontend/Upcoming.php';

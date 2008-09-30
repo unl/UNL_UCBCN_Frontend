@@ -96,7 +96,16 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 			</p>
 			
 			</form>
-			<?php echo $this->navigation; ?>
+            <ul id="frontend_view_selector" class="<?php echo $this->view; ?>">
+                <li id="todayview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id)); ?>">Today's Events</a></li>
+                <li id="monthview"><a href="'<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
+                                                                                            'm'=>date('m'),
+                                                                                            'calendar'=>$this->calendar->id)); ?>">This Month</a></li>
+                <li id="yearview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
+                                                                                          'calendar'=>$this->calendar->id)); ?>">This Year</a></li>
+                <li id="upcomingview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,
+                                                                                              'upcoming'=>'upcoming')); ?>">Upcoming</a></li>
+            </ul>
 			<!-- InstanceBeginEditable name="maincontent" -->
 	
 				<?php if (isset($this->right)) { ?>
