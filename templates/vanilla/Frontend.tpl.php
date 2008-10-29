@@ -12,7 +12,7 @@
         </div>
         <ul id="frontend_view_selector" class="<?php echo $this->view; ?>">
             <li id="todayview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id)); ?>">Today's Events</a></li>
-            <li id="monthview"><a href="'<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
+            <li id="monthview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
                                                                                         'm'=>date('m'),
                                                                                         'calendar'=>$this->calendar->id)); ?>">This Month</a></li>
             <li id="yearview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
