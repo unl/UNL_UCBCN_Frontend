@@ -316,9 +316,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
     {
         $event_instance = new UNL_UCBCN_EventInstance($id, $calendar);
         if (isset($_GET['y'], $_GET['m'], $_GET['d'])) {
-            $in_date   = date('Y-m-d', strtotime($_GET['y'].'-'.$_GET['m'].'-'.$_GET['d']));
+            $in_date   = str_replace(array('/',' '), '', $_GET['y'].'-'.$_GET['m'].'-'.$_GET['d']);
+            $in_date   = date('Y-m-d', strtotime($in_date));
             $real_date = $date = date('Y-m-d', strtotime($event_instance->eventdatetime->starttime));
-            
+ 
             // Verify the date is correct, otherwise, redirect to the correct location.
             if ($in_date != $real_date) {
                 header('HTTP/1.0 301 Moved Permanently');
