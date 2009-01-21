@@ -308,8 +308,7 @@ function todayHilite(){
 						//insert icon to indicate today	
 					if(verify1[0].id == getCalendarDate() && td1[i].className.indexOf('prev') < 0 && td1[i].className.indexOf('next') < 0){
 							try{
-								if(td1[i].innerHTML.indexOf([y]) >= 0){
-									
+								if(td1[i].textContent == y){
 									td1[i].className += ' today'
 									var imageToday = document.createElement("div");
 									imageToday.setAttribute("id","today_image");
