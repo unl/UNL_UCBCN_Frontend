@@ -14,7 +14,7 @@
  * @category  Events 
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
- * @copyright 2008 Regents of the University of Nebraska
+ * @copyright 2009 Regents of the University of Nebraska
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
@@ -69,35 +69,28 @@ $pfm->setDescription('This class extends the UNL UCBCN backend system to create
 $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
-$pfm->setAPIVersion('0.5.0');
-$pfm->setReleaseVersion('0.5.7');
+$pfm->setAPIVersion('0.7.0');
+$pfm->setReleaseVersion('0.7.0');
 $pfm->setNotes('
-Bugfix Release:
-* Events which were not \'all-day events\' and start on the last day displayed in the month widget were not showing up. - bsteere
-* Fix searches for the word \'art\' - ART is a timezone identifier for Argentina, and would simply return the current time offset by a few hours. Fix provided by Mark Kornblum at Cornish.
-* Fix mismatched variable name in getURL, pass through an ongoing event boolean when each day is constructed.
+0.7.0 Changes
 
-Template Updates:
-UNL template -
-* Compatibility updates for the icalendar format - 75 char limit etc.
-* Ensure special chars are encoded in the XML output.
-* Add additional public info and directions to the event instance output.
-* Minor CSS tweaks.
-* Add class to upcoming events header to allow styling.
-* When you try to go back to today from event instance page on another month, return to today icon breaks.
-* Increase default calendar subscription links to 100 upcoming items.
+* Move navigation html to templates
+    ** THERE IS NO MORE ->navigation MEMBER VARIABLE - UPDATE YOUR TEMPLATES **
+* Check for errors when initializing the default calendar.
+* Ensure $_GET[\'eventdatetime_id\'] is an integer.
+* Verify date in url is correct for this event instance, otherwise redirect to correct date.
+* Provide a default \'manageruri\' option that is \'manager/\'.
+* Create document root if it does not exists.
 
-NEW Vanilla Template -
-* Vanilla template can be used for frontend output - not dependent on the UNL templates.
-To use the vanilla template, just enter \'vanilla\' when prompted for which template to use.
+* UNL template improvements, better checking for the \'Today\' indicator icon.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
 //$pfm->addMaintainer('developer','alvinwoon','Alvin Woon','alvinwoon@gmail.com');
 $pfm->setLicense('BSD License', 'http://www1.unl.edu/wdn/wiki/Software_License');
 $pfm->clearDeps();
-$pfm->setPhpDep('5.0.0');
-$pfm->setPearinstallerDep('1.4.3');
+$pfm->setPhpDep('5.1.2');
+$pfm->setPearinstallerDep('1.5.4');
 $pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.5.0');
 $pfm->addPackageDepWithChannel('required', 'Calendar', 'pear.php.net', '0.5.3');
 foreach (array('Frontend.php','UNL_UCBCN_Frontend_setup.php','index.php') as $file) {

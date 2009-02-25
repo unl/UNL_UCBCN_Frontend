@@ -7,7 +7,7 @@
  * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
- * @copyright 2008 Regents of the University of Nebraska
+ * @copyright 2009 Regents of the University of Nebraska
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
@@ -24,7 +24,7 @@ require_once 'Calendar/Week.php';
  * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
- * @copyright 2008 Regents of the University of Nebraska
+ * @copyright 2009 Regents of the University of Nebraska
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.8.0alpha1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_UCBCN_Frontend</name>
  <channel>pear.unl.edu</channel>
  <summary>A public frontend for a University Event Publishing system.</summary>
@@ -18,11 +18,11 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2008-06-20</date>
- <time>11:03:11</time>
+ <date>2009-02-25</date>
+ <time>16:49:29</time>
  <version>
-  <release>0.5.7</release>
-  <api>0.5.0</api>
+  <release>0.7.0</release>
+  <api>0.7.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -30,24 +30,17 @@
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
  <notes>
-Bugfix Release:
-* Events which were not &apos;all-day events&apos; and start on the last day displayed in the month widget were not showing up. - bsteere
-* Fix searches for the word &apos;art&apos; - ART is a timezone identifier for Argentina, and would simply return the current time offset by a few hours. Fix provided by Mark Kornblum at Cornish.
-* Fix mismatched variable name in getURL, pass through an ongoing event boolean when each day is constructed.
+0.7.0 Changes
 
-Template Updates:
-UNL template -
-* Compatibility updates for the icalendar format - 75 char limit etc.
-* Ensure special chars are encoded in the XML output.
-* Add additional public info and directions to the event instance output.
-* Minor CSS tweaks.
-* Add class to upcoming events header to allow styling.
-* When you try to go back to today from event instance page on another month, return to today icon breaks.
-* Increase default calendar subscription links to 100 upcoming items.
+* Move navigation html to templates
+    ** THERE IS NO MORE -&gt;navigation MEMBER VARIABLE - UPDATE YOUR TEMPLATES **
+* Check for errors when initializing the default calendar.
+* Ensure $_GET[&apos;eventdatetime_id&apos;] is an integer.
+* Verify date in url is correct for this event instance, otherwise redirect to correct date.
+* Provide a default &apos;manageruri&apos; option that is &apos;manager/&apos;.
+* Create document root if it does not exists.
 
-NEW Vanilla Template -
-* Vanilla template can be used for frontend output - not dependent on the UNL templates.
-To use the vanilla template, just enter &apos;vanilla&apos; when prompted for which template to use.
+* UNL template improvements, better checking for the &apos;Today&apos; indicator icon.
  </notes>
  <contents>
   <dir baseinstalldir="UNL/UCBCN" name="/">
@@ -220,10 +213,10 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
  <dependencies>
   <required>
    <php>
-    <min>5.0.0</min>
+    <min>5.1.2</min>
    </php>
    <pearinstaller>
-    <min>1.4.3</min>
+    <min>1.5.4</min>
    </pearinstaller>
    <package>
     <name>UNL_UCBCN</name>
@@ -250,7 +243,9 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
    </stability>
    <date>2006-07-28</date>
    <license uri="http://www.php.net/license">PHP License</license>
-   <notes>Initial Release... this is really bare-bones.</notes>
+   <notes>
+Initial Release... this is really bare-bones.
+   </notes>
   </release>
   <release>
    <version>
@@ -263,7 +258,8 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
    </stability>
    <date>2006-07-28</date>
    <license uri="http://www.php.net/license">PHP License</license>
-   <notes>* Add Month, Year, Day views.
+   <notes>
+* Add Month, Year, Day views.
 		* Add configuration variables to better play with the manager.
 		* Month widget for Month navigation.
 		* Dependency on Calendar
@@ -272,7 +268,8 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
 		* css files prefixed with frontend_
 		* Switch to using .tpl template files_
 		* Frontend now uses UNL CSS templaes by default
-		* Calendar Shortname or ID can be used to select the calendar displayed.</notes>
+		* Calendar Shortname or ID can be used to select the calendar displayed.
+   </notes>
   </release>
   <release>
    <version>
@@ -285,12 +282,14 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
    </stability>
    <date>2006-08-22</date>
    <license uri="http://www.php.net/license">PHP License</license>
-   <notes>* Fix eventinstance display to have location and contact information details.
+   <notes>
+* Fix eventinstance display to have location and contact information details.
 * Add event start and end times to month view.
 * CSS fixes from Alvin Woon
 * Better output cache handling (preRun function for http header output).
 * Fixes to allow viewing individual eventdatetime instances.
-* Frontend should only output events with the status of posted or archived (not pending).</notes>
+* Frontend should only output events with the status of posted or archived (not pending).
+   </notes>
   </release>
   <release>
    <version>
@@ -303,10 +302,12 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
    </stability>
    <date>2006-10-02</date>
    <license uri="http://www.php.net/license">PHP License</license>
-   <notes>* Add search capabilities to the frontend.
+   <notes>
+* Add search capabilities to the frontend.
 				* CSS Fixes from Alvin Woon.
 				* Fix Bug #21 multi-day events only show on their start day
-				* Fix Bug #23 Month view, incorrect day shown in certain cases</notes>
+				* Fix Bug #23 Month view, incorrect day shown in certain cases
+   </notes>
   </release>
   <release>
    <version>
@@ -319,14 +320,16 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
    </stability>
    <date>2006-11-09</date>
    <license uri="http://www.php.net/license">PHP License</license>
-   <notes>* Fix Bug #24: html doctitles not generated correctly for calendars other than default
+   <notes>
+* Fix Bug #24: html doctitles not generated correctly for calendars other than default
 				* New Feature some AJAX calls for day navigation.
 				* New Feature Next and Previous links for each Day.
 				* Implement  Request #26  	 Search should look in description, location, and event type.
 				* Fix  Bug #30  	 Ongoing events will not activate link to that day.
 				* Fix  Bug #28  	 Room Number doesn&apos;t show up on Live Calendar.
 				* Fix  Bug #33  	 Missing subscribe link for local (non-default) calendar.
-				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/</notes>
+				Added lots of documentation now available at http://pear.unl.edu/docs/UNL_UCBCN_Frontend/
+   </notes>
   </release>
   <release>
    <version>
@@ -339,11 +342,13 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
    </stability>
    <date>2006-11-17</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Improve queries: Remove table events, and orderby clause from the dayHasEvents query because they are not needed.
+   <notes>
+Improve queries: Remove table events, and orderby clause from the dayHasEvents query because they are not needed.
 Add Event image output.
 * Fix Bug #36: RSS Format in IE7 Text is very large for event calendar
 * Fix Bug in upcoming event rss output, reported by Shravan Manda.
-Switch to BSD License</notes>
+Switch to BSD License
+   </notes>
   </release>
   <release>
    <version>
@@ -356,10 +361,12 @@ Switch to BSD License</notes>
    </stability>
    <date>2006-12-18</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Fix  Bug #37  	 month widget for Dec 2006
+   <notes>
+Fix  Bug #37  	 month widget for Dec 2006
 Add feed subscription links to Search results page.
 Implement ajax search results, autohide search term.
-Back to events listing button for event instances.</notes>
+Back to events listing button for event instances.
+   </notes>
   </release>
   <release>
    <version>
@@ -372,10 +379,12 @@ Back to events listing button for event instances.</notes>
    </stability>
    <date>2007-02-28</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
+   <notes>
+Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
 Small speed improvements, strtotime is only called once per event.
 Javascript fixes for search form.
-Fix XML output format.</notes>
+Fix XML output format.
+   </notes>
   </release>
   <release>
    <version>
@@ -388,10 +397,12 @@ Fix XML output format.</notes>
    </stability>
    <date>2007-04-02</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
+   <notes>
+Correct date time output. Calendar will now show date when event does not end on the same day (both in event listing and event instance).
 Small speed improvements, strtotime is only called once per event.
 Javascript fixes for search form.
-Fix XML output format.</notes>
+Fix XML output format.
+   </notes>
   </release>
   <release>
    <version>
@@ -404,7 +415,9 @@ Fix XML output format.</notes>
    </stability>
    <date>2007-04-02</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Permalink for event instances on sub-calendars did not include calendar name.</notes>
+   <notes>
+Permalink for event instances on sub-calendars did not include calendar name.
+   </notes>
   </release>
   <release>
    <version>
@@ -417,7 +430,9 @@ Fix XML output format.</notes>
    </stability>
    <date>2007-05-01</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Remove h1 tag from xml output of upcoming events.</notes>
+   <notes>
+Remove h1 tag from xml output of upcoming events.
+   </notes>
   </release>
   <release>
    <version>
@@ -430,7 +445,9 @@ Fix XML output format.</notes>
    </stability>
    <date>2007-05-08</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD License</license>
-   <notes>Send application/rss+xml for rss feeds.</notes>
+   <notes>
+Send application/rss+xml for rss feeds.
+   </notes>
   </release>
   <release>
    <version>
@@ -443,11 +460,13 @@ Fix XML output format.</notes>
    </stability>
    <date>2007-08-22</date>
    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
-   <notes>Add links to event locations with map urls.
+   <notes>
+Add links to event locations with map urls.
 Vastly improve the functions for determining if days have events within the
 month widgets. Greatly improves the speed of the year view.
 
-Many coding standards and documentation improvements.</notes>
+Many coding standards and documentation improvements.
+   </notes>
   </release>
   <release>
    <version>
@@ -460,7 +479,8 @@ Many coding standards and documentation improvements.</notes>
    </stability>
    <date>2007-08-29</date>
    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
-   <notes>* Add a link to the upcoming view to the default template.
+   <notes>
+* Add a link to the upcoming view to the default template.
 * Do not cache the upcoming view, and allow the limit to be adjusted.
 * Fix searching within the upcoming view.
 * CSS fixes for IE6
@@ -468,7 +488,8 @@ Many coding standards and documentation improvements.</notes>
 * Add RSS and ICS links to upcoming view.
 * Strip tags from rss feed output... this was breaking the rss feed on some instances
 * Change default calendar subscription to upcoming event list.
-* Fix event location URIs so they validate.</notes>
+* Fix event location URIs so they validate.
+   </notes>
   </release>
   <release>
    <version>
@@ -481,11 +502,13 @@ Many coding standards and documentation improvements.</notes>
    </stability>
    <date>2008-03-17</date>
    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
-   <notes>* Javascript fixes for searching. (Alvin Woon)
+   <notes>
+* Javascript fixes for searching. (Alvin Woon)
 * Separate Location out into new template file. (Brett Bieber)
 * Fix event check for events starting on the last day of the month, was off by 1. (Brett Bieber)
 * Minor CSS fixes. (Alvin Woon)
-* Enhanced print stylesheet for month view. (Alvin Woon)</notes>
+* Enhanced print stylesheet for month view. (Alvin Woon)
+   </notes>
   </release>
   <release>
    <version>
@@ -517,6 +540,31 @@ UNL template -
 NEW Vanilla Template -
 * Vanilla template can be used for frontend output - not dependent on the UNL templates.
 To use the vanilla template, just enter &apos;vanilla&apos; when prompted for which template to use.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.7.0</release>
+    <api>0.7.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-02-25</date>
+   <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+   <notes>
+0.7.0 Changes
+
+* Move navigation html to templates
+    ** THERE IS NO MORE -&gt;navigation MEMBER VARIABLE - UPDATE YOUR TEMPLATES **
+* Check for errors when initializing the default calendar.
+* Ensure $_GET[&apos;eventdatetime_id&apos;] is an integer.
+* Verify date in url is correct for this event instance, otherwise redirect to correct date.
+* Provide a default &apos;manageruri&apos; option that is &apos;manager/&apos;.
+* Create document root if it does not exists.
+
+* UNL template improvements, better checking for the &apos;Today&apos; indicator icon.
    </notes>
   </release>
  </changelog>
