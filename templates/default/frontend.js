@@ -24,7 +24,8 @@ var glob_handler = {
  	 	ajaxsearch();
  	 	shortenText();
  		dropdown();
-  	 }	
+ 	 }
+ 	glob_handler.addEvent(document.getElementById('monthwidget'), 'DOMMouseScroll', changeMonthWidget);
   }
   
   todayHilite();	
@@ -46,8 +47,22 @@ var glob_handler = {
     }
   }
 }
-glob_handler.addEvent(window,"load",glob_handler.init);  
+glob_handler.addEvent(window,"load",glob_handler.init);
 
+function changeMonthWidget(e)
+{
+	e = e ? e : window.event;
+	var raw = e.detail ? e.detail : e.wheelDelta;
+	if (raw > 0) {
+		// Go to next month
+		var next = document.getElementById('next_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+	} else {
+		// Go to prev month
+		var next = document.getElementById('prev_month').getAttribute("href", 2)+'?&monthwidget&format=hcalendar';
+	}
+	ajaxEngine(next, 'monthwidget');
+	return cancelEvent(e);
+}
 
 /*------------------------ GENERIC FUNCTIONS --------------------------*/ 
 /* getElementsByClassName by some guy with a yeallowish website. */
@@ -890,3 +905,17 @@ for (k=0;k<listevent.length;k++){
 
 return false;
 }
+
+function cancelEvent(e)
+{
+  e = e ? e : window.event;
+  if(e.stopPropagation)
+    e.stopPropagation();
+  if(e.preventDefault)
+    e.preventDefault();
+  e.cancelBubble = true;
+  e.cancel = true;
+  e.returnValue = false;
+  return false;
+}
+
