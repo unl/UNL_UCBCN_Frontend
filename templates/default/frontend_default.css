@@ -90,6 +90,7 @@ table.wp-calendar tr:hover{
 table.wp-calendar td:hover{
 	background:#ffffcc;
 }
+table.wp-calendar td.next, table.wp-calendar td.prev {color:#EEE;}
 table.wp-calendar td.pad:hover{background:none}
 
 table.wp-calendar #today_image{
