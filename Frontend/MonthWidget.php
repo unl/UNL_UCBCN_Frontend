@@ -243,7 +243,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
                      OR calendar_has_event.status ='archived')
                 AND calendar_has_event.event_id = eventdatetime.event_id 
                 AND (eventdatetime.starttime < og.d 
-                     AND eventdatetime.endtime > og.d)
+                     AND eventdatetime.endtime >= og.d)
                 AND og.d >= '$firstday' AND og.d <= '$lastday'
                 GROUP BY day;";
             $res =& $db->queryCol($sql);
