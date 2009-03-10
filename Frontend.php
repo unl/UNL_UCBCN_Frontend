@@ -153,7 +153,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
     {
         parent::__construct($options);
         if (!isset($this->calendar)) {
-            $this->calendar = $this->factory('calendar');
+            $this->calendar = UNL_UCBCN_Frontend::factory('calendar');
             if (PEAR::isError($this->calendar)) {
                 throw new Exception($this->calendar->message);
             } else {
@@ -566,7 +566,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
      */
     function getCalendarShortname($id)
     {
-        $c = UNL_UCBCN::factory('calendar');
+        $c = UNL_UCBCN_Frontend::factory('calendar');
         if ($c->get($id)) {
             return $c->shortname;
         } else {
@@ -583,7 +583,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
      */
     function getCalendarID($shortname)
     {
-        $c            = UNL_UCBCN::factory('calendar');
+        $c            = UNL_UCBCN_Frontend::factory('calendar');
         $c->shortname = $shortname;
         if ($c->find() && $c->fetch()) {
             return $c->id;
@@ -634,7 +634,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
                 return new UNL_UCBCN_Error($res->getMessage());
             }
         } else {
-            $eventdatetime = $this->factory('eventdatetime');
+            $eventdatetime = UNL_UCBCN_Frontend::factory('eventdatetime');
             $eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d', $epoch).'%\'');
             return $eventdatetime->find();
         }
@@ -649,7 +649,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
     function displayImage()
     {
         if (isset($_GET['id'])) {
-            $event = $this->factory('event');
+            $event = UNL_UCBCN_Frontend::factory('event');
             if ($event->get($_GET['id'])) {
                 header('Content-type: '.$event->imagemime);
                 echo $event->imagedata;

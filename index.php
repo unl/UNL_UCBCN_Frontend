@@ -26,7 +26,7 @@ $front = new UNL_UCBCN_Frontend(array_merge(array(
             'default_calendar_id' => 1),
             UNL_UCBCN_Frontend::determineView()));
 if (isset($_GET['calendar_shortname'])&&!empty($_GET['calendar_shortname'])) {
-    $front->calendar            = $front->factory('calendar');
+    $front->calendar            = UNL_UCBCN_Frontend::factory('calendar');
     $front->calendar->shortname = $_GET['calendar_shortname'];
     if (!$front->calendar->find()) {
         header('HTTP/1.0 404 Not Found');
