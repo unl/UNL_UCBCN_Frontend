@@ -44,7 +44,7 @@ require_once 'Date.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend extends UNL_UCBCN
+class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object
@@ -175,7 +175,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN
      * 
      * @return void
      */
-    function preRun($cache_hit=false)
+    function preRun($cache_hit = false)
     {
         switch($this->format) {
         case 'ics':

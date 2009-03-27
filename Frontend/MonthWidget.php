@@ -30,7 +30,7 @@ require_once 'Calendar/Util/Textual.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
+class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cacheable
 {
 
     /**
@@ -111,7 +111,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN
      * 
      * @return void
      */
-    public function preRun($cache_hit)
+    public function preRun($cache_hit = false)
     {
         // Do stuff here if needed.
     }
