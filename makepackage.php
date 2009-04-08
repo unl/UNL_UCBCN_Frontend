@@ -74,6 +74,7 @@ $pfm->setReleaseVersion('0.8.0');
 $pfm->setNotes('
 0.8.0 Changes
 * Rearrange SVN so frontend can be used from checkout.
+* Default to vanilla template.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
@@ -101,7 +102,7 @@ $task->addParamGroup('questionCreate', array(
     ));
 $task->addParamGroup('fileSetup', array(
     $task->getParam('docroot', 'Path to root of webserver', 'string', '/Library/WebServer/Documents/events'),
-    $task->getParam('template', 'Template style to use, default (UNL) or vanilla', 'string', 'default')
+    $task->getParam('template', 'Template style to use', 'string', 'vanilla')
     ));
 
 $pfm->addPostinstallTask($task, 'UNL/UCBCN/Frontend_setup.php');
