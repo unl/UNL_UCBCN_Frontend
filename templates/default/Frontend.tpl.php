@@ -10,16 +10,16 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 ?>| Events</title>
 <!-- InstanceEndEditable -->
 <link rel="stylesheet" type="text/css" media="screen" href="/ucomm/templatedependents/templatecss/layouts/main.css" />
-<link rel="stylesheet" type="text/css" media="print" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/print.css"/>
+<link rel="stylesheet" type="text/css" media="print" href="<?php echo $this->uri; ?>templates/default/print.css"/>
 <script type="text/javascript" src="/ucomm/templatedependents/templatesharedcode/scripts/all_compressed.js"></script>
 
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/browsersniffers/ie.html'); ?>
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/comments/developersnote.html'); ?>
 <?php require_once($GLOBALS['unl_template_dependents'].'/templatesharedcode/includes/metanfavico/metanfavico.html'); ?>
 <!-- InstanceBeginEditable name="head" -->
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend_main.css" />
-<script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/ajaxCaller.js"></script>
-<script type="text/javascript" src="<?php echo $this->uri; ?>templates/@TEMPLATE@/frontend.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/default/frontend_main.css" />
+<script type="text/javascript" src="<?php echo $this->uri; ?>templates/default/ajaxCaller.js"></script>
+<script type="text/javascript" src="<?php echo $this->uri; ?>templates/default/frontend.js"></script>
 
 
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->calendar->name; ?> Events" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" />
@@ -162,7 +162,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 				<a href="http://www.unl.edu/webdevnet/">UNL Web Developer Network</a>.
 				For more information see <a href="http://code.google.com/p/unl-event-publisher/">the project documentation.</a></p>
 				<p>The UNL Event publisher is a <br />
-					<a href="http://microformats.org/"><img src="<?php echo $this->uri; ?>templates/@TEMPLATE@/images/microformats.png" alt="microformats community mark" /> Microformats</a> Enabled hCalendar</p>
+					<a href="http://microformats.org/"><img src="<?php echo $this->uri; ?>templates/default/images/microformats.png" alt="microformats community mark" /> Microformats</a> Enabled hCalendar</p>
 		</div>
 		<div class="footer_col">
 				<h3>Ongoing Development</h3>

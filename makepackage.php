@@ -35,7 +35,7 @@ $pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
 //$pfm = new PEAR_PackageFileManager2();
 //$pfm->setOptions(array(
     'packagedirectory' => dirname(__FILE__),
-    'baseinstalldir' => 'UNL/UCBCN',
+    'baseinstalldir' => '/',
     'filelistgenerator' => 'svn',
     'ignore' => array(  'package.xml',
                         '.project',
@@ -49,16 +49,16 @@ $pfm = PEAR_PackageFileManager2::importOptions('package.xml', array(
                         '*tests*'),
     'simpleoutput' => true,
     'roles'=>array('php'=>'data'),
-    'exceptions'=>array('UNL_UCBCN_Frontend_setup.php'=>'php',
-                        'Frontend.php'=>'php',
-                        'Frontend/Month.php'=>'php',
-                        'Frontend/Day.php'=>'php',
-                        'Frontend/MonthWidget.php'=>'php',
-                        'Frontend/NoEvents.php'=>'php',
-                        'Frontend/Year.php'=>'php',
-                        'Frontend/Search.php'=>'php',
-                        'Frontend/Upcoming.php'=>'php',
-                        'Frontend/Week.php'=>'php')
+    'exceptions'=>array('UNL/UCBCN/Frontend_setup.php'=>'php',
+                        'UNL/UCBCN/Frontend.php'=>'php',
+                        'UNL/UCBCN/Frontend/Month.php'=>'php',
+                        'UNL/UCBCN/Frontend/Day.php'=>'php',
+                        'UNL/UCBCN/Frontend/MonthWidget.php'=>'php',
+                        'UNL/UCBCN/Frontend/NoEvents.php'=>'php',
+                        'UNL/UCBCN/Frontend/Year.php'=>'php',
+                        'UNL/UCBCN/Frontend/Search.php'=>'php',
+                        'UNL/UCBCN/Frontend/Upcoming.php'=>'php',
+                        'UNL/UCBCN/Frontend/Week.php'=>'php')
 ));
 $pfm->setPackage('UNL_UCBCN_Frontend');
 $pfm->setPackageType('php'); // this is a PEAR-style php script package
@@ -69,20 +69,11 @@ $pfm->setDescription('This class extends the UNL UCBCN backend system to create
 $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
-$pfm->setAPIVersion('0.7.0');
-$pfm->setReleaseVersion('0.7.0');
+$pfm->setAPIVersion('0.8.0');
+$pfm->setReleaseVersion('0.8.0');
 $pfm->setNotes('
-0.7.0 Changes
-
-* Move navigation html to templates
-    ** THERE IS NO MORE ->navigation MEMBER VARIABLE - UPDATE YOUR TEMPLATES **
-* Check for errors when initializing the default calendar.
-* Ensure $_GET[\'eventdatetime_id\'] is an integer.
-* Verify date in url is correct for this event instance, otherwise redirect to correct date.
-* Provide a default \'manageruri\' option that is \'manager/\'.
-* Create document root if it does not exists.
-
-* UNL template improvements, better checking for the \'Today\' indicator icon.
+0.8.0 Changes
+* Rearrange SVN so frontend can be used from checkout.
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
@@ -93,7 +84,7 @@ $pfm->setPhpDep('5.1.2');
 $pfm->setPearinstallerDep('1.5.4');
 $pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.5.0');
 $pfm->addPackageDepWithChannel('required', 'Calendar', 'pear.php.net', '0.5.3');
-foreach (array('Frontend.php','UNL_UCBCN_Frontend_setup.php','index.php') as $file) {
+foreach (array('Frontend.php','Frontend_setup.php','index.php') as $file) {
     $pfm->addReplacement($file, 'pear-config', '@PHP_BIN@', 'php_bin');
     $pfm->addReplacement($file, 'pear-config', '@PHP_DIR@', 'php_dir');
     $pfm->addReplacement($file, 'pear-config', '@DATA_DIR@', 'data_dir');
@@ -103,7 +94,7 @@ foreach (array('Frontend.php','UNL_UCBCN_Frontend_setup.php','index.php') as $fi
 $config = PEAR_Config::singleton();
 $log    = PEAR_Frontend::singleton();
 $task   = new PEAR_Task_Postinstallscript_rw($pfm, $config, $log,
-    array('name' => 'UNL_UCBCN_Frontend_setup.php', 'role' => 'php'));
+    array('name' => 'UNL/UCBCN/Frontend_setup.php', 'role' => 'php'));
 $task->addParamGroup('questionCreate', array(
     $task->getParam('createtemplate', 'Create/Upgrade default templates?', 'string', 'yes'),
     $task->getParam('createindex', 'Create/Upgrade sample index page?', 'string', 'yes'),
@@ -113,7 +104,7 @@ $task->addParamGroup('fileSetup', array(
     $task->getParam('template', 'Template style to use, default (UNL) or vanilla', 'string', 'default')
     ));
 
-$pfm->addPostinstallTask($task, 'UNL_UCBCN_Frontend_setup.php');
+$pfm->addPostinstallTask($task, 'UNL/UCBCN/Frontend_setup.php');
 $pfm->generateContents();
 if (isset($_SERVER['argv']) && $_SERVER['argv'][1] == 'make') {
     $pfm->writePackageFile();

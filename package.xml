@@ -18,11 +18,11 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2009-02-25</date>
- <time>16:49:29</time>
+ <date>2009-04-08</date>
+ <time>12:00:23</time>
  <version>
-  <release>0.7.0</release>
-  <api>0.7.0</api>
+  <release>0.8.0</release>
+  <api>0.8.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -30,30 +30,11 @@
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
  <notes>
-0.7.0 Changes
-
-* Move navigation html to templates
-    ** THERE IS NO MORE -&gt;navigation MEMBER VARIABLE - UPDATE YOUR TEMPLATES **
-* Check for errors when initializing the default calendar.
-* Ensure $_GET[&apos;eventdatetime_id&apos;] is an integer.
-* Verify date in url is correct for this event instance, otherwise redirect to correct date.
-* Provide a default &apos;manageruri&apos; option that is &apos;manager/&apos;.
-* Create document root if it does not exists.
-
-* UNL template improvements, better checking for the &apos;Today&apos; indicator icon.
+0.8.0 Changes
+* Rearrange SVN so frontend can be used from checkout.
  </notes>
  <contents>
-  <dir baseinstalldir="UNL/UCBCN" name="/">
-   <dir name="Frontend">
-    <file name="Day.php" role="php" />
-    <file name="Month.php" role="php" />
-    <file name="MonthWidget.php" role="php" />
-    <file name="NoEvents.php" role="php" />
-    <file name="Search.php" role="php" />
-    <file name="Upcoming.php" role="php" />
-    <file name="Week.php" role="php" />
-    <file name="Year.php" role="php" />
-   </dir> <!-- /Frontend -->
+  <dir baseinstalldir="/" name="/">
    <dir name="templates">
     <dir name="default">
      <dir name="images">
@@ -157,12 +138,55 @@
      <file name="screen.css" role="data" />
     </dir> <!-- /templates/vanilla -->
    </dir> <!-- /templates -->
-   <file name="Frontend.php" role="php">
-    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config" />
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config" />
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config" />
-    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config" />
-   </file>
+   <dir name="UNL">
+    <dir name="UCBCN">
+     <dir name="Frontend">
+      <file name="Day.php" role="php" />
+      <file name="Month.php" role="php" />
+      <file name="MonthWidget.php" role="php" />
+      <file name="NoEvents.php" role="php" />
+      <file name="Search.php" role="php" />
+      <file name="Upcoming.php" role="php" />
+      <file name="Week.php" role="php" />
+      <file name="Year.php" role="php" />
+     </dir> <!-- /UNL/UCBCN/Frontend -->
+     <file name="Frontend.php" role="php" />
+     <file name="Frontend_setup.php" role="php">
+      <tasks:postinstallscript>
+       <tasks:paramgroup>
+        <tasks:id>questionCreate</tasks:id>
+        <tasks:param>
+         <tasks:name>createtemplate</tasks:name>
+         <tasks:prompt>Create/Upgrade default templates?</tasks:prompt>
+         <tasks:type>string</tasks:type>
+         <tasks:default>yes</tasks:default>
+        </tasks:param>
+        <tasks:param>
+         <tasks:name>createindex</tasks:name>
+         <tasks:prompt>Create/Upgrade sample index page?</tasks:prompt>
+         <tasks:type>string</tasks:type>
+         <tasks:default>yes</tasks:default>
+        </tasks:param>
+       </tasks:paramgroup>
+       <tasks:paramgroup>
+        <tasks:id>fileSetup</tasks:id>
+        <tasks:param>
+         <tasks:name>docroot</tasks:name>
+         <tasks:prompt>Path to root of webserver</tasks:prompt>
+         <tasks:type>string</tasks:type>
+         <tasks:default>/Library/WebServer/Documents/events</tasks:default>
+        </tasks:param>
+        <tasks:param>
+         <tasks:name>template</tasks:name>
+         <tasks:prompt>Template style to use, default (UNL) or vanilla</tasks:prompt>
+         <tasks:type>string</tasks:type>
+         <tasks:default>default</tasks:default>
+        </tasks:param>
+       </tasks:paramgroup>
+      </tasks:postinstallscript>
+     </file>
+    </dir> <!-- /UNL/UCBCN -->
+   </dir> <!-- /UNL -->
    <file name="index.php" role="data">
     <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config" />
     <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config" />
@@ -170,44 +194,6 @@
     <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config" />
    </file>
    <file name="LICENSE" role="data" />
-   <file name="UNL_UCBCN_Frontend_setup.php" role="php">
-    <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config" />
-    <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config" />
-    <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config" />
-    <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config" />
-    <tasks:postinstallscript>
-     <tasks:paramgroup>
-      <tasks:id>questionCreate</tasks:id>
-      <tasks:param>
-       <tasks:name>createtemplate</tasks:name>
-       <tasks:prompt>Create/Upgrade default templates?</tasks:prompt>
-       <tasks:type>string</tasks:type>
-       <tasks:default>yes</tasks:default>
-      </tasks:param>
-      <tasks:param>
-       <tasks:name>createindex</tasks:name>
-       <tasks:prompt>Create/Upgrade sample index page?</tasks:prompt>
-       <tasks:type>string</tasks:type>
-       <tasks:default>yes</tasks:default>
-      </tasks:param>
-     </tasks:paramgroup>
-     <tasks:paramgroup>
-      <tasks:id>fileSetup</tasks:id>
-      <tasks:param>
-       <tasks:name>docroot</tasks:name>
-       <tasks:prompt>Path to root of webserver</tasks:prompt>
-       <tasks:type>string</tasks:type>
-       <tasks:default>/Library/WebServer/Documents/events</tasks:default>
-      </tasks:param>
-      <tasks:param>
-       <tasks:name>template</tasks:name>
-       <tasks:prompt>Template style to use, default (UNL) or vanilla</tasks:prompt>
-       <tasks:type>string</tasks:type>
-       <tasks:default>default</tasks:default>
-      </tasks:param>
-     </tasks:paramgroup>
-    </tasks:postinstallscript>
-   </file>
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -551,7 +537,7 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2009-02-25</date>
+   <date>2009-03-27</date>
    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
    <notes>
 0.7.0 Changes
@@ -565,6 +551,22 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
 * Create document root if it does not exists.
 
 * UNL template improvements, better checking for the &apos;Today&apos; indicator icon.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>0.8.0</release>
+    <api>0.8.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-04-08</date>
+   <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
+   <notes>
+0.8.0 Changes
+* Rearrange SVN so frontend can be used from checkout.
    </notes>
   </release>
  </changelog>
