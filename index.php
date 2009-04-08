@@ -15,11 +15,16 @@
 ini_set('display_errors', true);
 require_once 'UNL/Autoload.php';
 
+if (file_exists(dirname(dirname(__FILE__)).'/UNL_UCBCN')) {
+    // Allow to run from a checkout
+    set_include_path(dirname(dirname(__FILE__)).'/UNL_UCBCN'.PATH_SEPARATOR.get_include_path());
+}
+
 $GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents';
 
 $front = new UNL_UCBCN_Frontend(array_merge(array(
-            'dsn'                 =>'mysqli://eventcal:eventcal@localhost/eventcal',
-            'template'            => 'default',
+            'dsn'                 => 'mysqli://eventcal:eventcal@localhost/eventcal',
+            'template'            => 'vanilla',
             'uri'                 => '',
             'uriformat'           => 'querystring',
             'manageruri'          => 'manager/',
