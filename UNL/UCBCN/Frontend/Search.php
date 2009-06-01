@@ -86,7 +86,6 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
      * Title, Description, Location
      * 
      * @return void
-     * @todo Add searching event_has_eventtype for matching event types.
      */
     public function run()
     {
@@ -94,8 +93,11 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
         if (!empty($this->query)) {
             $mdb2 = $this->calendar->getDatabaseConnection();
             $sql  = 'SELECT DISTINCT eventdatetime.id 
-                    FROM event, eventdatetime, calendar_has_event, location
-                    WHERE 
+                    FROM event, eventdatetime, calendar_has_event, location, 
+                      eventtype, event_has_eventtype
+                    WHERE
+                        event_has_eventtype.event_id = event.id AND
+                        event_has_eventtype.eventtype_id = eventtype.id AND
                         eventdatetime.event_id = event.id AND 
                         calendar_has_event.event_id = event.id AND 
                         calendar_has_event.status != \'pending\' AND 
@@ -106,13 +108,17 @@ class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
                 $sql .= 'eventdatetime.starttime LIKE \''.date('Y-m-d', $t).'%\' ORDER BY eventdatetime.starttime';
             } else {
                 // Do a textual search.
-                $sql .= '(event.title LIKE \'%'.$mdb2->escape($this->query).'%\' OR '.
+                $sql .= 
+                        '(event.title LIKE \'%'.$mdb2->escape($this->query).'%\' OR '.
+                        '(eventtype.name LIKE \'%'.$mdb2->escape($this->query).'%\') OR '.
+
                         'event.description LIKE \'%'.$mdb2->escape($this->query).'%\' OR '.
                         '(location.name LIKE \'%'.$mdb2->escape($this->query).'%\')) AND '.
                         '(eventdatetime.starttime>=\''.date('Y-m-d').' 00:00:00\' OR '.
-                        'eventdatetime.endtime>\''.date('Y-m-d').' 00:00:00\') ORDER BY eventdatetime.starttime ASC';
+                        'eventdatetime.endtime>\''.date('Y-m-d').' 00:00:00\')
+
+                        ORDER BY eventdatetime.starttime ASC';
             }
-            
             $res = $mdb2->query($sql);
             if (!PEAR::isError($res)) {
                 $this->output       = new UNL_UCBCN_EventListing();
