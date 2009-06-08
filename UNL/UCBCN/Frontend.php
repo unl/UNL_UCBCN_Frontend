@@ -2,12 +2,12 @@
 /**
  * This is the primary viewing interface for the events.
  * This would be the 'model/controller' if you follow that paradigm.
- * 
+ *
  * This file contains functions used throughout the frontend views.
- * 
+ *
  * PHP version 5
- * 
- * @category  Events 
+ *
+ * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2009 Regents of the University of Nebraska
@@ -22,7 +22,7 @@
 require_once 'UNL/UCBCN.php';
 
 /**
- * Event instance is a simple class used to hold details about a single event 
+ * Event instance is a simple class used to hold details about a single event
  * instance which is a UNL_UCBCN_Event and a UNL_UCBCN_Location.
  */
 require_once 'UNL/UCBCN/EventInstance.php';
@@ -36,7 +36,7 @@ require_once 'Date.php';
  * This is the basic frontend output class through which all output to the public is
  * generated. This class handles the determination of what view the user requested
  * and what information to send.
- * 
+ *
  * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
@@ -48,105 +48,105 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object
-     * 
+     *
      * @var UNL_UCBCN_Calendar
      */
     public $calendar;
     
     /**
      * Year the user is viewing.
-     * 
+     *
      * @var int
      */
     public $year;
     
     /**
      * Month the user is viewing.
-     * 
+     *
      * @var int
      */
     public $month;
     
     /**
      * Day to show events for
-     * 
+     *
      * @var int
      */
     public $day;
     
     /**
      * Specific eventdatetime_id (if used)
-     * 
+     *
      * @var int
      */
     public $eventdatetime_id = null;
     
     /**
      * URI to the management frontend
-     * 
+     *
      * @var string
      */
     public $uri = '';
     
     /**
      * Format of URI's  querystring|rest
-     * 
+     *
      * @var string
      */
     public $uriformat = 'querystring';
     
     /**
      * URI to the management interface UNL_UCBCN_Manager
-     * 
+     *
      * @var string EG: http://events.unl.edu/manager/
      */
     public $manageruri = '';
     
     /**
      * Right column (usually the month widget)
-     * 
+     *
      * @var string
      */
     public $right;
     
     /**
      * Unique body ID
-     * 
+     *
      * @var string
      */
     public $uniquebody;
     
     /**
      * Main content of the page sent to the client.
-     * 
+     *
      * @var mixed
      */
     public $output;
     
     /**
      * Section Title
-     * 
+     *
      * @var string
      */
     public $sectitle;
     
     /**
      * View to be displayed
-     * 
+     *
      * @var string
      */
     public $view = 'day';
     
     /**
      * format of view
-     * 
+     *
      * @var string
      */
     public $format = 'html';
     
     /**
      * Constructor for the frontend.
-     * 
+     *
      * @param array $options Associative array of options for the frontend.
      */
     function __construct($options)
@@ -168,11 +168,11 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * This function is called before the run() function to handle
-     * any details prior to populating the data in the object, and 
+     * any details prior to populating the data in the object, and
      * sends output headers.
-     * 
+     *
      * @param bool $cache_hit if data is already cached or not.
-     * 
+     *
      * @return void
      */
     function preRun($cache_hit = false)
@@ -203,7 +203,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      * Runs/builds the frontend object with the display parameters set.
      * This function will populate all of the output and member variables with the
      * data for the current view.
-     * 
+     *
      * @return void
      */
     function run()
@@ -306,10 +306,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * Gets the specified event instance.
-     * 
+     *
      * @param int                $id       The id of the event instance to get.
      * @param UNL_UCBCN_Calendar $calendar The calendar to get the event for.
-     * 
+     *
      * @return object UNL_UCBCN_EventInstance on success UNL_UCBCN_Error on error.
      */
     function getEventInstance($id, $calendar=null)
@@ -332,17 +332,16 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * Returns a formatted URL.
-     * 
+     *
      * @param array $values Associative array of the values to add to the URL
      * @param bool  $encode If true and format is querystring, ampersands will be &amp;
-     * 
+     *
      * @return string URL to a frontend which has the data in the format requested.
      */
     function formatURL($values,$encode = true)
     {
         $order = array('calendar','upcoming','search','y','m','d','eventdatetime_id','q');
         global $_UNL_UCBCN;
-        $url = '?';
         if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
             $url = $_UNL_UCBCN['uri'];
         }
@@ -355,7 +354,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
                         /* A calendar needs to be formmatted into the URL.
                          * We need to take care to not include it if it is the
                          * default calendar.
-                         */ 
+                         */
                         if (is_numeric($values[$val])) {
                             $cid = $values[$val];
                         } else {
@@ -377,6 +376,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             break;
         case 'querystring':
         default:
+        	$url .= '?';
             foreach ($order as $val) {
                 if (isset($values[$val])) {
                     if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
@@ -409,12 +409,12 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     }
     
     /**
-     * This function is for reformmating URL address. IE, you have the 
+     * This function is for reformmating URL address. IE, you have the
      * url to the object, but simply want to change the format to ics etc.
-     * 
+     *
      * @param string $url    Url of the form http://
      * @param array  $values Associative array of values to apply. format
-     * 
+     *
      * @return string The URL reformatted to a different output format.
      */
     function reformatURL($url, $values)
@@ -436,9 +436,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * Sets and/or returns the uri format.
-     * 
+     *
      * @param string $set optional string, pass it to set the uriFormat, don't pass it to retrieve.
-     * 
+     *
      * @return string rest or querystring
      */
     function uriFormat($set=null)
@@ -468,9 +468,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * This function attempts to determine the view parameters for the frontend output.
-     * 
+     *
      * @param string $method The HTTP method to use for determining views-GET | POST
-     * 
+     *
      * @return array options to be sent to the constructor.
      */
     function determineView($method='GET')
@@ -543,7 +543,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * Get's a uniqe key for this object for reference in cache.
-     * 
+     *
      * @return string A unique identifier for this view of the calendar.
      */
     function getCacheKey()
@@ -552,16 +552,16 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             // Right now we aren't caching search results or upcoming pages.
             return false;
         } else {
-            return md5(serialize(array_merge($this->determineView(), 
+            return md5(serialize(array_merge($this->determineView(),
                                              array($this->calendar->id))));
         }
     }
     
     /**
      * Returns a calendar shortname for the calendar with the given ID.
-     * 
+     *
      * @param int $id Calendar ID within the database.
-     * 
+     *
      * @return int on success, false on error.
      */
     function getCalendarShortname($id)
@@ -576,9 +576,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * Gets the calendar id from a shortname.
-     * 
+     *
      * @param string $shortname The value for the shortname field in the calendar table.
-     * 
+     *
      * @return int id on success, false on error.
      */
     function getCalendarID($shortname)
@@ -595,9 +595,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     /**
      * This function converts a string stored in the database to html output.
      * & becomes &amp; etc.
-     * 
+     *
      * @param string $t Normally a varchar string from the database.
-     * 
+     *
      * @return String encoded for output to html.
      */
     function dbStringToHtml($t)
@@ -608,10 +608,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     
     /**
      * This function checks if a calendar has events on the day requested.
-     * 
+     *
      * @param string             $epoch    Unix epoch of the day to check.
      * @param UNL_UCBCN_Calendar $calendar The calendar to check.
-     * 
+     *
      * @return bool true or false
      */
     function dayHasEvents($epoch, $calendar = null)
@@ -621,11 +621,11 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             $db  =& $calendar->getDatabaseConnection();
             $res =& $db->query('SELECT DISTINCT eventdatetime.id FROM calendar_has_event,eventdatetime
                                 WHERE calendar_has_event.calendar_id='.$calendar->id.'
-                                AND (calendar_has_event.status =\'posted\' 
+                                AND (calendar_has_event.status =\'posted\'
                                      OR calendar_has_event.status =\'archived\')
                                 AND calendar_has_event.event_id = eventdatetime.event_id
-                                AND (eventdatetime.starttime LIKE \''.date('Y-m-d', $epoch).'%\' 
-                                    OR (eventdatetime.starttime<\''.date('Y-m-d 00:00:00', $epoch).'\' 
+                                AND (eventdatetime.starttime LIKE \''.date('Y-m-d', $epoch).'%\'
+                                    OR (eventdatetime.starttime<\''.date('Y-m-d 00:00:00', $epoch).'\'
                                         AND eventdatetime.endtime > \''.date('Y-m-d 00:00:00', $epoch).'\'))
                                 LIMIT 1');
             if (!PEAR::isError($res)) {
@@ -643,7 +643,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     /**
      * When the image view is set, the image for a given event will be displayed
      * to the end user.  $_GET['id'] must be set to the event.id which has the image.
-     * 
+     *
      * @return void
      */
     function displayImage()
