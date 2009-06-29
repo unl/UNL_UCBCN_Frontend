@@ -612,6 +612,22 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     }
     
     /**
+     * Get a list of event types
+     *
+     * @return
+     */
+    function getEventTypes()
+    {
+		$e = UNL_UCBCN_Frontend::factory('eventtype');
+		$e->orderBy('name ASC');
+		if($e->find()){
+			return $e;
+		}else{
+			return false;
+		}
+    }
+    
+    /**
      * This function converts a string stored in the database to html output.
      * & becomes &amp; etc.
      *
