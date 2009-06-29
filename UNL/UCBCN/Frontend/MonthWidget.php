@@ -1,14 +1,14 @@
 <?php
 /**
  * This class defines a 30 day widget containing information for a given month.
- * 
+ *
  * PHP version 5
- * 
+ *
  * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2009 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
  */
@@ -22,12 +22,12 @@ require_once 'Calendar/Util/Textual.php';
 /**
  * Class defines a month widget, basically a table with 30 boxes representing the
  * days in the month. Days which have events will be selected.
- * 
+ *
  * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2009 Regents of the University of Nebraska
- * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
+ * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
 class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cacheable
@@ -35,7 +35,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
 
     /**
      * Calendar UNL_UCBCN_Calendar Object
-     * 
+     *
      * @var UNL_UCBCN_Calendar
      */
     public $calendar;
@@ -43,34 +43,34 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     /**
      * Year for this month widget
      *
-     * @var int 
+     * @var int
      */
     public $year;
     
     /**
      * Month for this month widget.
-     * 
+     *
      * @var int
      */
     public $month;
     
     /**
      * Caption for the month widget.
-     * 
-     * @var string 
+     *
+     * @var string
      */
     public $caption;
     
     /**
      * Header for the table
-     * 
+     *
      * @var string
      */
     public $thead;
     
     /**
      * Body for the table
-     * 
+     *
      * @var string
      */
     public $tbody;
@@ -78,7 +78,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     /**
      * This function constructs the month widget and populates the heading,
      * caption, footer and body for the MonthWidget.
-     * 
+     *
      * @param int                $y        Year
      * @param int                $m        Month
      * @param UNL_UCBCN_Calendar $calendar Calendar to prepare a month widget for.
@@ -93,11 +93,11 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     /**
      * Returns a string identifying this month widget.
      *
-     * @return string A string of the form monthwidget_2006-05_1
+     * @return string A string of the form monthwidget_2006-05-12_1
      */
     public function getCacheKey()
     {
-        $str = 'monthwidget_'.$this->year.'-'.$this->month;
+        $str = 'monthwidget_'.$this->year.'-'.$this->month.'-'.date('d');
         if (isset($this->calendar)) {
             $str .= '_'.$this->calendar->id;
         }
@@ -106,9 +106,9 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     
     /**
      * Runs before any output is sent or object is built.
-     * 
+     *
      * @param bool $cache_hit True if cached output is ready to be sent, or false.
-     * 
+     *
      * @return void
      */
     public function preRun($cache_hit = false)
@@ -117,7 +117,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     }
     
     /**
-     * This function populates the month widget... checks for each 
+     * This function populates the month widget... checks for each
      * day of this month whether the day has events.
      *
      * @return void
@@ -167,6 +167,10 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
                 $class = 'next';
             }
             
+            if(date('Y') == $Day->thisYear() && date('m') == $Day->thisMonth() && date('d') == $Day->thisDay()){
+	    		$class .= ' today';
+            }
+            
             // isFirst() to find start of week
             if ( $Day->isFirst() )
                 $this->tbody .= "<tr>\n";
@@ -188,9 +192,9 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     
     /**
      * Determines the days of this month with events.
-     * 
+     *
      * @param Calendar_Month $month Month to find events in.
-     * 
+     *
      * @return an array with values representing the days with events.
      */
     public function dailyEventCount($month)
@@ -201,11 +205,11 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
         $end_bound   = date('Y-m-d', $days[count($days)]->getTimestamp());
         $sql         = "SELECT DATE_FORMAT(eventdatetime.starttime,'%m-%d') AS day,
                                count(*) AS events
-		                FROM calendar_has_event,eventdatetime 
+		                FROM calendar_has_event,eventdatetime
 		                WHERE calendar_has_event.calendar_id={$this->calendar->id}
 		                AND (calendar_has_event.status ='posted'
                              OR calendar_has_event.status ='archived')
-		                AND calendar_has_event.event_id = eventdatetime.event_id 
+		                AND calendar_has_event.event_id = eventdatetime.event_id
 		                AND eventdatetime.starttime >= '$start_bound 00:00:00'
 						AND eventdatetime.starttime <= '$end_bound 23:59:59'
 		                GROUP BY day;";
@@ -215,9 +219,9 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     
     /**
      * This function finds ongoing events for the given month.
-     * 
+     *
      * @param Calendar_Month $month Month to find ongoing events for.
-     * 
+     *
      * @return array
      */
     public function findOngoingEvents($month)
@@ -237,12 +241,12 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
                 $db->query($sql);
             }
             $sql = "SELECT DATE_FORMAT(og.d,'%m-%d') AS day, count(*) AS events
-                FROM calendar_has_event,eventdatetime,ongoingcheck AS og 
+                FROM calendar_has_event,eventdatetime,ongoingcheck AS og
                 WHERE calendar_has_event.calendar_id={$this->calendar->id}
                 AND (calendar_has_event.status ='posted'
                      OR calendar_has_event.status ='archived')
-                AND calendar_has_event.event_id = eventdatetime.event_id 
-                AND (eventdatetime.starttime < og.d 
+                AND calendar_has_event.event_id = eventdatetime.event_id
+                AND (eventdatetime.starttime < og.d
                      AND eventdatetime.endtime >= og.d)
                 AND og.d >= '$firstday' AND og.d <= '$lastday'
                 GROUP BY day;";
