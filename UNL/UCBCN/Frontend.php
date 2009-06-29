@@ -593,6 +593,25 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     }
     
     /**
+     * Get a list of calendars with a given status
+     *
+     * @param string $status The value of the status in the calendar table
+     *
+     * @return
+     */
+    function getCalendarsByStatus($status)
+    {
+		$c = UNL_UCBCN_Frontend::factory('calendar');
+		$c->calendarstatus = $status;
+		$c->orderBy('name ASC');
+		if($c->find()){
+			return $c;
+		}else{
+			return false;
+		}
+    }
+    
+    /**
      * This function converts a string stored in the database to html output.
      * & becomes &amp; etc.
      *
