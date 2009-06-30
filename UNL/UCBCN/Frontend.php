@@ -16,21 +16,6 @@
  * @todo      Add new output formats such as serialized PHP, XML, and JSON.
  */
 
-/**
- * Require the backend UNL_UCBCN to extend it.
- */
-require_once 'UNL/UCBCN.php';
-
-/**
- * Event instance is a simple class used to hold details about a single event
- * instance which is a UNL_UCBCN_Event and a UNL_UCBCN_Location.
- */
-require_once 'UNL/UCBCN/EventInstance.php';
-
-/**
- * The PEAR Date class is used for its knowledge about dates & times.
- */
-require_once 'Date.php';
 
 /**
  * This is the basic frontend output class through which all output to the public is
@@ -210,8 +195,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     {
         switch($this->view) {
         case 'upcoming':
-            include_once 'UNL/UCBCN/Frontend/Upcoming.php';
-            include_once 'UNL/UCBCN/Frontend/MonthWidget.php';
             if (isset($_GET['limit'])) {
                 $limit = intval($_GET['limit']);
             } else {
@@ -224,7 +207,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             $this->right    = new UNL_UCBCN_Frontend_MonthWidget(date('Y'), date('m'), $this->calendar);
             break;
         case 'event':
-            include_once 'UNL/UCBCN/Frontend/MonthWidget.php';
             if (isset($_GET['eventdatetime_id'])) {
                 $id = (int) $_GET['eventdatetime_id'];
             }
@@ -235,8 +217,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             break;
         default:
         case 'day':
-            include_once 'UNL/UCBCN/Frontend/Day.php';
-            include_once 'UNL/UCBCN/Frontend/MonthWidget.php';
             $this->output[] = new UNL_UCBCN_Frontend_Day(array(
                                         'dsn'     => $this->dsn,
                                         'year'    => $this->year,
@@ -248,7 +228,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
                                                               $this->calendar);
             break;
         case 'week':
-            include_once 'UNL/UCBCN/Frontend/Week.php';
             $this->output[] = new UNL_UCBCN_Frontend_Week(array(
                                         'dsn'     => $this->dsn,
                                         'year'    => $this->year,
@@ -257,20 +236,16 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
                                         'calendar'=> $this->calendar));
             break;
         case 'month':
-            include_once 'UNL/UCBCN/Frontend/Month.php';
             $this->output[] = new UNL_UCBCN_Frontend_Month($this->year, $this->month, $this->calendar, $this->dsn);
             break;
         case 'monthwidget':
-            include_once 'UNL/UCBCN/Frontend/MonthWidget.php';
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_hcalendar');
             $this->output[] = new UNL_UCBCN_Frontend_MonthWidget($this->year, $this->month, $this->calendar);
             break;
         case 'year':
-            include_once 'UNL/UCBCN/Frontend/Year.php';
             $this->output[] = new UNL_UCBCN_Frontend_Year($this->year, $this->calendar);
             break;
         case 'search':
-            include_once 'UNL/UCBCN/Frontend/Search.php';
             if (isset($_GET['q'])) {
                 $q = $_GET['q'];
             } else {

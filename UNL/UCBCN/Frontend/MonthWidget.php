@@ -13,11 +13,6 @@
  * @link      http://code.google.com/p/unl-event-publisher/
  */
 
-require_once 'UNL/UCBCN.php';
-require_once 'UNL/UCBCN/Frontend.php';
-require_once 'Calendar/Calendar.php';
-require_once 'Calendar/Month/Weekdays.php';
-require_once 'Calendar/Util/Textual.php';
 
 /**
  * Class defines a month widget, basically a table with 30 boxes representing the
