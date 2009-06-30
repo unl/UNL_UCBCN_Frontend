@@ -2,10 +2,10 @@
 /**
  * Sample index file for running the frontend. This is a simple file which creates
  * a new UNL_UCBCN_Frontend object and handles sending the output to the user.
- * 
+ *
  * PHP version 5
- * 
- * @category  Events 
+ *
+ * @category  Events
  * @package   UNL_UCBCN_Frontend
  * @author    Brett Bieber <brett.bieber@gmail.com>
  * @copyright 2009 Regents of the University of Nebraska
@@ -13,7 +13,7 @@
  * @link      http://code.google.com/p/unl-event-publisher/
  */
 ini_set('display_errors', true);
-require_once 'UNL/Autoload.php';
+require_once 'UNL/UCBCN/Autoload.php';
 
 if (file_exists(dirname(dirname(__FILE__)).'/UNL_UCBCN')) {
     // Allow to run from a checkout
