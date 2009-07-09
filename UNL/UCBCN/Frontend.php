@@ -317,6 +317,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     {
         $order = array('calendar','upcoming','search','y','m','d','eventdatetime_id','q');
         global $_UNL_UCBCN;
+        $url = '';
         if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
             $url = $_UNL_UCBCN['uri'];
         }
