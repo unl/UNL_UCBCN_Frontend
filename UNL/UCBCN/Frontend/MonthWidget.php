@@ -223,7 +223,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
     {
         $db      =& $this->calendar->getDatabaseConnection();
         $queries = array();
-        $sql     = "CREATE TABLE IF NOT EXISTS `ongoingcheck` (`d` DATE NOT NULL , PRIMARY KEY ( `d` ))";
+        $sql     = "CREATE TABLE IF NOT EXISTS `ongoingcheck` (`d` DATE NOT NULL DEFAULT '".date('Y-m-d')."', PRIMARY KEY ( `d` ))";
         $res     =& $db->query($sql);
         if (!PEAR::isError($res)) {
             while ( $day = $month->fetch() ) {
