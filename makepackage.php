@@ -72,9 +72,21 @@ $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.8.0');
 $pfm->setReleaseVersion('0.8.0');
 $pfm->setNotes('
-0.8.0 Changes
-* Rearrange SVN so frontend can be used from checkout.
+0.8.0 Changes:
+* Rearrange SVN so frontend can be run from checkout.
 * Default to vanilla template.
+* Always call the factory statically.
+* Support searching by event types.
+
+Template Changes:
+* Allow scrolling through the monthwidget with mouse scroll wheel
+* Different coloring for month widget days on the next and previous months
+* New sample of a mobile template.
+
+Fixes:
+* Ongoing events were not showing up on the their last day within the monthwidget.
+* Call UNL_UCBCN_Frontend::factory() method statically - users should update their index.php files.
+
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
@@ -83,9 +95,9 @@ $pfm->setLicense('BSD License', 'http://www1.unl.edu/wdn/wiki/Software_License')
 $pfm->clearDeps();
 $pfm->setPhpDep('5.1.2');
 $pfm->setPearinstallerDep('1.5.4');
-$pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.5.0');
+$pfm->addPackageDepWithChannel('required', 'UNL_UCBCN', 'pear.unl.edu', '0.8.0');
 $pfm->addPackageDepWithChannel('required', 'Calendar', 'pear.php.net', '0.5.3');
-foreach (array('Frontend.php','Frontend_setup.php','index.php') as $file) {
+foreach (array('UNL/UCBCN/Frontend.php','UNL/UCBCN/Frontend_setup.php','index.php') as $file) {
     $pfm->addReplacement($file, 'pear-config', '@PHP_BIN@', 'php_bin');
     $pfm->addReplacement($file, 'pear-config', '@PHP_DIR@', 'php_dir');
     $pfm->addReplacement($file, 'pear-config', '@DATA_DIR@', 'data_dir');

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.8.0alpha1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>UNL_UCBCN_Frontend</name>
  <channel>pear.unl.edu</channel>
  <summary>A public frontend for a University Event Publishing system.</summary>
@@ -18,8 +18,8 @@
   <email>alvinwoon@gmail.com</email>
   <active>yes</active>
  </developer>
- <date>2009-04-08</date>
- <time>12:00:23</time>
+ <date>2009-07-09</date>
+ <time>10:03:08</time>
  <version>
   <release>0.8.0</release>
   <api>0.8.0</api>
@@ -30,8 +30,20 @@
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
  <notes>
-0.8.0 Changes
-* Rearrange SVN so frontend can be used from checkout.
+0.8.0 Changes:
+* Rearrange SVN so frontend can be run from checkout.
+* Default to vanilla template.
+* Always call the factory statically.
+* Support searching by event types.
+
+Template Changes:
+* Allow scrolling through the monthwidget with mouse scroll wheel
+* Different coloring for month widget days on the next and previous months
+* New sample of a mobile template.
+
+Fixes:
+* Ongoing events were not showing up on the their last day within the monthwidget.
+* Call UNL_UCBCN_Frontend::factory() method statically - users should update their index.php files.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -111,30 +123,11 @@
      <file name="print.css" role="data" />
      <file name="util.js" role="data" />
     </dir> <!-- /templates/default -->
-    <dir name="vanilla">
-     <file name="EventInstance.tpl.php" role="data" />
-     <file name="EventInstance_icalendar.tpl.php" role="data" />
-     <file name="EventInstance_rss.tpl.php" role="data" />
-     <file name="EventInstance_xml.tpl.php" role="data" />
-     <file name="EventListing.tpl.php" role="data" />
-     <file name="EventListing_icalendar.tpl.php" role="data" />
-     <file name="EventListing_month.tpl.php" role="data" />
-     <file name="EventListing_rss.tpl.php" role="data" />
+    <dir name="mobile">
      <file name="Frontend.tpl.php" role="data" />
-     <file name="Frontend_Day.tpl.php" role="data" />
-     <file name="Frontend_Day_icalendar.tpl.php" role="data" />
-     <file name="Frontend_Day_monthday.tpl.php" role="data" />
-     <file name="Frontend_Day_rss.tpl.php" role="data" />
-     <file name="Frontend_Day_xml.tpl.php" role="data" />
-     <file name="Frontend_hcalendar.tpl.php" role="data" />
-     <file name="Frontend_icalendar.tpl.php" role="data" />
-     <file name="Frontend_Month.tpl.php" role="data" />
-     <file name="Frontend_MonthWidget.tpl.php" role="data" />
-     <file name="Frontend_NoEvents.tpl.php" role="data" />
-     <file name="Frontend_rss.tpl.php" role="data" />
-     <file name="Frontend_Upcoming.tpl.php" role="data" />
-     <file name="Frontend_xml.tpl.php" role="data" />
-     <file name="Location.tpl.php" role="data" />
+    </dir> <!-- /templates/mobile -->
+    <dir name="vanilla">
+     <file name="Frontend.tpl.php" role="data" />
      <file name="screen.css" role="data" />
     </dir> <!-- /templates/vanilla -->
    </dir> <!-- /templates -->
@@ -150,8 +143,17 @@
       <file name="Week.php" role="php" />
       <file name="Year.php" role="php" />
      </dir> <!-- /UNL/UCBCN/Frontend -->
-     <file name="Frontend.php" role="php" />
+     <file name="Frontend.php" role="php">
+      <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config" />
+      <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config" />
+      <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config" />
+      <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config" />
+     </file>
      <file name="Frontend_setup.php" role="php">
+      <tasks:replace from="@PHP_BIN@" to="php_bin" type="pear-config" />
+      <tasks:replace from="@PHP_DIR@" to="php_dir" type="pear-config" />
+      <tasks:replace from="@DATA_DIR@" to="data_dir" type="pear-config" />
+      <tasks:replace from="@DOC_DIR@" to="doc_dir" type="pear-config" />
       <tasks:postinstallscript>
        <tasks:paramgroup>
         <tasks:id>questionCreate</tasks:id>
@@ -178,9 +180,9 @@
         </tasks:param>
         <tasks:param>
          <tasks:name>template</tasks:name>
-         <tasks:prompt>Template style to use, default (UNL) or vanilla</tasks:prompt>
+         <tasks:prompt>Template style to use</tasks:prompt>
          <tasks:type>string</tasks:type>
-         <tasks:default>default</tasks:default>
+         <tasks:default>vanilla</tasks:default>
         </tasks:param>
        </tasks:paramgroup>
       </tasks:postinstallscript>
@@ -207,7 +209,7 @@
    <package>
     <name>UNL_UCBCN</name>
     <channel>pear.unl.edu</channel>
-    <min>0.5.0</min>
+    <min>0.8.0</min>
    </package>
    <package>
     <name>Calendar</name>
@@ -562,11 +564,23 @@ To use the vanilla template, just enter &apos;vanilla&apos; when prompted for wh
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2009-04-08</date>
+   <date>2009-07-09</date>
    <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
    <notes>
-0.8.0 Changes
-* Rearrange SVN so frontend can be used from checkout.
+0.8.0 Changes:
+* Rearrange SVN so frontend can be run from checkout.
+* Default to vanilla template.
+* Always call the factory statically.
+* Support searching by event types.
+
+Template Changes:
+* Allow scrolling through the monthwidget with mouse scroll wheel
+* Different coloring for month widget days on the next and previous months
+* New sample of a mobile template.
+
+Fixes:
+* Ongoing events were not showing up on the their last day within the monthwidget.
+* Call UNL_UCBCN_Frontend::factory() method statically - users should update their index.php files.
    </notes>
   </release>
  </changelog>
