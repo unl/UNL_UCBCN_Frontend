@@ -117,7 +117,7 @@ class UNL_UCBCN_Frontend_setup_postinstall
         $datadir      = '@DATA_DIR@'. DIRECTORY_SEPARATOR . 'UNL_UCBCN_Frontend' . DIRECTORY_SEPARATOR;
         if ($this->createIndex) {
             if (!is_dir($docroot)) {
-                mkdir($docroot, null, true);
+                mkdir($docroot);
             }
             copy($datadir.'index.php', $docroot.'index.php');
         }
@@ -188,7 +188,7 @@ class UNL_UCBCN_Frontend_setup_postinstall
     {
         if ($handle = opendir($source)) {        // if the folder exploration is sucsessful, continue
             if (!is_dir($dest)) {
-                mkdir($dest, null, true);
+                mkdir($dest);
             }
             while (false !== ($file = readdir($handle))) { // as long as storing the next file to $file is successful, continue
                 if ($file != '.' && $file != '..') {

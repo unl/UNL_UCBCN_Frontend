@@ -70,23 +70,11 @@ $pfm->setChannel('pear.unl.edu');
 $pfm->setAPIStability('beta');
 $pfm->setReleaseStability('beta');
 $pfm->setAPIVersion('0.8.0');
-$pfm->setReleaseVersion('0.8.0');
+$pfm->setReleaseVersion('0.8.1');
 $pfm->setNotes('
-0.8.0 Changes:
-* Rearrange SVN so frontend can be run from checkout.
-* Default to vanilla template.
-* Always call the factory statically.
-* Support searching by event types.
-
-Template Changes:
-* Allow scrolling through the monthwidget with mouse scroll wheel
-* Different coloring for month widget days on the next and previous months
-* New sample of a mobile template.
-
-Fixes:
-* Ongoing events were not showing up on the their last day within the monthwidget.
-* Call UNL_UCBCN_Frontend::factory() method statically - users should update their index.php files.
-
+0.8.1 Changes:
+Post-install script would create template directories with no permissions 
+resulting in "template error, examine fetch() result."
 ');
 
 //$pfm->addMaintainer('lead','saltybeagle','Brett Bieber','brett.bieber@gmail.com');
