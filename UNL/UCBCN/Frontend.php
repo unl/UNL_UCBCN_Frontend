@@ -162,6 +162,15 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      */
     function preRun($cache_hit = false)
     {
+        // Send headers for CORS support so calendar bits can be pulled remotely
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, OPTIONS');
+        header('Access-Control-Allow-Headers: X-Requested-With');
+        if (isset($_SERVER['REQUEST_METHOD'])
+            && $_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            // short circuit execution for CORS OPTIONS reqeusts
+            exit();
+        }
         switch($this->format) {
         case 'ics':
             // We'll be outputting a ics file
