@@ -4,7 +4,12 @@
  */
 #maincontent a{background:none;}
 #maincontent a:hover{text-decoration:underline;}
-    
+
+body.events #titlegraphic {
+    margin-top:60px;
+    margin-bottom:20px;
+}
+
 /* Event list */
 
 
@@ -143,8 +148,8 @@ table.wp-calendar caption{position:absolute;top:0;left:0;margin:-38px 0 0 0}
 table.wp-calendar caption span{display:block;height:31px;background:url(images/monthviewnav_mid.gif) repeat-x 0 0;float:left;}
 table.wp-calendar caption span.monthvalue, table.wp-calendar caption span.yearvalue{
 margin-top:0;padding:8px 3px 0;}
-table.wp-calendar caption a{margin-bottom:5px;color:#fff;}
-table.wp-calendar caption a:hover{color:#fff;}
+table.wp-calendar caption a{margin-bottom:5px;color:#fff !important;}
+table.wp-calendar caption a:hover{color:#fff !important;}
 table.wp-calendar caption a#prev_month, table.wp-calendar caption a#next_month{text-indent:-9999em;
 	display:block;background:#fff url(images/monthviewnav_prev.gif) no-repeat; width:22px; height:31px;}
 table.wp-calendar caption a#next_month{background:url(images/monthviewnav_next.gif) no-repeat;}
