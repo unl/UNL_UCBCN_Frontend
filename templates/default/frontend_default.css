@@ -78,8 +78,8 @@ table.wp-calendar td.selected{
 table.wp-calendar td#onselect{
 	background-color:#3e83c9;
 }
-table.wp-calendar td#onselect a, table.wp-calendar td#onselect.today{
-	color:#fff!important;
+#maincontent table.wp-calendar td#onselect a, #maincontent table.wp-calendar td#onselect.today{
+	color:#fff;
 }
 table.wp-calendar td#next{
 	background:url(images/calnav.gif) no-repeat;
@@ -95,7 +95,7 @@ table.wp-calendar tr:hover{
 table.wp-calendar td:hover{
 	background:#ffffcc;
 }
-table.wp-calendar td.next, table.wp-calendar td.prev {color:#EEE;}
+#maincontent table.wp-calendar td.next, table.wp-calendar td.prev {color:#EEE;}
 table.wp-calendar td.pad:hover{background:none}
 
 table.wp-calendar #today_image{
@@ -108,13 +108,13 @@ table.wp-calendar #today_image{
 /*table.wp-calendar td.today {
 	background:#ecf4f8;
 }*/
-.day_cal table.wp-calendar td.today {
+#maincontent .day_cal table.wp-calendar td.today {
 	color:#fff;
 }
 .month_cal table.wp-calendar td#onselect {
 	background:#eee;
 }
-.month_cal table.wp-calendar td#onselect a{
+#maincontent .month_cal table.wp-calendar td#onselect a{
 	color:#900;
 }
 .month_cal table.wp-calendar td#onselect {
@@ -148,8 +148,8 @@ table.wp-calendar caption{position:absolute;top:0;left:0;margin:-38px 0 0 0}
 table.wp-calendar caption span{display:block;height:31px;background:url(images/monthviewnav_mid.gif) repeat-x 0 0;float:left;}
 table.wp-calendar caption span.monthvalue, table.wp-calendar caption span.yearvalue{
 margin-top:0;padding:8px 3px 0;}
-table.wp-calendar caption a{margin-bottom:5px;color:#fff !important;}
-table.wp-calendar caption a:hover{color:#fff !important;}
+#maincontent table.wp-calendar caption a{margin-bottom:5px;color:#fff;}
+#maincontent table.wp-calendar caption a:hover{color:#fff !important;}
 table.wp-calendar caption a#prev_month, table.wp-calendar caption a#next_month{text-indent:-9999em;
 	display:block;background:#fff url(images/monthviewnav_prev.gif) no-repeat; width:22px; height:31px;}
 table.wp-calendar caption a#next_month{background:url(images/monthviewnav_next.gif) no-repeat;}
@@ -164,7 +164,7 @@ background-position:0 -45px;
 
 .event_cal table{width:auto;border:1px solid #8ebcd6;border-top:none;border-right:1px solid #4081a6;border-bottom:1px solid #4081a6;}
 .event_cal table td.date, .event_cal table td.title{width:auto;}
-.event_cal table td.date{color:#cc0000;}
+#maincontent .event_cal table td.date{color:#cc0000;}
 .event_cal table thead{display:none;}
 img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 /*- Menu Tabs G--------------------------- */
@@ -219,7 +219,7 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 .col{margin-top:48px;}
 
 /* month view */
-.month_cal {margin-top:70px;}
+.month_cal {margin-top:70px;position:relative;}
 .month_cal table.wp-calendar{margin:0 0 20px 0;}
 .month_cal table.wp-calendar td{
 	width:124px;
@@ -256,7 +256,7 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 .month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:126px;display:block;float:left;margin-bottom:1px;}
 .month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
-.month_cal table.wp-calendar caption{margin:33px 0 0 10px}
+.month_cal table.wp-calendar caption{margin:-38px 0 0 0}
 
 
 ul#frontend_view_selector{position:relative;width:927px;float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
@@ -270,8 +270,8 @@ ul#frontend_view_selector.month li#monthview, ul#frontend_view_selector.day li#t
 .year_cal table.wp-calendar caption span.monthvalue{margin:0;padding:0 5px 0 15px;background:url(images/year_box.gif) no-repeat 0 1px;}
 .year_cal table.wp-calendar caption {text-align:left;padding:0 0 2px 0;position:relative;margin:0;}
 .year_cal table.wp-calendar caption a#prev_month, .year_cal table.wp-calendar caption a#next_month{display:none}
-.year_cal table.wp-calendar caption a{color:#333;}
-.year_cal table.wp-calendar caption a:hover{color:#cc0000;}
+#maincontent .year_cal table.wp-calendar caption a{color:#333;}
+#maincontent .year_cal table.wp-calendar caption a:hover{color:#cc0000;}
 
 .year_cal table td{border:none;}
 .year_cal table.wp-calendar td{border:1px solid #ddd;}
