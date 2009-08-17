@@ -49,6 +49,10 @@ var glob_handler = {
 }
 glob_handler.addEvent(window,"load",glob_handler.init);
 
+try {
+	WDN.navigation.initialize = function(){};
+} catch(e){}
+
 function changeMonthWidget(e)
 {
 	e = e ? e : window.event;
