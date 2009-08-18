@@ -57,7 +57,6 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
             <!-- InstanceEndEditable --></div>
         <div id="wdn_navigation_wrapper">
             <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
-                <?php include 'file:///Eraserhead/Users/bbieber/Documents/workspace/wdntemplates/sharedcode/navigation.html'; ?>
                 <!-- InstanceEndEditable --></div>
         </div>
     </div>
