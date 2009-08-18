@@ -226,7 +226,7 @@ class UNL_UCBCN_Frontend_setup_postinstall
         if (isset($this->_ui)) {
             $this->_ui->outputData($msg);
         } else {
-            echo $msg;
+            echo $msg.'<br />'.PHP_EOL;
         }
     }
 }
