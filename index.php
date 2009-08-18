@@ -12,15 +12,13 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-ini_set('display_errors', true);
+ini_set('display_errors', false);
 require_once 'UNL/UCBCN/Autoload.php';
 
 if (file_exists(dirname(dirname(__FILE__)).'/UNL_UCBCN')) {
     // Allow to run from a checkout
     set_include_path(dirname(dirname(__FILE__)).'/UNL_UCBCN'.PATH_SEPARATOR.get_include_path());
 }
-
-$GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'].'/ucomm/templatedependents';
 
 $front = new UNL_UCBCN_Frontend(array_merge(array(
             'dsn'                 => 'mysqli://eventcal:eventcal@localhost/eventcal',
