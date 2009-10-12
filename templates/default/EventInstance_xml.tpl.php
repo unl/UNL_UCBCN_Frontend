@@ -85,7 +85,7 @@
 
         <Description><?php echo htmlspecialchars($this->event->description); ?></Description>
         <ShortDescription><?php echo htmlspecialchars($this->event->shortdescription); ?></ShortDescription>
-        <Refreshments><?php echo $this->event->refreshments; ?></Refreshments>
+        <Refreshments><?php echo htmlspecialchars($this->event->refreshments); ?></Refreshments>
         <WebPages>
             <WebPage>
                 <Title>Event Instance URL</Title>
