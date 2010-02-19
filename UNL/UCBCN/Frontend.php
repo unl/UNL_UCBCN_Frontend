@@ -183,6 +183,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         case 'rss':
             header('Content-type: application/rss+xml');
             break;
+        case 'html':
+        case 'hcalendar':
+            header('Content-Type:text/html; charset=UTF-8');
+            break;
         }
         /*
         if ($cache_hit == true) {
