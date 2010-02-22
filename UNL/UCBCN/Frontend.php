@@ -624,10 +624,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      *
      * @return String encoded for output to html.
      */
-    function dbStringToHtml($t)
+    function dbStringToHtml($text)
     {
-        $t = str_replace('&amp;', '&', $t);
-        return str_replace('&', '&amp;', $t);
+        $text = str_replace(array('&amp;', '&'), array('&', '&amp;'), $text);
+        return nl2br($text);
     }
     
     /**
