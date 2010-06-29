@@ -106,6 +106,13 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
     public $ongoing = true;
     
     /**
+     * Events that are both recurring and ongoing.
+     * 
+     * @var array UNL_UCBCN_Event or UNL_UCBCN_EventInstance objects
+     */
+    public $ongoing_recurring = array();
+    
+    /**
      * no events message
      * 
      * @var string
@@ -133,26 +140,28 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
         
         parent::__construct($options);
         
-        $this->output[] = $this->showEventListing();
+        $this->output[] = $this->showEventListing($ongoing_recurring);
         if ($this->ongoing===true) {
-            $this->output[] = $this->showOngoingEventListing();
+            $this->output[] = $this->showOngoingEventListing($ongoing_recurring);
         }
         $this->url = $this->getURL();
     }
     
     /**
-     * Shows the listing of new events for this day.
+     * Shows the listing of new events for this day
+     * 
+     * @param $oarevents UNL_UCBCN_Event or UNL_UCBCN_EventInstance objects
      * 
      * @return mixed UNL_UCBCN_EventListing or string for noevents.
      */
-    public function showEventListing()
+    public function showEventListing(&$oarevents)
     {
         $options = array('year'=>$this->year,
                          'month'=>$this->month,
                          'day'=>$this->day,
                          'calendar'=>$this->calendar);
         // Fetch the day evenlisting for this day.
-        $eventlist = new UNL_UCBCN_EventListing('day', $options);
+        $eventlist = new UNL_UCBCN_EventListing('day', $options, $oarevents);
         
         if (count($eventlist->events)) {
             return $eventlist;
@@ -167,14 +176,14 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
      * 
      * @return object UNL_UCBCN_EventListing
      */
-    public function showOngoingEventListing()
+    public function showOngoingEventListing(&$oarevents)
     {
         $options = array('year'=>$this->year,
                          'month'=>$this->month,
                          'day'=>$this->day,
                          'calendar'=>$this->calendar);
         // Fetch the day evenlisting for this day.
-        $eventlist = new UNL_UCBCN_EventListing('ongoing', $options);
+        $eventlist = new UNL_UCBCN_EventListing('ongoing', $options, $oarevents);
         
         if (count($eventlist->events)) {
             return $eventlist;

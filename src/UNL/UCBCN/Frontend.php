@@ -223,7 +223,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             if (isset($_GET['eventdatetime_id'])) {
                 $id = (int) $_GET['eventdatetime_id'];
             }
-            $this->output[] = $this->getEventInstance($id, $this->calendar);
+            if (isset($_GET['event_id'])) {
+                $event_id = (int) $_GET['event_id'];
+            }
+            $this->output[] = $this->getEventInstance($id, $this->calendar, $event_id);
             $this->right    = new UNL_UCBCN_Frontend_MonthWidget($this->year,
                                                               $this->month,
                                                               $this->calendar);
@@ -300,16 +303,34 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      *
      * @return object UNL_UCBCN_EventInstance on success UNL_UCBCN_Error on error.
      */
-    function getEventInstance($id, $calendar=null)
+    function getEventInstance($id, $calendar=null, $event_id=null)
     {
+        // Get recurring dates, if any
+        if (isset($event_id)) {
+        $db  = $this->getDatabaseConnection();
+            $sql = 'SELECT recurringdate FROM recurringdate WHERE event_id='.$event_id.';';
+            $res = $db->query($sql);
+            $rdates = $res->fetchCol();
+        }
         $event_instance = new UNL_UCBCN_EventInstance($id, $calendar);
         if (isset($_GET['y'], $_GET['m'], $_GET['d'])) {
             $in_date   = str_replace(array('/',' '), '', $_GET['y'].'-'.$_GET['m'].'-'.$_GET['d']);
             $in_date   = date('Y-m-d', strtotime($in_date));
             $real_date = $date = date('Y-m-d', strtotime($event_instance->eventdatetime->starttime));
  
+            // Check if the date is a recurring date for this event
+            if (isset($rdates) && in_array($in_date, $rdates)) {
+                //$starttime =& $event_instance->eventdatetime->starttime;
+                //$starttime = $in_date . substr($starttime, 10);
+                $sql = 'SELECT recurringdate, recurrence_id, ongoing FROM recurringdate '.
+                       'WHERE event_id='.$event_id.' '.
+                   	   'AND recurringdate LIKE \''.$in_date.'\';';
+                $res = $db->query($sql);
+                $rinfo = $res->fetchRow();
+                $event_instance->fixRecurringEvent($event_instance, $rinfo[0], $rinfo[1], $rinfo[2]);
+            }
             // Verify the date is correct, otherwise, redirect to the correct location.
-            if ($in_date != $real_date) {
+            else if ($in_date != $real_date) {
                 header('HTTP/1.0 301 Moved Permanently');
                 header('Location: '.html_entity_decode($event_instance->url));
                 exit;
@@ -328,7 +349,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      */
     function formatURL($values,$encode = true)
     {
-        $order = array('calendar','upcoming','search','y','m','d','eventdatetime_id','q');
+        $order = array('calendar','upcoming','search','y','m','d','eventdatetime_id','q', 'event_id');
         global $_UNL_UCBCN;
         $url = '';
         if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
