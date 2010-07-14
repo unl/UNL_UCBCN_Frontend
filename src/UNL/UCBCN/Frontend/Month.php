@@ -113,7 +113,7 @@ class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
         $Month->build($selectedDays);
         
         //Update recurring events table
-        UNL_UCBCN::factory('recurringdate')->getRecurringEvents($Month);
+        UNL_UCBCN::factory('recurringdate')->getRecurringDates($Month);
         
         $week = count($this->weeks);
         while ( $Day = $Month->fetch() ) {
