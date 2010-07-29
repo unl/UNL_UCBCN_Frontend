@@ -207,6 +207,8 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
 		                AND (calendar_has_event.status ='posted'
                              OR calendar_has_event.status ='archived')
 		                AND calendar_has_event.event_id = eventdatetime.event_id
+		                AND (eventdatetime.recurringtype = ''
+		                     OR eventdatetime.recurringtype = 'none') 
 		                AND eventdatetime.starttime >= '$start_bound 00:00:00'
 						AND eventdatetime.starttime <= '$end_bound 23:59:59'
 		                GROUP BY day;";
