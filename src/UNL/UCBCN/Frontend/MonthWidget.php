@@ -164,7 +164,7 @@ class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cach
             }
             
             if(date('Y') == $Day->thisYear() && date('m') == $Day->thisMonth() && date('d') == $Day->thisDay()){
-	    		$class .= ' today';
+                $class .= ' today';
             }
             
             // isFirst() to find start of week
