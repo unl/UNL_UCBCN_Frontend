@@ -177,6 +177,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             header('Content-type: text/calendar');
             header('Content-Disposition: attachment; filename="events.ics"');
             break;
+        case 'json':
+        	header('Content-type: text/json');
+        	break;
         case 'xml':
             header('Content-type: text/xml');
             break;
@@ -274,6 +277,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             break;
         }
         switch($this->format) {
+        case 'json':
+        	UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_json');
+            break;
         case 'xml':
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_xml');
             break;
