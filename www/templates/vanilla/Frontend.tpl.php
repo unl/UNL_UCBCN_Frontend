@@ -4,35 +4,45 @@
     <head>
         <title><?php echo $this->calendar->name; ?></title>
         <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/vanilla/screen.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/base/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/vanilla/css/fullcalendar.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/<?php echo $this->calendar->theme ?>/jquery-ui.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+        <script src="<?php echo $this->uri; ?>templates/vanilla/javascript/fullcalendar.min.js"></script>
+        <script>
+        $(function() {
+    		$("#tabs").tabs({
+    			ajaxOptions: {
+    				error: function(xhr, status, index, anchor) {
+    					$(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible.");
+    				}
+    			}
+    		});
+    	});
+        </script>
     </head>
     <body>
         <h1><?php echo $this->calendar->name; ?></h1>
         <div>
             <a href="<?php echo $this->manageruri; ?>">Event Publishing Manager</a>
         </div>
-        <ul id="frontend_view_selector" class="<?php echo $this->view; ?>">
-            <li id="todayview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id)); ?>">Today's Events</a></li>
-            <li id="monthview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
+
+		<div id="tabs">
+			<ul>
+				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id, 'format'=>'stub',)); ?>">Today's Events</a></li>
+				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
                                                                                         'm'=>date('m'),
+            																			'format'=>'stub',
                                                                                         'calendar'=>$this->calendar->id)); ?>">This Month</a></li>
-            <li id="yearview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
-                                                                                      'calendar'=>$this->calendar->id)); ?>">This Year</a></li>
-            <li id="upcomingview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,
-                                                                                          'upcoming'=>'upcoming')); ?>">Upcoming</a></li>
-        </ul>
-        <!-- Month Widget -->
-        <?php UNL_UCBCN::displayRegion($this->right); ?>
-        <!-- Main output for the view determined by determineView() and populated with run() -->
-        <?php UNL_UCBCN::displayRegion($this->output); ?>
-        <div>
-            <ul>
-                <li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming','format'=>'rss')); ?>&amp;limit=100" title="RSS feed">Calendar RSS feed</a></li>
-                <li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming','format'=>'ics')); ?>&amp;limit=100" title=".ical format">Calendar in .ical format</a></li>
-            </ul>
-        </div>
+				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,
+                                                                                          'upcoming'=>'upcoming',
+																						  'format'=>'stub')); ?>">This Week</a></li>
+				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
+                                                                                      'calendar'=>$this->calendar->id,
+																					  'format'=>'stub')); ?>">This Year</a></li>
+			</ul>
+		</div>
+        
         <div class="footer">
             <h3>Yeah, It's Open Source</h3>
                 The University Event Publishing System is an open source project

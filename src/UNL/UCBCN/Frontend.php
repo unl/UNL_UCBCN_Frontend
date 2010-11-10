@@ -130,6 +130,12 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     public $format = 'html';
     
     /**
+     * whether this is a top level page or a sub-tab
+     * @param $options
+     */
+    public $top_level = false;
+    
+    /**
      * Constructor for the frontend.
      *
      * @param array $options Associative array of options for the frontend.
@@ -278,7 +284,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         }
         switch($this->format) {
         case 'json':
-        	UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_json');
+            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_json');
             break;
         case 'xml':
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_xml');
@@ -294,6 +300,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         case 'rss':
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_rss');
             break;
+        case 'stub':
+        	UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_stub');
+        	break;
         case 'html':
         default:
             // Standard template works for html.
