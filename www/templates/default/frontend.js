@@ -181,24 +181,23 @@ function getCalendarDate(t)
    months[9]  = "October";
    months[10] = "November";
    months[11] = "December";
-   if(t){
-   	  var monthname   = months[t];
+   if (t){
+   	  var monthname = months[t];
    	  return monthname;
    }
-   else{
-	   var now         = new Date();
-	   var monthnumber = now.getMonth();
-	   var monthname   = months[monthnumber];
-	   var dateString = monthname;
-	   return dateString;
-   }
+
+   var now         = new Date();
+   var monthnumber = now.getMonth();
+   var monthname   = months[monthnumber];
+   var dateString  = monthname;
+   return dateString;
 }
 
 function eventLink(){
 	$('tbody a.url').click(function(){
 		var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
-		   new ajaxEngine(linkURL, 'eventlisting');
-		   return false;
+		new ajaxEngine(linkURL, 'eventlisting');
+		return false;
 	});
 }
 
@@ -222,18 +221,16 @@ function isInternalLink(link)
  * Call to: none
  */
 function returnToday(){
-	var x = new Date ();	
-	//var widgetDiv = document.getElementById('monthwidget');
-	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
+	var x = new Date();	
+
+	$("#load").html("<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />");
+
 	//due to the way we detect today's date, the left side content has to be loaded before the month widget
-	var backtoDay = '?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;d='+x.getDate+'&amp;?&format=hcalendar';
+	var backtoDay = window.location.href+'?&y='+(x.getYear ()+1900)+'&m='+(x.getMonth()+1)+'&d='+x.getDate()+'&format=hcalendar';
 	ajaxEngine(backtoDay, 'eventlisting');
-	ajaxCaller.get('?&amp;y='+x.getYear () + 1900+'&amp;m='+x.getMonth () + 1+'&amp;?&monthwidget&format=hcalendar', null, function(text, headers, callingContext){
-		if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
-			var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
-		}
-		document.getElementById('load').innerHTML=""
-		document.getElementById("monthwidget").innerHTML = text;
+	$.get(window.location.href+'?&y='+(x.getYear()+1900)+'&m='+(x.getMonth()+1)+'&monthwidget&format=hcalendar', function(data, textStatus) {
+		$("#load").html('');
+		$("#monthwidget").html(data);
 		todayHilite();			
 	}, false, null);
 	return false;
@@ -469,39 +466,40 @@ function monthCaptionSwitch(eT){
 }
 
 /*this is the main ajax calling engine. make library calls to XHR lib (ajaxcaller.js)*/
-function ajaxEngine(urlPath, section, vars){
+function ajaxEngine(urlPath, section, vars) {
 	document.getElementById('load').innerHTML="<img src='/ucomm/templatedependents/templatecss/images/loading.gif' />";
 	switch (section){
 		case "monthwidget":
-			ajaxCaller.get(urlPath, null, onMonthResponse, false, null);
+			$.get(urlPath, onMonthResponse);
 			break;
 		case "search":
-			ajaxCaller.get(urlPath, vars, onSumResponse, false, null);
+			$.get(urlPath, onSumResponse);
 			break;
 		case "eventlisting":
-			ajaxCaller.get(urlPath, null, onSumResponse, false, null);
+			$.get(urlPath, onSumResponse);
 		break;
 		default : alert("Error: please specify ajaxEngine calling section");
 	}	
 }
 
 /* parse ajax response for month widget */
-function onMonthResponse(text, headers, callingContext) {
-  if(document.getElementById('onselect') && document.getElementById('onselect').getElementsByTagName('a')[0] != null){
-   var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
-  } 
-  document.getElementById('load').innerHTML="";
-  document.getElementById("monthwidget").innerHTML = text;
-  carryOver(tdlink);
-  todayHilite();
+function onMonthResponse(data, textStatus) {
+	if (document.getElementById('onselect')
+		&& document.getElementById('onselect').getElementsByTagName('a')[0] != null){
+		var tdlink = document.getElementById('onselect').getElementsByTagName('a')[0].getAttribute("href", 2);
+	} 
+	$('#load').html("");
+	$('#monthwidget').html(data);
+	carryOver(tdlink);
+	todayHilite();
 }
 
 /* parse ajax response for event listing and event instance */
 var save;//global variable to store previous content;
-function onSumResponse(text, headers, callingContext) {
-  save = document.getElementById('updatecontent').innerHTML;
-  document.getElementById('load').innerHTML=""
-  document.getElementById("updatecontent").innerHTML = text;
+function onSumResponse(data, textStatus) {
+  save = $('#updatecontent').html();
+  $('#load').html("");
+  $("#updatecontent").html(data);
   new eventLink();
   shortenText();
   if(document.getElementById('day_nav') != null){
