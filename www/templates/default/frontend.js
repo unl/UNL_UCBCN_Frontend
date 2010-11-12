@@ -1,3 +1,5 @@
+$ = WDN.jQuery;
+
 //attaching JS events
 var glob_handler = {
 
@@ -193,20 +195,11 @@ function getCalendarDate(t)
 }
 
 function eventLink(){
-
-	var tbodyObj = document.getElementsByTagName('tbody');
-	for(tb=0; tb<tbodyObj.length; tb++){
-		var eventLink = getElementsByClassName(tbodyObj[tb], "a", "url");
-			for(a=0; a<eventLink.length; a++){
-				 if (isInternalLink(eventLink[a])) {
-					eventLink[a].onclick = function(){
-										   var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
-										   new ajaxEngine(linkURL, 'eventlisting');
-										   return false;
-										   }
-				 }
-			}
-	}
+	$('tbody a.url').click(function(){
+		var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
+		   new ajaxEngine(linkURL, 'eventlisting');
+		   return false;
+	});
 }
 
 /*
