@@ -102,8 +102,10 @@ $endu = strtotime($this->eventdatetime->endtime);
 		</tr>
 		</tbody>
 		</table>
-		<?php
-			echo '<p id="feeds">
+        <?php
+            UNL_UCBCN::displayRegion($this->facebookRSVP);
+            echo $this->facebook->like($this->url);
+            echo '<p id="feeds">
 			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics')).'">ics format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a>
 			<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'rss')).'">rss format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a>
 			</p>'; ?>

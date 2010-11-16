@@ -1,6 +1,7 @@
 <?php
 if (!isset($_GLOBALS['unl_template_dependents'])) {
-    $_GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
+	//$_GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
+    $_GLOBALS['unl_template_dependents'] = "";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -23,8 +24,8 @@ if (!isset($_GLOBALS['unl_template_dependents'])) {
 <link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
 <link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
 <script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
-<?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/browserspecifics.html'; ?>
-<?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/metanfavico.html'; ?>
+<?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/browserspecifics.html'; ?>
+<?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/metanfavico.html'; ?>
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL <?php
 if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
@@ -33,18 +34,28 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 ?>| Events</title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/default/frontend_main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/default/facebook.css" />
 <script type="text/javascript" src="<?php echo $this->uri; ?>templates/default/ajaxCaller.js"></script>
 <script type="text/javascript" src="<?php echo $this->uri; ?>templates/default/frontend.js"></script>
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->calendar->name; ?> Events" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" />
 <link rel="search" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>" />
+<?php 
+if(get_class($this->output[0]->event) == "UNL_UCBCN_Event"){
+	echo '<meta property="og:title" content="'. $this->output[0]->event->title .'"/>
+          <meta property="og:site_name" content="'. $this->calendar->name .'"/> 
+          <meta property="og:url" content="'. UNL_UCBCN::getBaseURL().$this->output[0]->url .'"/>
+          <meta property="og:description" content="'. $this->output[0]->event->description .'" />';
+}
+?>
 <!-- InstanceEndEditable -->
 </head>
 <body class="fixed events">
+
 <p class="skipnav"> <a class="skipnav" href="#maincontent">Skip Navigation</a> </p>
 <div id="wdn_wrapper">
     <div id="header"> <a href="http://www.unl.edu/" title="UNL website"><img src="/wdn/templates_3.0/images/logo.png" alt="UNL graphic identifier" id="logo" /></a>
         <h1>University of Nebraska&ndash;Lincoln</h1>
-        <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/wdnTools.html'; ?>
+        <?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/wdnTools.html'; ?>
     </div>
     <div id="wdn_navigation_bar">
         <div id="breadcrumbs">
@@ -93,7 +104,6 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
                 <li id="upcomingview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,
                                                                                               'upcoming'=>'upcoming')); ?>">Upcoming</a></li>
             </ul>
-
                 <?php if (isset($this->right)) { ?>
                     <div class="col left">
                         <div id="monthwidget"><?php UNL_UCBCN::displayRegion($this->right); ?></div>
@@ -113,7 +123,7 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
           <li id="eventical"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming','format'=>'ics')); ?>&amp;limit=100" title=".ical format">.ical format</a></li>
           </ul>
       </div>
-                                            
+                    
                     </div>
                     <div id="updatecontent" class="three_col right">
                     <?php UNL_UCBCN::displayRegion($this->output); ?>
@@ -124,13 +134,13 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
                 } ?>
             <!-- InstanceEndEditable -->
             <div class="clear"></div>
-            <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/noscript.html'; ?>
+            <?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/noscript.html'; ?>
             <!--THIS IS THE END OF THE MAIN CONTENT AREA.-->
         </div>
         <div id="footer">
             <div id="footer_floater"></div>
             <div class="footer_col">
-                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/feedback.html'; ?>
+                <?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/feedback.html'; ?>
             </div>
             <div class="footer_col"><!-- InstanceBeginEditable name="leftcollinks" -->
                 <h3>Related Links</h3>
@@ -146,14 +156,14 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
                 402-472-7211</p>
                 <!-- InstanceEndEditable --></div>
             <div class="footer_col">
-                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/socialmediashare.html'; ?>
+                <?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/socialmediashare.html'; ?>
             </div>
             <!-- InstanceBeginEditable name="optionalfooter" --> <!-- InstanceEndEditable -->
             <div id="wdn_copyright"><!-- InstanceBeginEditable name="footercontent" -->
                 Yeah, it's open source. &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
             <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
                 <!-- InstanceEndEditable -->
-                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/wdn.html'; ?>
+                <?php include_once $GLOBALS['unl_template_dependents'].'wdn/templates_3.0/includes/wdn.html'; ?>
                 | <a href="http://validator.unl.edu/check/referer">W3C</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS</a> <a href="http://www.unl.edu/" title="UNL Home" id="wdn_unl_wordmark"><img src="/wdn/templates_3.0/css/footer/images/wordmark.png" alt="UNL's wordmark" /></a> </div>
         </div>
     </div>

@@ -339,6 +339,10 @@ div.cal_widget{
 	margin:-14px 0 0 0;
 	background:url(images/recent_mid.gif) repeat-y right top;
 }
+#maincontent div.cal_widget ul li.nobullet {
+background:none;
+padding:0;
+}
 a#frontend_login{margin:0 0 0 -5px;background:url(images/front-login.gif) no-repeat 0 -2px;padding:0 0 0 20px}
 a#frontend_login:hover{background-position:0 -21px;}
 
