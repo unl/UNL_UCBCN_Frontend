@@ -14,7 +14,6 @@ if($this->account->createEvents()){
     FB.Event.subscribe('auth.logout', function() {
         window.location.reload();
     });
-    
     FB.api('/me', function(response) {
         var uid = response.id;
         //alert(uid);
@@ -40,7 +39,7 @@ if($this->account->createEvents()){
                 }
             });
         }else{
-            document.getElementById('profile').style.visibility = 'hidden';
+            document.getElementById('profile').style.display = "none";
             document.getElementById('fbLogin').style.visibility = 'visible';
         }
     });
@@ -93,7 +92,6 @@ if($this->account->createEvents()){
     </div>
     <div>
     <span id='fbLogin'><a href="#" onclick="FB.login(function(response) {
-        //alert('here');
        if (response.session) {
             if (response.perms) {
               // user is logged in and granted some permissions.
