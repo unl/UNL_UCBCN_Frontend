@@ -1,7 +1,7 @@
 <?php
-if (!isset($_GLOBALS['unl_template_dependents'])) {
-	//$_GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
-    $_GLOBALS['unl_template_dependents'] = "";
+if (!isset($GLOBALS['unl_template_dependents'])) {
+	//$GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
+    $GLOBALS['unl_template_dependents'] = "";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
