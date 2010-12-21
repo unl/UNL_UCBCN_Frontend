@@ -272,10 +272,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             $this->output[] = new UNL_UCBCN_Frontend_Year($this->year, $this->calendar);
             break;
         case 'search':
+            $q = null;
             if (isset($_GET['q'])) {
                 $q = $_GET['q'];
-            } else {
-                $q = null;
             }
             $this->output[] = new UNL_UCBCN_Frontend_Search(array('calendar'=>$this->calendar, 'query'=>$q));
             break;
