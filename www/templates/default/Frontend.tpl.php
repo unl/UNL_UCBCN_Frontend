@@ -39,7 +39,8 @@ if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
 <link rel="alternate" type="application/rss+xml" title="<?php echo $this->calendar->name; ?> Events" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" />
 <link rel="search" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>" />
 <?php 
-if(get_class($this->output[0]->event) == "UNL_UCBCN_Event"){
+if (isset($this->output[0], $this->output[0]->event)
+    && $this->output[0]->event instanceof UNL_UCBCN_Event) {
 	echo '<meta property="og:title" content="'. $this->output[0]->event->title .'"/>
           <meta property="og:site_name" content="'. $this->calendar->name .'"/> 
           <meta property="og:url" content="'. UNL_UCBCN::getBaseURL().$this->output[0]->url .'"/>
