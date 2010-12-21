@@ -232,6 +232,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             if (isset($_GET['eventdatetime_id'])) {
                 $id = (int) $_GET['eventdatetime_id'];
             }
+            $event_id = null;
             if (isset($_GET['event_id'])) {
                 $event_id = (int) $_GET['event_id'];
             }
@@ -322,7 +323,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     {
         // Get recurring dates, if any
         if (isset($event_id)) {
-        $db  = $this->getDatabaseConnection();
+            $db  = $this->getDatabaseConnection();
             $sql = 'SELECT recurringdate FROM recurringdate WHERE event_id='.$event_id.';';
             $res = $db->query($sql);
             $rdates = $res->fetchCol();
