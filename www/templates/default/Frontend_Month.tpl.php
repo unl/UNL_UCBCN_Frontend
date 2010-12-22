@@ -1,4 +1,3 @@
-<!-- 
 <div class="month_cal" id="month_viewcal">
 <table class="wp-calendar">
 	<caption><?php echo $this->caption; ?></caption>
@@ -38,20 +37,3 @@
 </table>
 <a href="#" id="monthfullview" onclick="fullview()">View all events</a>
 </div>
--->
-<div class="calendar"></div>
-<script type='text/javascript'> 
-$(document).ready(function() {
-	$('.calendar').fullCalendar({
-		theme: true,
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		editable: false,
-		defaultView: 'month',
-		events: '?upcoming=upcoming&limit=100&format=json'
-	});
-});
-</script> 
