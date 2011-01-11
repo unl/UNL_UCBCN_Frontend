@@ -1,5 +1,7 @@
-[{}<?php
-UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_json');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Upcoming','Frontend_passthrough');
-UNL_UCBCN::displayRegion($this->output);
-?>]
+<?php
+$url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
+$url = str_replace("format=json", "format=xml", $url);
+require_once("xml2json.php");
+$data = file_get_contents($url);
+$jsonContents = xml2json::transformXmlStringToJson($data);
+echo $jsonContents;
