@@ -1,7 +1,11 @@
 <?php
-$url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
-$url = str_replace("format=json", "format=xml", $url);
-require_once("xml2json.php");
-$data = file_get_contents($url);
+require_once dirname(__FILE__).'/../../includes/xml2json/xml2json.php';
+
+ob_start();
+
+include dirname(__FILE__).'/Frontend_xml.tpl.php';
+
+$data = ob_get_clean();
+
 $jsonContents = xml2json::transformXmlStringToJson($data);
 echo $jsonContents;
