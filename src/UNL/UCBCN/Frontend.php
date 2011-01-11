@@ -184,7 +184,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             header('Content-Disposition: attachment; filename="events.ics"');
             break;
         case 'json':
-        	header('Content-type: text/json');
+        	header('Content-Type:text/plain; charset=UTF-8');
         	break;
         case 'xml':
             header('Content-type: text/xml');
