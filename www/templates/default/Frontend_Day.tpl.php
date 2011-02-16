@@ -52,7 +52,7 @@ echo date('l, F jS',$day->getTimeStamp());
 		},
 		editable: false,
 		defaultView: 'agendaDay',
-		events: '?upcoming=upcoming&limit=100&format=json',
+		events: '?upcoming=upcoming&limit=100&format=fullcal_json',
 		date: $.getUrlVar('d')
 	});
 });

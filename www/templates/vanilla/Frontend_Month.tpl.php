@@ -10,7 +10,7 @@ $(document).ready(function() {
         },
         editable: false,
         defaultView: 'month',
-        events: '?upcoming=upcoming&limit=100&format=json'
+        events: '?upcoming=upcoming&limit=100&format=fullcal_json'
     });
 });
 </script> 
