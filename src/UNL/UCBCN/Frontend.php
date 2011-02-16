@@ -286,6 +286,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         case 'json':
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_json');
             break;
+        case 'fullcal_json':
+            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_fullcalJson');
+            break;
         case 'xml':
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_xml');
             break;
