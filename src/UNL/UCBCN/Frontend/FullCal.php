@@ -9,7 +9,7 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN
 {
     public $events = array();
 
-    function __construct($type, $calendar, $dsn) 
+    function __construct($calendar, $dsn) 
     {
         $start = date('U');
         $end   = date('U');

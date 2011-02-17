@@ -241,6 +241,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
                                                               $this->month,
                                                               $this->calendar);
             break;
+        case 'fullcal':
+            $this->output[] = new UNL_UCBCN_Frontend_FullCal($this->calendar, $this->dsn);
+            break;
         default:
         case 'day':
             $this->output[] = new UNL_UCBCN_Frontend_Day(array(
@@ -559,6 +562,18 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         }
         if (isset($GLOBALS[$method]['monthwidget'])) {
             $view['view'] = 'monthwidget';
+        }
+        if (isset($GLOBALS[$method]['fullcal'])) {
+            if (isset($GLOBALS[$method]['m'])) {
+                $view['month'] = (int)$GLOBALS[$method]['m'];
+            }
+            if (isset($GLOBALS[$method]['d'])) {
+                $view['day'] = (int)$GLOBALS[$method]['d'];
+            }
+            if (isset($GLOBALS[$method]['y'])) {
+                $view['year'] = (int)$GLOBALS[$method]['y'];
+            }
+            $view['view'] = 'fullcal';
         }
         
         if (isset($GLOBALS[$method]['format'])) {
