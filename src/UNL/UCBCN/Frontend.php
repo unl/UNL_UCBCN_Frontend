@@ -306,9 +306,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         case 'rss':
             UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_rss');
             break;
-        case 'stub':
-        	UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_stub');
-        	break;
         case 'html':
         default:
             // Standard template works for html.
