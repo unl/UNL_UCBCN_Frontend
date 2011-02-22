@@ -25,35 +25,3 @@ echo date('l, F jS',$day->getTimeStamp());
             <a id="rssformat" title="rss format for events on '.date('l, F jS',$day->getTimeStamp()).'" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'rss')).'">rss format for events on '.date('l, F jS',$day->getTimeStamp()).'</a>
             </p>'; ?>
 </div>
-<script type='text/javascript'> 
-	$(document).ready(function() {
-		$.extend({
-	        getUrlVars: function(){
-	          var vars = [], hash;
-	          var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-	          for(var i = 0; i < hashes.length; i++)
-	          {
-	            hash = hashes[i].split('=');
-	            vars.push(hash[0]);
-	            vars[hash[0]] = hash[1];
-	          }
-	          return vars;
-	        },
-	        getUrlVar: function(name){
-	          return $.getUrlVars()[name];
-	        }
-      });
-	$('.calendar').fullCalendar({
-		theme: true,
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		editable: false,
-		defaultView: 'agendaDay',
-		events: '?fullcal&format=fullcal_json',
-		date: $.getUrlVar('d')
-	});
-});
-</script> 

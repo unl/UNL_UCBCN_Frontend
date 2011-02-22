@@ -14,17 +14,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
         <script src="<?php echo $this->uri; ?>templates/vanilla/javascript/fullcalendar.min.js"></script>
-        <script>
-        $(function() {
-    		$("#tabs").tabs({
-    			ajaxOptions: {
-    				error: function(xhr, status, index, anchor) {
-    					$(anchor.hash).html("Couldn't load this tab. We'll try to fix this as soon as possible.");
-    				}
-    			}
-    		});
-    	});
-        </script>
     </head>
     <body>
         <h1><?php echo $this->calendar->name; ?></h1>
@@ -32,22 +21,43 @@
             <a href="<?php echo $this->manageruri; ?>">Event Publishing Manager</a>
         </div>
 
-		<div id="tabs">
-			<ul>
-				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id, 'format'=>'stub',)); ?>">Today's Events</a></li>
-				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
-                                                                                        'm'=>date('m'),
-            																			'format'=>'stub',
-                                                                                        'calendar'=>$this->calendar->id)); ?>">This Month</a></li>
-				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,
-                                                                                          'upcoming'=>'upcoming',
-																						  'format'=>'stub')); ?>">This Week</a></li>
-				<li><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
-                                                                                      'calendar'=>$this->calendar->id,
-																					  'format'=>'stub')); ?>">This Year</a></li>
-			</ul>
-		</div>
-        
+        <?php UNL_UCBCN::displayRegion($this->output); ?>
+
+<script type='text/javascript'> 
+$(document).ready(function() {
+    $.extend({
+        getUrlVars: function(){
+          var vars = [], hash;
+          var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+          for(var i = 0; i < hashes.length; i++)
+          {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+          }
+          return vars;
+        },
+        getUrlVar: function(name){
+          return $.getUrlVars()[name];
+        }
+    });
+    $('.calendar').fullCalendar({
+        theme: true,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        editable: false,
+        defaultView: 'agendaDay',
+        events: '?fullcal&format=fullcal_json',
+        date:  <?php echo $this->day; ?>,
+        month: <?php echo $this->month-1; ?>,
+        year:  <?php echo $this->year; ?>
+    });
+});
+</script>
+
         <div class="footer">
             <h3>Yeah, It's Open Source</h3>
                 The University Event Publishing System is an open source project
