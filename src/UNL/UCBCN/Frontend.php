@@ -242,7 +242,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
                                                               $this->calendar);
             break;
         case 'fullcal':
-            $this->output[] = new UNL_UCBCN_Frontend_FullCal($this->calendar, $this->dsn);
+            $start = (int)$_GET['start'];
+            $end   = (int)$_GET['end'];
+            $this->output[] = new UNL_UCBCN_Frontend_FullCal($this->calendar, $this->dsn, $start, $end);
             break;
         default:
         case 'day':
@@ -588,7 +590,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      */
     function getCacheKey()
     {
-        if ($this->view == 'search' || $this->view == 'upcoming') {
+        if ($this->view == 'search' || $this->view == 'upcoming' || $this->view == 'fullcal') {
             // Right now we aren't caching search results or upcoming pages.
             return false;
         } else {
