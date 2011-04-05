@@ -34,7 +34,7 @@ $(document).ready(function() {
         },
         editable: false,
         defaultView: 'agendaDay',
-        events: '?fullcal&format=fullcal_json',
+        events: '?fullcal&format=fullcal_json&calendar_id=<?php echo $this->calendar->id; ?>',
         date:  <?php echo $this->day; ?>,
         month: <?php echo $this->month-1; ?>,
         year:  <?php echo $this->year; ?>
