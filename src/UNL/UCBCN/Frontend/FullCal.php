@@ -1,10 +1,4 @@
 <?php
-require_once 'UNL/UCBCN/Frontend.php';
-require_once 'UNL/UCBCN/Frontend/Day.php';
-require_once 'Calendar/Calendar.php';
-require_once 'Calendar/Month/Weekdays.php';
-require_once 'Calendar/Util/Textual.php';
-
 class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN
 {
     public $events = array();
