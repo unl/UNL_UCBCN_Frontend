@@ -35,7 +35,25 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
         $diff  = ($this->end - $this->start)/3600;
 
         switch($diff) {
+            case 168: // week
+                $weekList = new UNL_UCBCN_Frontend_Week(array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
+                foreach ($weekList->output as $day) {
+                    if (isset($day->output[0]->events)) {
+                        foreach ($day->output[0]->events as $event) {
+                            $this->events[] = $event;
+                        }
+                    }
+                }
+                break;
+
             case 24: // day
+                $dayList = new UNL_UCBCN_EventListing('day', array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
+                foreach ($dayList->events as $event) {
+                    $this->events[] = $event;
+                }
+                break;
+
+            default:
                 //recalculate the startdate.  WARNING: UGLY HACK
                 $month = (int)date('m', $this->start+604800);  //Works because 7 days + whatever will always be in the correct month
                 
@@ -48,24 +66,6 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
                             }
                         }
                     }
-                }
-                break;                
-
-            case 168: // week
-                $weekList = new UNL_UCBCN_Frontend_Week(array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
-                foreach ($weekList->output as $day) {
-                    if (isset($day->output[0]->events)) {
-                        foreach ($day->output[0]->events as $event) {
-                            $this->events[] = $event;
-                        }
-                    }
-                }
-                break;
-
-            default: // month
-                $dayList = new UNL_UCBCN_EventListing('day', array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
-                foreach ($dayList->events as $event) {
-                    $this->events[] = $event;
                 }
                 break;
         }
