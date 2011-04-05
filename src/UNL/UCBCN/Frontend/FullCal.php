@@ -1,25 +1,38 @@
 <?php
-class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN
+class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
 {
     public $events = array();
+    
+    public $calendar;
+    
+    public $dsn;
+    
+    public $start;
+    
+    public $end;
 
-    function __construct($calendar, $dsn) 
+    function __construct($calendar, $dsn, $start = null, $end = null) 
     {
-        $start = date('U');
-        $end   = date('U');
-        
-        if (isset($_GET['start'])) {
-            $start = (int)$_GET['start'];
+        $this->setOptions(array('calendar'=>$calendar));
+        $this->calendar = $calendar;
+        $this->dsn      = $dsn;
+        $this->start    = time();
+        $this->end      = time();
+        if (isset($start)) {
+            $this->start = (int)$start;
         }
         
-        if (isset($_GET['end'])) {
-            $end = (int)$_GET['end'];
+        if (isset($end)) {
+            $this->end = (int)$end;
         }
-        
-        $day   = date('d', $start);
-        $month = (int)date('m', $start);
-        $year  = date('Y', $start);
-        $diff  = ($end - $start)/3600;
+    }
+    
+    function run()
+    {
+        $day   = date('d', $this->start);
+        $month = (int)date('m', $this->start);
+        $year  = date('Y', $this->start);
+        $diff  = ($this->end - $this->start)/3600;
 
         switch($diff) {
             case 24:
@@ -36,9 +49,9 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN
         switch($type) {
             case 'month':
                 //recalculate the startdate.  WARNING: UGLY HACK
-                $month = (int)date('m', $start+604800);  //Works because 7 days + whatever will always be in the correct month
+                $month = (int)date('m', $this->start+604800);  //Works because 7 days + whatever will always be in the correct month
                 
-                $monthList = new UNL_UCBCN_Frontend_Month($year,$month,$calendar,$dsn);
+                $monthList = new UNL_UCBCN_Frontend_Month($year,$month,$this->calendar,$this->dsn);
                 foreach ($monthList->weeks as $week) {
                     foreach ($week as $day) {
                         if (isset($day->output[0]->events)) {
@@ -51,14 +64,14 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN
                 break;
                 
             case 'day':
-                $dayList = new UNL_UCBCN_EventListing('day', array('calendar' => $calendar, 'dsn' => $dsn, 'month' => $month, 'day' => $day, 'year' => $year));
+                $dayList = new UNL_UCBCN_EventListing('day', array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
                 foreach ($dayList->events as $event) {
                     $this->events[] = $event;
                 }
                 break;
                 
             case 'week':
-                $weekList = new UNL_UCBCN_Frontend_Week(array('calendar' => $calendar, 'dsn' => $dsn, 'month' => $month, 'day' => $day, 'year' => $year));
+                $weekList = new UNL_UCBCN_Frontend_Week(array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
                 foreach ($weekList->output as $day) {
                     if (isset($day->output[0]->events)) {
                         foreach ($day->output[0]->events as $event) {
