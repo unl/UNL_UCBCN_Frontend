@@ -593,10 +593,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         if ($this->view == 'search' || $this->view == 'upcoming' || $this->view == 'fullcal') {
             // Right now we aren't caching search results or upcoming pages.
             return false;
-        } else {
-            return md5(serialize(array_merge($this->determineView(),
-                                             array($this->calendar->id))));
         }
+
+        return md5(serialize(array_merge($this->determineView(),
+                                         array($this->calendar->id))));
     }
     
     /**
