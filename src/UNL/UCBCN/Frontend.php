@@ -147,12 +147,12 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             $this->calendar = UNL_UCBCN_Frontend::factory('calendar');
             if (PEAR::isError($this->calendar)) {
                 throw new Exception($this->calendar->message);
-            } else {
-                if (isset($_GET['calendar_id'])) {
-                    $this->calendar->get($_GET['calendar_id']);
-                } elseif (!$this->calendar->get($this->default_calendar_id)) {
-                    return new UNL_UCBCN_Error('No calendar specified or could be found.');
-                }
+            }
+
+            if (isset($_GET['calendar_id'])) {
+                $this->calendar->get($_GET['calendar_id']);
+            } elseif (!$this->calendar->get($this->default_calendar_id)) {
+                return new UNL_UCBCN_Error('No calendar specified or could be found.');
             }
         }
     }
@@ -611,9 +611,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         $c = UNL_UCBCN_Frontend::factory('calendar');
         if ($c->get($id)) {
             return $c->shortname;
-        } else {
-            return false;
         }
+
+        return false;
+
     }
     
     /**
@@ -629,9 +630,10 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         $c->shortname = $shortname;
         if ($c->find() && $c->fetch()) {
             return $c->id;
-        } else {
-            return false;
         }
+
+        return false;
+
     }
     
     /**
@@ -646,11 +648,11 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
 		$c = UNL_UCBCN_Frontend::factory('calendar');
 		$c->calendarstatus = $status;
 		$c->orderBy('name ASC');
-		if($c->find()){
+		if ($c->find()) {
 			return $c;
-		}else{
-			return false;
 		}
+
+		return false;
     }
     
     /**
@@ -662,11 +664,11 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     {
 		$e = UNL_UCBCN_Frontend::factory('eventtype');
 		$e->orderBy('name ASC');
-		if($e->find()){
+		if ($e->find()) {
 			return $e;
-		}else{
-			return false;
 		}
+
+		return false;
     }
     
     /**
@@ -707,14 +709,14 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
                                 LIMIT 1');
             if (!PEAR::isError($res)) {
                 return $res->numRows();
-            } else {
-                return new UNL_UCBCN_Error($res->getMessage());
             }
-        } else {
-            $eventdatetime = UNL_UCBCN_Frontend::factory('eventdatetime');
-            $eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d', $epoch).'%\'');
-            return $eventdatetime->find();
+
+            return new UNL_UCBCN_Error($res->getMessage());
         }
+
+        $eventdatetime = UNL_UCBCN_Frontend::factory('eventdatetime');
+        $eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d', $epoch).'%\'');
+        return $eventdatetime->find();
     }
     
     /**
