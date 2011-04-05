@@ -26,6 +26,11 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
             $this->end = (int)$end;
         }
     }
+
+    function getCacheKey()
+    {
+        return md5('fullcal'.$this->calendar->id.$this->start.$this->end);
+    }
     
     function run()
     {
