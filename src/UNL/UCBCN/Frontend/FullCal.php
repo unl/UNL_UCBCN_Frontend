@@ -35,19 +35,7 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
         $diff  = ($this->end - $this->start)/3600;
 
         switch($diff) {
-            case 24:
-                $type = "day";
-                break;
-            case 168:
-                $type = "week";
-                break;
-            default:
-                $type = "month";
-                break;
-        }
-
-        switch($type) {
-            case 'month':
+            case 24: // day
                 //recalculate the startdate.  WARNING: UGLY HACK
                 $month = (int)date('m', $this->start+604800);  //Works because 7 days + whatever will always be in the correct month
                 
@@ -61,16 +49,9 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
                         }
                     }
                 }
-                break;
-                
-            case 'day':
-                $dayList = new UNL_UCBCN_EventListing('day', array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
-                foreach ($dayList->events as $event) {
-                    $this->events[] = $event;
-                }
-                break;
-                
-            case 'week':
+                break;                
+
+            case 168: // week
                 $weekList = new UNL_UCBCN_Frontend_Week(array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
                 foreach ($weekList->output as $day) {
                     if (isset($day->output[0]->events)) {
@@ -78,6 +59,13 @@ class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
                             $this->events[] = $event;
                         }
                     }
+                }
+                break;
+
+            default: // month
+                $dayList = new UNL_UCBCN_EventListing('day', array('calendar' => $this->calendar, 'dsn' => $this->dsn, 'month' => $month, 'day' => $day, 'year' => $year));
+                foreach ($dayList->events as $event) {
+                    $this->events[] = $event;
                 }
                 break;
         }
