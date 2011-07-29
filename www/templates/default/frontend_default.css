@@ -5,11 +5,6 @@
 #maincontent a{background:none;}
 #maincontent a:hover{text-decoration:underline;}
 
-body.events #titlegraphic {
-    margin-top:60px;
-    margin-bottom:20px;
-}
-
 /* Event list */
 
 
