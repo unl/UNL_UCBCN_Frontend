@@ -196,6 +196,9 @@ function getCalendarDate(t)
 function eventLink(){
 	$('tbody a.url').click(function(){
 		var linkURL = this.getAttribute("href", 2)+'?&format=hcalendar';
+		if (!isInternalLink(linkURL)) {
+			return true;
+		}
 		new ajaxEngine(linkURL, 'eventlisting');
 		return false;
 	});
