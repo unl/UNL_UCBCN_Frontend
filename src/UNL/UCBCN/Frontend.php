@@ -305,22 +305,6 @@ class UNL_UCBCN_Frontend
     }
     
     /**
-     * Get a list of event types
-     *
-     * @return
-     */
-    function getEventTypes()
-    {
-		$e = UNL_UCBCN_Frontend::factory('eventtype');
-		$e->orderBy('name ASC');
-		if ($e->find()) {
-			return $e;
-		}
-
-		return false;
-    }
-    
-    /**
      * This function checks if a calendar has events on the day requested.
      *
      * @param string             $epoch    Unix epoch of the day to check.
