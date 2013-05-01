@@ -252,26 +252,7 @@ class UNL_UCBCN_Frontend
         return md5(serialize(array_merge($this->options,
                                          array($this->calendar->id))));
     }
-    
-    /**
-     * Get a list of calendars with a given status
-     *
-     * @param string $status The value of the status in the calendar table
-     *
-     * @return
-     */
-    function getCalendarsByStatus($status)
-    {
-		$c = UNL_UCBCN_Frontend::factory('calendar');
-		$c->calendarstatus = $status;
-		$c->orderBy('name ASC');
-		if ($c->find()) {
-			return $c;
-		}
 
-		return false;
-    }
-    
     /**
      * This function checks if a calendar has events on the day requested.
      *
