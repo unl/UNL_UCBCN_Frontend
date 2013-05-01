@@ -188,15 +188,9 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     {
         switch($this->view) {
         case 'upcoming':
-            if (isset($_GET['limit'])) {
-                $limit = intval($_GET['limit']);
-            } else {
-                $limit = 10;
-            }
             $this->output[] = new UNL_UCBCN_Frontend_Upcoming(array(
                                                 'dsn'=>$this->dsn,
-                                                'calendar'=>$this->calendar,
-                                                'limit'=>$limit));
+                                                'calendar'=>$this->calendar));
             $this->right    = new UNL_UCBCN_Frontend_MonthWidget(date('Y'), date('m'), $this->calendar);
             break;
         case 'event':

@@ -55,13 +55,10 @@ class UNL_UCBCN_Frontend_Upcoming extends UNL_UCBCN
      * Message for when no upcoming events are found.
      */
     public $noevents = 'Sorry, no events could be found.';
-    
-    /**
-     * Limit the number of records.
-     *
-     * @var int
-     */
-    public $limit = 10;
+
+    public $options = array(
+            'limit' => 10,
+            );
     
     /**
      * Constructs an upcoming event view for this calendar.
@@ -89,7 +86,7 @@ class UNL_UCBCN_Frontend_Upcoming extends UNL_UCBCN
     public function showEventListing()
     {
         $options = array('calendar'=> $this->calendar,
-                         'limit'   => $this->limit);
+                         'limit'   => $this->options['limit']);
         // Fetch the day evenlisting for this day.
         $eventlist = new UNL_UCBCN_EventListing('upcoming', $options);
         
