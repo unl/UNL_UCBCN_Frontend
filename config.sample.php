@@ -24,4 +24,12 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 
-UNL\UCBCN\Frontend\Controller::$url = '/workspace/UNL_UCBCN/www/';
+UNL\UCBCN\Frontend\Controller::$url = '/workspace/UNL_UCBCN_Frontend/www/';
+
+UNL\UCBCN\ActiveRecord\Database::setDbSettings(
+    array(
+    'host'     => 'localhost',
+    'user'     => 'events',
+    'password' => 'events',
+    'dbname'   => 'events',
+));
