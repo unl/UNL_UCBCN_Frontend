@@ -39,34 +39,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     public $calendar;
     
     /**
-     * Year the user is viewing.
-     *
-     * @var int
-     */
-    public $year;
-    
-    /**
-     * Month the user is viewing.
-     *
-     * @var int
-     */
-    public $month;
-    
-    /**
-     * Day to show events for
-     *
-     * @var int
-     */
-    public $day;
-    
-    /**
-     * Specific eventdatetime_id (if used)
-     *
-     * @var int
-     */
-    public $eventdatetime_id = null;
-    
-    /**
      * URI to the management frontend
      *
      * @var string
@@ -88,45 +60,20 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     public $right;
     
     /**
-     * Unique body ID
-     *
-     * @var string
-     */
-    public $uniquebody;
-    
-    /**
      * Main content of the page sent to the client.
      *
      * @var mixed
      */
     public $output;
-    
+
     /**
-     * Section Title
-     *
-     * @var string
+     * Options array
+     * Will include $_GET vars
      */
-    public $sectitle;
-    
-    /**
-     * View to be displayed
-     *
-     * @var string
-     */
-    public $view = 'day';
-    
-    /**
-     * format of view
-     *
-     * @var string
-     */
-    public $format = 'html';
-    
-    /**
-     * whether this is a top level page or a sub-tab
-     * @param $options
-     */
-    public $top_level = false;
+    public $options = array(
+        'model'  => false,
+        'format' => 'html',
+    );
     
     /**
      * Constructor for the frontend.
