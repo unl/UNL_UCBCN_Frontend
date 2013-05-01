@@ -3,12 +3,21 @@
 $startu = strtotime($this->eventdatetime->starttime);
 $endu = strtotime($this->eventdatetime->endtime);
 
+/*
+ * 
+ *  //Moved here temporarily, they'll need to get into the head some time
+	echo '<meta property="og:title" content="'. $context->output[0]->event->title .'"/>
+          <meta property="og:site_name" content="'. $context->calendar->name .'"/> 
+          <meta property="og:url" content="'. UNL_UCBCN::getBaseURL().$context->output[0]->url .'"/>
+          <meta property="og:description" content="'. $context->output[0]->event->description .'" />';
+ */
+
 ?>
 <div class="event_cal">
 <div class='vcalendar'>
 	<div class='vevent'>
-		<h1 class='summary'><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->title); ?> <a class="permalink" href="<?php echo $this->url; ?>">(link)</a></h1>
-		<?php if (isset($this->event->subtitle)) echo '<h2>'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'</h2>'; ?>
+		<h1 class='summary'><?php echo $savvy->dbStringtoHtml($this->event->title); ?> <a class="permalink" href="<?php echo $this->url; ?>">(link)</a></h1>
+		<?php if (isset($this->event->subtitle)) echo '<h2>'.$savvy->dbStringtoHtml($this->event->subtitle).'</h2>'; ?>
 		<div id="tabsG">
 		  <ul>
 		    <li><a href="#" id="event_selected" title="Event Detail"><span>Event Detail</span></a></li>
@@ -56,13 +65,13 @@ $endu = strtotime($this->eventdatetime->endtime);
 		<tr>
 			<td class="date">Description:</td>	
 			<td><p class='description'>
-			<?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->description); ?></p>
+			<?php echo $savvy->dbStringtoHtml($this->event->description); ?></p>
 			<?php
 			if (isset($this->eventdatetime->additionalpublicinfo)) {
-                echo '<p>Additional Public Info: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->additionalpublicinfo).'</p>';
+                echo '<p>Additional Public Info: '.$savvy->dbStringtoHtml($this->eventdatetime->additionalpublicinfo).'</p>';
             }
 			if (isset($this->event->webpageurl)) {
-			    echo 'Website: <a class="url" href="'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->webpageurl).'">'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->webpageurl).'</a>';
+			    echo 'Website: <a class="url" href="'.$savvy->dbStringtoHtml($this->event->webpageurl).'">'.$savvy->dbStringtoHtml($this->event->webpageurl).'</a>';
 			}
 			?>
 			<?php if (isset($this->event->imagedata)) { ?>
@@ -75,13 +84,13 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<td>
 				<?php
 				if (isset($this->eventdatetime->room)) {
-				    echo 'Room: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+				    echo 'Room: '.$savvy->dbStringtoHtml($this->eventdatetime->room);
 				}
 				if ($loc = $this->eventdatetime->getLocation()) {
 					UNL_UCBCN::displayRegion($loc);
 				}
                 if (isset($this->eventdatetime->directions)) {
-                    echo '<p class="directions">Directions: '.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->directions).'</p>';
+                    echo '<p class="directions">Directions: '.$savvy->dbStringtoHtml($this->eventdatetime->directions).'</p>';
                 }
 				?>
 			</td>
@@ -106,8 +115,8 @@ $endu = strtotime($this->eventdatetime->endtime);
             UNL_UCBCN::displayRegion($this->facebookRSVP);
             echo $this->facebook->like($this->url,$this->calendar->id);
             echo '<p id="feeds">
-			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics')).'">ics format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a>
-			<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'rss')).'">rss format for '.UNL_UCBCN_Frontend::dbStringToHtml($this->event->title).'</a>
+			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics')).'">ics format for '.$savvy->dbStringtoHtml($this->event->title).'</a>
+			<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'rss')).'">rss format for '.$savvy->dbStringtoHtml($this->event->title).'</a>
 			</p>'; ?>
 		</div>
 	</div>

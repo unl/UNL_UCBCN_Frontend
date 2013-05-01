@@ -58,19 +58,19 @@ foreach ($this->events as $e) {
         }
     }
     $row .= '</td>' .
-            '<td><a class="url summary" href="'.UNL_UCBCN_Frontend::dbStringToHtml($e->url).'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a>';
+            '<td><a class="url summary" href="'.$savvy->dbStringtoHtml($e->url).'">'.$savvy->dbStringtoHtml($e->event->title).'</a>';
     if (isset($e->eventdatetime->location_id) && $e->eventdatetime->location_id) {
         $l = $e->eventdatetime->getLink('location_id');
         $row .= ' <span class="location">';
         if (isset($l->mapurl)) {
-            $row .= '<a class="mapurl" href="'.UNL_UCBCN_Frontend::dbStringToHtml($l->mapurl).'">'.UNL_UCBCN_Frontend::dbStringToHtml($l->name).'</a>';
+            $row .= '<a class="mapurl" href="'.$savvy->dbStringtoHtml($l->mapurl).'">'.$savvy->dbStringtoHtml($l->name).'</a>';
         } else {
-            $row .= UNL_UCBCN_Frontend::dbStringToHtml($l->name);
+            $row .= $savvy->dbStringtoHtml($l->name);
         }
         $row .= '</span>';
     }
     if ($this->type != 'ongoing') {
-        $row .=    '<blockquote class="description">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->description).'</blockquote>';
+        $row .=    '<blockquote class="description">'.$savvy->dbStringtoHtml($e->event->description).'</blockquote>';
     }
     $row .= $e->facebook->like($e->url,$e->calendar->id);
     $row .= '</td></tr>';

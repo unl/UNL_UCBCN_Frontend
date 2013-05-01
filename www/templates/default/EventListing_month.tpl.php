@@ -22,7 +22,7 @@ foreach ($this->events as $e) {
         }
         $li .= ': ';
     }
-    $li .= '<a href="'.$e->url.'">'.UNL_UCBCN_Frontend::dbStringToHtml($e->event->title).'</a></li>';
+    $li .= '<a href="'.$e->url.'">'.$savvy->dbStringtoHtml($e->event->title).'</a></li>';
     echo $li;
 }
 ?>

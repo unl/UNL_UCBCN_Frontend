@@ -3,12 +3,12 @@ $startu = strtotime($this->eventdatetime->starttime);
 $endu = strtotime($this->eventdatetime->endtime);
 ?>
 <item>
-	<title><?php echo UNL_UCBCN_Frontend::dbStringToHtml($this->event->title); ?></title>
+	<title><?php echo $savvy->dbStringtoHtml($this->event->title); ?></title>
 	<link><?php echo $this->url; ?></link>
 	<description>
 		<?php
-		echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml(strip_tags($this->event->description)).'&lt;/div&gt;';
-		if (isset($this->event->subtitle)) echo '&lt;div&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($this->event->subtitle).'&lt;/div&gt;';
+		echo '&lt;div&gt;'.$savvy->dbStringtoHtml(strip_tags($this->event->description)).'&lt;/div&gt;';
+		if (isset($this->event->subtitle)) echo '&lt;div&gt;'.$savvy->dbStringtoHtml($this->event->subtitle).'&lt;/div&gt;';
 		echo '&lt;small&gt;'.date('l, F jS', $startu).'&lt;/small&gt;';
 		
 		if (isset($this->eventdatetime->starttime)) {
@@ -27,9 +27,9 @@ $endu = strtotime($this->eventdatetime->endtime);
 	    }
 		if ($this->eventdatetime->location_id) {
 		    $loc = $this->eventdatetime->getLink('location_id');
-			echo ' | &lt;small&gt;'.UNL_UCBCN_Frontend::dbStringToHtml($loc->name);
+			echo ' | &lt;small&gt;'.$savvy->dbStringtoHtml($loc->name);
 			if (isset($this->eventdatetime->room)) {
-			    echo ' Room:'.UNL_UCBCN_Frontend::dbStringToHtml($this->eventdatetime->room);
+			    echo ' Room:'.$savvy->dbStringtoHtml($this->eventdatetime->room);
 			}
 			echo '&lt;/small&gt;';
 		} ?>
