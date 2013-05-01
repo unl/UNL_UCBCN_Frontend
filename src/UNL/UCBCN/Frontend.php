@@ -436,93 +436,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     }
     
     /**
-     * This function attempts to determine the view parameters for the frontend output.
-     *
-     * @param string $method The HTTP method to use for determining views-GET | POST
-     *
-     * @return array options to be sent to the constructor.
-     */
-    function determineView($method='GET')
-    {
-        $view = array();
-        switch ($method) {
-        case 'GET':
-        case '_GET':
-        case 'get':
-        default:
-            $method = '_GET';
-            break;
-        case 'post':
-        case 'POST':
-        case '_POST':
-            $method = '_POST';
-            break;
-        }
-        $view['view'] = 'day';
-        if (isset($GLOBALS[$method]['y'])&&!empty($GLOBALS[$method]['y'])) {
-            $view['year'] = (int)$GLOBALS[$method]['y'];
-            $view['view'] = 'year';
-        } else {
-            $view['year'] = date('Y');
-        }
-        if (isset($GLOBALS[$method]['m'])&&!empty($GLOBALS[$method]['m'])) {
-            $view['view']  = 'month';
-            $view['month'] = (int)$GLOBALS[$method]['m'];
-        } else {
-            $view['month'] = date('m');
-        }
-        if (isset($GLOBALS[$method]['d'])&&!empty($GLOBALS[$method]['d'])) {
-            $view['view'] = 'day';
-            $view['day']  = (int)$GLOBALS[$method]['d'];
-        } else {
-            $view['day'] = date('j');
-        }
-        if (isset($GLOBALS[$method]['s'])) {
-            $view['view'] = 'week';
-        }
-        if (isset($GLOBALS[$method]['eventdatetime_id'])&&!empty($GLOBALS[$method]['eventdatetime_id'])) {
-            $view['view']             = 'event';
-            $view['eventdatetime_id'] = $GLOBALS[$method]['eventdatetime_id'];
-        }
-
-        if (isset($GLOBALS[$method]['image'])) {
-            $view['view'] = 'image';
-        }
-
-        if (isset($GLOBALS[$method]['month'])) {
-            $view['view'] = 'month';
-        }
-        if (isset($GLOBALS[$method]['search'])) {
-            $view['view'] = 'search';
-        }
-        if (isset($GLOBALS[$method]['upcoming'])) {
-            $view['view'] = 'upcoming';
-        }
-        if (isset($GLOBALS[$method]['monthwidget'])) {
-            $view['view'] = 'monthwidget';
-        }
-        if (isset($GLOBALS[$method]['fullcal'])) {
-            if (isset($GLOBALS[$method]['m'])) {
-                $view['month'] = (int)$GLOBALS[$method]['m'];
-            }
-            if (isset($GLOBALS[$method]['d'])) {
-                $view['day'] = (int)$GLOBALS[$method]['d'];
-            }
-            if (isset($GLOBALS[$method]['y'])) {
-                $view['year'] = (int)$GLOBALS[$method]['y'];
-            }
-            $view['view'] = 'fullcal';
-        }
-        
-        if (isset($GLOBALS[$method]['format'])) {
-            $view['format'] = $GLOBALS[$method]['format'];
-        } else {
-            $view['format'] = 'html';
-        }
-        return $view;
-    }
-    
-    /**
      * Get's a uniqe key for this object for reference in cache.
      *
      * @return string A unique identifier for this view of the calendar.
@@ -534,7 +447,7 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             return false;
         }
 
-        return md5(serialize(array_merge($this->determineView(),
+        return md5(serialize(array_merge($this->options,
                                          array($this->calendar->id))));
     }
     
