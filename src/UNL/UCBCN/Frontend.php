@@ -29,7 +29,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
+class UNL_UCBCN_Frontend
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object
@@ -82,7 +82,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      */
     function __construct($options)
     {
-        parent::__construct($options);
+        $this->options = $options + $this->options;
+
         if (!isset($this->calendar)) {
             $this->calendar = UNL_UCBCN_Frontend::factory('calendar');
             if (PEAR::isError($this->calendar)) {
