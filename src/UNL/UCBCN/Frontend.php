@@ -177,64 +177,79 @@ class UNL_UCBCN_Frontend
         }
         return $event_instance;
     }
-    
+
     /**
-     * Returns a formatted URL.
+     * Add a file extension to the existing URL
      *
-     * @param array $values Associative array of the values to add to the URL
-     * @param bool  $encode If true and format is querystring, ampersands will be &amp;
-     *
-     * @return string URL to a frontend which has the data in the format requested.
+     * @param string $url       The URL
+     * @param string $extension The file extension to add, e.g. csv
      */
-    function formatURL($values,$encode = true)
+    public static function addURLExtension($url, $extension)
     {
-        $order = array('calendar','upcoming','search','y','m','d','eventdatetime_id','q', 'event_id');
-        global $_UNL_UCBCN;
-        $url = '';
-        if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
-            $url = $_UNL_UCBCN['uri'];
+        $extension = trim($extension, '.');
+
+        return preg_replace('/^([^?]+)(\.[\w]+)?(\?.*)?$/', '$1.'.$extension.'$3', $url);
+    }
+
+    /**
+     * Add unique querystring parameters to a URL
+     *
+     * @param string $url               The URL
+     * @param array  $additional_params Additional querystring parameters to add
+     *
+     * @return string
+     */
+    public static function addURLParams($url, $additional_params = array())
+    {
+        $params = self::getURLParams($url);
+
+        $params = array_merge($params, $additional_params);
+
+        if (strpos($url, '?') !== false) {
+            $url = substr($url, 0, strpos($url, '?'));
         }
-        foreach ($order as $val) {
-            if (isset($values[$val])) {
-                if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
-                    /* A calendar needs to be formmatted into the URL.
-                     * We need to take care to not include it if it is the
-                     * default calendar.
-                     */
-                    if (is_numeric($values[$val])) {
-                        $cid = $values[$val];
-                    } else {
-                        $cid = UNL_UCBCN_Frontend::getCalendarID($values[$val]);
-                    }
-                    if ($cid != $_UNL_UCBCN['default_calendar_id']) {
-                        // This is link is not for the default calendar, add it to the url.
-                        $url .= UNL_UCBCN_Frontend::getCalendarShortname($cid).'/';
+
+        $url .= '?';
+
+        foreach ($params as $option=>$value) {
+            if ($option == 'driver') {
+                continue;
+            }
+            if ($option == 'format'
+                && $value == 'html') {
+                continue;
+            }
+            if (isset($value)) {
+                if (is_array($value)) {
+                    foreach ($value as $arr_value) {
+                        $url .= "&{$option}[]=$arr_value";
                     }
                 } else {
-                    $url .= $values[$val].'/';
+                    $url .= "&$option=$value";
                 }
             }
         }
-        // Final check for the format (rss, ics, etc).
-        if (isset($values['format'])) {
-            $url .= '?format='.$values['format'];
-        }
-        return $url;
+        $url = str_replace('?&', '?', $url);
+
+        return trim($url, '?;=');
     }
-    
-    /**
-     * This function is for reformmating URL address. IE, you have the
-     * url to the object, but simply want to change the format to ics etc.
-     *
-     * @param string $url    Url of the form http://
-     * @param array  $values Associative array of values to apply. format
-     *
-     * @return string The URL reformatted to a different output format.
-     */
-    function reformatURL($url, $values)
+
+    public static function getURLParams($url)
     {
-        $url .= '?format='.$values['format'];
-        return $url;
+        $params = array();
+        if (strpos($url, '?') !== false) {
+            list($url, $existing_params) = explode('?', $url);
+            $existing_params = explode('&', html_entity_decode($existing_params, ENT_QUOTES, 'UTF-8'));
+            foreach ($existing_params as $val) {
+                $split = explode('=', $val);
+                $params[$split[0]] = '';
+                if (isset($split[1])) {
+                    $params[$split[0]] = $split[1];
+                }
+            }
+        }
+
+        return $params;
     }
 
     /**
