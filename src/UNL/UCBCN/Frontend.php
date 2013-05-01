@@ -74,13 +74,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
     public $uri = '';
     
     /**
-     * Format of URI's  querystring|rest
-     *
-     * @var string
-     */
-    public $uriformat = 'querystring';
-    
-    /**
      * URI to the management interface UNL_UCBCN_Manager
      *
      * @var string EG: http://events.unl.edu/manager/
@@ -314,65 +307,30 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
         if (isset($_UNL_UCBCN['uri']) && !empty($_UNL_UCBCN['uri'])) {
             $url = $_UNL_UCBCN['uri'];
         }
-        switch(UNL_UCBCN_Frontend::uriFormat()) {
-        case 'rest':
-        case 'REST':
-            foreach ($order as $val) {
-                if (isset($values[$val])) {
-                    if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
-                        /* A calendar needs to be formmatted into the URL.
-                         * We need to take care to not include it if it is the
-                         * default calendar.
-                         */
-                        if (is_numeric($values[$val])) {
-                            $cid = $values[$val];
-                        } else {
-                            $cid = UNL_UCBCN_Frontend::getCalendarID($values[$val]);
-                        }
-                        if ($cid != $_UNL_UCBCN['default_calendar_id']) {
-                            // This is link is not for the default calendar, add it to the url.
-                            $url .= UNL_UCBCN_Frontend::getCalendarShortname($cid).'/';
-                        }
+        foreach ($order as $val) {
+            if (isset($values[$val])) {
+                if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
+                    /* A calendar needs to be formmatted into the URL.
+                     * We need to take care to not include it if it is the
+                     * default calendar.
+                     */
+                    if (is_numeric($values[$val])) {
+                        $cid = $values[$val];
                     } else {
-                        $url .= $values[$val].'/';
+                        $cid = UNL_UCBCN_Frontend::getCalendarID($values[$val]);
                     }
+                    if ($cid != $_UNL_UCBCN['default_calendar_id']) {
+                        // This is link is not for the default calendar, add it to the url.
+                        $url .= UNL_UCBCN_Frontend::getCalendarShortname($cid).'/';
+                    }
+                } else {
+                    $url .= $values[$val].'/';
                 }
             }
-            // Final check for the format (rss, ics, etc).
-            if (isset($values['format'])) {
-                $url .= '?format='.$values['format'];
-            }
-            break;
-        case 'querystring':
-        default:
-        	$url .= '?';
-            foreach ($order as $val) {
-                if (isset($values[$val])) {
-                    if ($val == 'calendar' && isset($_UNL_UCBCN['default_calendar_id'])) {
-                        if (is_numeric($values[$val])) {
-                            $cid = $values[$val];
-                        } else {
-                            $cid = UNL_UCBCN_Frontend::getCalendarID($values[$val]);
-                        }
-                        if ($cid != $_UNL_UCBCN['default_calendar_id']) {
-                            // This is link is not for the default calendar, add it to the url.
-                            $url .= 'calendar_id='.$values[$val];
-                        }
-                    } else {
-                        $url .= $val.'='.$values[$val];
-                    }
-                    if ($encode == true) {
-                        $url .= '&amp;';
-                    } else {
-                        $url .= '&';
-                    }
-                }
-            }
-            // Final check for the format (rss, ics, etc).
-            if (isset($values['format'])) {
-                $url .= 'format='.$values['format'];
-            }
-            break;
+        }
+        // Final check for the format (rss, ics, etc).
+        if (isset($values['format'])) {
+            $url .= '?format='.$values['format'];
         }
         return $url;
     }
@@ -388,51 +346,8 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      */
     function reformatURL($url, $values)
     {
-        if (isset($values['format'])) {
-            switch(UNL_UCBCN_Frontend::uriFormat()) {
-            case 'rest':
-            case 'REST':
-                $url .= '?format='.$values['format'];
-                break;
-            case 'querystring':
-            default:
-                $url .= 'format='.$values['format'];
-                break;
-            }
-        }
+        $url .= '?format='.$values['format'];
         return $url;
-    }
-    
-    /**
-     * Sets and/or returns the uri format.
-     *
-     * @param string $set optional string, pass it to set the uriFormat, don't pass it to retrieve.
-     *
-     * @return string rest or querystring
-     */
-    function uriFormat($set=null)
-    {
-        global $_UNL_UCBCN;
-        if (isset($set)) {
-            switch($set){
-            case 'rest':
-            case 'REST':
-                $format = 'rest';
-                break;
-            case 'querystring':
-            default:
-                $format = 'querystring';
-                break;
-            }
-            $_UNL_UCBCN['uriformat'] = $format;
-        } else {
-            if (isset($_UNL_UCBCN['uriformat'])) {
-                $format = $_UNL_UCBCN['uriformat'];
-            } else {
-                $format = 'querystring';
-            }
-        }
-        return $format;
     }
     
     /**
