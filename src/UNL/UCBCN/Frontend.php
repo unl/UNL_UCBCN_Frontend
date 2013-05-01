@@ -305,5 +305,14 @@ class UNL_UCBCN_Frontend
         $eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d', $epoch).'%\'');
         return $eventdatetime->find();
     }
+
+    public static function redirect($url, $exit = true)
+    {
+        header('Location: '.$url);
+        if (!defined('CLI')
+            && false !== $exit) {
+            exit($exit);
+        }
+    }
 }
 ?>
