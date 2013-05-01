@@ -236,22 +236,6 @@ class UNL_UCBCN_Frontend
         $url .= '?format='.$values['format'];
         return $url;
     }
-    
-    /**
-     * Get's a uniqe key for this object for reference in cache.
-     *
-     * @return string A unique identifier for this view of the calendar.
-     */
-    function getCacheKey()
-    {
-        if ($this->view == 'search' || $this->view == 'upcoming' || $this->view == 'fullcal') {
-            // Right now we aren't caching search results or upcoming pages.
-            return false;
-        }
-
-        return md5(serialize(array_merge($this->options,
-                                         array($this->calendar->id))));
-    }
 
     /**
      * This function checks if a calendar has events on the day requested.
