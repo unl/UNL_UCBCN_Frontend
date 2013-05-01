@@ -77,7 +77,7 @@ class Frontend
      *
      * @param array $options Associative array of options for the frontend.
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         $this->options = $options + $this->options;
 
@@ -96,7 +96,7 @@ class Frontend
      *
      * @return void
      */
-    function run()
+    public function run()
     {
         $this->determineCalendar();
 
@@ -139,7 +139,7 @@ class Frontend
      *
      * @return object UNL_UCBCN_EventInstance on success UNL_UCBCN_Error on error.
      */
-    function getEventInstance($id, $calendar=null, $event_id=null)
+    public function getEventInstance($id, $calendar=null, $event_id=null)
     {
         // Get recurring dates, if any
         if (isset($event_id)) {
@@ -264,7 +264,7 @@ class Frontend
      *
      * @return bool true or false
      */
-    function dayHasEvents($epoch, $calendar = null)
+    public function dayHasEvents($epoch, $calendar = null)
     {
         
         if (isset($calendar)) {
@@ -299,4 +299,3 @@ class Frontend
         }
     }
 }
-?>
