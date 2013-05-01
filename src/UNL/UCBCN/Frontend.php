@@ -249,43 +249,6 @@ class UNL_UCBCN_Frontend
     }
     
     /**
-     * Returns a calendar shortname for the calendar with the given ID.
-     *
-     * @param int $id Calendar ID within the database.
-     *
-     * @return int on success, false on error.
-     */
-    function getCalendarShortname($id)
-    {
-        $c = UNL_UCBCN_Frontend::factory('calendar');
-        if ($c->get($id)) {
-            return $c->shortname;
-        }
-
-        return false;
-
-    }
-    
-    /**
-     * Gets the calendar id from a shortname.
-     *
-     * @param string $shortname The value for the shortname field in the calendar table.
-     *
-     * @return int id on success, false on error.
-     */
-    function getCalendarID($shortname)
-    {
-        $c            = UNL_UCBCN_Frontend::factory('calendar');
-        $c->shortname = $shortname;
-        if ($c->find() && $c->fetch()) {
-            return $c->id;
-        }
-
-        return false;
-
-    }
-    
-    /**
      * Get a list of calendars with a given status
      *
      * @param string $status The value of the status in the calendar table
