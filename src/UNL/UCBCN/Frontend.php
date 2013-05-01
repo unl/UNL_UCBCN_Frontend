@@ -168,35 +168,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
      */
     function preRun($cache_hit = false)
     {
-        // Send headers for CORS support so calendar bits can be pulled remotely
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, OPTIONS');
-        header('Access-Control-Allow-Headers: X-Requested-With');
-        if (isset($_SERVER['REQUEST_METHOD'])
-            && $_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-            // short circuit execution for CORS OPTIONS reqeusts
-            exit();
-        }
-        switch($this->format) {
-        case 'ics':
-            // We'll be outputting a ics file
-            header('Content-type: text/calendar');
-            header('Content-Disposition: attachment; filename="events.ics"');
-            break;
-        case 'json':
-        	header('Content-Type:text/plain; charset=UTF-8');
-        	break;
-        case 'xml':
-            header('Content-type: text/xml');
-            break;
-        case 'rss':
-            header('Content-type: application/rss+xml');
-            break;
-        case 'html':
-        case 'hcalendar':
-            header('Content-Type:text/html; charset=UTF-8');
-            break;
-        }
         /*
         if ($cache_hit == true) {
             // cached output is about to be sent to the browser.
@@ -285,32 +256,6 @@ class UNL_UCBCN_Frontend extends UNL_UCBCN implements UNL_UCBCN_Cacheable
             break;
         case 'image':
             $this->displayImage();
-            break;
-        }
-        switch($this->format) {
-        case 'json':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_json');
-            break;
-        case 'fullcal_json':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_fullcalJson');
-            break;
-        case 'xml':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_xml');
-            break;
-        case 'hcalendar':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_hcalendar');
-            break;
-        case 'ics':
-        case 'ical':
-        case 'icalendar':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_icalendar');
-            break;
-        case 'rss':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_rss');
-            break;
-        case 'html':
-        default:
-            // Standard template works for html.
             break;
         }
     }
