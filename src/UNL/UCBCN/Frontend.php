@@ -103,71 +103,15 @@ class UNL_UCBCN_Frontend
     {
         $this->determineCalendar();
 
-        switch($this->view) {
-        case 'upcoming':
-            $this->output[] = new UNL_UCBCN_Frontend_Upcoming(array(
-                                                'dsn'=>$this->dsn,
-                                                'calendar'=>$this->calendar));
-            $this->right    = new UNL_UCBCN_Frontend_MonthWidget(date('Y'), date('m'), $this->calendar);
-            break;
-        case 'event':
-            if (isset($_GET['eventdatetime_id'])) {
-                $id = (int) $_GET['eventdatetime_id'];
-            }
-            $event_id = null;
-            if (isset($_GET['event_id'])) {
-                $event_id = (int) $_GET['event_id'];
-            }
-            $this->output[] = $this->getEventInstance($id, $this->calendar, $event_id);
-            $this->right    = new UNL_UCBCN_Frontend_MonthWidget($this->year,
-                                                              $this->month,
-                                                              $this->calendar);
-            break;
-        case 'fullcal':
-            $start = (int)$_GET['start'];
-            $end   = (int)$_GET['end'];
-            $this->output[] = new UNL_UCBCN_Frontend_FullCal($this->calendar, $this->dsn, $start, $end);
-            break;
-        default:
-        case 'day':
-            $this->output[] = new UNL_UCBCN_Frontend_Day(array(
-                                        'dsn'     => $this->dsn,
-                                        'year'    => $this->year,
-                                        'month'   => $this->month,
-                                        'day'     => $this->day,
-                                        'calendar'=> $this->calendar));
-            $this->right    = new UNL_UCBCN_Frontend_MonthWidget($this->year,
-                                                              $this->month,
-                                                              $this->calendar);
-            break;
-        case 'week':
-            $this->output[] = new UNL_UCBCN_Frontend_Week(array(
-                                        'dsn'     => $this->dsn,
-                                        'year'    => $this->year,
-                                        'month'   => $this->month,
-                                        'day'     => $this->day,
-                                        'calendar'=> $this->calendar));
-            break;
-        case 'month':
-            $this->output[] = new UNL_UCBCN_Frontend_Month($this->year, $this->month, $this->calendar, $this->dsn);
-            break;
-        case 'monthwidget':
-            UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend', 'Frontend_hcalendar');
-            $this->output[] = new UNL_UCBCN_Frontend_MonthWidget($this->year, $this->month, $this->calendar);
-            break;
-        case 'year':
-            $this->output[] = new UNL_UCBCN_Frontend_Year($this->year, $this->calendar);
-            break;
-        case 'search':
-            $q = null;
-            if (isset($_GET['q'])) {
-                $q = $_GET['q'];
-            }
-            $this->output[] = new UNL_UCBCN_Frontend_Search(array('calendar'=>$this->calendar, 'query'=>$q));
-            break;
-        case 'image':
-            $this->displayImage();
-            break;
+        if (!isset($this->options['model'])
+            || false === $this->options['model']) {
+            throw new UnexpectedValueException('Un-registered view', 404);
+        }
+
+        if (is_callable($this->options['model'])) {
+            $this->output = call_user_func($this->options['model'], $this->options);
+        } else {
+            $this->output = new $this->options['model']($this->options);
         }
     }
 
