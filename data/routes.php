@@ -18,6 +18,7 @@ $day      = '(?P<d>([0-3])?[0-9])';
 $format   = '(\.(?P<format>[\w]+))?';
 
 $routes['/^'.$calendar.'$/']                                                        = 'UNL\UCBCN\Frontend\Day';
+$routes['/^images\/(?P<id>[\d]+)'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Image';
 $routes['/^'.$calendar.'upcoming'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Upcoming';
 $routes['/^'.$calendar.'search(\/(?P<q>.+))'.$format.'$/']                          = 'UNL\UCBCN\Frontend\Search';
 $routes['/^'.$calendar.$year.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Year';
