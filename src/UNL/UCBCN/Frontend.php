@@ -321,20 +321,6 @@ class UNL_UCBCN_Frontend
     }
     
     /**
-     * This function converts a string stored in the database to html output.
-     * & becomes &amp; etc.
-     *
-     * @param string $t Normally a varchar string from the database.
-     *
-     * @return String encoded for output to html.
-     */
-    function dbStringToHtml($text)
-    {
-        $text = str_replace(array('&amp;', '&'), array('&', '&amp;'), $text);
-        return nl2br($text);
-    }
-    
-    /**
      * This function checks if a calendar has events on the day requested.
      *
      * @param string             $epoch    Unix epoch of the day to check.
