@@ -234,6 +234,13 @@ class UNL_UCBCN_Frontend
         return trim($url, '?;=');
     }
 
+    /**
+     * Get the querystring parameters for a URL
+     *
+     * @param string $url 
+     *
+     * @return array key=>value pairs
+     */
     public static function getURLParams($url)
     {
         $params = array();
