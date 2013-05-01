@@ -80,7 +80,7 @@ class UNL_UCBCN_Frontend
      *
      * @param array $options Associative array of options for the frontend.
      */
-    function __construct($options)
+    function __construct($options = array())
     {
         $this->options = $options + $this->options;
 
