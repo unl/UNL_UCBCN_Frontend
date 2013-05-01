@@ -128,7 +128,12 @@ class UNL_UCBCN_Frontend
             throw new RuntimeException('No calendar could be found.', 404);
         }
     }
-    
+
+    public function getURL()
+    {
+        return self::$url;
+    }
+
     /**
      * Gets the specified event instance.
      *
