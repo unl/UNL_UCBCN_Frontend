@@ -95,6 +95,7 @@ class Frontend
      * data for the current view.
      *
      * @return void
+     * @throws Exception if view is unregistered
      */
     public function run()
     {
