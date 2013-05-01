@@ -84,18 +84,12 @@ class UNL_UCBCN_Frontend
     {
         $this->options = $options + $this->options;
 
-        if (!isset($this->calendar)) {
-            $this->calendar = UNL_UCBCN_Frontend::factory('calendar');
-            if (PEAR::isError($this->calendar)) {
-                throw new Exception($this->calendar->message);
-            }
-
-            if (isset($_GET['calendar_id'])) {
-                $this->calendar->get($_GET['calendar_id']);
-            } elseif (!$this->calendar->get($this->default_calendar_id)) {
-                return new UNL_UCBCN_Error('No calendar specified or could be found.');
-            }
+        try {
+            $this->run();
+        } catch (\Exception $e) {
+            $this->output = $e;
         }
+
     }
     
     /**
@@ -127,6 +121,8 @@ class UNL_UCBCN_Frontend
      */
     function run()
     {
+        $this->determineCalendar();
+
         switch($this->view) {
         case 'upcoming':
             $this->output[] = new UNL_UCBCN_Frontend_Upcoming(array(
@@ -192,6 +188,20 @@ class UNL_UCBCN_Frontend
         case 'image':
             $this->displayImage();
             break;
+        }
+    }
+
+    protected function determineCalendar()
+    {
+        if (isset($this->options['calendar_shortname'])) {
+            // Try and get by shortname
+            $this->options['calendar'] = \UNL\UCBCN\Calendar::getByShortName($this->options['calendar_shortname']);
+        } else {
+            $this->options['calendar'] = \UNL\UCBCN\Calendar::getByID(self::$default_calendar_id);
+        }
+
+        if (!$this->options['calendar']) {
+            throw new RuntimeException('No calendar could be found.', 404);
         }
     }
     
