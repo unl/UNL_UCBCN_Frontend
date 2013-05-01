@@ -53,13 +53,6 @@ class UNL_UCBCN_Frontend
     public $manageruri = '';
     
     /**
-     * Right column (usually the month widget)
-     *
-     * @var string
-     */
-    public $right;
-    
-    /**
      * Main content of the page sent to the client.
      *
      * @var mixed
