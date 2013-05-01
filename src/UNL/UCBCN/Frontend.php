@@ -93,26 +93,6 @@ class UNL_UCBCN_Frontend
     }
     
     /**
-     * This function is called before the run() function to handle
-     * any details prior to populating the data in the object, and
-     * sends output headers.
-     *
-     * @param bool $cache_hit if data is already cached or not.
-     *
-     * @return void
-     */
-    function preRun($cache_hit = false)
-    {
-        /*
-        if ($cache_hit == true) {
-            // cached output is about to be sent to the browser.
-        } else {
-            // output is not already cached.
-        }
-        */
-    }
-    
-    /**
      * Runs/builds the frontend object with the display parameters set.
      * This function will populate all of the output and member variables with the
      * data for the current view.
