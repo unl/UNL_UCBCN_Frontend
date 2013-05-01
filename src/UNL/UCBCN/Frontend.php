@@ -353,26 +353,5 @@ class UNL_UCBCN_Frontend
         $eventdatetime->whereAdd('starttime LIKE \''.date('Y-m-d', $epoch).'%\'');
         return $eventdatetime->find();
     }
-    
-    /**
-     * When the image view is set, the image for a given event will be displayed
-     * to the end user.  $_GET['id'] must be set to the event.id which has the image.
-     *
-     * @return void
-     */
-    function displayImage()
-    {
-        if (isset($_GET['id'])) {
-            $event = UNL_UCBCN_Frontend::factory('event');
-            if ($event->get($_GET['id'])) {
-                header('Content-type: '.$event->imagemime);
-                echo $event->imagedata;
-                exit();
-            }
-        }
-        header('HTTP/1.0 404 Not Found');
-        echo '404';
-        exit(0);
-    }
 }
 ?>
