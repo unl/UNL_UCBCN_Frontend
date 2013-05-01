@@ -11,6 +11,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
+namespace UNL\UCBCN;
 
 /**
  * This is the post install setup script for the frontend.
@@ -26,7 +27,7 @@
  * @link      http://code.google.com/p/unl-event-publisher/
  * 
  */
-class UNL_UCBCN_Frontend_setup_postinstall
+class Frontend_setup_postinstall
 {
     public $createFiles;
     public $createIndex;

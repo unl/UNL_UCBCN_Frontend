@@ -1,5 +1,7 @@
 <?php
-class UNL_UCBCN_Frontend_FullCal extends UNL_UCBCN_Frontend
+namespace UNL\UCBCN\Frontend;
+
+class FullCal
 {
     public $events = array();
     

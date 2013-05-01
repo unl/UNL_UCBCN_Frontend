@@ -12,7 +12,7 @@
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-
+namespace UNL\UCBCN\Frontend;
 
 /**
  * Class defines a month widget, basically a table with 30 boxes representing the
@@ -25,7 +25,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_MonthWidget extends UNL_UCBCN implements UNL_UCBCN_Cacheable
+class MonthWidget
 {
 
     /**

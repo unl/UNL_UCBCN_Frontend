@@ -12,12 +12,7 @@
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-
-require_once 'UNL/UCBCN/Frontend.php';
-require_once 'UNL/UCBCN/Frontend/Day.php';
-require_once 'Calendar/Calendar.php';
-require_once 'Calendar/Month/Weekdays.php';
-require_once 'Calendar/Util/Textual.php';
+namespace UNL\UCBCN\Frontend;
 
 /**
  * Object for a month view of the calendar.
@@ -31,7 +26,7 @@ require_once 'Calendar/Util/Textual.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_Month extends UNL_UCBCN
+class Month
 {
     /**
      * Calendar to show events for UNL_UCBCN_Month object

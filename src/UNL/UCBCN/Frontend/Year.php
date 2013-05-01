@@ -15,9 +15,7 @@
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-
-require_once 'UNL/UCBCN.php';
-require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
+namespace UNL\UCBCN\Frontend;
 
 /**
  * Generates a year view for the public frontend.
@@ -29,7 +27,7 @@ require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/ 
  */
-class UNL_UCBCN_Frontend_Year extends UNL_UCBCN
+class Year
 {
     /**
      * Year to show events for.

@@ -13,9 +13,7 @@
  * @link      http://code.google.com/p/unl-event-publisher/
  * @todo      Add searching by eventtype.
  */
-
-require_once 'UNL/UCBCN/Frontend.php';
-require_once 'UNL/UCBCN/EventListing.php';
+namespace UNL\UCBCN\Frontend;
 
 /**
  * Container for search results for the frontend.
@@ -29,7 +27,7 @@ require_once 'UNL/UCBCN/EventListing.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_Search extends UNL_UCBCN_Frontend
+class Search
 {
     /**
      * Calendar we are searching

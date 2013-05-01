@@ -1,4 +1,10 @@
 <?php
+namespace UNL\UCBCN\Frontend;
+
+use UNL\UCBCN\RuntimeException;
+
+use UNL\UCBCN\Calendar;
+
 /**
  * This class contains the information needed for viewing a single day view calendar.
  * 
@@ -13,23 +19,6 @@
  * @link      http://code.google.com/p/unl-event-publisher/
  */
 
-require_once 'UNL/UCBCN/Frontend.php';
-
-/**
- * Month widget is used for navigation within the month this day resides
- */
-require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
-
-/**
- * Event listings hold an array of events for this day.
- */
-require_once 'UNL/UCBCN/EventListing.php';
-
-/**
- * Calendar_Day is used for day manipulation and date verification.
- */
-require_once 'Calendar/Day.php';
-
 /**
  * Object for the view of a single day for a calendar.
  * 
@@ -40,7 +29,7 @@ require_once 'Calendar/Day.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
+class Day
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object
@@ -127,18 +116,13 @@ class UNL_UCBCN_Frontend_Day extends UNL_UCBCN
     public function __construct($options)
     {
         if (!isset($options['calendar'])) {
-            $this->calendar = UNL_UCBCN::factory('calendar');
-            if (!$this->calendar->get(1)) {
-                return new UNL_UCBCN_Error('No calendar specified or could be found.');
+            $this->calendar = Calendar::getById(Controller::$default_calendar_id);
+            if (!$this->calendar) {
+                throw new RuntimeException('The calendar specified or could be found.', 404);
             }
         } else {
             $this->calendar = $options['calendar'];
         }
-        
-        $upcoming = UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming'));
-        $this->noevents = $this->noevents.' Would you like to see the <a href="'.$upcoming.'">upcoming list of events</a>?';
-        
-        parent::__construct($options);
         
         $this->output[] = $this->showEventListing($ongoing_recurring);
         if ($this->ongoing===true) {

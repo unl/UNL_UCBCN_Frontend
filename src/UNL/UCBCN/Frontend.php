@@ -15,7 +15,11 @@
  * @link      http://code.google.com/p/unl-event-publisher/
  * @todo      Add new output formats such as serialized PHP, XML, and JSON.
  */
+namespace UNL\UCBCN;
 
+use UNL\UCBCN\RuntimeException;
+
+use UNL\UCBCN\UnexpectedValueException;
 
 /**
  * This is the basic frontend output class through which all output to the public is
@@ -29,7 +33,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend
+class Frontend
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object

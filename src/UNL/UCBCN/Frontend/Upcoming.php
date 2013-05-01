@@ -13,10 +13,7 @@
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-
-require_once 'UNL/UCBCN/Frontend.php';
-require_once 'UNL/UCBCN/Frontend/MonthWidget.php';
-require_once 'UNL/UCBCN/EventListing.php';
+namespace UNL\UCBCN\Frontend;
 
 /**
  * A list of upcoming events for a calendar.
@@ -28,7 +25,7 @@ require_once 'UNL/UCBCN/EventListing.php';
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_Upcoming extends UNL_UCBCN
+class Upcoming
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object

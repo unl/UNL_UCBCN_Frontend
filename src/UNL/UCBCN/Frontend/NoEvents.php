@@ -12,6 +12,7 @@
  * @version   CVS: $id$
  * @link      http://code.google.com/p/unl-event-publisher/
  */
+namespace UNL\UCBCN\Frontend;
 
 /**
  * Object for the view of a single day for a calendar.
@@ -23,7 +24,7 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class UNL_UCBCN_Frontend_NoEvents
+class NoEvents
 {
 	/**
      * no events message
