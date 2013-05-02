@@ -47,15 +47,22 @@ class Frontend
      *
      * @var string
      */
-    public $uri = '';
-    
+    public static $uri = '';
+
     /**
      * URI to the management interface UNL_UCBCN_Manager
      *
      * @var string EG: http://events.unl.edu/manager/
      */
-    public $manageruri = '';
-    
+    public static $manageruri = '';
+
+    /**
+     * Configurable ID for the base/master calendar
+     *
+     * @var int
+     */
+    public static $default_calendar_id = 1;
+
     /**
      * Main content of the page sent to the client.
      *
