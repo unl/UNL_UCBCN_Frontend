@@ -78,7 +78,7 @@ class Frontend
         'model'  => false,
         'format' => 'html',
     );
-    
+
     /**
      * Constructor for the frontend.
      *
@@ -95,7 +95,7 @@ class Frontend
         }
 
     }
-    
+
     /**
      * Runs/builds the frontend object with the display parameters set.
      * This function will populate all of the output and member variables with the
