@@ -1,5 +1,5 @@
-<a href="<?php echo $this->url; ?>"><?php echo $this->day; ?></a><span class="monthvalue_ID"><?php echo $this->month; ?></span>
+<a href="<?php echo $context->url; ?>"><?php echo $context->day; ?></a><span class="monthvalue_ID"><?php echo $context->month; ?></span>
 <?php
     UNL_UCBCN::outputTemplate('UNL_UCBCN_EventListing','EventListing_month');
-    UNL_UCBCN::displayRegion($this->output);
+    UNL_UCBCN::displayRegion($context->output);
 ?>

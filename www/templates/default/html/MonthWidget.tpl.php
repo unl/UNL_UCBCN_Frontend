@@ -1,5 +1,5 @@
 <table class="wp-calendar">
-	<caption><?php echo $this->caption; ?></caption>
+	<caption><?php echo $context->caption; ?></caption>
    <thead>
 	<tr>
 		<th abbr="Sunday" scope="col" title="Sunday">Sun</th>
@@ -12,6 +12,6 @@
 	</tr>
 	</thead>
 	<tbody>
-		<?php echo $this->tbody; ?>
+		<?php echo $context->tbody; ?>
 	</tbody>
 </table>

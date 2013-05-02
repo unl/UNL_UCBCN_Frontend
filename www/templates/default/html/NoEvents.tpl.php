@@ -1,3 +1,3 @@
-<?php if (!empty($this->message)): ?>
-<p class="noentry"><?php echo $this->message; ?></p>
+<?php if (!empty($context->message)): ?>
+<p class="noentry"><?php echo $context->message; ?></p>
 <?php endif; ?>

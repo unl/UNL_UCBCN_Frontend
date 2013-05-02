@@ -1,7 +1,7 @@
 <ul>
 <?php
 
-foreach ($this->events as $e) {
+foreach ($context->events as $e) {
     $li = '<li>';
     if (strpos($e->eventdatetime->starttime,'00:00:00')===false) {
         $starttime = strtotime($e->eventdatetime->starttime);

@@ -4,5 +4,5 @@
  * @package UNL_UCBCN_Frontend
  */
 UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_rss');
-UNL_UCBCN::displayRegion($this->events);
+UNL_UCBCN::displayRegion($context->events);
 ?>

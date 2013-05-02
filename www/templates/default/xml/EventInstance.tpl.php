@@ -1,16 +1,16 @@
 	<Event>
-        <EventID><?php echo $this->event->id; ?></EventID>
-        <EventTitle><?php echo htmlspecialchars($this->event->title); ?></EventTitle>
-        <EventSubtitle><?php echo htmlspecialchars($this->event->subtitle); ?></EventSubtitle>
+        <EventID><?php echo $context->event->id; ?></EventID>
+        <EventTitle><?php echo htmlspecialchars($context->event->title); ?></EventTitle>
+        <EventSubtitle><?php echo htmlspecialchars($context->event->subtitle); ?></EventSubtitle>
         <?php 
-        $startu = strtotime($this->eventdatetime->starttime);
-		$endu = strtotime($this->eventdatetime->endtime);
+        $startu = strtotime($context->eventdatetime->starttime);
+		$endu = strtotime($context->eventdatetime->endtime);
 		?>
         <DateTime>
             <StartDate><?php echo date('Y-m-d', $startu); ?></StartDate>
             <StartTime><?php echo date('H:i:s', $startu); ?>Z</StartTime>
-            <?php if (isset($this->eventdatetime->endtime)
-                    && !empty($this->eventdatetime->endtime)
+            <?php if (isset($context->eventdatetime->endtime)
+                    && !empty($context->eventdatetime->endtime)
                     && ($endu > $startu)) : ?>
             <EndDate><?php echo date('Y-m-d', $endu); ?></EndDate>
             <EndTime><?php echo date('H:i:s', $endu); ?>Z</EndTime>
@@ -18,8 +18,8 @@
         </DateTime>
         <Locations>
         	<?php
-			if ($this->eventdatetime->location_id) : 
-			$loc = $this->eventdatetime->getLink('location_id');
+			if ($context->eventdatetime->location_id) : 
+			$loc = $context->eventdatetime->getLink('location_id');
 			?>
             <Location>
                 <LocationID><?php echo $loc->id; ?></LocationID>
@@ -28,7 +28,7 @@
                     <LocationType><?php echo $loc->type; ?></LocationType>
                 </LocationTypes>
                 <Address>
-                    <Room><?php echo htmlspecialchars($this->eventdatetime->room); ?></Room>
+                    <Room><?php echo htmlspecialchars($context->eventdatetime->room); ?></Room>
                     <BuildingName><?php echo htmlspecialchars($loc->name); ?></BuildingName>
                     <CityName><?php echo htmlspecialchars($loc->city); ?></CityName>
                     <PostalZone><?php echo $loc->zip; ?></PostalZone>
@@ -62,7 +62,7 @@
         </Locations>
         <?php
         $etype = UNL_UCBCN::factory('event_has_eventtype');
-        $etype->event_id = $this->event->id;
+        $etype->event_id = $context->event->id;
         if ($etype->find()) : ?>
         <EventTypes>
         	<?php while ($etype->fetch()) : 
@@ -81,26 +81,26 @@
         <Languages>
             <Language>en-US</Language>
         </Languages>
-        <EventTransparency><?php echo $this->event->transparency; ?></EventTransparency>
+        <EventTransparency><?php echo $context->event->transparency; ?></EventTransparency>
 
-        <Description><?php echo htmlspecialchars($this->event->description); ?></Description>
-        <ShortDescription><?php echo htmlspecialchars($this->event->shortdescription); ?></ShortDescription>
-        <Refreshments><?php echo htmlspecialchars($this->event->refreshments); ?></Refreshments>
+        <Description><?php echo htmlspecialchars($context->event->description); ?></Description>
+        <ShortDescription><?php echo htmlspecialchars($context->event->shortdescription); ?></ShortDescription>
+        <Refreshments><?php echo htmlspecialchars($context->event->refreshments); ?></Refreshments>
         <WebPages>
             <WebPage>
                 <Title>Event Instance URL</Title>
-                <URL><?php echo htmlspecialchars($this->url); ?></URL>
+                <URL><?php echo htmlspecialchars($context->url); ?></URL>
             </WebPage>
-            <?php if (!empty($this->event->webpageurl)): ?>
+            <?php if (!empty($context->event->webpageurl)): ?>
             <WebPage>
                 <Title>Event webpage</Title>
-                <URL><?php echo htmlspecialchars($this->event->webpageurl); ?></URL>
+                <URL><?php echo htmlspecialchars($context->event->webpageurl); ?></URL>
             </WebPage>
             <?php endif; ?>
         </WebPages>
         <?php
         $webcast = UNL_UCBCN::factory('webcast');
-        $webcast->event_id = $this->event->id;
+        $webcast->event_id = $context->event->id;
         if ($webcast->find()): ?>
         <Webcasts>
         	<?php while ($webcast->fetch()) : ?>
@@ -128,18 +128,18 @@
             <?php endwhile; ?>
         </Webcasts>
         <?php endif; ?>
-        <?php if (isset($this->event->imagedata)) : ?>
+        <?php if (isset($context->event->imagedata)) : ?>
         <Images>
             <Image>
                 <Title>Image</Title>
-                <Description>image for event <?php echo $this->event->id; ?></Description>
-                <URL><?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $this->event->id; ?></URL>
+                <Description>image for event <?php echo $context->event->id; ?></Description>
+                <URL><?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $context->event->id; ?></URL>
             </Image>
         </Images>
         <?php endif; ?>
         <?php
         $document = UNL_UCBCN::factory('document');
-        $document->event_id = $this->event->id;
+        $document->event_id = $context->event->id;
         if ($document->find()) : ?>
         <Documents>
         	<?php while ($document->fetch()) : ?>
@@ -152,7 +152,7 @@
         <?php endif; ?>
         <?php
         $contact = UNL_UCBCN::factory('publiccontact');
-        $contact->event_id = $this->event->id;
+        $contact->event_id = $context->event->id;
         if ($contact->find()) : ?>
         <PublicEventContacts>
         	<?php while ($contact->fetch()) : ?>
@@ -217,23 +217,23 @@
 
             <EventListingContact>
                 <ContactName>
-                    <FullName><?php echo htmlspecialchars($this->event->listingcontactname); ?></FullName>
+                    <FullName><?php echo htmlspecialchars($context->event->listingcontactname); ?></FullName>
                 </ContactName>
                 <Phones>
                     <Phone>
-                        <PhoneNumber><?php echo htmlspecialchars($this->event->listingcontactphone); ?></PhoneNumber>
+                        <PhoneNumber><?php echo htmlspecialchars($context->event->listingcontactphone); ?></PhoneNumber>
                     </Phone>
                 </Phones>
                 <EmailAddresses>
-                    <EmailAddress><?php echo $this->event->listingcontactemail; ?></EmailAddress>
+                    <EmailAddress><?php echo $context->event->listingcontactemail; ?></EmailAddress>
                 </EmailAddresses>
             </EventListingContact>
         </EventListingContacts>
         <EventStatus>Happening As Scheduled</EventStatus>
         <Classification>Public</Classification>
-        <?php if (!empty($this->event->privatecomment)): ?>
+        <?php if (!empty($context->event->privatecomment)): ?>
         <PrivateComments>
-            <PrivateComment><?php echo htmlspecialchars($this->event->privatecomment); ?></PrivateComment>
+            <PrivateComment><?php echo htmlspecialchars($context->event->privatecomment); ?></PrivateComment>
         </PrivateComments>
         <?php endif; ?>
     </Event>

@@ -1,3 +1,3 @@
 [{}<?php
-UNL_UCBCN::displayRegion($this->output);
+UNL_UCBCN::displayRegion($context->output);
 ?>]

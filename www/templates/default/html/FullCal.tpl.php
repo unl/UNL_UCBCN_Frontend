@@ -1,5 +1,5 @@
 <?php 
-foreach ($this->events as $event) {
+foreach ($context->events as $event) {
 ?>,
 {
     "id":<?php echo $event->event->id; ?>,

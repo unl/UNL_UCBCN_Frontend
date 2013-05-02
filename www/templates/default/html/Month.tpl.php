@@ -1,6 +1,6 @@
 <div class="month_cal" id="month_viewcal">
 <table class="wp-calendar">
-	<caption><?php echo $this->caption; ?></caption>
+	<caption><?php echo $context->caption; ?></caption>
    <thead>
 	<tr>
 		<th abbr="Sunday" scope="col" title="Sunday">Sun</th>
@@ -15,14 +15,14 @@
 	<tbody>
 		<?php
 		    UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Day','Frontend_Day_monthday');
-		    foreach ($this->weeks as $week) {
+		    foreach ($context->weeks as $week) {
 		        echo '<tr>';
 		        foreach ($week as $day) {
 		            $class = '';
 		            if (is_object($day) && get_class($day) == 'UNL_UCBCN_Frontend_Day') {
-			            if ($day->month < $this->month) {
+			            if ($day->month < $context->month) {
 			                $class = 'prev';
-			            } elseif ($day->month > $this->month) {
+			            } elseif ($day->month > $context->month) {
 			                $class = 'next';
 			            }
 		            }

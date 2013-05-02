@@ -1,7 +1,7 @@
-<?php if ($this->type == 'ongoing') {
-    echo '<h4 class="'.$this->type.'">Ongoing Events:</h4>';
+<?php if ($context->type == 'ongoing') {
+    echo '<h4 class="'.$context->type.'">Ongoing Events:</h4>';
 } ?>
-<table class='<?php echo $this->type; ?>'>
+<table class='<?php echo $context->type; ?>'>
 <thead>
 <tr>
 <th scope="col" class="date">Time</th>
@@ -11,7 +11,7 @@
 <tbody class="vcalendar">
 <?php
 $oddrow = false;
-foreach ($this->events as $e) {
+foreach ($context->events as $e) {
     
     $startu = strtotime($e->eventdatetime->starttime);
     $endu = strtotime($e->eventdatetime->endtime);
@@ -23,10 +23,10 @@ foreach ($this->events as $e) {
     $row .= '">';
     $oddrow = !$oddrow;
     $row .=    '<td class="date">';
-    if ($this->type == 'ongoing') {
+    if ($context->type == 'ongoing') {
         $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('M jS', $startu).'</abbr>';
         $row .= '-<abbr class="dtend" title="'.date('c', $endu).'">'.date('M jS', $endu).'</abbr>';
-    } elseif ($this->type == 'upcoming' || $this->type == 'search') {
+    } elseif ($context->type == 'upcoming' || $context->type == 'search') {
         if (strpos($e->eventdatetime->starttime,'00:00:00')) {
             $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('M jS', $startu).'</abbr>';
         } else {
@@ -69,7 +69,7 @@ foreach ($this->events as $e) {
         }
         $row .= '</span>';
     }
-    if ($this->type != 'ongoing') {
+    if ($context->type != 'ongoing') {
         $row .=    '<blockquote class="description">'.$savvy->dbStringtoHtml($e->event->description).'</blockquote>';
     }
     $row .= $e->facebook->like($e->url,$e->calendar->id);

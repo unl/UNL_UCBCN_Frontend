@@ -1,7 +1,7 @@
 <?php
 
-$startu = strtotime($this->eventdatetime->starttime);
-$endu = strtotime($this->eventdatetime->endtime);
+$startu = strtotime($context->eventdatetime->starttime);
+$endu = strtotime($context->eventdatetime->endtime);
 
 /*
  * 
@@ -16,8 +16,8 @@ $endu = strtotime($this->eventdatetime->endtime);
 <div class="event_cal">
 <div class='vcalendar'>
 	<div class='vevent'>
-		<h1 class='summary'><?php echo $savvy->dbStringtoHtml($this->event->title); ?> <a class="permalink" href="<?php echo $this->url; ?>">(link)</a></h1>
-		<?php if (isset($this->event->subtitle)) echo '<h2>'.$savvy->dbStringtoHtml($this->event->subtitle).'</h2>'; ?>
+		<h1 class='summary'><?php echo $savvy->dbStringtoHtml($context->event->title); ?> <a class="permalink" href="<?php echo $context->url; ?>">(link)</a></h1>
+		<?php if (isset($context->event->subtitle)) echo '<h2>'.$savvy->dbStringtoHtml($context->event->subtitle).'</h2>'; ?>
 		<div id="tabsG">
 		  <ul>
 		    <li><a href="#" id="event_selected" title="Event Detail"><span>Event Detail</span></a></li>
@@ -37,8 +37,8 @@ $endu = strtotime($this->eventdatetime->endtime);
 		</tr>
 		<tr class="alt"><td class="date">Time:</td>	
 			<td><?php
-			if (isset($this->eventdatetime->starttime)) {
-				if (strpos($this->eventdatetime->starttime,'00:00:00')) {
+			if (isset($context->eventdatetime->starttime)) {
+				if (strpos($context->eventdatetime->starttime,'00:00:00')) {
 					echo '<abbr class="dtstart" title="'.date(DATE_ISO8601, $startu).'">All day</abbr>';
 				} else {
 		        	echo '<abbr class="dtstart" title="'.date(DATE_ISO8601, $startu).'">'.date('g:i a', $startu).'</abbr>';
@@ -46,12 +46,12 @@ $endu = strtotime($this->eventdatetime->endtime);
 		    } else {
 		        echo 'Unknown';
 		    }
-		    if (isset($this->eventdatetime->endtime) &&
-		    	($this->eventdatetime->endtime != $this->eventdatetime->starttime) &&
-		    	($this->eventdatetime->endtime > $this->eventdatetime->starttime)) {
-		    	if (substr($this->eventdatetime->endtime,0,10) != substr($this->eventdatetime->starttime,0,10)) {
+		    if (isset($context->eventdatetime->endtime) &&
+		    	($context->eventdatetime->endtime != $context->eventdatetime->starttime) &&
+		    	($context->eventdatetime->endtime > $context->eventdatetime->starttime)) {
+		    	if (substr($context->eventdatetime->endtime,0,10) != substr($context->eventdatetime->starttime,0,10)) {
 		    	    // Not on the same day
-		    	    if (strpos($this->eventdatetime->endtime,'00:00:00')) {
+		    	    if (strpos($context->eventdatetime->endtime,'00:00:00')) {
 		    	        echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('l, F jS', $endu).'</abbr>';
 		    	    } else {
 		    	        echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('l, F jS g:i a', $endu).'</abbr>';
@@ -65,17 +65,17 @@ $endu = strtotime($this->eventdatetime->endtime);
 		<tr>
 			<td class="date">Description:</td>	
 			<td><p class='description'>
-			<?php echo $savvy->dbStringtoHtml($this->event->description); ?></p>
+			<?php echo $savvy->dbStringtoHtml($context->event->description); ?></p>
 			<?php
-			if (isset($this->eventdatetime->additionalpublicinfo)) {
-                echo '<p>Additional Public Info: '.$savvy->dbStringtoHtml($this->eventdatetime->additionalpublicinfo).'</p>';
+			if (isset($context->eventdatetime->additionalpublicinfo)) {
+                echo '<p>Additional Public Info: '.$savvy->dbStringtoHtml($context->eventdatetime->additionalpublicinfo).'</p>';
             }
-			if (isset($this->event->webpageurl)) {
-			    echo 'Website: <a class="url" href="'.$savvy->dbStringtoHtml($this->event->webpageurl).'">'.$savvy->dbStringtoHtml($this->event->webpageurl).'</a>';
+			if (isset($context->event->webpageurl)) {
+			    echo 'Website: <a class="url" href="'.$savvy->dbStringtoHtml($context->event->webpageurl).'">'.$savvy->dbStringtoHtml($context->event->webpageurl).'</a>';
 			}
 			?>
-			<?php if (isset($this->event->imagedata)) { ?>
-				<img class="event_description_img" src="<?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $this->event->id; ?>" alt="image for event <?php echo $this->event->id; ?>" />
+			<?php if (isset($context->event->imagedata)) { ?>
+				<img class="event_description_img" src="<?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $context->event->id; ?>" alt="image for event <?php echo $context->event->id; ?>" />
 			<?php } ?>	
 			</td>
 		</tr>
@@ -83,14 +83,14 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<td class="date">Location:</td>
 			<td>
 				<?php
-				if (isset($this->eventdatetime->room)) {
-				    echo 'Room: '.$savvy->dbStringtoHtml($this->eventdatetime->room);
+				if (isset($context->eventdatetime->room)) {
+				    echo 'Room: '.$savvy->dbStringtoHtml($context->eventdatetime->room);
 				}
-				if ($loc = $this->eventdatetime->getLocation()) {
+				if ($loc = $context->eventdatetime->getLocation()) {
 					UNL_UCBCN::displayRegion($loc);
 				}
-                if (isset($this->eventdatetime->directions)) {
-                    echo '<p class="directions">Directions: '.$savvy->dbStringtoHtml($this->eventdatetime->directions).'</p>';
+                if (isset($context->eventdatetime->directions)) {
+                    echo '<p class="directions">Directions: '.$savvy->dbStringtoHtml($context->eventdatetime->directions).'</p>';
                 }
 				?>
 			</td>
@@ -99,24 +99,24 @@ $endu = strtotime($this->eventdatetime->endtime);
 			<td class="date">Contact:</td>
 			<td>
 			<?php 
-			    if (isset($this->event->listingcontactname) ||
-					isset($this->event->listingcontactphone) ||
-					isset($this->event->listingcontactemail)) {
+			    if (isset($context->event->listingcontactname) ||
+					isset($context->event->listingcontactphone) ||
+					isset($context->event->listingcontactemail)) {
 
-					if (isset($this->event->listingcontactname)) echo '<div class="n">'.$this->event->listingcontactname.'</div>';
-					if (isset($this->event->listingcontactphone)) echo '<div class="tel">'.$this->event->listingcontactphone.'</div>';
-					if (isset($this->event->listingcontactemail)) echo '<div class="mailto">'.$this->event->listingcontactemail.'</div>';
+					if (isset($context->event->listingcontactname)) echo '<div class="n">'.$context->event->listingcontactname.'</div>';
+					if (isset($context->event->listingcontactphone)) echo '<div class="tel">'.$context->event->listingcontactphone.'</div>';
+					if (isset($context->event->listingcontactemail)) echo '<div class="mailto">'.$context->event->listingcontactemail.'</div>';
 				} ?>
 			</td>
 		</tr>
 		</tbody>
 		</table>
         <?php
-            UNL_UCBCN::displayRegion($this->facebookRSVP);
-            echo $this->facebook->like($this->url,$this->calendar->id);
+            UNL_UCBCN::displayRegion($context->facebookRSVP);
+            echo $context->facebook->like($context->url,$context->calendar->id);
             echo '<p id="feeds">
-			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'ics')).'">ics format for '.$savvy->dbStringtoHtml($this->event->title).'</a>
-			<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($this->url,array('format'=>'rss')).'">rss format for '.$savvy->dbStringtoHtml($this->event->title).'</a>
+			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($context->url,array('format'=>'ics')).'">ics format for '.$savvy->dbStringtoHtml($context->event->title).'</a>
+			<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($context->url,array('format'=>'rss')).'">rss format for '.$savvy->dbStringtoHtml($context->event->title).'</a>
 			</p>'; ?>
 		</div>
 	</div>

@@ -1,11 +1,11 @@
 <?php 
-if($this->account->createEvents()){
+if($context->account->createEvents()){
 ?>
 <div id="fb-root"></div>
 <script type="text/javascript">
-  var fbEventId = <?php echo $this->facebook->facebook_id;?>;
+  var fbEventId = <?php echo $context->facebook->facebook_id;?>;
   window.fbAsyncInit = function() {
-    FB.init({appId: <?php echo $this->config["appID"];?>, status: true, cookie: true,
+    FB.init({appId: <?php echo $context->config["appID"];?>, status: true, cookie: true,
              xfbml: true});
     //alert(fbEventId);
     FB.Event.subscribe('auth.login', function() {

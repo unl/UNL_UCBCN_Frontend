@@ -1,30 +1,30 @@
 <div class="location">
 <?php
-if (isset($this->mapurl)) {
-    echo '<a class="mapurl" href="'.$savvy->dbStringtoHtml($this->mapurl).'">'.$savvy->dbStringtoHtml($this->name).'</a>';
+if (isset($context->mapurl)) {
+    echo '<a class="mapurl" href="'.$savvy->dbStringtoHtml($context->mapurl).'">'.$savvy->dbStringtoHtml($context->name).'</a>';
 } else {
-    echo $savvy->dbStringtoHtml($this->name);
+    echo $savvy->dbStringtoHtml($context->name);
 }
 
-if (isset($this->streetaddress1)) {
+if (isset($context->streetaddress1)) {
     echo '<div class="adr">';
-    echo '<span class="street-address">'.$savvy->dbStringtoHtml($this->streetaddress1).'<br />'.$savvy->dbStringtoHtml($this->streetaddress2).'</span>';
-    if (isset($this->city)) {
-        echo '<span class="locality">'.$savvy->dbStringtoHtml($this->city).'</span>';
+    echo '<span class="street-address">'.$savvy->dbStringtoHtml($context->streetaddress1).'<br />'.$savvy->dbStringtoHtml($context->streetaddress2).'</span>';
+    if (isset($context->city)) {
+        echo '<span class="locality">'.$savvy->dbStringtoHtml($context->city).'</span>';
     }
-    if (isset($this->state)) {
-        echo ' <span class="region">'.$savvy->dbStringtoHtml($this->state).'</span>';
+    if (isset($context->state)) {
+        echo ' <span class="region">'.$savvy->dbStringtoHtml($context->state).'</span>';
     }
-    if (isset($this->zip)) {
-        echo ' <span class="postal-code">'.$savvy->dbStringtoHtml($this->zip).'</span>';
+    if (isset($context->zip)) {
+        echo ' <span class="postal-code">'.$savvy->dbStringtoHtml($context->zip).'</span>';
     }
     echo '</div>';
 }
-if (isset($this->directions)) {
-    echo '<div class="directions">Directions: '.$savvy->dbStringtoHtml($this->directions).'</div>';
+if (isset($context->directions)) {
+    echo '<div class="directions">Directions: '.$savvy->dbStringtoHtml($context->directions).'</div>';
 }
-if (isset($this->additionalpublicinfo)) {
-    echo '<div class="additionalinfo">Additional Info: '.$savvy->dbStringtoHtml($this->additionalpublicinfo).'</div>';
+if (isset($context->additionalpublicinfo)) {
+    echo '<div class="additionalinfo">Additional Info: '.$savvy->dbStringtoHtml($context->additionalpublicinfo).'</div>';
 }
 ?>
 </div>
