@@ -54,7 +54,7 @@ class Frontend
      *
      * @var string EG: http://events.unl.edu/manager/
      */
-    public static $managerurl = '';
+    public static $manager_url = '';
 
     /**
      * Configurable ID for the base/master calendar
