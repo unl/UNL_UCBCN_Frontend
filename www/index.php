@@ -12,32 +12,31 @@
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-ini_set('display_errors', false);
-require_once 'UNL/UCBCN/Autoload.php';
+namespace UNL\UCBCN\Frontend;
 
-if (file_exists(dirname(dirname(__FILE__)).'/UNL_UCBCN')) {
-    // Allow to run from a checkout
-    set_include_path(dirname(dirname(__FILE__)).'/UNL_UCBCN'.PATH_SEPARATOR.get_include_path());
+$config_file = __DIR__ . '/../config.sample.php';
+
+if (file_exists(__DIR__ . '/../config.inc.php')) {
+    $config_file = __DIR__ . '/../config.inc.php';
+}
+require_once $config_file;
+
+
+use RegExpRouter as RegExpRouter;
+
+$routes = include __DIR__ . '/../data/routes.php';
+$router = new RegExpRouter\Router(array('baseURL' => Controller::$url));
+$router->setRoutes($routes);
+if (isset($_GET['model'])) {
+    // Prevent injecting a specific model through the web interface
+    unset($_GET['model']);
 }
 
-$front = new UNL_UCBCN_Frontend(array_merge(array(
-            'dsn'                 => 'mysqli://eventcal:eventcal@localhost/eventcal',
-            'template'            => 'vanilla',
-            'uri'                 => '',
-            'uriformat'           => 'querystring',
-            'manageruri'          => 'manager/',
-            'default_calendar_id' => 1),
-            UNL_UCBCN_Frontend::determineView()));
-if (isset($_GET['calendar_shortname'])&&!empty($_GET['calendar_shortname'])) {
-    $front->calendar            = UNL_UCBCN_Frontend::factory('calendar');
-    $front->calendar->shortname = $_GET['calendar_shortname'];
-    if (!$front->calendar->find()) {
-        header('HTTP/1.0 404 Not Found');
-        $front->output[] = new UNL_UCBCN_Error('The calendar you requested could not be found.');
-    } else {
-        $front->calendar->fetch();
-    }
-}
-UNL_UCBCN::displayRegion($front);
+// Initialize Controller, and construct everything the user requested
+$frontend = new Controller($router->route($_SERVER['REQUEST_URI'], $_GET));
 
-?>
+// Now render what the user has requested
+$savvy = new OutputController($frontend->options);
+$savvy->addGlobal('frontend', $frontend);
+
+echo $savvy->render($frontend);
