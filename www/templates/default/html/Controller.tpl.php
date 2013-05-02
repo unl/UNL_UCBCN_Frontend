@@ -27,26 +27,17 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
 <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/metanfavico.html'; ?>
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>UNL <?php
-if ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
-    echo '| '.$this->calendar->name.' ';
+if ($context->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
+    echo '| '.$context->calendar->name.' ';
 }
 ?>| Events</title>
 <!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/default/frontend_main.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/default/facebook.css" />
-<script type="text/javascript" src="<?php echo $this->uri; ?>templates/default/ajaxCaller.js"></script>
-<script type="text/javascript" src="<?php echo $this->uri; ?>templates/default/frontend.js"></script>
-<link rel="alternate" type="application/rss+xml" title="<?php echo $this->calendar->name; ?> Events" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'format'=>'rss')); ?>" />
-<link rel="search" href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>" />
-<?php 
-if (isset($this->output[0], $this->output[0]->event)
-    && $this->output[0]->event instanceof UNL_UCBCN_Event) {
-	echo '<meta property="og:title" content="'. $this->output[0]->event->title .'"/>
-          <meta property="og:site_name" content="'. $this->calendar->name .'"/> 
-          <meta property="og:url" content="'. UNL_UCBCN::getBaseURL().$this->output[0]->url .'"/>
-          <meta property="og:description" content="'. $this->output[0]->event->description .'" />';
-}
-?>
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $context->uri; ?>templates/default/frontend_main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $context->uri; ?>templates/default/facebook.css" />
+<script type="text/javascript" src="<?php echo $context->uri; ?>templates/default/ajaxCaller.js"></script>
+<script type="text/javascript" src="<?php echo $context->uri; ?>templates/default/frontend.js"></script>
+<link rel="alternate" type="application/rss+xml" title="<?php echo $context->calendar->name; ?> Events" href="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id,'format'=>'rss')); ?>" />
+<link rel="search" href="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id,'search'=>'search')); ?>" />
 <!-- InstanceEndEditable -->
 </head>
 <body class="fixed events">
@@ -64,8 +55,8 @@ if (isset($this->output[0], $this->output[0]->event)
             <ul>
                 <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
                 <?php
-                if (!empty($this->calendar->website) && ($this->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id'])) {
-                    echo '<li><a href="'.$this->calendar->website.'">'.$this->calendar->name.'</a></li>';
+                if (!empty($context->calendar->website) && ($context->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id'])) {
+                    echo '<li><a href="'.$context->calendar->website.'">'.$context->calendar->name.'</a></li>';
                 }
                 ?>
                 <li>Events</li>
@@ -78,14 +69,14 @@ if (isset($this->output[0], $this->output[0]->event)
     </div>
     <div id="wdn_content_wrapper">
         <div id="titlegraphic"><!-- InstanceBeginEditable name="titlegraphic" -->
-            <h1><?php echo $this->calendar->name; ?> Events</h1>
+            <h1><?php echo $context->calendar->name; ?> Events</h1>
             <!-- InstanceEndEditable --></div>
         <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" --> <!-- InstanceEndEditable --></div>
         <div id="maincontent">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <div id="load"></div>
-            <form id="event_search" name="event_search" method="get" action="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'search'=>'search')); ?>">
+            <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id,'search'=>'search')); ?>">
                 <input type='text' name='q' id='searchinput' alt='Search for events' value="<?php if (isset($_GET['q'])) { echo htmlentities($_GET['q']); } ?>" />
                 <input type='submit' name='submit' value="Search" />
                 <input type='hidden' name='search' value='search' />
@@ -94,23 +85,23 @@ if (isset($this->output[0], $this->output[0]->event)
             </p>
             
             </form>
-            <ul id="frontend_view_selector" class="<?php echo $this->view; ?>">
-                <li id="todayview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id)); ?>">Today's Events</a></li>
-                <li id="monthview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
+            <ul id="frontend_view_selector" class="<?php echo $context->view; ?>">
+                <li id="todayview"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id)); ?>">Today's Events</a></li>
+                <li id="monthview"><a href="<?php echo $frontend->formatURL(array('y'=>date('Y'),
                                                                                             'm'=>date('m'),
-                                                                                            'calendar'=>$this->calendar->id)); ?>">This Month</a></li>
-                <li id="yearview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('y'=>date('Y'),
-                                                                                          'calendar'=>$this->calendar->id)); ?>">This Year</a></li>
-                <li id="upcomingview"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,
+                                                                                            'calendar'=>$context->calendar->id)); ?>">This Month</a></li>
+                <li id="yearview"><a href="<?php echo $frontend->formatURL(array('y'=>date('Y'),
+                                                                                          'calendar'=>$context->calendar->id)); ?>">This Year</a></li>
+                <li id="upcomingview"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id,
                                                                                               'upcoming'=>'upcoming')); ?>">Upcoming</a></li>
             </ul>
-                <?php if (isset($this->right)) { ?>
+                <?php if (isset($context->right)) { ?>
                     <div class="col left">
-                        <div id="monthwidget"><?php UNL_UCBCN::displayRegion($this->right); ?></div>
+                        <div id="monthwidget"><?php echo $savvy->render($context->right); ?></div>
                         <div class="cal_widget">
                         <h3>Contribute/Learn More</h3>
                         <ul>
-                        <li id="login_list"><a id="frontend_login" href="<?php echo $this->manageruri; ?>">Submit an Event</a> </li>
+                        <li id="login_list"><a id="frontend_login" href="<?php echo $context->manageruri; ?>">Submit an Event</a> </li>
                         <li><a href="http://www1.unl.edu/wdn/wiki/UNL_Calendar_Documentation">Learn More</a></li>
                         <li><a href="http://www1.unl.edu/comments/">Provide Feedback</a> </li>
                         </ul></div>
@@ -119,18 +110,18 @@ if (isset($this->output[0], $this->output[0]->event)
       <div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
         <span>Subscribe to this calendar</span> 
         <ul id="droplist">
-          <li id="eventrss"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming','format'=>'rss')); ?>&amp;limit=100" title="RSS feed">RSS feed</a></li>
-          <li id="eventical"><a href="<?php echo UNL_UCBCN_Frontend::formatURL(array('calendar'=>$this->calendar->id,'upcoming'=>'upcoming','format'=>'ics')); ?>&amp;limit=100" title=".ical format">.ical format</a></li>
+          <li id="eventrss"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id,'upcoming'=>'upcoming','format'=>'rss')); ?>&amp;limit=100" title="RSS feed">RSS feed</a></li>
+          <li id="eventical"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->calendar->id,'upcoming'=>'upcoming','format'=>'ics')); ?>&amp;limit=100" title=".ical format">.ical format</a></li>
           </ul>
       </div>
                     
                     </div>
                     <div id="updatecontent" class="three_col right">
-                    <?php UNL_UCBCN::displayRegion($this->output); ?>
+                    <?php echo $savvy->render($context->output); ?>
                     </div>
                     
                 <?php } else {
-                    UNL_UCBCN::displayRegion($this->output);
+                    echo $savvy->render($context->output);
                 } ?>
             <!-- InstanceEndEditable -->
             <div class="clear"></div>
