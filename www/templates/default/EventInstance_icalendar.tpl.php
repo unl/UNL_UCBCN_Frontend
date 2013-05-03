@@ -36,6 +36,14 @@ if (isset($this->eventdatetime->endtime)
     } else {
            $out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $endu);
     }
+} elseif (isset($this->eventdatetime->starttime)) {
+    if (strpos($this->eventdatetime->starttime,'00:00:00')) {
+        // All-day event
+        $out[] = 'DTEND;VALUE=DATE:'.date('Ymd', $startu + 86400);
+    } else {
+        // Event with unknown end-time
+        $out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $startu);
+    }
 }
 $out[] = 'END:VEVENT';
 echo implode("\n",$out)."\n";
