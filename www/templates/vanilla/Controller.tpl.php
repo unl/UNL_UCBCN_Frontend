@@ -2,26 +2,26 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
-        <title><?php echo $this->calendar->name; ?></title>
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/vanilla/screen.css" />
-        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->uri; ?>templates/vanilla/css/fullcalendar.css" />
+        <title><?php echo $context->calendar->name; ?></title>
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $context->uri; ?>templates/vanilla/screen.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $context->uri; ?>templates/vanilla/css/fullcalendar.css" />
         <?php 
-        if (!isset($this->calendar->theme)) {
-            $this->calendar->theme = "base";
+        if (!isset($context->calendar->theme)) {
+            $context->calendar->theme = "base";
         }
         ?>
-        <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/<?php echo $this->calendar->theme ?>/jquery-ui.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/<?php echo $context->calendar->theme ?>/jquery-ui.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
-        <script src="<?php echo $this->uri; ?>templates/vanilla/javascript/fullcalendar.min.js"></script>
+        <script src="<?php echo $context->uri; ?>templates/vanilla/javascript/fullcalendar.min.js"></script>
     </head>
     <body>
-        <h1><?php echo $this->calendar->name; ?></h1>
+        <h1><?php echo $context->calendar->name; ?></h1>
         <div>
-            <a href="<?php echo $this->manageruri; ?>">Event Publishing Manager</a>
+            <a href="<?php echo $context->manageruri; ?>">Event Publishing Manager</a>
         </div>
 
-        <?php UNL_UCBCN::displayRegion($this->output); ?>
+        <?php UNL_UCBCN::displayRegion($context->output); ?>
 
 <script type='text/javascript'> 
 $(document).ready(function() {
@@ -34,10 +34,10 @@ $(document).ready(function() {
         },
         editable: false,
         defaultView: 'agendaDay',
-        events: '?fullcal&format=fullcal_json&calendar_id=<?php echo $this->calendar->id; ?>',
-        date:  <?php echo $this->day; ?>,
-        month: <?php echo $this->month-1; ?>,
-        year:  <?php echo $this->year; ?>
+        events: '?fullcal&format=fullcal_json&calendar_id=<?php echo $context->calendar->id; ?>',
+        date:  <?php echo $context->day; ?>,
+        month: <?php echo $context->month-1; ?>,
+        year:  <?php echo $context->year; ?>
     });
 });
 </script>
