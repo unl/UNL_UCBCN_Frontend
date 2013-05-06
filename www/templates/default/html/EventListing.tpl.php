@@ -1,7 +1,4 @@
-<?php if ($context->type == 'ongoing') {
-    echo '<h4 class="'.$context->type.'">Ongoing Events:</h4>';
-} ?>
-<table class='<?php echo $context->type; ?>'>
+<table>
 <thead>
 <tr>
 <th scope="col" class="date">Time</th>
@@ -23,16 +20,6 @@ foreach ($context->events as $e) {
     $row .= '">';
     $oddrow = !$oddrow;
     $row .=    '<td class="date">';
-    if ($context->type == 'ongoing') {
-        $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('M jS', $startu).'</abbr>';
-        $row .= '-<abbr class="dtend" title="'.date('c', $endu).'">'.date('M jS', $endu).'</abbr>';
-    } elseif ($context->type == 'upcoming' || $context->type == 'search') {
-        if (strpos($e->eventdatetime->starttime,'00:00:00')) {
-            $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('M jS', $startu).'</abbr>';
-        } else {
-            $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('g:i a M jS', $startu).'</abbr>';
-        }
-    } else {
         if (isset($e->eventdatetime->starttime)) {
             if (strpos($e->eventdatetime->starttime,'00:00:00')) {
                 $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">All day</abbr>';
@@ -56,7 +43,6 @@ foreach ($context->events as $e) {
                 $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
             }
         }
-    }
     $row .= '</td>' .
             '<td><a class="url summary" href="'.$savvy->dbStringtoHtml($e->url).'">'.$savvy->dbStringtoHtml($e->event->title).'</a>';
     if (isset($e->eventdatetime->location_id) && $e->eventdatetime->location_id) {
@@ -69,9 +55,7 @@ foreach ($context->events as $e) {
         }
         $row .= '</span>';
     }
-    if ($context->type != 'ongoing') {
         $row .=    '<blockquote class="description">'.$savvy->dbStringtoHtml($e->event->description).'</blockquote>';
-    }
     $row .= $e->facebook->like($e->url,$e->calendar->id);
     $row .= '</td></tr>';
     
