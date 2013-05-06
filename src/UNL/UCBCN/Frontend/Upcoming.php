@@ -37,7 +37,8 @@ class Upcoming extends EventListing
     public $calendar;
 
     public $options = array(
-            'limit' => 10,
+            'limit'  => 10,
+            'offset' => 0,
             );
     
     /**
@@ -45,37 +46,46 @@ class Upcoming extends EventListing
      * 
      * @param array $options Associative array of options.
      */
-    public function __construct($options)
+    public function __construct($options = array())
     {
-        parent::__construct($options);
-        if (!isset($this->calendar)) {
-            $this->calendar = UNL_UCBCN::factory('calendar');
-            if (!$this->calendar->get(1)) {
-                return new UNL_UCBCN_Error('No calendar specified or could be found.');
-            }
+        if (isset($options['calendar'])) {
+            $this->calendar = $options['calendar'];
         }
-        $this->output = $this->showEventListing();
-        $this->url    = $this->getURL();
+
+        // Set defaults
+        $this->options['m'] = date('m');
+        $this->options['d'] = date('d');
+        $this->options['y'] = date('Y');
+
+        parent::__construct($options = array());
     }
-    
+
     /**
-     * UNL_UCBCN_EventListing of events.
-     * 
-     * @return UNL_UCBCN_EventListing
+     * Get the date and time for this day
+     *
+     * @return \DateTime
      */
-    public function showEventListing()
+    public function getDateTime()
     {
-        $options = array('calendar'=> $this->calendar,
-                         'limit'   => $this->options['limit']);
-        // Fetch the day evenlisting for this day.
-        $eventlist = new UNL_UCBCN_EventListing('upcoming', $options);
-        
-        if (count($eventlist->events)) {
-            return $eventlist;
-        } else {
-            include_once 'UNL/UCBCN/Frontend/NoEvents.php';
-            return new UNL_UCBCN_Frontend_NoEvents($this->noevents);
-        }
+        return new \DateTime('@'.mktime(0, 0, 0, $this->options['m'], $this->options['d'], $this->options['y']));
+    }
+
+    /**
+     * Get the SQL for finding events
+     * 
+     * @see \UNL\UCBCN\ActiveRecord\RecordList::getSQL()
+     */
+    function getSQL()
+    {
+        $timestamp = $this->getDateTime()->getTimestamp();
+
+        $sql = 'SELECT eventdatetime.id FROM eventdatetime
+                INNER JOIN event ON eventdatetime.event_id = event.id
+                WHERE
+                    eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
+                ORDER BY eventdatetime.starttime ASC, event.title ASC
+                ';
+        return $sql;
     }
     
     /**
@@ -85,8 +95,7 @@ class Upcoming extends EventListing
      */
     public function getURL()
     {
-        return UNL_UCBCN_Frontend::formatURL(array('upcoming'=>'upcoming',
-                                                   'calendar'=>$this->calendar->id));
+        return 'upcoming';
     }
     
 }
