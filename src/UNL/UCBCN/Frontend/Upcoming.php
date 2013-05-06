@@ -15,8 +15,6 @@
  */
 namespace UNL\UCBCN\Frontend;
 
-use UNL\UCBCN\EventListing;
-
 /**
  * A list of upcoming events for a calendar.
  * 

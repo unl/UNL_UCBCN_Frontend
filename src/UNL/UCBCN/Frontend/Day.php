@@ -1,7 +1,6 @@
 <?php
 namespace UNL\UCBCN\Frontend;
 
-use UNL\UCBCN\EventListing;
 use UNL\UCBCN\RuntimeException;
 use UNL\UCBCN\Calendar;
 
