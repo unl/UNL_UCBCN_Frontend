@@ -231,4 +231,3 @@ class Frontend_setup_postinstall
         }
     }
 }
-?>

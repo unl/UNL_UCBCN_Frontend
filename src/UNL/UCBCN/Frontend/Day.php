@@ -180,5 +180,3 @@ class Day extends Occurrences
     }
     
 }
-
-?>
