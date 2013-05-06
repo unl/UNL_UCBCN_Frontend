@@ -70,8 +70,9 @@ class Day extends EventListing
                 SELECT eventdatetime.id FROM eventdatetime
                 INNER JOIN event ON eventdatetime.event_id = event.id
                 WHERE
-                    eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
-                    AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+6400).'" 
+                    (eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
+                    AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+86400).'")
+                    OR (NOW() BETWEEN eventdatetime.starttime AND eventdatetime.endtime)
                 ORDER BY eventdatetime.starttime ASC, event.title ASC
                 ';
         return $sql;
