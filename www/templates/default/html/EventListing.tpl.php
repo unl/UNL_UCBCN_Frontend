@@ -20,29 +20,29 @@ foreach ($context->events as $e) {
     $row .= '">';
     $oddrow = !$oddrow;
     $row .=    '<td class="date">';
-        if (isset($e->eventdatetime->starttime)) {
-            if (strpos($e->eventdatetime->starttime,'00:00:00')) {
-                $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">All day</abbr>';
+    if (isset($e->eventdatetime->starttime)) {
+        if (strpos($e->eventdatetime->starttime,'00:00:00')) {
+            $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">All day</abbr>';
+        } else {
+            $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('g:i a', $startu).'</abbr>';
+        }
+    } else {
+        $row .= 'Unknown';
+    }
+    if (isset($e->eventdatetime->endtime) &&
+        ($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
+        ($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
+        if (substr($e->eventdatetime->endtime,0,10) != substr($e->eventdatetime->starttime,0,10)) {
+            // Not on the same day
+            if (strpos($e->eventdatetime->endtime,'00:00:00')) {
+                $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS', $endu).'</abbr>';
             } else {
-                $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('g:i a', $startu).'</abbr>';
+                $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS g:i a', $endu).'</abbr>';
             }
         } else {
-            $row .= 'Unknown';
+            $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
         }
-        if (isset($e->eventdatetime->endtime) &&
-            ($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
-            ($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
-            if (substr($e->eventdatetime->endtime,0,10) != substr($e->eventdatetime->starttime,0,10)) {
-                // Not on the same day
-                if (strpos($e->eventdatetime->endtime,'00:00:00')) {
-                    $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS', $endu).'</abbr>';
-                } else {
-                    $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS g:i a', $endu).'</abbr>';
-                }
-            } else {
-                $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
-            }
-        }
+    }
     $row .= '</td>' .
             '<td><a class="url summary" href="'.$savvy->dbStringtoHtml($e->url).'">'.$savvy->dbStringtoHtml($e->event->title).'</a>';
     if (isset($e->eventdatetime->location_id) && $e->eventdatetime->location_id) {
@@ -55,7 +55,7 @@ foreach ($context->events as $e) {
         }
         $row .= '</span>';
     }
-        $row .=    '<blockquote class="description">'.$savvy->dbStringtoHtml($e->event->description).'</blockquote>';
+    $row .=    '<blockquote class="description">'.$savvy->dbStringtoHtml($e->event->description).'</blockquote>';
     $row .= $e->facebook->like($e->url,$e->calendar->id);
     $row .= '</td></tr>';
     
