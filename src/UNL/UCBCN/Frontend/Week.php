@@ -29,7 +29,7 @@ class Week
     /**
      * Calendar to show events for UNL_UCBCN_Month object
      * 
-     * @var UNL_UCBCN_Calendar
+     * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
     

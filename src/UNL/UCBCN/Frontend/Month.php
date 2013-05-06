@@ -31,7 +31,7 @@ class Month
     /**
      * Calendar to show events for UNL_UCBCN_Month object
      *
-     * @var UNL_UCBCN_Calendar 
+     * @var \UNL\UCBCN\Calendar 
      */
     public $calendar;
     
@@ -62,7 +62,7 @@ class Month
      * 
      * @param int                $y        Year
      * @param int                $m        Month
-     * @param UNL_UCBCN_Calendar $calendar Calendar to display events from.
+     * @param \UNL\UCBCN\Calendar $calendar Calendar to display events from.
      * @param string             $dsn      EG: mysqli://events:events@host/events
      */
     public function __construct($y,$m,$calendar,$dsn)

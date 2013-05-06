@@ -46,7 +46,7 @@ class Year
     /**
      * Calendar to display year for.
      *
-     * @var UNL_UCBCN_Calendar
+     * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
     
@@ -54,7 +54,7 @@ class Year
      * Constructor for a year calendar.
      *
      * @param int                $y        Year to render
-     * @param UNL_UCBCN_Calendar $calendar Calendar to grab events for.
+     * @param \UNL\UCBCN\Calendar $calendar Calendar to grab events for.
      */
     public function __construct($y,$calendar)
     {

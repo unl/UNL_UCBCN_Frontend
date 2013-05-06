@@ -36,9 +36,9 @@ use UNL\UCBCN\UnexpectedValueException;
 class Controller
 {
     /**
-     * Calendar UNL_UCBCN_Calendar Object
+     * Calendar \UNL\UCBCN\Calendar Object
      *
-     * @var UNL_UCBCN_Calendar
+     * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
     
@@ -143,7 +143,7 @@ class Controller
      * Gets the specified event instance.
      *
      * @param int                $id       The id of the event instance to get.
-     * @param UNL_UCBCN_Calendar $calendar The calendar to get the event for.
+     * @param \UNL\UCBCN\Calendar $calendar The calendar to get the event for.
      *
      * @return object UNL_UCBCN_EventInstance on success UNL_UCBCN_Error on error.
      */
@@ -268,7 +268,7 @@ class Controller
      * This function checks if a calendar has events on the day requested.
      *
      * @param string             $epoch    Unix epoch of the day to check.
-     * @param UNL_UCBCN_Calendar $calendar The calendar to check.
+     * @param \UNL\UCBCN\Calendar $calendar The calendar to check.
      *
      * @return bool true or false
      */

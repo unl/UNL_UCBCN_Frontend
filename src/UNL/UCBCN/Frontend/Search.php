@@ -32,7 +32,7 @@ class Search
     /**
      * Calendar we are searching
      *
-     * @var object UNL_UCBCN_Calendar
+     * @var object \UNL\UCBCN\Calendar
      */
     public $calendar;
     

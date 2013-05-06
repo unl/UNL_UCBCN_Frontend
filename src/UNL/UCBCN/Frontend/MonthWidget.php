@@ -29,9 +29,9 @@ class MonthWidget
 {
 
     /**
-     * Calendar UNL_UCBCN_Calendar Object
+     * Calendar \UNL\UCBCN\Calendar Object
      *
-     * @var UNL_UCBCN_Calendar
+     * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
     
@@ -76,7 +76,7 @@ class MonthWidget
      *
      * @param int                $y        Year
      * @param int                $m        Month
-     * @param UNL_UCBCN_Calendar $calendar Calendar to prepare a month widget for.
+     * @param \UNL\UCBCN\Calendar $calendar Calendar to prepare a month widget for.
      */
     public function __construct($y,$m,$calendar=null)
     {

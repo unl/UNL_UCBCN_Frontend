@@ -5,7 +5,7 @@ use UNL\UCBCN\Event\Occurrences;
 
 use UNL\UCBCN\RuntimeException;
 
-use UNL\UCBCN\Calendar;
+use \UNL\UCBCN\Calendar;
 
 /**
  * This class contains the information needed for viewing a single day view calendar.
@@ -34,9 +34,9 @@ use UNL\UCBCN\Calendar;
 class Day extends Occurrences
 {
     /**
-     * Calendar UNL_UCBCN_Calendar Object
+     * Calendar \UNL\UCBCN\Calendar Object
      * 
-     * @var UNL_UCBCN_Calendar
+     * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
     

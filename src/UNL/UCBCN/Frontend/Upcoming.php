@@ -28,9 +28,9 @@ namespace UNL\UCBCN\Frontend;
 class Upcoming
 {
     /**
-     * Calendar UNL_UCBCN_Calendar Object
+     * Calendar \UNL\UCBCN\Calendar Object
      * 
-     * @var UNL_UCBCN_Calendar
+     * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
     
