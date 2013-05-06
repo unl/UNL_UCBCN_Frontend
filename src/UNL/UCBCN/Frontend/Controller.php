@@ -134,9 +134,38 @@ class Controller
         }
     }
 
+    /**
+     * Get the calendar currently set
+     *
+     * @return \UNL\UCBCN\Calendar
+     */
+    public function getCalendar()
+    {
+        return $this->options['calendar'];
+    }
+
+    /**
+     * Get the URL to the frontend
+     *
+     * @return string
+     */
     public function getURL()
     {
         return self::$url;
+    }
+
+    /**
+     * Get the URL to this specific calendar
+     *
+     * @return string
+     */
+    public function getCalendarURL()
+    {
+        if ($this->getCalendar()->id == self::$default_calendar_id) {
+            return $this->getURL();
+        }
+
+        return $this->getURL() . $this->getCalendar()->shortname . '/';
     }
 
     /**
