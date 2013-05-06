@@ -35,25 +35,6 @@ class Upcoming extends EventListing
      * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
-    
-    /**
-     * Listing of events on this day.
-     * 
-     * @var UNL_UCBCN_EventListing
-     */
-    public $output;
-    
-    /**
-     * URL to the listing of upcoming events.
-     * 
-     * @var string
-     */
-    public $url;
-    
-    /**
-     * Message for when no upcoming events are found.
-     */
-    public $noevents = 'Sorry, no events could be found.';
 
     public $options = array(
             'limit' => 10,
