@@ -1,6 +1,8 @@
 <?php
 namespace UNL\UCBCN\Frontend;
 
+use UNL\UCBCN\Event\Occurrences;
+
 use UNL\UCBCN\RuntimeException;
 
 use UNL\UCBCN\Calendar;
@@ -29,7 +31,7 @@ use UNL\UCBCN\Calendar;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Day
+class Day extends Occurrences
 {
     /**
      * Calendar UNL_UCBCN_Calendar Object
@@ -115,7 +117,7 @@ class Day
      */
     public function __construct($options)
     {
-        if (!isset($options['calendar'])) {
+        if (isset($options['calendar'])) {
             $this->calendar = Calendar::getById(Controller::$default_calendar_id);
             if (!$this->calendar) {
                 throw new RuntimeException('The calendar specified or could be found.', 404);
