@@ -69,20 +69,6 @@ class Day extends Occurrences
     public $output;
     
     /**
-     * URL to the next day
-     * 
-     * @var string
-     */
-    public $next_url;
-    
-    /**
-     * URL to the previous day
-     * 
-     * @var string 
-     */
-    public $prev_url;
-    
-    /**
      * Display ongoing events?
      * 
      * @var bool
