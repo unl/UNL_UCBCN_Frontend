@@ -122,7 +122,7 @@ class Controller
 
     protected function determineCalendar()
     {
-        if (isset($this->options['calendar_shortname'])) {
+        if (!empty($this->options['calendar_shortname'])) {
             // Try and get by shortname
             $this->options['calendar'] = \UNL\UCBCN\Calendar::getByShortName($this->options['calendar_shortname']);
         } else {
