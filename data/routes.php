@@ -27,7 +27,7 @@ $routes['/^'.$calendar.'search(\/(?P<q>.+))'.$format.'$/']                      
 $routes['/^'.$calendar.$year.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Year';
 $routes['/^'.$calendar.$year.'\/'.$month.$format.'$/']                              = 'UNL\UCBCN\Frontend\Month';
 $routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.$format.'$/']                    = 'UNL\UCBCN\Frontend\Day';
-$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.'\/(?P<id>[\d]+)'.$format.'$/']  = 'UNL\UCBCN\Frontend\Day';
+$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.'\/(?P<id>[\d]+)'.$format.'$/']  = 'UNL\UCBCN\Frontend\EventInstance';
 
 
 return $routes;
