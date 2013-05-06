@@ -15,6 +15,8 @@
  */
 namespace UNL\UCBCN\Frontend;
 
+use UNL\UCBCN\EventListing;
+
 /**
  * A list of upcoming events for a calendar.
  * 
@@ -25,7 +27,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Upcoming
+class Upcoming extends EventListing
 {
     /**
      * Calendar \UNL\UCBCN\Calendar Object
