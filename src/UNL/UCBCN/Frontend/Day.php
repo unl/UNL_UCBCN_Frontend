@@ -1,11 +1,9 @@
 <?php
 namespace UNL\UCBCN\Frontend;
 
-use UNL\UCBCN\Event\Occurrences;
-
+use UNL\UCBCN\EventListing;
 use UNL\UCBCN\RuntimeException;
-
-use \UNL\UCBCN\Calendar;
+use UNL\UCBCN\Calendar;
 
 /**
  * This class contains the information needed for viewing a single day view calendar.
@@ -31,7 +29,7 @@ use \UNL\UCBCN\Calendar;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Day extends Occurrences
+class Day extends EventListing
 {
     /**
      * Calendar \UNL\UCBCN\Calendar Object
@@ -39,56 +37,7 @@ class Day extends Occurrences
      * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
-    
-    /**
-     * Year the user is viewing.
-     * 
-     * @var int
-     */
-    public $year;
-    
-    /**
-     * Month the user is viewing.
-     * 
-     * @var int
-     */
-    public $month;
-    
-    /**
-     * Day to show events for
-     * 
-     * @var int
-     */
-    public $day;
-    
-    /**
-     * Listing of events on this day.
-     * 
-     * @var UNL_UCBCN_EventListing
-     */
-    public $output;
-    
-    /**
-     * Display ongoing events?
-     * 
-     * @var bool
-     */
-    public $ongoing = true;
-    
-    /**
-     * Events that are both recurring and ongoing.
-     * 
-     * @var array UNL_UCBCN_Event or UNL_UCBCN_EventInstance objects
-     */
-    public $ongoing_recurring = array();
-    
-    /**
-     * no events message
-     * 
-     * @var string
-     */
-    public $noevents = 'Sorry, no new events were found for today!';
-    
+
     /**
      * Constructor for an individual day.
      * 
@@ -99,58 +48,45 @@ class Day extends Occurrences
         if (isset($options['calendar'])) {
             $this->calendar = $options['calendar'];
         }
-        
-        $this->output[] = $this->showEventListing($ongoing_recurring);
-        if ($this->ongoing===true) {
-            $this->output[] = $this->showOngoingEventListing($ongoing_recurring);
-        }
+
+        // Set defaults
+        $this->options['m'] = date('m');
+        $this->options['d'] = date('d');
+        $this->options['y'] = date('Y');
+
+        parent::__construct($options);
     }
-    
+
     /**
-     * Shows the listing of new events for this day
+     * Get the SQL for finding events
      * 
-     * @param $oarevents UNL_UCBCN_Event or UNL_UCBCN_EventInstance objects
-     * 
-     * @return mixed UNL_UCBCN_EventListing or string for noevents.
+     * @see \UNL\UCBCN\ActiveRecord\RecordList::getSQL()
      */
-    public function showEventListing(&$oarevents)
+    function getSQL()
     {
-        $options = array('year'=>$this->year,
-                         'month'=>$this->month,
-                         'day'=>$this->day,
-                         'calendar'=>$this->calendar);
-        // Fetch the day evenlisting for this day.
-        $eventlist = new UNL_UCBCN_EventListing('day', $options, $oarevents);
-        
-        if (count($eventlist->events)) {
-            return $eventlist;
-        } else {
-			include_once 'UNL/UCBCN/Frontend/NoEvents.php';
-            return new UNL_UCBCN_Frontend_NoEvents($this->noevents);
-        }
+        $timestamp = $this->getDateTime()->getTimestamp();
+
+        $sql = '
+                SELECT eventdatetime.id FROM eventdatetime
+                INNER JOIN event ON eventdatetime.event_id = event.id
+                WHERE
+                    eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
+                    AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+6400).'" 
+                ORDER BY eventdatetime.starttime ASC, event.title ASC
+                ';
+        return $sql;
     }
-    
+
     /**
-     * Returns the listing of ongoing events for this day.
-     * 
-     * @return object UNL_UCBCN_EventListing
+     * Get the date and time for this day
+     *
+     * @return \DateTime
      */
-    public function showOngoingEventListing(&$oarevents)
+    public function getDateTime()
     {
-        $options = array('year'=>$this->year,
-                         'month'=>$this->month,
-                         'day'=>$this->day,
-                         'calendar'=>$this->calendar);
-        // Fetch the day evenlisting for this day.
-        $eventlist = new UNL_UCBCN_EventListing('ongoing', $options, $oarevents);
-        
-        if (count($eventlist->events)) {
-            return $eventlist;
-        } else {
-            return null;
-        }
+        return new \DateTime('@'.mktime(0, 0, 0, $this->options['m'], $this->options['d'], $this->options['y']));
     }
-    
+
     /**
      * Returns the permalink URL to this specific day.
      * 
@@ -162,7 +98,7 @@ class Day extends Occurrences
         if (isset($this->calendar)) {
             $url .= $this->calendar->shortname . '/';
         }
-        return $url . $this->year. '/' . $this->month .'/' . $this->day;
+        return $url . date('Y/m/d', $this->getDateTime()->getTimestamp());
     }
     
 }
