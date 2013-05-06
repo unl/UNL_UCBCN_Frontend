@@ -69,13 +69,6 @@ class Day extends Occurrences
     public $output;
     
     /**
-     * URL of events on this day.
-     * 
-     * @var string
-     */
-    public $url;
-    
-    /**
      * URL to the next day
      * 
      * @var string
@@ -125,7 +118,6 @@ class Day extends Occurrences
         if ($this->ongoing===true) {
             $this->output[] = $this->showOngoingEventListing($ongoing_recurring);
         }
-        $this->url = $this->getURL();
     }
     
     /**
@@ -174,17 +166,17 @@ class Day extends Occurrences
     }
     
     /**
-     * Returns the permanent URL to this specific day.
+     * Returns the permalink URL to this specific day.
      * 
      * @return string URL to this day.
-     * @access public
      */
     public function getURL()
     {
-        return UNL_UCBCN_Frontend::formatURL(array('d'=>$this->day,
-                                                   'm'=>$this->month,
-                                                   'y'=>$this->year,
-                                                   'calendar'=>$this->calendar->id));
+        $url = Controller::$url;
+        if (isset($this->calendar)) {
+            $url .= $this->calendar->shortname . '/';
+        }
+        return $url . $this->year. '/' . $this->month .'/' . $this->day;
     }
     
 }
