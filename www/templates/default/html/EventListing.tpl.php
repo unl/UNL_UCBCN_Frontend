@@ -44,7 +44,7 @@ foreach ($context as $occurrence) {
         }
     }
     $row .= '</td>' .
-            '<td><a class="url summary" href="'.$savvy->dbStringtoHtml($occurrence->getURL()).'">'.$savvy->dbStringtoHtml($occurrence->getEvent()->title).'</a>';
+            '<td><a class="url summary" href="'.$frontend->getCalendarURL().date('Y/m/d/', $startu).$occurrence->id.'">'.$savvy->dbStringtoHtml($occurrence->getEvent()->title).'</a>';
     if (isset($occurrence->location_id) && $occurrence->location_id) {
         $l = $occurrence->getLocation();
         $row .= ' <span class="location">';
