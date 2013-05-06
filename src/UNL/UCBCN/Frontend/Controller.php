@@ -130,7 +130,7 @@ class Controller
         }
 
         if (!$this->options['calendar']) {
-            throw new RuntimeException('No calendar could be found.', 404);
+            throw new RuntimeException('The calendar could not be found.', 404);
         }
     }
 
