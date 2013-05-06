@@ -4,5 +4,5 @@
  */
 UNL_UCBCN::outputTemplate('UNL_UCBCN_EventListing','EventListing_icalendar');
 
-UNL_UCBCN::displayRegion($context->output);
+echo $savvy->render($context->output);
 ?>

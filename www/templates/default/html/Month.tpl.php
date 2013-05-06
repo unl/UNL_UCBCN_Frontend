@@ -27,7 +27,7 @@
 			            }
 		            }
 		            echo '<td class="'.$class.'">';
-		            UNL_UCBCN::displayRegion($day);
+		            echo $savvy->render($day);
 		            echo '</td>';
 		        }
 		        echo '</tr>';

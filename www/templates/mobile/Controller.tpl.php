@@ -32,13 +32,13 @@ if ($context->calendar->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id']) {
     
 <?php if (isset($context->right)) { ?>
     <div id="updatecontent" class="three_col right">
-    <?php UNL_UCBCN::displayRegion($context->output); ?>
+    <?php echo $savvy->render($context->output); ?>
     </div>
     <div class="col left">
-        <div id="monthwidget"><?php UNL_UCBCN::displayRegion($context->right); ?></div>
+        <div id="monthwidget"><?php echo $savvy->render($context->right); ?></div>
     </div>
 <?php } else {
-    UNL_UCBCN::displayRegion($context->output);
+    echo $savvy->render($context->output);
 } ?>
 
 </body>

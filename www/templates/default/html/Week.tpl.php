@@ -3,5 +3,5 @@
 /**
  * HTML Output template for a week view.
  */
-UNL_UCBCN::displayRegion($context->output);
+echo $savvy->render($context->output);
 ?>

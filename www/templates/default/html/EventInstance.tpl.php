@@ -87,7 +87,7 @@ $endu = strtotime($context->eventdatetime->endtime);
 				    echo 'Room: '.$savvy->dbStringtoHtml($context->eventdatetime->room);
 				}
 				if ($loc = $context->eventdatetime->getLocation()) {
-					UNL_UCBCN::displayRegion($loc);
+					echo $savvy->render($loc);
 				}
                 if (isset($context->eventdatetime->directions)) {
                     echo '<p class="directions">Directions: '.$savvy->dbStringtoHtml($context->eventdatetime->directions).'</p>';
@@ -112,7 +112,7 @@ $endu = strtotime($context->eventdatetime->endtime);
 		</tbody>
 		</table>
         <?php
-            UNL_UCBCN::displayRegion($context->facebookRSVP);
+            echo $savvy->render($context->facebookRSVP);
             echo $context->facebook->like($context->url,$context->calendar->id);
             echo '<p id="feeds">
 			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($context->url,array('format'=>'ics')).'">ics format for '.$savvy->dbStringtoHtml($context->event->title).'</a>

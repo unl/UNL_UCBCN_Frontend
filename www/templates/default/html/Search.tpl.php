@@ -8,7 +8,7 @@ if (is_a($context->output,'UNL_UCBCN_EventListing')) {
     }
     echo '<h3>'.count($context->output->events).' results</h3>';
 }
-UNL_UCBCN::displayRegion($context->output);
+echo $savvy->render($context->output);
 
 echo '<p id="feeds">
             <a id="icsformat" title="ics format for search results" href="'.UNL_UCBCN_Frontend::reformatURL($context->url,array('format'=>'ics')).'">ics format for search results</a>

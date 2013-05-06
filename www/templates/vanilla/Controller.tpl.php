@@ -21,7 +21,7 @@
             <a href="<?php echo $context->manageruri; ?>">Event Publishing Manager</a>
         </div>
 
-        <?php UNL_UCBCN::displayRegion($context->output); ?>
+        <?php echo $savvy->render($context->output); ?>
 
 <script type='text/javascript'> 
 $(document).ready(function() {

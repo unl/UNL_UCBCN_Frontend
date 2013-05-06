@@ -39,7 +39,7 @@ TZOFFSETFROM:-0600
 TZNAME:CDT
 END:DAYLIGHT
 END:VTIMEZONE
-<?php UNL_UCBCN::displayRegion($context->output); ?>
+<?php echo $savvy->render($context->output); ?>
 END:VCALENDAR
 <?php
 // Convert all line endings: line endings are windows-style, carriage-return, followed by a line feed

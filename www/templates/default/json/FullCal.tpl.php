@@ -1,3 +1,3 @@
 [{}<?php
-UNL_UCBCN::displayRegion($context->output);
+echo $savvy->render($context->output);
 ?>]
