@@ -1,7 +1,8 @@
 <?php
 
 $startu = strtotime($context->eventdatetime->starttime);
-$endu = strtotime($context->eventdatetime->endtime);
+$endu   = strtotime($context->eventdatetime->endtime);
+$url    = $frontend->getCalendarURL().date('Y/m/d/', $startu).$context->eventdatetime->id;
 
 /*
  * 
@@ -16,7 +17,7 @@ $endu = strtotime($context->eventdatetime->endtime);
 <div class="event_cal">
 <div class='vcalendar'>
 	<div class='vevent'>
-		<h1 class='summary'><?php echo $savvy->dbStringtoHtml($context->event->title); ?> <a class="permalink" href="<?php echo $context->url; ?>">(link)</a></h1>
+		<h1 class='summary'><?php echo $savvy->dbStringtoHtml($context->event->title); ?> <a class="permalink" href="<?php echo $url; ?>">(link)</a></h1>
 		<?php if (isset($context->event->subtitle)) echo '<h2>'.$savvy->dbStringtoHtml($context->event->subtitle).'</h2>'; ?>
 		<div id="tabsG">
 		  <ul>
@@ -87,7 +88,7 @@ $endu = strtotime($context->eventdatetime->endtime);
 				    echo 'Room: '.$savvy->dbStringtoHtml($context->eventdatetime->room);
 				}
 				if ($loc = $context->eventdatetime->getLocation()) {
-					echo $savvy->render($loc);
+					echo $savvy->render($loc, 'Location.tpl.php');
 				}
                 if (isset($context->eventdatetime->directions)) {
                     echo '<p class="directions">Directions: '.$savvy->dbStringtoHtml($context->eventdatetime->directions).'</p>';
@@ -112,11 +113,11 @@ $endu = strtotime($context->eventdatetime->endtime);
 		</tbody>
 		</table>
         <?php
-            echo $savvy->render($context->facebookRSVP);
-            echo $context->facebook->like($context->url,$context->calendar->id);
+//             echo $savvy->render($context->facebookRSVP);
+//             echo $facebook->like($context->url, $context->calendar->id);
             echo '<p id="feeds">
-			<a id="icsformat" href="'.UNL_UCBCN_Frontend::reformatURL($context->url,array('format'=>'ics')).'">ics format for '.$savvy->dbStringtoHtml($context->event->title).'</a>
-			<a id="rssformat" href="'.UNL_UCBCN_Frontend::reformatURL($context->url,array('format'=>'rss')).'">rss format for '.$savvy->dbStringtoHtml($context->event->title).'</a>
+			<a id="icsformat" href="'.$url.'.ics">ics format for '.$savvy->dbStringtoHtml($context->event->title).'</a>
+			<a id="rssformat" href="'.$url.'.rss">rss format for '.$savvy->dbStringtoHtml($context->event->title).'</a>
 			</p>'; ?>
 		</div>
 	</div>
