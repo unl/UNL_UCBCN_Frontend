@@ -118,11 +118,6 @@ class Day extends Occurrences
     public function __construct($options)
     {
         if (isset($options['calendar'])) {
-            $this->calendar = Calendar::getById(Controller::$default_calendar_id);
-            if (!$this->calendar) {
-                throw new RuntimeException('The calendar specified or could be found.', 404);
-            }
-        } else {
             $this->calendar = $options['calendar'];
         }
         
