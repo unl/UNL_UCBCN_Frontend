@@ -1,37 +1,48 @@
 <div class="month_cal" id="month_viewcal">
 <table class="wp-calendar">
-	<caption><?php echo $context->caption; ?></caption>
-   <thead>
+	<caption><?php echo $context->getDateTime()->format('F, Y'); ?></caption>
+    <thead>
+    <?php
+    $weekdays = array(
+        'Sunday'    => 'Sun',
+        'Monday'    => 'Mon',
+        'Tuesday'   => 'Tue',
+        'Wednesday' => 'Wed',
+        'Thursday'  => 'Thu',
+        'Friday'    => 'Fri',
+        'Saturday'  => 'Sat',
+    );
+    ?>
 	<tr>
-		<th abbr="Sunday" scope="col" title="Sunday">Sun</th>
-		<th abbr="Monday" scope="col" title="Monday">Mon</th>
-		<th abbr="Tuesday" scope="col" title="Tuesday">Tue</th>
-		<th abbr="Wednesday" scope="col" title="Wednesday">Wed</th>
-		<th abbr="Thursday" scope="col" title="Thursday">Thu</th>
-		<th abbr="Friday" scope="col" title="Friday">Fri</th>
-		<th abbr="Saturday" scope="col" title="Saturday">Sat</th>
+	    <?php foreach ($weekdays as $full=>$short): ?>
+		<th abbr="<?php echo $full; ?>" scope="col" title="<?php echo $full; ?>"><?php echo $short; ?></th>
+		<?php endforeach; ?>
 	</tr>
 	</thead>
 	<tbody>
 		<?php
-		    UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Day','Frontend_Day_monthday');
-		    foreach ($context->weeks as $week) {
-		        echo '<tr>';
-		        foreach ($week as $day) {
-		            $class = '';
-		            if (is_object($day) && get_class($day) == 'UNL_UCBCN_Frontend_Day') {
-			            if ($day->month < $context->month) {
-			                $class = 'prev';
-			            } elseif ($day->month > $context->month) {
-			                $class = 'next';
-			            }
-		            }
-		            echo '<td class="'.$class.'">';
-		            echo $savvy->render($day);
-		            echo '</td>';
-		        }
-		        echo '</tr>';
-		    }
+		$first = true;
+		$month = $context->getRawObject();
+	    foreach ($month as $day) {
+            if (UNL\UCBCN\Frontend\Month::$weekday_start == $day->getDateTime()->format('l')) {
+                // Start of a new week, so start a new table row
+                if (!$first) {
+                    echo '</tr>';
+                    $first = false;
+                }
+                echo '<tr>';
+            }
+            $class = '';
+            if ($day->options['m'] < $context->options['m']) {
+                $class = 'prev';
+            } elseif ($day->options['m'] > $context->options['m']) {
+                $class = 'next';
+            }
+            echo '<td class="'.$class.'">';
+            echo $savvy->render($day);
+            echo '</td>';
+	    }
+        echo '</tr>';
 		?>
 	</tbody>
 </table>
