@@ -26,7 +26,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Month
+class Month extends \IteratorIterator
 {
     /**
      * Calendar to show events for UNL_UCBCN_Month object
@@ -34,95 +34,101 @@ class Month
      * @var \UNL\UCBCN\Calendar 
      */
     public $calendar;
-    
+
+    public $options = array(
+            'm' => null,
+            'y' => null,
+            );
+
     /**
-     * Year the user is viewing.
-     * 
-     * @var int
-     */
-    public $year;
-    
-    /**
-     * Month the user is viewing.
-     * 
-     * @var int
-     */
-    public $month;
-    
-    /**
-     * Contains an array of Frontend_Day objects
+     * Configurable start day for the week
      *
-     * @var array
+     * @var string
      */
-    public $weeks = array();
-    
+    public static $weekday_start = 'Sunday';
+
     /**
-     * This function constructs the month widget and populates the heading,
-     * caption, footer and body for the MonthWidget.
+     * Constructor for an individual day.
      * 
-     * @param int                $y        Year
-     * @param int                $m        Month
-     * @param \UNL\UCBCN\Calendar $calendar Calendar to display events from.
-     * @param string             $dsn      EG: mysqli://events:events@host/events
+     * @param array $options Associative array of options to apply.
      */
-    public function __construct($y,$m,$calendar,$dsn)
+    public function __construct($options)
     {
-        $this->year     = (int) $y;
-        $this->month    = (int) $m;
-        $this->calendar = $calendar;
-        $Month          = new Calendar_Month_Weekdays($y, $m, 0);
-        $PMonth         = $Month->prevMonth('object'); // Get previous month as object
-        $prev           = UNL_UCBCN_Frontend::formatURL(array(
-                                                'y'       => $PMonth->thisYear(),
-                                                'm'       => $PMonth->thisMonth(),
-                                                'calendar'=> $this->calendar->id));
-        $NMonth         = $Month->nextMonth('object');
-        $next           = UNL_UCBCN_Frontend::formatURL(array(
-                                                'y'       => $NMonth->thisYear(),
-                                                'm'       => $NMonth->thisMonth(),
-                                                'calendar'=> $this->calendar->id));
-        
-        $this->caption  = '
-        <span><a href="'.$prev.'" id="prev_month" title="View events for '.
-              Calendar_Util_Textual::thisMonthName($PMonth).' '.$PMonth->thisYear().
-              '">&lt;&lt; </a></span>
-        <span class="monthvalue" id="'.
-              Calendar_Util_Textual::thisMonthName($Month).'"><a href="'.
-              UNL_UCBCN_Frontend::formatURL(array('y'       => $Month->thisYear(),
-                                                  'm'       => $Month->thisMonth(),
-                                                  'calendar'=> $this->calendar->id)).
-                                                  '">'.
-              Calendar_Util_Textual::thisMonthName($Month).'</a></span>
-        <span class="yearvalue"><a href="'.
-              UNL_UCBCN_Frontend::formatURL(array('y'       => $Month->thisYear(),
-                                                  'calendar'=> $this->calendar->id)).
-                                                  '">'.$Month->thisYear().
-                                                  '</a></span>
-        <span><a href="'.$next.'" id="next_month" title="View events for '.
-              Calendar_Util_Textual::thisMonthName($NMonth).' '.$NMonth->thisYear().
-              '"> &gt;&gt;</a></span>
-        ';
-        
-        //Determine selected days
-        $selectedDays = array();
-        $Month->build($selectedDays);
-        
-        //Update recurring events table
-        UNL_UCBCN::factory('recurringdate')->getRecurringDates($Month);
-        
-        $week = count($this->weeks);
-        while ( $Day = $Month->fetch() ) {
-            $this->weeks[$week][] = new UNL_UCBCN_Frontend_Day(array(
-                                            'dsn'     => $dsn,
-                                            'year'    => $Day->thisYear(),
-                                            'month'   => $Day->thisMonth(),
-                                            'day'     => $Day->thisDay(),
-                                            'calendar'=> $this->calendar,
-                                            'ongoing' => false,
-                                            'noevents'=> ''));
-            if ( $Day->isLast() ) {
-                $week++;
-            }
+        if (isset($options['calendar'])) {
+            $this->calendar = $options['calendar'];
         }
+
+        // Set defaults
+        $this->options['m'] = date('m');
+        $this->options['y'] = date('Y');
+
+        $this->options = $options + $this->options;
+
+        $start_date = $this->getStartDateTime();
+        $end_date   = $this->getEndDateTime();
+        $interval   = new \DateInterval('P1D');
+
+        parent::__construct( new \DatePeriod($start_date, $interval, $end_date));
+    }
+
+    /**
+     * Get the starting datetime object for this month
+     *
+     * @return \DateTime
+     */
+    public function getStartDateTime()
+    {
+        $first_day = new \DateTime(
+                $this->options['y'].'-'.$this->options['m'].'-01'
+        );
+        if (self::$weekday_start != $first_day->format('l')) {
+            $first_day = $first_day->modify('last '.self::$weekday_start);
+        }
+        return $first_day;
+    }
+
+    /**
+     * Get the ending datetime object for this month
+     *
+     * @return \DateTime
+     */
+    public function getEndDateTime()
+    {
+        $last_day = new \DateTime(
+               $this->options['y'].'-'.$this->options['m'].'-01 +1 month'
+        );
+
+        if (self::$weekday_start != $last_day->format('l')) {
+            $last_day->modify('next '.self::$weekday_start);
+        }
+
+        return $last_day;
+        
+    }
+
+    /**
+     * Get the date for this month
+     *
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return new \DateTime(
+                $this->options['y'].'-'.$this->options['m'].'-01'
+        );
+    }
+
+    function current()
+    {
+        /* @var $datetime \DateTime */
+        $datetime = parent::current();
+
+        $options = array(
+                'm' => $datetime->format('m'),
+                'y' => $datetime->format('Y'),
+                'd' => $datetime->format('d'),
+                ) + $this->options;
+
+        return new Day($options);
     }
 }
