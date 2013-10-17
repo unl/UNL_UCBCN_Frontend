@@ -53,16 +53,19 @@ class Year
     /**
      * Constructor for a year calendar.
      *
-     * @param int                $y        Year to render
-     * @param \UNL\UCBCN\Calendar $calendar Calendar to grab events for.
+     * @param array $options Array of options
      */
-    public function __construct($y,$calendar)
+    public function __construct($options = array())
     {
-        $this->year     = $y;
-        $this->calendar = $calendar;
-        $m              = 1;
+        if (isset($options['calendar'])) {
+            $this->calendar = $options['calendar'];
+        }
+
+        $this->year = $options['y'];
+
         for ($m=1;$m<=12;$m++) {
-            $this->monthwidgets[] = new UNL_UCBCN_Frontend_MonthWidget($this->year, $m, $this->calendar);
+            $options['m'] = $m;
+            $this->monthwidgets[] = new MonthWidget($options);
         }
     }
 }
