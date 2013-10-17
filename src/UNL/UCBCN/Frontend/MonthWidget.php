@@ -74,15 +74,16 @@ class MonthWidget
      * This function constructs the month widget and populates the heading,
      * caption, footer and body for the MonthWidget.
      *
-     * @param int                $y        Year
-     * @param int                $m        Month
-     * @param \UNL\UCBCN\Calendar $calendar Calendar to prepare a month widget for.
+     * @param array $options Associative array of options
+     *      'y'        int                 Year
+     *      'm'        int                 Month
+     *      'calendar' \UNL\UCBCN\Calendar Calendar to prepare a month widget for
      */
-    public function __construct($y,$m,$calendar=null)
+    public function __construct($options = array())
     {
-        $this->year     = intval($y);
-        $this->month    = intval($m);
-        $this->calendar = $calendar;
+        $this->year     = intval($options['y']);
+        $this->month    = intval($options['m']);
+        $this->calendar = $options['calendar'];
     }
     
     /**
