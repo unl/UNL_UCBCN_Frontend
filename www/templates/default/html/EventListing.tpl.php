@@ -44,7 +44,7 @@ foreach ($context as $eventinstance) {
         }
     }
     $row .= '</td>' .
-            '<td><a class="url summary" href="'.$frontend->getCalendarURL().date('Y/m/d/', $startu).$eventinstance->eventdatetime->id.'">'.$savvy->dbStringtoHtml($eventinstance->event->title).'</a>';
+            '<td><a class="url summary" href="'.$frontend->getEventURL($eventinstance->getRawObject()).'">'.$savvy->dbStringtoHtml($eventinstance->event->title).'</a>';
     if (isset($eventinstance->eventdatetime->location_id) && $eventinstance->eventdatetime->location_id) {
         $l = $eventinstance->eventdatetime->getLocation();
         $row .= ' <span class="location">';

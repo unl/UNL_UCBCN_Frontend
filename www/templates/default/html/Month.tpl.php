@@ -39,7 +39,7 @@
                 $class = 'next';
             }
             echo '<td class="'.$class.'">';
-            echo $savvy->render($day);
+            echo $savvy->render($day, 'EventListing/Month.tpl.php');
             echo '</td>';
 	    }
         echo '</tr>';

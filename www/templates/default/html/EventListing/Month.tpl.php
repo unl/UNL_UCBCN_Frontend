@@ -1,7 +1,7 @@
 <ul>
 <?php
 
-foreach ($context->events as $e) {
+foreach ($context as $e) {
     $li = '<li>';
     if (strpos($e->eventdatetime->starttime,'00:00:00')===false) {
         $starttime = strtotime($e->eventdatetime->starttime);
@@ -22,7 +22,7 @@ foreach ($context->events as $e) {
         }
         $li .= ': ';
     }
-    $li .= '<a href="'.$e->url.'">'.$savvy->dbStringtoHtml($e->event->title).'</a></li>';
+    $li .= '<a href="'.$frontend->getEventURL($e->getRawObject()).'">'.$savvy->dbStringtoHtml($e->event->title).'</a></li>';
     echo $li;
 }
 ?>

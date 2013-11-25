@@ -167,6 +167,11 @@ class Controller
 
         return $this->getURL() . $this->getCalendar()->shortname . '/';
     }
+  
+    public function getEventURL(\UNL\UCBCN\Frontend\EventInstance $instance)
+    {
+        return $instance->getURL($this->getCalendarURL());
+    }
 
     /**
      * Gets the specified event instance.
