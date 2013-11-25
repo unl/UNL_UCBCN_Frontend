@@ -45,4 +45,14 @@ class EventInstance
     {
         return new self(array('id'=>$id));
     }
+
+    /**
+     * @param $baseURL - The baseurl of the current calendar
+     *
+     * @return string - The absolute url for the event instance
+     */
+    public function getURL($baseURL)
+    {
+        return $baseURL . date('Y/m/d/', strtotime($this->eventdatetime->starttime)) . $this->eventdatetime->id;
+    }
 }
