@@ -66,12 +66,14 @@ class Day extends EventListing
         $timestamp = $this->getDateTime()->getTimestamp();
 
         $sql = '
-                SELECT eventdatetime.id FROM eventdatetime
+                SELECT DISTINCT eventdatetime.id FROM eventdatetime
                 INNER JOIN event ON eventdatetime.event_id = event.id
+                INNER JOIN calendar_has_event ON calendar_has_event.event_id = event.id
                 WHERE
-                    (eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
-                    AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+86400).'")
-                    OR (NOW() BETWEEN eventdatetime.starttime AND eventdatetime.endtime)
+                    calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
+                    AND ((eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
+                        AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+86400).'")
+                        OR (NOW() BETWEEN eventdatetime.starttime AND eventdatetime.endtime))
                 ORDER BY eventdatetime.starttime ASC, event.title ASC
                 ';
         return $sql;
