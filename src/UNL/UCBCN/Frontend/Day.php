@@ -71,6 +71,7 @@ class Day extends EventListing
                 INNER JOIN calendar_has_event ON calendar_has_event.event_id = event.id
                 WHERE
                     calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
+                    AND calendar_has_event.status IN ("posted", "archived")
                     AND ((eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
                         AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+86400).'")
                         OR (NOW() BETWEEN eventdatetime.starttime AND eventdatetime.endtime))
