@@ -98,4 +98,25 @@ class EventInstance
 
         return false;
     }
+
+    /**
+     * Determines if this event is an all day event.
+     *
+     * @return bool
+     */
+    public function isAllDay()
+    {
+        //It must start at midnight to be an all day event
+        if (strpos($this->eventdatetime->starttime, '00:00:00') === false) {
+            return false;
+        }
+
+        //It must end at midnight, or not have an end date.
+        if (!empty($this->eventdatetime->endtime) &&
+            strpos($this->eventdatetime->endtime, '00:00:00') === false) {
+            return false;
+        }
+
+        return true;
+    }
 }
