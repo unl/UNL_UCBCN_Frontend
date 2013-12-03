@@ -78,11 +78,11 @@ class EventInstance
     }
 
     /**
-     * Determines if this event is currently happening.
+     * Determines if this event is currently in progress.
      * 
      * @return bool
      */
-    public function isHappening()
+    public function isInProgress()
     {
         if (strtotime($this->eventdatetime->starttime) > time()) {
             //It has not started yet.
