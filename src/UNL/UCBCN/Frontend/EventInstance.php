@@ -55,4 +55,47 @@ class EventInstance
     {
         return $baseURL . date('Y/m/d/', strtotime($this->eventdatetime->starttime)) . $this->eventdatetime->id;
     }
+
+    /**
+     * Determines if this is an ongoing event.
+     *
+     * An 'ongoing' event is defined as an event that spans more than one day.
+     *
+     * @return bool
+     */
+    public function isOngoing()
+    {
+
+        $start = date('m-d-Y', strtotime($this->eventdatetime->starttime));
+        $end   = date('m-d-Y', strtotime($this->eventdatetime->endtime));
+
+        //It is not an ongoing event if it starts and ends on the same day.
+        if ($start == $end) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Determines if this event is currently in progress.
+     * 
+     * @return bool
+     */
+    public function isInProgress()
+    {
+        $currentTime = time();
+        
+        if (strtotime($this->eventdatetime->starttime) > $currentTime) {
+            //It has not started yet.
+            return false;
+        }
+
+        if (strtotime($this->eventdatetime->endtime) < $currentTime) {
+            //It already finished.
+            return false;
+        }
+
+        return false;
+    }
 }
