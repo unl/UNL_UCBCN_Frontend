@@ -84,12 +84,14 @@ class EventInstance
      */
     public function isInProgress()
     {
-        if (strtotime($this->eventdatetime->starttime) > time()) {
+        $currentTime = time();
+        
+        if (strtotime($this->eventdatetime->starttime) > $currentTime) {
             //It has not started yet.
             return false;
         }
 
-        if (strtotime($this->eventdatetime->endtime) < time()) {
+        if (strtotime($this->eventdatetime->endtime) < $currentTime) {
             //It already finished.
             return false;
         }
