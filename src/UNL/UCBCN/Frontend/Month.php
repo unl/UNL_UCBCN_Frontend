@@ -131,4 +131,53 @@ class Month extends \IteratorIterator
 
         return new Day($options);
     }
+
+    /**
+     * Get a relative month
+     * 
+     * @param $string - +1, -1, etc
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getRelativeMonth($string)
+    {
+        $datetime = $this->getDateTime()->modify($string . ' month');
+
+        $options = $this->options;
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+
+        $class = get_called_class();
+
+        return new $class($options);
+    }
+
+    /**
+     * Get the previous month object
+     *
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getPreviousMonth()
+    {
+        return $this->getRelativeMonth('-1');
+    }
+
+    /**
+     * Get the next month object
+     *
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getNextMonth()
+    {
+        return $this->getRelativeMonth('+1');
+    }
+
+    /**
+     * Get the year for this month
+     * 
+     * @return \UNL\UCBCN\Frontend\Year Year
+     */
+    public function getYear()
+    {
+        return new Year($this->options);
+    }
 }
