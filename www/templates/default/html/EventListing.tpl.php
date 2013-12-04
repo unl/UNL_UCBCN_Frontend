@@ -16,6 +16,18 @@
                 //Add an alt class to odd rows
                 $row_classes[] = 'alt';
             }
+            
+            if ($eventinstance->isAllDay()) {
+                $row_classes[] = 'all-day';
+            }
+
+            if ($eventinstance->isInProgress()) {
+                $row_classes[] = 'in-progress';
+            }
+
+            if ($eventinstance->isOnGoing()) {
+                $row_classes[] = 'ongoing';
+            }
         
             //Invert oddrow
             $oddrow = !$oddrow;
