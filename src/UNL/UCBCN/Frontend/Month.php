@@ -190,6 +190,6 @@ class Month extends \IteratorIterator
      */
     public function getURL()
     {
-        return $this->calendar()->getURL() . date('Y/m', $this->getDateTime()->getTimestamp()) . '/';
+        return $this->calendar->getURL() . date('Y/m', $this->getDateTime()->getTimestamp()) . '/';
     }
 }
