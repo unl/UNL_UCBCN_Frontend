@@ -86,10 +86,10 @@ if ($context->getCalendar()->id != UNL\UCBCN\Frontend\Controller::$default_calen
             
             </form>
             <ul id="frontend_view_selector">
-                <li id="todayview"><a href="<?php echo $frontend->getCalendarURL(); ?>">Today's Events</a></li>
-                <li id="monthview"><a href="<?php echo $frontend->getCalendarURL().date('Y/m'); ?>">This Month</a></li>
-                <li id="yearview"><a href="<?php echo $frontend->getCalendarURL().date('Y'); ?>">This Year</a></li>
-                <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming">Upcoming</a></li>
+                <li id="todayview"><a href="<?php echo $frontend->getCurrentDay()->getURL(); ?>">Today's Events</a></li>
+                <li id="monthview"><a href="<?php echo $frontend->getCurrentMonth()->getURL(); ?>">This Month</a></li>
+                <li id="yearview"><a href="<?php echo $frontend->getCurrentYear()->getURL(); ?>">This Year</a></li>
+                <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
             </ul>
                 <?php if (isset($context->right)) { ?>
                     <div class="col left">
