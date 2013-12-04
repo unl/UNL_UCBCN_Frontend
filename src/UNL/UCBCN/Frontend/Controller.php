@@ -124,9 +124,9 @@ class Controller
     {
         if (!empty($this->options['calendar_shortname'])) {
             // Try and get by shortname
-            $this->options['calendar'] = \UNL\UCBCN\Calendar::getByShortName($this->options['calendar_shortname']);
+            $this->options['calendar'] = Calendar::getByShortName($this->options['calendar_shortname']);
         } else {
-            $this->options['calendar'] = \UNL\UCBCN\Calendar::getByID(self::$default_calendar_id);
+            $this->options['calendar'] = Calendar::getByID(self::$default_calendar_id);
         }
 
         if (!$this->options['calendar']) {
