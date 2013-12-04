@@ -173,6 +173,11 @@ class Controller
         return $instance->getURL($this->getCalendarURL());
     }
 
+    /**
+     * Get the Day object for the current date (now)
+     * 
+     * @return Day
+     */
     public function getCurrentDay()
     {
         $datetime = new \DateTime();
@@ -185,6 +190,11 @@ class Controller
         return new Day($options);
     }
 
+    /**
+     * Get the Month object for the current date (now)
+     * 
+     * @return Month
+     */
     public function getCurrentMonth()
     {
         $datetime = new \DateTime();
@@ -196,6 +206,11 @@ class Controller
         return new Month($options);
     }
 
+    /**
+     * Get the Year object for the current date (now)
+     * 
+     * @return Year
+     */
     public function getCurrentYear()
     {
         $datetime = new \DateTime();
