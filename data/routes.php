@@ -19,15 +19,15 @@ $format   = '(\.(?P<format>[\w]+))?';
 
 $routes['/^'.$calendar.'$/']                                                        = 'UNL\UCBCN\Frontend\Day';
 $routes['/^images\/(?P<id>[\d]+)'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Image';
-$routes['/^'.$calendar.'upcoming'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Upcoming';
-$routes['/^'.$calendar.'monthwidget'.$format.'$/']                                  = 'UNL\UCBCN\Frontend\MonthWidget';
-$routes['/^'.$calendar.'fullcal'.$format.'$/']                                      = 'UNL\UCBCN\Frontend\FullCal';
-$routes['/^'.$calendar.'week'.$format.'$/']                                         = 'UNL\UCBCN\Frontend\Week';
-$routes['/^'.$calendar.'search(\/(?P<q>.+))'.$format.'$/']                          = 'UNL\UCBCN\Frontend\Search';
-$routes['/^'.$calendar.$year.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Year';
-$routes['/^'.$calendar.$year.'\/'.$month.$format.'$/']                              = 'UNL\UCBCN\Frontend\Month';
-$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.$format.'$/']                    = 'UNL\UCBCN\Frontend\Day';
-$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.'\/(?P<id>[\d]+)'.$format.'$/']  = 'UNL\UCBCN\Frontend\EventInstance';
+$routes['/^'.$calendar.'upcoming'.'\/'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Upcoming';
+$routes['/^'.$calendar.'monthwidget'.'\/'.$format.'$/']                                  = 'UNL\UCBCN\Frontend\MonthWidget';
+$routes['/^'.$calendar.'fullcal'.'\/'.$format.'$/']                                      = 'UNL\UCBCN\Frontend\FullCal';
+$routes['/^'.$calendar.'week'.'\/'.$format.'$/']                                         = 'UNL\UCBCN\Frontend\Week';
+$routes['/^'.$calendar.'search(\/(?P<q>.+))'.'\/'.$format.'$/']                          = 'UNL\UCBCN\Frontend\Search';
+$routes['/^'.$calendar.$year.'\/'.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Year';
+$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$format.'$/']                              = 'UNL\UCBCN\Frontend\Month';
+$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.'\/'.$format.'$/']                    = 'UNL\UCBCN\Frontend\Day';
+$routes['/^'.$calendar.$year.'\/'.$month.'\/'.$day.'\/(?P<id>[\d]+)'.'\/'.$format.'$/']  = 'UNL\UCBCN\Frontend\EventInstance';
 
 
 return $routes;
