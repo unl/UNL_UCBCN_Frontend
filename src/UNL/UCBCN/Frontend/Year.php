@@ -61,11 +61,13 @@ class Year
      */
     public function __construct($options = array())
     {
-        $this->options = $options + $this->options;
-        
-        if (isset($options['calendar'])) {
-            $this->calendar = $options['calendar'];
+        if (!isset($options['calendar'])) {
+            throw new Exception('A calendar must be set', 500);
         }
+
+        $this->calendar = $options['calendar'];
+        
+        $this->options = $options + $this->options;
 
         $this->year = $this->options['y'];
 
@@ -77,11 +79,7 @@ class Year
     
     public function getURL()
     {
-        $url = Controller::$url;
-        if (isset($this->calendar)) {
-            $url .= $this->calendar->shortname . '/';
-        }
-        return $url . date('Y', $this->getDateTime()->getTimestamp());
+        return $this->calendar->getURL() . date('Y', $this->getDateTime()->getTimestamp()) . '/';
     }
 
 

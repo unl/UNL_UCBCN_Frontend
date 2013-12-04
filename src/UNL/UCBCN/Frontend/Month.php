@@ -31,7 +31,7 @@ class Month extends \IteratorIterator
     /**
      * Calendar to show events for UNL_UCBCN_Month object
      *
-     * @var \UNL\UCBCN\Calendar 
+     * @var \UNL\UCBCN\Frontend\Calendar 
      */
     public $calendar;
 
@@ -54,9 +54,11 @@ class Month extends \IteratorIterator
      */
     public function __construct($options)
     {
-        if (isset($options['calendar'])) {
-            $this->calendar = $options['calendar'];
+        if (!isset($options['calendar'])) {
+            throw new Exception('A calendar must be set', 500);
         }
+
+        $this->calendar = $options['calendar'];
 
         // Set defaults
         $this->options['m'] = date('m');
@@ -188,11 +190,6 @@ class Month extends \IteratorIterator
      */
     public function getURL()
     {
-        $url = Controller::$url;
-        if (isset($this->calendar)) {
-            $url .= $this->calendar->shortname . '/';
-        }
-
-        return $url . date('Y/m', $this->getDateTime()->getTimestamp());
+        return $this->calendar()->getURL() . date('Y/m', $this->getDateTime()->getTimestamp()) . '/';
     }
 }
