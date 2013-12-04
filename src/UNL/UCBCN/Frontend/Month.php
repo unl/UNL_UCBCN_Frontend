@@ -180,4 +180,19 @@ class Month extends \IteratorIterator
     {
         return new Year($this->options);
     }
+
+    /**
+     * Returns the permalink URL to this specific month.
+     *
+     * @return string URL to this day.
+     */
+    public function getURL()
+    {
+        $url = Controller::$url;
+        if (isset($this->calendar)) {
+            $url .= $this->calendar->shortname . '/';
+        }
+
+        return $url . date('Y/m', $this->getDateTime()->getTimestamp());
+    }
 }
