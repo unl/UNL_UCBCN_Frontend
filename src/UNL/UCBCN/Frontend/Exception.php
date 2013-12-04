@@ -1,6 +1,6 @@
 <?php
 namespace UNL\UCBCN\Frontend;
 
-interface Exception
+class Exception extends \Exception
 {
 }
