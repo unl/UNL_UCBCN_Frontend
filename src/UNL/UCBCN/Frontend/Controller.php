@@ -173,6 +173,39 @@ class Controller
         return $instance->getURL($this->getCalendarURL());
     }
 
+    public function getCurrentDay()
+    {
+        $datetime = new \DateTime();
+        
+        $options = $this->options;
+        $options['d'] = $datetime->format('d');
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+
+        return new Day($options);
+    }
+
+    public function getCurrentMonth()
+    {
+        $datetime = new \DateTime();
+
+        $options = $this->options;
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+
+        return new Month($options);
+    }
+
+    public function getCurrentYear()
+    {
+        $datetime = new \DateTime();
+
+        $options = $this->options;
+        $options['y'] = $datetime->format('Y');
+
+        return new Year($options);
+    }
+
     /**
      * Gets the specified event instance.
      *
