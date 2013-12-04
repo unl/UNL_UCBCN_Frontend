@@ -9,31 +9,44 @@
 <?php
 $oddrow = false;
 foreach ($context as $eventinstance) {
-    
+    //Convert the times to something we can use.
     $startu = strtotime($eventinstance->eventdatetime->starttime);
     $endu = strtotime($eventinstance->eventdatetime->endtime);
-    
-    $row = '<tr class="vevent';
+
+    //Start building an array of row classes
+    $row_classes = array('vevent');
+
     if ($oddrow) {
-        $row .= ' alt';
+        //Add an alt class to odd rows
+        $row_classes[] = 'alt';
     }
-    $row .= '">';
+
+    //Invert oddrow
     $oddrow = !$oddrow;
-    $row .=    '<td class="date">';
+    
+    $row = '<tr class="' . implode(' ', $row_classes) . '">';
+    
+    $row .= '<td class="date">';
+    
+    //get the start time
     if (isset($eventinstance->eventdatetime->starttime)) {
-        if (strpos($eventinstance->eventdatetime->starttime,'00:00:00')) {
-            $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">All day</abbr>';
+        $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">';
+        if ($eventinstance->isAllDay()) {
+            $row .= 'All day';
         } else {
-            $row .= '<abbr class="dtstart" title="'.date('c', $startu).'">'.date('g:i a', $startu).'</abbr>';
+            $row .= date('g:i a', $startu);
         }
+        $row .= '</abbr>';
     } else {
         $row .= 'Unknown';
     }
+    
+    //get the end time
     if (isset($eventinstance->eventdatetime->endtime) &&
         ($eventinstance->eventdatetime->endtime != $eventinstance->eventdatetime->starttime) &&
         ($eventinstance->eventdatetime->endtime > $eventinstance->eventdatetime->starttime)) {
-        if (substr($eventinstance->eventdatetime->endtime,0,10) != substr($eventinstance->eventdatetime->starttime,0,10)) {
-            // Not on the same day
+        
+        if ($eventinstance->isOngoing()) {
             if (strpos($eventinstance->eventdatetime->endtime,'00:00:00')) {
                 $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('M jS', $endu).'</abbr>';
             } else {
@@ -43,6 +56,7 @@ foreach ($context as $eventinstance) {
             $row .= '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
         }
     }
+    
     $row .= '</td>' .
             '<td><a class="url summary" href="'.$frontend->getEventURL($eventinstance->getRawObject()).'">'.$savvy->dbStringtoHtml($eventinstance->event->title).'</a>';
     if (isset($eventinstance->eventdatetime->location_id) && $eventinstance->eventdatetime->location_id) {
@@ -56,15 +70,13 @@ foreach ($context as $eventinstance) {
         $row .= '</span>';
     }
     $row .=    '<blockquote class="description">'.$savvy->dbStringtoHtml($eventinstance->event->description).'</blockquote>';
-//     $facebook = new \UNL\UCBCN\Facebook\Instance($occurrence->id);
-//     $row .= $facebook->like($occurrence->getURL(), $parent->context->getCalendar()->id);
+
     $row .= '</td></tr>';
     
     echo $row;
 }
 
  ?>
-
 </tbody>
 </table>
 
