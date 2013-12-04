@@ -50,6 +50,10 @@ class Year
      */
     public $calendar;
     
+    public $options = array(
+        'y' => null
+    );
+    
     /**
      * Constructor for a year calendar.
      *
@@ -57,15 +61,39 @@ class Year
      */
     public function __construct($options = array())
     {
+        $this->options = $options + $this->options;
+        
         if (isset($options['calendar'])) {
             $this->calendar = $options['calendar'];
         }
 
-        $this->year = $options['y'];
+        $this->year = $this->options['y'];
 
         for ($m=1;$m<=12;$m++) {
             $options['m'] = $m;
-            $this->monthwidgets[] = new MonthWidget($options);
+            $this->monthwidgets[] = new MonthWidget($this->options);
         }
+    }
+    
+    public function getURL()
+    {
+        $url = Controller::$url;
+        if (isset($this->calendar)) {
+            $url .= $this->calendar->shortname . '/';
+        }
+        return $url . date('Y', $this->getDateTime()->getTimestamp());
+    }
+
+
+    /**
+     * Get the date for this month
+     *
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return new \DateTime(
+            $this->options['y'].'-01-01'
+        );
     }
 }
