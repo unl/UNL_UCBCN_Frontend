@@ -1,5 +1,7 @@
-<div class="calendar"></div>
-<div class="day_cal">
+<div class="calendar col left">
+    <?php echo $savvy->render($context->getMonthWidget()); ?>
+</div>
+<div class="day_cal three_col right">
     <h4 class="sec_main">
     <?php
     $day = $context->getDateTime();
