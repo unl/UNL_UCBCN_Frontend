@@ -29,11 +29,11 @@ class EventInstance
     function __construct($options = array())
     {
         if (!isset($options['id'])) {
-            throw new Exception('No event specified', 404);
+            throw new InvalidArgumentException('No event specified', 404);
         }
         
         if (!isset($options['calendar'])) {
-            throw new Exception('A calendar must be set', 500);
+            throw new InvalidArgumentException('A calendar must be set', 500);
         }
         
         $this->calendar = $options['calendar'];
@@ -41,7 +41,7 @@ class EventInstance
         $this->eventdatetime = Occurrence::getById($options['id']);
 
         if (false === $this->eventdatetime) {
-            throw new Exception('No event with that id exists', 404);
+            throw new UnexpectedValueException('No event with that id exists', 404);
         }
 
         $this->event = $this->eventdatetime->getEvent();

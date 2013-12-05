@@ -20,7 +20,7 @@ class EventListing extends RecordList
     public function __construct($options)
     {
         if (!isset($options['calendar'])) {
-            throw new Exception('A calendar must be set', 500);
+            throw new InvalidArgumentException('A calendar must be set', 500);
         }
 
         $this->calendar = $options['calendar'];
