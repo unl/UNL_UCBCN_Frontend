@@ -31,7 +31,7 @@ class Month extends \IteratorIterator
     /**
      * Calendar to show events for UNL_UCBCN_Month object
      *
-     * @var \UNL\UCBCN\Calendar 
+     * @var \UNL\UCBCN\Frontend\Calendar 
      */
     public $calendar;
 
@@ -54,9 +54,11 @@ class Month extends \IteratorIterator
      */
     public function __construct($options)
     {
-        if (isset($options['calendar'])) {
-            $this->calendar = $options['calendar'];
+        if (!isset($options['calendar'])) {
+            throw new InvalidArgumentException('A calendar must be set', 500);
         }
+
+        $this->calendar = $options['calendar'];
 
         // Set defaults
         $this->options['m'] = date('m');
@@ -130,5 +132,64 @@ class Month extends \IteratorIterator
                 ) + $this->options;
 
         return new Day($options);
+    }
+
+    /**
+     * Get a relative month
+     * 
+     * @param $string - +1, -1, etc
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getRelativeMonth($string)
+    {
+        $datetime = $this->getDateTime()->modify($string . ' month');
+
+        $options = $this->options;
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+
+        $class = get_called_class();
+
+        return new $class($options);
+    }
+
+    /**
+     * Get the previous month object
+     *
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getPreviousMonth()
+    {
+        return $this->getRelativeMonth('-1');
+    }
+
+    /**
+     * Get the next month object
+     *
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getNextMonth()
+    {
+        return $this->getRelativeMonth('+1');
+    }
+
+    /**
+     * Get the year for this month
+     * 
+     * @return \UNL\UCBCN\Frontend\Year Year
+     */
+    public function getYear()
+    {
+        return new Year($this->options);
+    }
+
+    /**
+     * Returns the permalink URL to this specific month.
+     *
+     * @return string URL to this day.
+     */
+    public function getURL()
+    {
+        return $this->calendar->getURL() . date('Y/m', $this->getDateTime()->getTimestamp()) . '/';
     }
 }

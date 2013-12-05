@@ -19,16 +19,29 @@ class EventInstance
      */
     public $event;
 
+    /**
+     * Calendar \UNL\UCBCN\Frontend\Calendar Object
+     *
+     * @var \UNL\UCBCN\Frontend\Calendar
+     */
+    public $calendar;
+
     function __construct($options = array())
     {
         if (!isset($options['id'])) {
-            throw new Exception('No event specified', 404);
+            throw new InvalidArgumentException('No event specified', 404);
         }
+        
+        if (!isset($options['calendar'])) {
+            throw new InvalidArgumentException('A calendar must be set', 500);
+        }
+        
+        $this->calendar = $options['calendar'];
         
         $this->eventdatetime = Occurrence::getById($options['id']);
 
         if (false === $this->eventdatetime) {
-            throw new Exception('No event with that id exists', 404);
+            throw new UnexpectedValueException('No event with that id exists', 404);
         }
 
         $this->event = $this->eventdatetime->getEvent();
@@ -47,13 +60,11 @@ class EventInstance
     }
 
     /**
-     * @param $baseURL - The baseurl of the current calendar
-     *
      * @return string - The absolute url for the event instance
      */
-    public function getURL($baseURL)
+    public function getURL()
     {
-        return $baseURL . date('Y/m/d/', strtotime($this->eventdatetime->starttime)) . $this->eventdatetime->id;
+        return $this->calendar->getURL() . date('Y/m/d/', strtotime($this->eventdatetime->starttime)) . $this->eventdatetime->id . '/';
     }
 
     /**

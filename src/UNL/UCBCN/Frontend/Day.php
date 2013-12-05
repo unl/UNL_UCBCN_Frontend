@@ -2,7 +2,6 @@
 namespace UNL\UCBCN\Frontend;
 
 use UNL\UCBCN\RuntimeException;
-use UNL\UCBCN\Calendar;
 
 /**
  * This class contains the information needed for viewing a single day view calendar.
@@ -31,23 +30,12 @@ use UNL\UCBCN\Calendar;
 class Day extends EventListing
 {
     /**
-     * Calendar \UNL\UCBCN\Calendar Object
-     * 
-     * @var \UNL\UCBCN\Calendar
-     */
-    public $calendar;
-
-    /**
      * Constructor for an individual day.
      * 
      * @param array $options Associative array of options to apply.
      */
     public function __construct($options)
     {
-        if (isset($options['calendar'])) {
-            $this->calendar = $options['calendar'];
-        }
-
         // Set defaults
         $this->options['m'] = date('m');
         $this->options['d'] = date('d');
@@ -97,11 +85,7 @@ class Day extends EventListing
      */
     public function getURL()
     {
-        $url = Controller::$url;
-        if (isset($this->calendar)) {
-            $url .= $this->calendar->shortname . '/';
-        }
-        return $url . date('Y/m/d', $this->getDateTime()->getTimestamp());
+        return $this->calendar->getURL() . date('Y/m/d', $this->getDateTime()->getTimestamp()) . '/';
     }
     
 }

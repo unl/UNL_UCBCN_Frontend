@@ -124,9 +124,9 @@ class Controller
     {
         if (!empty($this->options['calendar_shortname'])) {
             // Try and get by shortname
-            $this->options['calendar'] = \UNL\UCBCN\Calendar::getByShortName($this->options['calendar_shortname']);
+            $this->options['calendar'] = Calendar::getByShortName($this->options['calendar_shortname']);
         } else {
-            $this->options['calendar'] = \UNL\UCBCN\Calendar::getByID(self::$default_calendar_id);
+            $this->options['calendar'] = Calendar::getByID(self::$default_calendar_id);
         }
 
         if (!$this->options['calendar']) {
@@ -171,6 +171,54 @@ class Controller
     public function getEventURL(\UNL\UCBCN\Frontend\EventInstance $instance)
     {
         return $instance->getURL($this->getCalendarURL());
+    }
+
+    /**
+     * Get the Day object for the current date (now)
+     * 
+     * @return Day
+     */
+    public function getCurrentDay()
+    {
+        $datetime = new \DateTime();
+        
+        $options = $this->options;
+        $options['d'] = $datetime->format('d');
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+
+        return new Day($options);
+    }
+
+    /**
+     * Get the Month object for the current date (now)
+     * 
+     * @return Month
+     */
+    public function getCurrentMonth()
+    {
+        $datetime = new \DateTime();
+
+        $options = $this->options;
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+
+        return new Month($options);
+    }
+
+    /**
+     * Get the Year object for the current date (now)
+     * 
+     * @return Year
+     */
+    public function getCurrentYear()
+    {
+        $datetime = new \DateTime();
+
+        $options = $this->options;
+        $options['y'] = $datetime->format('Y');
+
+        return new Year($options);
     }
 
     /**

@@ -50,6 +50,10 @@ class Year
      */
     public $calendar;
     
+    public $options = array(
+        'y' => null
+    );
+    
     /**
      * Constructor for a year calendar.
      *
@@ -57,15 +61,37 @@ class Year
      */
     public function __construct($options = array())
     {
-        if (isset($options['calendar'])) {
-            $this->calendar = $options['calendar'];
+        if (!isset($options['calendar'])) {
+            throw new InvalidArgumentException('A calendar must be set', 500);
         }
 
-        $this->year = $options['y'];
+        $this->calendar = $options['calendar'];
+        
+        $this->options = $options + $this->options;
+
+        $this->year = $this->options['y'];
 
         for ($m=1;$m<=12;$m++) {
             $options['m'] = $m;
-            $this->monthwidgets[] = new MonthWidget($options);
+            $this->monthwidgets[] = new MonthWidget($this->options);
         }
+    }
+    
+    public function getURL()
+    {
+        return $this->calendar->getURL() . date('Y', $this->getDateTime()->getTimestamp()) . '/';
+    }
+
+
+    /**
+     * Get the date for this month
+     *
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return new \DateTime(
+            $this->options['y'].'-01-01'
+        );
     }
 }

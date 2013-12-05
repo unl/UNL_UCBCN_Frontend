@@ -68,7 +68,7 @@ class OutputController extends \Savvy
             case 'partial':
             case 'hcalendar':
                 $this->sendCORSHeaders();
-                \Savvy_ClassToTemplateMapper::$output_template[__NAMESPACE__ . '\Controller'] = 'Frontend/Controller-partial';
+                \Savvy_ClassToTemplateMapper::$output_template[__NAMESPACE__ . '\Controller'] = 'Controller-partial';
                 // intentional no-break
 
             case 'html':
