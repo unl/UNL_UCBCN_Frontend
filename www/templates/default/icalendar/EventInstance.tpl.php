@@ -13,7 +13,7 @@ if (isset($context->eventdatetime->starttime)) {
     if (strpos($context->eventdatetime->starttime,'00:00:00')) {
         $out[] = 'DTSTART;VALUE=DATE:'.date('Ymd', $startu);
     } else {
-           $out[] = 'DTSTART;TZID=US/Central:'.date('Ymd\THis', $startu);
+           $out[] = 'DTSTART;TZID=America/Chicago:'.date('Ymd\THis', $startu);
     }
 }
 $out[] = 'UID:'.$context->eventdatetime->id.'@'.$_SERVER['SERVER_NAME'];
@@ -34,7 +34,7 @@ if (isset($context->eventdatetime->endtime)
     if (strpos($context->eventdatetime->endtime,'00:00:00')) {
         $out[] = 'DTEND;VALUE=DATE:'.date('Ymd', $endu);
     } else {
-           $out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $endu);
+           $out[] = 'DTEND;TZID=America/Chicago:'.date('Ymd\THis', $endu);
     }
 } elseif (isset($context->eventdatetime->starttime)) {
     if (strpos($context->eventdatetime->starttime,'00:00:00')) {
@@ -42,7 +42,7 @@ if (isset($context->eventdatetime->endtime)
         $out[] = 'DTEND;VALUE=DATE:'.date('Ymd', $startu + 86400);
     } else {
         // Event with unknown end-time
-        $out[] = 'DTEND;TZID=US/Central:'.date('Ymd\THis', $startu);
+        $out[] = 'DTEND;TZID=America/Chicago:'.date('Ymd\THis', $startu);
     }
 }
 $out[] = 'END:VEVENT';
