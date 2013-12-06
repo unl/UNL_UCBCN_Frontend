@@ -86,8 +86,13 @@ class Controller
      */
     public function __construct($options = array())
     {
+        //Legacy mothwidget route : ?&monthwidget&format=hcalendar
+        if (isset($options['monthwidget'])) {
+            $options['model'] = 'UNL\\UCBCN\\Frontend\\MonthWidget';
+        }
+        
         $this->options = $options + $this->options;
-
+        
         try {
             $this->run();
         } catch (\Exception $e) {

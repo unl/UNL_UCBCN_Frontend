@@ -88,4 +88,8 @@ class Day extends EventListing
         return $this->calendar->getURL() . date('Y/m/d', $this->getDateTime()->getTimestamp()) . '/';
     }
     
+    public function getMonthWidget()
+    {
+        return new MonthWidget($this->options);
+    }
 }

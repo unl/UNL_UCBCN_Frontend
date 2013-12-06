@@ -81,7 +81,7 @@ class OutputController extends \Savvy
                 $this->addFilters(array(new OutputController\PostRunFilter\HTML($options), 'postRun'));
                 break;
             default:
-                throw new Exception('Invalid/unsupported output format', 500);
+                throw new UnexpectedValueException('Invalid/unsupported output format', 500);
         }
     }
 
