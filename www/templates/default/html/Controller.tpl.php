@@ -45,7 +45,7 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>
-<body class="" data-version="4.0">
+<body class="terminal" data-version="4.0">
 <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/skipnav.html'; ?>
 <div id="wdn_wrapper">
     <input type="checkbox" id="wdn_menu_toggle" value="Show navigation menu" class="wdn-content-slide wdn-input-driver" />
