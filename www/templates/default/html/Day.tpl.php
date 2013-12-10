@@ -1,4 +1,4 @@
-<div class="wdn-grid-set">
+<div id="updatecontent" class="wdn-grid-set">
     <section class="bp1-wdn-col-one-third">
         <div class="calendar">
             <?php echo $savvy->render($context->getMonthWidget()); ?>
@@ -12,8 +12,8 @@
             ?> <a class="permalink" href="<?php echo $context->getURL(); ?>">(link)</a>
         </h4>
         <p id="day_nav">
-            <a class="url prev" href="<?php echo $frontend->getCalendarURL().date('Y/m/d', $day->getTimeStamp()-86400) ?>">Previous Day</a>
-            <a class="url next" href="<?php echo $frontend->getCalendarURL().date('Y/m/d', $day->getTimeStamp()+86400) ?>">Next Day</a>
+            <a class="url prev" href="<?php echo $context->getPreviousDay()->getURL(); ?>">Previous Day</a>
+            <a class="url next" href="<?php echo $context->getNextDay()->getURL(); ?>">Next Day</a>
         </p>
         <?php
         echo $savvy->render($context, 'EventListing.tpl.php');
