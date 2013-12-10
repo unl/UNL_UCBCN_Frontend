@@ -256,9 +256,9 @@ function todayHilite(){
 		var verify = getElementsByClassName(td0[0], "span", "monthvalue");
 		//if in day view (only), execute....
 		var idSelector = document.getElementById('frontend_view_selector');
-		if (idSelector.className == 'day' || idSelector.className == 'event' || idSelector.className == 'upcoming'){
+		if (idSelector.className == 'unl_ucbcn_frontend_day' || idSelector.className == 'unl_ucbcn_frontend_eventinstance' || idSelector.className == 'unl_ucbcn_frontend_upcoming'){
 			createButton('Return to today', document.getElementById('monthwidget'), returnToday, 'returnToday');
-			if(idSelector.className == 'day'){
+			if(idSelector.className == 'unl_ucbcn_frontend_day'){
 				monthNav(); 
 			}
 			eventLink();

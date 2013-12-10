@@ -124,7 +124,10 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
                         </p>
 
                     </form>
-                    <ul id="frontend_view_selector">
+                    <?php
+                    $class = str_replace('\\', '_', strtolower($context->options['model']));
+                    ?>
+                    <ul id="frontend_view_selector" class="<?php echo $class; ?>">
                         <li id="todayview"><a href="<?php echo $frontend->getCurrentDay()->getURL(); ?>">Today's Events</a></li>
                         <li id="monthview"><a href="<?php echo $frontend->getCurrentMonth()->getURL(); ?>">This Month</a></li>
                         <li id="yearview"><a href="<?php echo $frontend->getCurrentYear()->getURL(); ?>">This Year</a></li>
