@@ -1,6 +1,6 @@
 <div class="wdn-grid-set">
     <section class="bp1-wdn-col-one-third">
-        <div class="calendar col left">
+        <div class="calendar">
             <?php echo $savvy->render($context->getMonthWidget()); ?>
         </div>
     </section>
