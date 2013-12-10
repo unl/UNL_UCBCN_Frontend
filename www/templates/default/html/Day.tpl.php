@@ -4,7 +4,7 @@
             <?php echo $savvy->render($context->getMonthWidget()); ?>
         </div>
     </section>
-    <section class="bp1-wdn-col-two-thirds">
+    <section class="day_cal bp1-wdn-col-two-thirds">
         <h4 class="sec_main">
             <?php
             $day = $context->getDateTime();
