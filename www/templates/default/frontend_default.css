@@ -141,7 +141,7 @@ table.ongoing{margin:5px 0 0 0;}
 /*caption nav*/
 table.wp-calendar caption span{display:block;height:31px;background:url(images/monthviewnav_mid.gif) repeat-x 0 0;float:left;}
 table.wp-calendar caption span.monthvalue, table.wp-calendar caption span.yearvalue{
-margin-top:0;padding:8px 3px 0;}
+margin-top:0;padding:0 3px 0; line-height: 1.5em;  font-size:.75em;}
 #maincontent table.wp-calendar caption a{margin-bottom:5px;color:#fff;}
 #maincontent table.wp-calendar caption a:hover{color:#fff !important;}
 table.wp-calendar caption a#prev_month, table.wp-calendar caption a#next_month{text-indent:-9999em;
