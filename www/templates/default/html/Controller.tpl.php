@@ -1,56 +1,78 @@
 <?php
 if (!isset($GLOBALS['unl_template_dependents'])) {
-	$GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
+    $GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><!-- InstanceBegin template="/Templates/php.fixed.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="ie iem7"><![endif]-->
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7) ]><html class="ie" lang="en"><![endif]-->
+<!--[if !(IEMobile) | !(IE)]><!--><html lang="en"><!-- InstanceBegin template="/Templates/fixed.dwt" codeOutsideHTMLIsLocked="false" --><!--<![endif]-->
 <head>
-<!--
-    Membership and regular participation in the UNL Web Developer Network
-    is required to use the UNL templates. Visit the WDN site at 
-    http://wdn.unl.edu/. Click the WDN Registry link to log in and
-    register your unl.edu site.
-    All UNL template code is the property of the UNL Web Developer Network.
-    The code seen in a source code view is not, and may not be used as, a 
-    template. You may not use this code, a reverse-engineered version of 
-    this code, or its associated visual presentation in whole or in part to
-    create a derivative work.
-    This message may not be removed from any pages based on the UNL site template.
-    
-    $Id: php.fixed.dwt.php 536 2009-07-23 15:47:30Z bbieber2 $
--->
-<link rel="stylesheet" type="text/css" media="screen" href="/wdn/templates_3.0/css/all.css" />
-<link rel="stylesheet" type="text/css" media="print" href="/wdn/templates_3.0/css/print.css" />
-<script type="text/javascript" src="/wdn/templates_3.0/scripts/all.js"></script>
-<?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/browserspecifics.html'; ?>
-<?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/metanfavico.html'; ?>
-<!-- InstanceBeginEditable name="doctitle" -->
-<title>UNL <?php
-if ($context->getCalendar()->id != UNL\UCBCN\Frontend\Controller::$default_calendar_id) {
-    echo '| '.$context->getCalendar()->name.' ';
-}
-?>| Events</title>
-<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/frontend_main.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/facebook.css" />
-<script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/ajaxCaller.js"></script>
-<script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/frontend.js"></script>
-<link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
-<link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search" />
-<!-- InstanceEndEditable -->
+    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/metanfavico.html'; ?>
+    <!--
+        Membership and regular participation in the UNL Web Developer Network
+        is required to use the UNL templates. Visit the WDN site at 
+        http://wdn.unl.edu/. Click the WDN Registry link to log in and
+        register your unl.edu site.
+        All UNL template code is the property of the UNL Web Developer Network.
+        The code seen in a source code view is not, and may not be used as, a 
+        template. You may not use this code, a reverse-engineered version of 
+        this code, or its associated visual presentation in whole or in part to
+        create a derivative work.
+        This message may not be removed from any pages based on the UNL site template.
+        
+        $Id: fixed.dwt | 252c2891a48c70db689be6d897d4f34768b8258a | Thu Aug 1 15:08:19 2013 -0500 | Kevin Abel  $
+    -->
+    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/scriptsandstyles.html'; ?>
+    <!-- InstanceBeginEditable name="doctitle" -->
+    <title>UNL <?php
+        if ($context->getCalendar()->id != UNL\UCBCN\Frontend\Controller::$default_calendar_id) {
+            echo '| '.$context->getCalendar()->name.' ';
+        }
+        ?>| Events</title>
+    <!-- InstanceEndEditable -->
+    <!-- InstanceBeginEditable name="head" -->
+    <!-- Place optional header elements here -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/frontend_main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/facebook.css" />
+    <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/ajaxCaller.js"></script>
+    <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/frontend.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
+    <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search" />
+    <!-- InstanceEndEditable -->
+    <!-- InstanceParam name="class" type="text" value="" -->
 </head>
-<body class="fixed events">
-
-<p class="skipnav"> <a class="skipnav" href="#maincontent">Skip Navigation</a> </p>
+<body class="terminal" data-version="4.0">
+<?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/skipnav.html'; ?>
 <div id="wdn_wrapper">
-    <div id="header"> <a href="http://www.unl.edu/" title="UNL website"><img src="/wdn/templates_3.0/images/logo.png" alt="UNL graphic identifier" id="logo" /></a>
-        <h1>University of Nebraska&ndash;Lincoln</h1>
-        <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/wdnTools.html'; ?>
-    </div>
-    <div id="wdn_navigation_bar">
-        <div id="breadcrumbs">
+    <input type="checkbox" id="wdn_menu_toggle" value="Show navigation menu" class="wdn-content-slide wdn-input-driver" />
+    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/noscript-padding.html'; ?>
+    <header id="header" role="banner" class="wdn-content-slide wdn-band">
+        <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/wdnResources.html'; ?>
+        <div class="wdn-inner-wrapper">
+            <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/logo.html'; ?>
+            <div id="wdn_resources">
+                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/idm.html'; ?>
+                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/wdnTools.html'; ?>
+            </div>
+            <span id="wdn_institution_title">University of Nebraska&ndash;Lincoln</span>
+        </div>
+        <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/apps.html'; ?>
+        <div class="wdn-inner-wrapper">
+            <div id="wdn_site_title">
+                    <span><!-- InstanceBeginEditable name="titlegraphic" -->
+                        <?php echo $context->getCalendar()->name; ?> Events
+                        <!-- InstanceEndEditable --></span>
+            </div>
+        </div>
+    </header>
+    <div id="wdn_navigation_bar" role="navigation" class="wdn-band">
+        <nav id="breadcrumbs" class="wdn-inner-wrapper">
             <!-- WDN: see glossary item 'breadcrumbs' -->
+            <h3 class="wdn_list_descriptor wdn-text-hidden">Breadcrumbs</h3>
             <!-- InstanceBeginEditable name="breadcrumbs" -->
             <ul>
                 <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
@@ -61,100 +83,133 @@ if ($context->getCalendar()->id != UNL\UCBCN\Frontend\Controller::$default_calen
                 ?>
                 <li>Events</li>
             </ul>
-            <!-- InstanceEndEditable --></div>
+            <!-- InstanceEndEditable -->
+        </nav>
         <div id="wdn_navigation_wrapper">
-            <div id="navigation"><!-- InstanceBeginEditable name="navlinks" -->
-                <!-- InstanceEndEditable --></div>
+            <nav id="navigation" role="navigation" class="wdn-band">
+                <h3 class="wdn_list_descriptor wdn-text-hidden">Navigation</h3>
+                <!-- InstanceBeginEditable name="navlinks" -->
+                <!-- no nav for now -->
+                <!-- InstanceEndEditable -->
+                <label for="wdn_menu_toggle" class="wdn-icon-menu">Menu</label>
+            </nav>
         </div>
     </div>
-    <div id="wdn_content_wrapper">
-        <div id="titlegraphic"><!-- InstanceBeginEditable name="titlegraphic" -->
-            <h1><?php echo $context->getCalendar()->name; ?> Events</h1>
-            <!-- InstanceEndEditable --></div>
-        <div id="pagetitle"><!-- InstanceBeginEditable name="pagetitle" --> <!-- InstanceEndEditable --></div>
-        <div id="maincontent">
+    <!-- Navigation Trigger -->
+    <div class="wdn-menu-trigger wdn-content-slide">
+        <label for="wdn_menu_toggle" class="wdn-icon-menu">Menu</label>
+    </div>
+    <!-- End navigation trigger -->
+    <div id="wdn_content_wrapper" role="main" class="wdn-content-slide">
+        <div class="wdn-band">
+            <div class="wdn-inner-wrapper">
+                <div id="pagetitle">
+                    <!-- InstanceBeginEditable name="pagetitle" -->
+                    <!-- InstanceEndEditable -->
+                </div>
+            </div>
+        </div>
+        <div id="maincontent" class="wdn-main">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->
-            <div id="load"></div>
-            <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
-                <input type='text' name='q' id='searchinput' alt='Search for events' value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
-                <input type='submit' name='submit' value="Search" />
-                <input type='hidden' name='search' value='search' />
-            <p id="search_term">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
-            <a href="#" title="close search tip">(close message)</a>
-            </p>
-            
-            </form>
-            <ul id="frontend_view_selector">
-                <li id="todayview"><a href="<?php echo $frontend->getCurrentDay()->getURL(); ?>">Today's Events</a></li>
-                <li id="monthview"><a href="<?php echo $frontend->getCurrentMonth()->getURL(); ?>">This Month</a></li>
-                <li id="yearview"><a href="<?php echo $frontend->getCurrentYear()->getURL(); ?>">This Year</a></li>
-                <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
-            </ul>
-                <?php if (isset($context->right)) { ?>
-                    <div class="col left">
-                        <div id="monthwidget"><?php echo $savvy->render($context->right); ?></div>
-                        <div class="cal_widget">
-                        <h3>Contribute/Learn More</h3>
-                        <ul>
-                        <li id="login_list"><a id="frontend_login" href="<?php echo $context->manageruri; ?>">Submit an Event</a> </li>
-                        <li><a href="http://www1.unl.edu/wdn/wiki/UNL_Calendar_Documentation">Learn More</a></li>
-                        <li><a href="http://www1.unl.edu/comments/">Provide Feedback</a> </li>
-                        </ul></div>
-                        
-                            
-      <div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
-        <span>Subscribe to this calendar</span> 
-        <ul id="droplist">
-          <li id="eventrss"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->getCalendar()->id,'upcoming'=>'upcoming','format'=>'rss')); ?>&amp;limit=100" title="RSS feed">RSS feed</a></li>
-          <li id="eventical"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->getCalendar()->id,'upcoming'=>'upcoming','format'=>'ics')); ?>&amp;limit=100" title=".ical format">.ical format</a></li>
-          </ul>
-      </div>
-                    
-                    </div>
-                    <div id="updatecontent" class="three_col right">
-                    <?php echo $savvy->render($context->output); ?>
-                    </div>
-                    
-                <?php } else {
-                    echo $savvy->render($context->output);
-                } ?>
+            <div class="wdn-band">
+                <div class="wdn-inner-wrapper">
+                    <div id="load"></div>
+                    <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
+                        <input type='text' name='q' id='searchinput' alt='Search for events' value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+                        <input type='submit' name='submit' value="Search" />
+                        <input type='hidden' name='search' value='search' />
+                        <p id="search_term">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
+                            <a href="#" title="close search tip">(close message)</a>
+                        </p>
+
+                    </form>
+                    <ul id="frontend_view_selector">
+                        <li id="todayview"><a href="<?php echo $frontend->getCurrentDay()->getURL(); ?>">Today's Events</a></li>
+                        <li id="monthview"><a href="<?php echo $frontend->getCurrentMonth()->getURL(); ?>">This Month</a></li>
+                        <li id="yearview"><a href="<?php echo $frontend->getCurrentYear()->getURL(); ?>">This Year</a></li>
+                        <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
+                    </ul>
+                    <?php if (isset($context->right)) { ?>
+                        <div class="col left">
+                            <div id="monthwidget"><?php echo $savvy->render($context->right); ?></div>
+                            <div class="cal_widget">
+                                <h3>Contribute/Learn More</h3>
+                                <ul>
+                                    <li id="login_list"><a id="frontend_login" href="<?php echo $context->manageruri; ?>">Submit an Event</a> </li>
+                                    <li><a href="http://www1.unl.edu/wdn/wiki/UNL_Calendar_Documentation">Learn More</a></li>
+                                    <li><a href="http://www1.unl.edu/comments/">Provide Feedback</a> </li>
+                                </ul></div>
+
+
+                            <div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
+                                <span>Subscribe to this calendar</span>
+                                <ul id="droplist">
+                                    <li id="eventrss"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->getCalendar()->id,'upcoming'=>'upcoming','format'=>'rss')); ?>&amp;limit=100" title="RSS feed">RSS feed</a></li>
+                                    <li id="eventical"><a href="<?php echo $frontend->formatURL(array('calendar'=>$context->getCalendar()->id,'upcoming'=>'upcoming','format'=>'ics')); ?>&amp;limit=100" title=".ical format">.ical format</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div id="updatecontent" class="three_col right">
+                            <?php echo $savvy->render($context->output); ?>
+                        </div>
+
+                    <?php } else {
+                        echo $savvy->render($context->output);
+                    } ?>
+                </div>
+            </div>
             <!-- InstanceEndEditable -->
-            <div class="clear"></div>
-            <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/noscript.html'; ?>
             <!--THIS IS THE END OF THE MAIN CONTENT AREA.-->
         </div>
-        <div id="footer">
-            <div id="footer_floater"></div>
-            <div class="footer_col">
-                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/feedback.html'; ?>
-            </div>
-            <div class="footer_col"><!-- InstanceBeginEditable name="leftcollinks" -->
+    </div>
+    <div class="wdn-band wdn-content-slide" id="wdn_optional_footer">
+        <div class="wdn-inner-wrapper">
+            <!-- InstanceBeginEditable name="optionalfooter" -->
+            <!-- InstanceEndEditable -->
+        </div>
+    </div>
+    <footer id="footer" role="contentinfo" class="wdn-content-slide">
+        <div class="wdn-band" id="wdn_footer_related">
+            <div class="wdn-inner-wrapper">
+                <!-- InstanceBeginEditable name="leftcollinks" -->
                 <h3>Related Links</h3>
                 <ul>
                     <li><a href="http://code.google.com/p/unl-event-publisher/">UNL Event Publisher</a></li>
                 </ul>
-                <!-- InstanceEndEditable --></div>
-            <div class="footer_col"><!-- InstanceBeginEditable name="contactinfo" -->
-                <h3>Contacting Us</h3>
-                <p><strong>University of Nebraska-Lincoln</strong><br />
-                1400 R Street<br />
-                Lincoln, NE 68588 <br />
-                402-472-7211</p>
-                <!-- InstanceEndEditable --></div>
-            <div class="footer_col">
-                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/socialmediashare.html'; ?>
-            </div>
-            <!-- InstanceBeginEditable name="optionalfooter" --> <!-- InstanceEndEditable -->
-            <div id="wdn_copyright"><!-- InstanceBeginEditable name="footercontent" -->
-                Yeah, it's open source. &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
-            <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
                 <!-- InstanceEndEditable -->
-                <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_3.0/includes/wdn.html'; ?>
-                | <a href="http://validator.unl.edu/check/referer">W3C</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3">CSS</a> <a href="http://www.unl.edu/" title="UNL Home" id="wdn_unl_wordmark"><img src="/wdn/templates_3.0/css/footer/images/wordmark.png" alt="UNL's wordmark" /></a> </div>
+            </div>
         </div>
-    </div>
-    <div id="wdn_wrapper_footer"> </div>
+        <div class="wdn-band">
+            <div class="wdn-inner-wrapper">
+                <div class="footer_col" id="wdn_footer_contact">
+                    <h3>Contact Us</h3>
+                    <div class="wdn-contact-wrapper">
+                        <!-- InstanceBeginEditable name="contactinfo" -->
+                        <h3>Contacting Us</h3>
+                        <p><strong>University of Nebraska-Lincoln</strong><br />
+                            1400 R Street<br />
+                            Lincoln, NE 68588 <br />
+                            402-472-7211</p>
+                        <!-- InstanceEndEditable -->
+                    </div>
+                </div>
+                <div id="wdn_copyright">
+                    <div class="wdn-footer-text">
+                        <!-- InstanceBeginEditable name="footercontent" -->
+                        Yeah, it's open source. &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
+                        <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
+                        <!-- InstanceEndEditable -->
+                        <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/wdn.html'; ?>
+                    </div>
+                    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/logos.html'; ?>
+                </div>
+            </div>
+        </div>
+        <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/footer_floater.html'; ?>
+    </footer>
+    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/noscript.html'; ?>
 </div>
 </body>
 <!-- InstanceEnd --></html>
