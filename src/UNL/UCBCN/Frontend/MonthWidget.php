@@ -38,8 +38,8 @@ class MonthWidget extends Month
     public function __construct($options)
     {
         parent::__construct($options);
-        
-        $this->data = $this->findOngoingEvents($this->datePeriod);
+
+        $this->data = $this->getEventTotals($this->datePeriod);
     }
 
     function current()
@@ -60,7 +60,7 @@ class MonthWidget extends Month
      *
      * @return array
      */
-    public function findOngoingEvents(\DatePeriod $datePeriod)
+    public function getEventTotals(\DatePeriod $datePeriod)
     {
         //Create a temporary table to store dates in every month.
         $db = \UNL\UCBCN\ActiveRecord\Database::getDB();
