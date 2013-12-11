@@ -51,20 +51,18 @@ class Day extends EventListing
      */
     function getSQL()
     {
-        $timestamp = $this->getDateTime()->getTimestamp();
-
         $sql = '
-                SELECT DISTINCT eventdatetime.id FROM eventdatetime
-                INNER JOIN event ON eventdatetime.event_id = event.id
+                SELECT DISTINCT e.id
+                FROM eventdatetime as e
+                INNER JOIN event ON e.event_id = event.id
                 INNER JOIN calendar_has_event ON calendar_has_event.event_id = event.id
                 WHERE
                     calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
                     AND calendar_has_event.status IN ("posted", "archived")
-                    AND ((eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
-                        AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+86400).'")
-                        OR (NOW() BETWEEN eventdatetime.starttime AND eventdatetime.endtime))
-                ORDER BY eventdatetime.starttime ASC, event.title ASC
+                    AND  "'.$this->getDateTime()->format('Y-m-d').'" BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
+                ORDER BY e.starttime ASC, event.title ASC
                 ';
+        
         return $sql;
     }
 
