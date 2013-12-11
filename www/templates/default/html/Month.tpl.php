@@ -32,10 +32,13 @@
                 }
                 echo '<tr>';
             }
-            $class = '';
-            if ($day->options['m'] < $context->options['m']) {
+            
+            $class = 'selected';
+            $day_timestamp = $day->getDateTime()->modify('first day of this month')->format('U');
+            $current_timestamp = $context->getDateTime('first day of this month')->format('U');
+            if ($day_timestamp < $current_timestamp) {
                 $class = 'prev';
-            } elseif ($day->options['m'] > $context->options['m']) {
+            } elseif ($day_timestamp  > $current_timestamp) {
                 $class = 'next';
             }
             echo '<td class="'.$class.'">';
