@@ -61,6 +61,7 @@ class MonthWidget extends Month
      */
     public function findOngoingEvents($datePeriod)
     {
+        //Create a temporary table to store dates in every month.
         $db = \UNL\UCBCN\ActiveRecord\Database::getDB();
         $sql     = "CREATE TABLE IF NOT EXISTS `ongoingcheck` (`d` DATE NOT NULL DEFAULT '".date('Y-m-d')."', PRIMARY KEY ( `d` ))";
         $res     = $db->query($sql);
@@ -68,17 +69,24 @@ class MonthWidget extends Month
         if (!$res) {
             return array();
         }
-        
+
+        $values = array();
         foreach ($datePeriod as $date) {
-            $strdate =  $date->format('Y-m-d');
+            $strdate = $date->format('Y-m-d');
+            
+            $values[] = '("' . $strdate . '")';
+            
             if (!isset($firstday)) {
                 $firstday = $strdate;
             }
             $lastday = $strdate;
-            $sql     = "INSERT INTO ongoingcheck VALUES ('$strdate');";
-            $db->query($sql);
         }
         
+        //Try to add this month's dates to the table.
+        $sql = 'INSERT IGNORE INTO ongoingcheck VALUES ' . implode(', ', $values) . ';';
+        $db->query($sql);
+        
+        //Using the temporary table, get the number of events for each date.
         $sql = "SELECT og.d AS day, count(*) AS events
                 FROM ongoingcheck AS og
                 JOIN calendar_has_event ON (calendar_has_event.calendar_id = 1)
