@@ -81,8 +81,8 @@ class Year
     {
         return self::generateURL($this->calendar, $this->getDateTime());
     }
-    
-    public static function generateURL($calendar, $datetime)
+
+    public static function generateURL(Calendar $calendar, \DateTime $datetime)
     {
         return $calendar->getURL() . $datetime->format('Y') . '/';
     }
