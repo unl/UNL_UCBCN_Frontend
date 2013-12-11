@@ -212,4 +212,9 @@ class Month extends \IteratorIterator
     {
         return self::generateURL($this->calendar, $this->getDateTime()->modify('+1 month'));
     }
+    
+    public function getYearURL()
+    {
+        return Year::generateURL($this->calendar, $this->getDateTime());
+    }
 }
