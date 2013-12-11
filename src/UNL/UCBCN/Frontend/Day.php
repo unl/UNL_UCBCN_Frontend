@@ -87,6 +87,46 @@ class Day extends EventListing
     {
         return $this->calendar->getURL() . date('Y/m/d', $this->getDateTime()->getTimestamp()) . '/';
     }
+
+    /**
+     * Get a relative day
+     *
+     * @param $string - +1, -1, etc
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getRelativeDay($string)
+    {
+        $datetime = $this->getDateTime()->modify($string . ' day');
+
+        $options = $this->options;
+        $options['m'] = $datetime->format('m');
+        $options['y'] = $datetime->format('Y');
+        $options['d'] = $datetime->format('d');
+
+        $class = get_called_class();
+
+        return new $class($options);
+    }
+
+    /**
+     * Get the previous month object
+     *
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getPreviousDay()
+    {
+        return $this->getRelativeDay('-1');
+    }
+
+    /**
+     * Get the next month object
+     *
+     * @return \UNL\UCBCN\Frontend\Month month
+     */
+    public function getNextDay()
+    {
+        return $this->getRelativeDay('+1');
+    }
     
     public function getMonthWidget()
     {
