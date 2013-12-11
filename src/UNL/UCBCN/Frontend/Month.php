@@ -194,6 +194,22 @@ class Month extends \IteratorIterator
      */
     public function getURL()
     {
-        return $this->calendar->getURL() . date('Y/m', $this->getDateTime()->getTimestamp()) . '/';
+        return self::generateURL($this->calendar, $this->getDateTime());
+        
+    }
+    
+    public static function generateURL($calendar, $datetime)
+    {
+        return $calendar->getURL() . $datetime->format('Y/m') . '/';
+    }
+    
+    public function getPreviousMonthURL()
+    {
+        return self::generateURL($this->calendar, $this->getDateTime()->modify('-1 month'));
+    }
+    
+    public function getNextMonthURL()
+    {
+        return self::generateURL($this->calendar, $this->getDateTime()->modify('+1 month'));
     }
 }

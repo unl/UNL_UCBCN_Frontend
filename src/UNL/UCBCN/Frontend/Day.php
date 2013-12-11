@@ -83,7 +83,12 @@ class Day extends EventListing
      */
     public function getURL()
     {
-        return $this->calendar->getURL() . date('Y/m/d', $this->getDateTime()->getTimestamp()) . '/';
+        return self::generateURL($this->calendar, $this->getDateTime());
+    }
+    
+    public static function generateURL($calendar, $datetime)
+    {
+        return $calendar->getURL() . $datetime->format('Y/m/d') . '/';
     }
 
     /**
