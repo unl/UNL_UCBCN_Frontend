@@ -27,33 +27,29 @@ namespace UNL\UCBCN\Frontend;
  */
 class MonthWidget extends Month
 {
+    public $data = array();
+    
     /**
-     * Determines the days of this month with events.
+     * Constructor for an individual day.
      *
-     * @param Calendar_Month $month Month to find events in.
-     *
-     * @return an array with values representing the days with events.
+     * @param array $options Associative array of options to apply.
+     * @throws InvalidArgumentException
      */
-    public function dailyEventCount($month)
+    public function __construct($options)
     {
-        $db          =& $this->calendar->getDatabaseConnection();
-        $days        = $month->fetchAll();
-        $start_bound = date('Y-m-d', $days[1]->getTimestamp());
-        $end_bound   = date('Y-m-d', $days[count($days)]->getTimestamp());
-        $sql         = "SELECT DATE_FORMAT(eventdatetime.starttime,'%m-%d') AS day,
-                               count(*) AS events
-		                FROM calendar_has_event,eventdatetime
-		                WHERE calendar_has_event.calendar_id={$this->calendar->id}
-		                AND (calendar_has_event.status ='posted'
-                             OR calendar_has_event.status ='archived')
-		                AND calendar_has_event.event_id = eventdatetime.event_id
-		                AND (eventdatetime.recurringtype = ''
-		                     OR eventdatetime.recurringtype = 'none') 
-		                AND eventdatetime.starttime >= '$start_bound 00:00:00'
-						AND eventdatetime.starttime <= '$end_bound 23:59:59'
-		                GROUP BY day;";
-        $res         =& $db->queryCol($sql);
-        return $res;
+        parent::__construct($options);
+        
+        $this->data = $this->findOngoingEvents($this->datePeriod);
+    }
+
+    function current()
+    {
+        return \IteratorIterator::current();
+    }
+    
+    public function getDayURL()
+    {
+        return Day::generateURL($this->calendar, $this->current());
     }
     
     /**
@@ -63,41 +59,47 @@ class MonthWidget extends Month
      *
      * @return array
      */
-    public function findOngoingEvents($month)
+    public function findOngoingEvents($datePeriod)
     {
-        $db      =& $this->calendar->getDatabaseConnection();
-        $queries = array();
+        $db = \UNL\UCBCN\ActiveRecord\Database::getDB();
         $sql     = "CREATE TABLE IF NOT EXISTS `ongoingcheck` (`d` DATE NOT NULL DEFAULT '".date('Y-m-d')."', PRIMARY KEY ( `d` ))";
-        $res     =& $db->query($sql);
-        if (!PEAR::isError($res)) {
-            while ( $day = $month->fetch() ) {
-                $strdate = date('Y-m-d', $day->getTimestamp());
-                if (!isset($firstday)) {
-                    $firstday = $strdate;
-                }
-                $lastday = $strdate;
-                $sql     = "INSERT INTO ongoingcheck VALUES ('$strdate');";
-                $db->query($sql);
-            }
-            $sql = "SELECT DATE_FORMAT(og.d,'%m-%d') AS day, count(*) AS events
-                FROM calendar_has_event,eventdatetime,ongoingcheck AS og
-                WHERE calendar_has_event.calendar_id={$this->calendar->id}
-                AND (calendar_has_event.status ='posted'
-                     OR calendar_has_event.status ='archived')
-                AND calendar_has_event.event_id = eventdatetime.event_id
-                AND (eventdatetime.starttime < og.d
-                     AND eventdatetime.endtime >= og.d)
-                AND og.d >= '$firstday' AND og.d <= '$lastday'
-                GROUP BY day;";
-            $res =& $db->queryCol($sql);
-            if (PEAR::isError($res)) {
-                return array();
-            } else {
-                return $res;
-            }
-        } else {
+        $res     = $db->query($sql);
+        
+        if (!$res) {
             return array();
         }
+        
+        foreach ($datePeriod as $date) {
+            $strdate =  $date->format('Y-m-d');
+            if (!isset($firstday)) {
+                $firstday = $strdate;
+            }
+            $lastday = $strdate;
+            $sql     = "INSERT INTO ongoingcheck VALUES ('$strdate');";
+            $db->query($sql);
+        }
+        
+        $sql = "SELECT og.d AS day, count(*) AS events
+                FROM ongoingcheck AS og
+                JOIN calendar_has_event ON (calendar_has_event.calendar_id = 1)
+                JOIN eventdatetime as e ON (calendar_has_event.event_id = e.event_id)
+            
+                WHERE calendar_has_event.status IN ('posted', 'archived')
+                AND og.d BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
+            
+                AND og.d >= '$firstday' AND og.d <= '$lastday'
+                GROUP BY day";
+        $res = $db->query($sql);
+        
+        if (!$res) {
+            return array();
+        }
+        
+        $results = array();
+        foreach ($res as $row) {
+            $results[$row['day']] = $row['events'];
+        }
+        
+        return $results;
     }
-    
 }
