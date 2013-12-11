@@ -76,12 +76,24 @@ class Year
             $this->monthwidgets[] = new MonthWidget($this->options);
         }
     }
-    
+
+    /**
+     * Get a permalink URL specific to this specific year
+     *
+     * @return string
+     */
     public function getURL()
     {
         return self::generateURL($this->calendar, $this->getDateTime());
     }
 
+    /**
+     * Generate a Day URL for a specific calendar and date
+     *
+     * @param Calendar $calendar
+     * @param \DateTime $datetime
+     * @return string
+     */
     public static function generateURL(Calendar $calendar, \DateTime $datetime)
     {
         return $calendar->getURL() . $datetime->format('Y') . '/';

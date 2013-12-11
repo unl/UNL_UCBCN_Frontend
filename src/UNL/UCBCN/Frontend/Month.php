@@ -198,21 +198,43 @@ class Month extends \IteratorIterator
         
     }
 
+    /**
+     * Generate a Month URL for a specific calendar and date
+     *
+     * @param Calendar $calendar
+     * @param \DateTime $datetime
+     * @return string
+     */
     public static function generateURL(Calendar $calendar, \DateTime $datetime)
     {
         return $calendar->getURL() . $datetime->format('Y/m') . '/';
     }
-    
+
+    /**
+     * Get a permalink URL for the context's previous month
+     *
+     * @return string
+     */
     public function getPreviousMonthURL()
     {
         return self::generateURL($this->calendar, $this->getDateTime()->modify('-1 month'));
     }
-    
+
+    /**
+     * get a permalink URL for the context's next month
+     *
+     * @return string
+     */
     public function getNextMonthURL()
     {
         return self::generateURL($this->calendar, $this->getDateTime()->modify('+1 month'));
     }
-    
+
+    /**
+     * Get a permalink URL for the context's year
+     *
+     * @return string
+     */
     public function getYearURL()
     {
         return Year::generateURL($this->calendar, $this->getDateTime());

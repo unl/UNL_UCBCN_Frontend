@@ -51,15 +51,16 @@ class MonthWidget extends Month
     {
         return Day::generateURL($this->calendar, $this->current());
     }
-    
+
     /**
      * This function finds ongoing events for the given month.
      *
-     * @param Calendar_Month $month Month to find ongoing events for.
+     * @param $datePeriod
+     * @internal param \UNL\UCBCN\Frontend\Calendar_Month $month Month to find ongoing events for.
      *
      * @return array
      */
-    public function findOngoingEvents($datePeriod)
+    public function findOngoingEvents(\DatePeriod $datePeriod)
     {
         //Create a temporary table to store dates in every month.
         $db = \UNL\UCBCN\ActiveRecord\Database::getDB();
