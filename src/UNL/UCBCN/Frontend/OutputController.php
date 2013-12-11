@@ -78,6 +78,11 @@ class OutputController extends \Savvy
                 });
                 header('Content-type:text/html;charset=UTF-8');
                 $this->setTemplateFormatPaths('html');
+                if ($options['format'] == 'hcalendar') {
+                    //For the hcalendar format, we may want to customize some templates, but we should fall back on html.
+                    $themes = $this->getTemplateFormatPaths('hcalendar');
+                    $this->addTemplatePath($themes);
+                }
                 $this->addFilters(array(new OutputController\PostRunFilter\HTML($options), 'postRun'));
                 break;
             default:
@@ -107,17 +112,27 @@ class OutputController extends \Savvy
      */
     public function setTemplateFormatPaths($format)
     {
+        $themes = $this->getTemplateFormatPaths($format);
+
+        $this->setTemplatePath($themes);
+    }
+    
+    public function getTemplateFormatPaths($format)
+    {
         $web_dir = $this->getWebDir();
 
         // The 'default' theme is always on the path as a fallback
-        $themes = array($web_dir . '/templates/default/' . $format);
+        $themes = array(
+            $web_dir . '/templates/default/', //add the default as a path so that we can reference other formats when rendering
+            $web_dir . '/templates/default/' . $format
+        );
 
         // If we've customized the theme, add that directory to the path
         if ($this->theme != 'default') {
             $themes[] = $web_dir . '/templates/' . $this->theme . '/' . $format;
         }
-
-        $this->setTemplatePath($themes);
+        
+        return $themes;
     }
 
     /**
