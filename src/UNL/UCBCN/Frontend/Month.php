@@ -46,6 +46,8 @@ class Month extends \IteratorIterator
      * @var string
      */
     public static $weekday_start = 'Sunday';
+    
+    public $datePeriod = false;
 
     /**
      * Constructor for an individual day.
@@ -70,7 +72,9 @@ class Month extends \IteratorIterator
         $end_date   = $this->getEndDateTime();
         $interval   = new \DateInterval('P1D');
 
-        parent::__construct( new \DatePeriod($start_date, $interval, $end_date));
+        $this->datePeriod = new \DatePeriod($start_date, $interval, $end_date);
+        
+        parent::__construct($this->datePeriod);
     }
 
     /**
