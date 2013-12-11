@@ -194,6 +194,11 @@ class Controller
 
         return new Day($options);
     }
+    
+    public function getCurrentDayURL()
+    {
+        return Day::generateURL($this->options['calendar'], new \DateTime);
+    }
 
     /**
      * Get the Month object for the current date (now)
@@ -210,6 +215,11 @@ class Controller
 
         return new Month($options);
     }
+    
+    public function getCurrentMonthURL()
+    {
+        return Month::generateURL($this->options['calendar'], new \DateTime);
+    }
 
     /**
      * Get the Year object for the current date (now)
@@ -224,6 +234,11 @@ class Controller
         $options['y'] = $datetime->format('Y');
 
         return new Year($options);
+    }
+    
+    public function getCurrentYearURL()
+    {
+        return Year::generateURL($this->options['calendar'], new \DateTime);
     }
 
     /**

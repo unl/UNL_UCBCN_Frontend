@@ -128,9 +128,9 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
                     $class = str_replace('\\', '_', strtolower($context->options['model']));
                     ?>
                     <ul id="frontend_view_selector" class="<?php echo $class; ?>">
-                        <li id="todayview"><a href="<?php echo $frontend->getCurrentDay()->getURL(); ?>">Today's Events</a></li>
-                        <li id="monthview"><a href="<?php echo $frontend->getCurrentMonth()->getURL(); ?>">This Month</a></li>
-                        <li id="yearview"><a href="<?php echo $frontend->getCurrentYear()->getURL(); ?>">This Year</a></li>
+                        <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today's Events</a></li>
+                        <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">This Month</a></li>
+                        <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">This Year</a></li>
                         <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
                     </ul>
                     <?php if (isset($context->right)) { ?>
