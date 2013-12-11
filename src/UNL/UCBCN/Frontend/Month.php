@@ -46,7 +46,10 @@ class Month extends \IteratorIterator
      * @var string
      */
     public static $weekday_start = 'Sunday';
-    
+
+    /**
+     * @var bool|\DatePeriod
+     */
     public $datePeriod = false;
 
     /**
