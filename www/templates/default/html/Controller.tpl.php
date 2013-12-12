@@ -96,8 +96,7 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
                     <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today's Events</a></li>
                     <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">This Month</a></li>
                     <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">This Year</a></li>
-                    <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a>
-                    </li>
+                    <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
                 </ul>
                 <!-- InstanceEndEditable -->
                 <label for="wdn_menu_toggle" class="wdn-icon-menu">Menu</label>
