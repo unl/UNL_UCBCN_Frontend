@@ -45,7 +45,7 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>
-<body class="terminal" data-version="4.0">
+<body class="fixed" data-version="4.0">
 <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/skipnav.html'; ?>
 <div id="wdn_wrapper">
     <input type="checkbox" id="wdn_menu_toggle" value="Show navigation menu" class="wdn-content-slide wdn-input-driver" />
@@ -89,7 +89,16 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
             <nav id="navigation" role="navigation" class="wdn-band">
                 <h3 class="wdn_list_descriptor wdn-text-hidden">Navigation</h3>
                 <!-- InstanceBeginEditable name="navlinks" -->
-                <!-- no nav for now -->
+                <?php
+                $class = str_replace('\\', '_', strtolower($context->options['model']));
+                ?>
+                <ul id="frontend_view_selector" class="<?php echo $class; ?>">
+                    <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today's Events</a></li>
+                    <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">This Month</a></li>
+                    <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">This Year</a></li>
+                    <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a>
+                    </li>
+                </ul>
                 <!-- InstanceEndEditable -->
                 <label for="wdn_menu_toggle" class="wdn-icon-menu">Menu</label>
             </nav>
@@ -122,17 +131,7 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
                         <p id="search_term">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
                             <a href="#" title="close search tip">(close message)</a>
                         </p>
-
                     </form>
-                    <?php
-                    $class = str_replace('\\', '_', strtolower($context->options['model']));
-                    ?>
-                    <ul id="frontend_view_selector" class="<?php echo $class; ?>">
-                        <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today's Events</a></li>
-                        <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">This Month</a></li>
-                        <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">This Year</a></li>
-                        <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
-                    </ul>
                     <?php if (isset($context->right)) { ?>
                         <div class="col left">
                             <div id="monthwidget"><?php echo $savvy->render($context->right); ?></div>
