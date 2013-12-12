@@ -570,33 +570,6 @@ img.event_description_img {
     padding: 0 15px;
 }
 
-ul#frontend_view_selector {
-    position: relative;
-    width: 927px;
-    float: right;
-    padding: 0 10px 0 0;
-    margin: 0;
-    border-bottom: 1px solid #999;
-}
-
-ul#frontend_view_selector li {
-    background: #efefef;
-    display: block;
-    float: left;
-    margin: 0 0 0 4px;
-    border: 1px solid #ccc;
-    border-bottom: 1px solid #efefef;
-    padding: 4px;
-}
-
-ul#frontend_view_selector.month li#monthview, ul#frontend_view_selector.day li#todayview, ul#frontend_view_selector.year li#yearview, ul#frontend_view_selector.upcoming li#upcomingview {
-    position: relative;
-    background: #fff url(images/ulnavbar.gif) no-repeat left top;
-    border: 1px solid #999;
-    margin-bottom: -1px;
-    border-bottom: 2px solid #fff;
-}
-
 /*year view*/
 .year_cal table.wp-calendar {
     margin: 0 0 15px 0;
