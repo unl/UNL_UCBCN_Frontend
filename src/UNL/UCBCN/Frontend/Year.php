@@ -71,9 +71,10 @@ class Year
 
         $this->year = $this->options['y'];
 
+        $options = $this->options;
         for ($m=1;$m<=12;$m++) {
             $options['m'] = $m;
-            $this->monthwidgets[] = new MonthWidget($this->options);
+            $this->monthwidgets[] = new MonthWidget($options);
         }
     }
 
