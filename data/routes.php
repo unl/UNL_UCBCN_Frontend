@@ -17,12 +17,12 @@ $day      = '(?P<d>([0-3])?[0-9])';
 // Used for determining an output format, e.g. .xml, .html
 $format   = '(\.(?P<format>[\w]+))?';
 
-$routes['/^'.$calendar.'$/']                                                        = 'UNL\UCBCN\Frontend\Day';
-$routes['/^images\/(?P<id>[\d]+)'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Image';
+$routes['/^images\/(?P<id>[\d]+)'.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Image';
 $routes['/^'.$calendar.'upcoming'.'\/'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Upcoming';
 $routes['/^'.$calendar.'fullcal'.'\/'.$format.'$/']                                      = 'UNL\UCBCN\Frontend\FullCal';
 $routes['/^'.$calendar.'week'.'\/'.$format.'$/']                                         = 'UNL\UCBCN\Frontend\Week';
 $routes['/^'.$calendar.'search(\/(?P<q>.+))'.'\/'.$format.'$/']                          = 'UNL\UCBCN\Frontend\Search';
+$routes['/^'.$calendar.'$/']                                                             = 'UNL\UCBCN\Frontend\Day';
 $routes['/^'.$calendar.$year.'\/'.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Year';
 $routes['/^'.$calendar.$year.'\/'.$month.'\/'.$format.'$/']                              = 'UNL\UCBCN\Frontend\Month';
 $routes['/^'.$calendar.$year.'\/'.$month.'\/widget\/'.$format.'$/']                      = 'UNL\UCBCN\Frontend\MonthWidget';

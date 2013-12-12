@@ -157,7 +157,11 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
                         </div>
 
                     <?php } else {
-                        echo $savvy->render($context->output);
+                        $template = null;
+                        if ($context->output->getRawObject() instanceof Exception) {
+                            $template = 'Exception.tpl.php';
+                        }
+                        echo $savvy->render($context->output, $template);
                     } ?>
                 </div>
             </div>

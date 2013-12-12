@@ -46,16 +46,12 @@ class Upcoming extends EventListing
      */
     public function __construct($options = array())
     {
-        if (isset($options['calendar'])) {
-            $this->calendar = $options['calendar'];
-        }
-
         // Set defaults
-        $this->options['m'] = date('m');
-        $this->options['d'] = date('d');
-        $this->options['y'] = date('Y');
+        $options['m'] = date('m');
+        $options['d'] = date('d');
+        $options['y'] = date('Y');
 
-        parent::__construct($options = array());
+        parent::__construct($options);
     }
 
     /**
