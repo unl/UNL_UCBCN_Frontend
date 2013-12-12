@@ -48,6 +48,11 @@ class Month extends \IteratorIterator
     public static $weekday_start = 'Sunday';
 
     /**
+     * @var bool|\DatePeriod
+     */
+    public $datePeriod = false;
+
+    /**
      * Constructor for an individual day.
      * 
      * @param array $options Associative array of options to apply.
@@ -70,7 +75,9 @@ class Month extends \IteratorIterator
         $end_date   = $this->getEndDateTime();
         $interval   = new \DateInterval('P1D');
 
-        parent::__construct( new \DatePeriod($start_date, $interval, $end_date));
+        $this->datePeriod = new \DatePeriod($start_date, $interval, $end_date);
+        
+        parent::__construct($this->datePeriod);
     }
 
     /**
@@ -190,6 +197,49 @@ class Month extends \IteratorIterator
      */
     public function getURL()
     {
-        return $this->calendar->getURL() . date('Y/m', $this->getDateTime()->getTimestamp()) . '/';
+        return self::generateURL($this->calendar, $this->getDateTime());
+        
+    }
+
+    /**
+     * Generate a Month URL for a specific calendar and date
+     *
+     * @param Calendar $calendar
+     * @param \DateTime $datetime
+     * @return string
+     */
+    public static function generateURL(Calendar $calendar, \DateTime $datetime)
+    {
+        return $calendar->getURL() . $datetime->format('Y/m') . '/';
+    }
+
+    /**
+     * Get a permalink URL for the context's previous month
+     *
+     * @return string
+     */
+    public function getPreviousMonthURL()
+    {
+        return self::generateURL($this->calendar, $this->getDateTime()->modify('-1 month'));
+    }
+
+    /**
+     * get a permalink URL for the context's next month
+     *
+     * @return string
+     */
+    public function getNextMonthURL()
+    {
+        return self::generateURL($this->calendar, $this->getDateTime()->modify('+1 month'));
+    }
+
+    /**
+     * Get a permalink URL for the context's year
+     *
+     * @return string
+     */
+    public function getYearURL()
+    {
+        return Year::generateURL($this->calendar, $this->getDateTime());
     }
 }

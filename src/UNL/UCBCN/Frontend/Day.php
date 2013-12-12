@@ -51,20 +51,18 @@ class Day extends EventListing
      */
     function getSQL()
     {
-        $timestamp = $this->getDateTime()->getTimestamp();
-
         $sql = '
-                SELECT DISTINCT eventdatetime.id FROM eventdatetime
-                INNER JOIN event ON eventdatetime.event_id = event.id
+                SELECT DISTINCT e.id
+                FROM eventdatetime as e
+                INNER JOIN event ON e.event_id = event.id
                 INNER JOIN calendar_has_event ON calendar_has_event.event_id = event.id
                 WHERE
                     calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
                     AND calendar_has_event.status IN ("posted", "archived")
-                    AND ((eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
-                        AND eventdatetime.starttime < "'.date('Y-m-d', $timestamp+86400).'")
-                        OR (NOW() BETWEEN eventdatetime.starttime AND eventdatetime.endtime))
-                ORDER BY eventdatetime.starttime ASC, event.title ASC
+                    AND  "'.$this->getDateTime()->format('Y-m-d').'" BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
+                ORDER BY e.starttime ASC, event.title ASC
                 ';
+        
         return $sql;
     }
 
@@ -85,7 +83,19 @@ class Day extends EventListing
      */
     public function getURL()
     {
-        return $this->calendar->getURL() . date('Y/m/d', $this->getDateTime()->getTimestamp()) . '/';
+        return self::generateURL($this->calendar, $this->getDateTime());
+    }
+
+    /**
+     * Generate a Day URL for a specific calendar and date
+     *
+     * @param Calendar $calendar
+     * @param \DateTime $datetime
+     * @return string
+     */
+    public static function generateURL(Calendar $calendar, \DateTime $datetime)
+    {
+        return $calendar->getURL() . $datetime->format('Y/m/d') . '/';
     }
 
     /**
@@ -127,7 +137,12 @@ class Day extends EventListing
     {
         return $this->getRelativeDay('+1');
     }
-    
+
+    /**
+     * Get the month widget for the context's month
+     *
+     * @return MonthWidget
+     */
     public function getMonthWidget()
     {
         return new MonthWidget($this->options);
