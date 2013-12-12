@@ -250,11 +250,6 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 .month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
 
-
-ul#frontend_view_selector{position:relative;width:927px;float:right;padding:0 10px 0 0;margin:0;border-bottom:1px solid #999;}
-ul#frontend_view_selector li{background:#efefef;display:block;float:left;margin:0 0 0 4px;border: 1px solid #ccc;border-bottom:1px solid #efefef; padding:4px;}
-ul#frontend_view_selector.month li#monthview, ul#frontend_view_selector.day li#todayview, ul#frontend_view_selector.year li#yearview, ul#frontend_view_selector.upcoming li#upcomingview{position:relative;background:#fff url(images/ulnavbar.gif) no-repeat left top;border: 1px solid #999;margin-bottom:-1px;border-bottom:2px solid #fff;}
-
 /*year view*/
 .year_cal table.wp-calendar{margin:0 0 15px 0;}
 
@@ -286,18 +281,6 @@ form#event_search input#searchinput{background:#eee; border:1px solid #ccc;
 	background:#ffffcc;
 	}
 #maincontent p#search_term{position:absolute;display:none;opacity:0;width:244px;height:85px;background:url(images/searchinfo.png) no-repeat;margin:-10px 0 0 -45px;padding:18px 20px 0 10px;font-size:11px;line-height:normal;}
-
-/*overwrite UNL template to expand to full width */
-#navigation{display:none;}
-#container div.clear .mainwrapper, #container div.clear .altwrapper {
-			width: 960px;}
-#maincontent .two_col {
-				clear:both;
-				width:690px;
-				padding:15px 10px 0 0;
-				}
-
-.three_col{width:700px;margin-top:13px;}
 
 /* feeds */
 #maincontent p#feeds{
