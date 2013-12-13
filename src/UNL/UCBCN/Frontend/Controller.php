@@ -255,6 +255,11 @@ class Controller
     {
         return Year::generateURL($this->options['calendar'], new \DateTime);
     }
+    
+    public function getUpcomingURL()
+    {
+        return Upcoming::generateURL($this->options['calendar']);
+    }
 
     /**
      * Gets the specified event instance.

@@ -268,7 +268,7 @@ function todayHilite(){
 			}
 		}
 
-		if(idSelector.className != 'year' && idSelector.className != 'upcoming'){	
+		if(idSelector.className != 'unl_ucbcn_frontend_year' && idSelector.className != 'unl_ucbcn_frontend_upcoming'){	
 			var selectedDay = getElementsByClassName(document.getElementById('maincontent'), "h4", "sec_main");
 			var re = new RegExp(/\d+/);
 			var m = re.exec(selectedDay[0].childNodes[0].nodeValue);
@@ -673,7 +673,7 @@ function createButton(linktext, attachE, actionFunc, classN){
 	morelink.style.display = 'inline';
 	var text = document.createTextNode(linktext);
 	morelink.className=classN;	
-	if(currentView == 'upcoming'){
+	if(currentView == 'unl_ucbcn_frontend_upcoming'){
 		hreflink = 	document.getElementById('todayview').childNodes[0].href;
 	} else {
 		hreflink = '#';	
