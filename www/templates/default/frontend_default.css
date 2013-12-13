@@ -215,7 +215,7 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 /* month view */
 .month_cal table.wp-calendar{margin:0 0 20px 0;}
 .month_cal table.wp-calendar td{
-	width:124px;
+	width:14.2%;
 	text-align:left;
 	background:#f3f3f3;
 	vertical-align:top;
@@ -246,8 +246,8 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 #maincontent .month_cal table.wp-calendar td a.more_event:hover{background:none}
 #maincontent .month_cal table.wp-calendar td ul.none li.close_eventbox{display:none;}
 .month_cal table.wp-calendar td:hover{background:#ffffcc;}
-.month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:126px;display:block;float:left;margin-bottom:1px;}
-.month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
+.month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:14.2%;display:block;float:left;margin-bottom:1px;}
+.month_cal table.wp-calendar tr{font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
 
 /*year view*/
