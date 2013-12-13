@@ -380,6 +380,40 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
   background-color: #ddd;
 }
  abbr.dtstart:after, abbr.dtend:after {content:'' }
+
+
+/* Date classes */
+.view-unl_ucbcn_frontend_day .date-wrapper .month,
+.view-unl_ucbcn_frontend_day .date-wrapper .year,
+.view-unl_ucbcn_frontend_day .date-wrapper .day {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_day .date-wrapper.ongoing .month,
+.view-unl_ucbcn_frontend_day .date-wrapper.ongoing .day {
+    display: inline;
+}
+
+.view-unl_ucbcn_frontend_day .date-wrapper.ongoing .time {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_upcoming .date-wrapper .year {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_month .date-wrapper .month,
+.view-unl_ucbcn_frontend_month .date-wrapper .year,
+.view-unl_ucbcn_frontend_month .date-wrapper .day,
+.view-unl_ucbcn_frontend_month .date-wrapper .am-pm {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_month .date-wrapper.all-day,
+.view-unl_ucbcn_frontend_month .month-day-listing .all-day .date-title-separator {
+    display: none;
+}
+ 
 /* IE */
 * html tr.vevent td.date{font-size:0.9em!important;}
 * html #maincontent .three_col{padding:0;}
