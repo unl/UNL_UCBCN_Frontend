@@ -89,7 +89,18 @@ class Upcoming extends EventListing
      */
     public function getURL()
     {
-        return 'upcoming';
+        return $this->generateURL($this->calendar);
+    }
+
+    /**
+     * Generate an Upcoming URL for a specific calendar
+     *
+     * @param Calendar $calendar
+     * @return string
+     */
+    public static function generateURL(Calendar $calendar)
+    {
+        return $calendar->getURL() . 'upcoming/';
     }
 
     /**
