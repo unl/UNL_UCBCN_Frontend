@@ -41,9 +41,11 @@
             } elseif ($day_timestamp > $current_timestamp) {
                 $class = 'next';
             }
-            echo '<td class="' . $class . '">';
-            echo $savvy->render($day, 'EventListing/Month.tpl.php');
-            echo '</td>';
+            ?>
+            <td class="<?php echo $class; ?>">
+                <?php echo $savvy->render($day, 'EventListing/Month.tpl.php'); ?>
+            </td>
+            <?php
         }
         echo '</tr>';
         ?>
