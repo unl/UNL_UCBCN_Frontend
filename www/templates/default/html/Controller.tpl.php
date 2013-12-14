@@ -2,6 +2,8 @@
 if (!isset($GLOBALS['unl_template_dependents'])) {
     $GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
 }
+
+$view_class = str_replace('\\', '_', strtolower($context->options['model']));
 ?>
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]><html class="ie iem7"><![endif]-->
@@ -89,10 +91,7 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
             <nav id="navigation" role="navigation" class="wdn-band">
                 <h3 class="wdn_list_descriptor wdn-text-hidden">Navigation</h3>
                 <!-- InstanceBeginEditable name="navlinks" -->
-                <?php
-                $class = str_replace('\\', '_', strtolower($context->options['model']));
-                ?>
-                <ul id="frontend_view_selector" class="<?php echo $class; ?>">
+                <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
                     <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today's Events</a></li>
                     <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">This Month</a></li>
                     <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">This Year</a></li>
@@ -120,7 +119,7 @@ if (!isset($GLOBALS['unl_template_dependents'])) {
         <div id="maincontent" class="wdn-main">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->
-            <div class="wdn-band">
+            <div class="wdn-band view-<?php echo $view_class; ?>">
                 <div class="wdn-inner-wrapper">
                     <div id="load"></div>
                     <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">

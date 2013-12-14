@@ -215,7 +215,7 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 /* month view */
 .month_cal table.wp-calendar{margin:0 0 20px 0;}
 .month_cal table.wp-calendar td{
-	width:124px;
+	width:14.2%;
 	text-align:left;
 	background:#f3f3f3;
 	vertical-align:top;
@@ -246,8 +246,8 @@ img.event_description_img{border:1px solid #ccc;background:#ddd;padding:2px;}
 #maincontent .month_cal table.wp-calendar td a.more_event:hover{background:none}
 #maincontent .month_cal table.wp-calendar td ul.none li.close_eventbox{display:none;}
 .month_cal table.wp-calendar td:hover{background:#ffffcc;}
-.month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:126px;display:block;float:left;margin-bottom:1px;}
-.month_cal table.wp-calendar tr{float:right;font-size:0.8em;}
+.month_cal table.wp-calendar th{font-size:1.15em;text-align:center;width:14.2%;display:block;float:left;margin-bottom:1px;}
+.month_cal table.wp-calendar tr{font-size:0.8em;}
 #maincontent .month_cal ul{padding:0 15px;}
 
 /*year view*/
@@ -380,6 +380,40 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
   background-color: #ddd;
 }
  abbr.dtstart:after, abbr.dtend:after {content:'' }
+
+
+/* Date classes */
+.view-unl_ucbcn_frontend_day .date-wrapper .month,
+.view-unl_ucbcn_frontend_day .date-wrapper .year,
+.view-unl_ucbcn_frontend_day .date-wrapper .day {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_day .date-wrapper.ongoing .month,
+.view-unl_ucbcn_frontend_day .date-wrapper.ongoing .day {
+    display: inline;
+}
+
+.view-unl_ucbcn_frontend_day .date-wrapper.ongoing .time {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_upcoming .date-wrapper .year {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_month .date-wrapper .month,
+.view-unl_ucbcn_frontend_month .date-wrapper .year,
+.view-unl_ucbcn_frontend_month .date-wrapper .day,
+.view-unl_ucbcn_frontend_month .date-wrapper .am-pm {
+    display: none;
+}
+
+.view-unl_ucbcn_frontend_month .date-wrapper.all-day,
+.view-unl_ucbcn_frontend_month .month-day-listing .all-day .date-title-separator {
+    display: none;
+}
+ 
 /* IE */
 * html tr.vevent td.date{font-size:0.9em!important;}
 * html #maincontent .three_col{padding:0;}

@@ -1,29 +1,28 @@
-<ul>
+<a href="<?php echo $context->getURL(); ?>"><?php echo $context->getDateTime()->format('j')?></a>
+<ul class="month-day-listing">
 <?php
-
 foreach ($context as $e) {
-    $li = '<li>';
-    if (strpos($e->eventdatetime->starttime,'00:00:00')===false) {
-        $starttime = strtotime($e->eventdatetime->starttime);
-        $li .= date('g',$starttime);
-        if (substr($e->eventdatetime->starttime,14,2)!='00') {
-            $li .= ':'.substr($e->eventdatetime->starttime,14,2);
-        }
-        $li .= date('',$starttime);
-        if (isset($e->eventdatetime->endtime) &&
-            ($e->eventdatetime->endtime != $e->eventdatetime->starttime) &&
-            ($e->eventdatetime->endtime > $e->eventdatetime->starttime)) {
-                $endtime = strtotime($e->eventdatetime->endtime);
-                $li .= '-'.date('g',$endtime);
-                if (substr($e->eventdatetime->endtime,14,2)!='00') {
-                    $li .= ':'.substr($e->eventdatetime->endtime,14,2);
-                }
-                $li .= date('',$endtime);
-        }
-        $li .= ': ';
+    //Start building an array of row classes
+    $classes = array('event');
+
+    if ($e->isAllDay()) {
+        $classes[] = 'all-day';
     }
-    $li .= '<a href="'.$frontend->getEventURL($e->getRawObject()).'">'.$savvy->dbStringtoHtml($e->event->title).'</a></li>';
-    echo $li;
+
+    if ($e->isInProgress()) {
+        $classes[] = 'in-progress';
+    }
+
+    if ($e->isOnGoing()) {
+        $classes[] = 'ongoing';
+    }
+    
+    ?>
+    <li class="<?php echo implode(' ', $classes); ?>">
+        <?php echo $savvy->render($e, 'EventInstance/Date.tpl.php') ?> <span class="date-title-separator">:</span>
+        <a href="<?php echo $e->getURL(); ?>"><?php echo $savvy->dbStringtoHtml($e->event->title)?></a>
+    </li>
+    <?php
 }
 ?>
 </ul>
