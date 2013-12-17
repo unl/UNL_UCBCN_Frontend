@@ -1,6 +1,19 @@
+<?php
+$prev = $context->getDateTime()->modify('-1 month');
+$next = $context->getDateTime()->modify('+1 month');
+?>
 <div class="month_cal" id="month_viewcal">
     <table class="wp-calendar">
-        <caption><?php echo $context->getDateTime()->format('F, Y'); ?></caption>
+        <caption>
+            <span><a href="<?php echo $context->getPreviousMonthURL(); ?>" id="prev_month" title="View events for <?php echo $prev->format('F'); ?>">&lt;&lt; </a></span>
+            <span class="monthvalue">
+                <a href="<?php echo $context->getURL(); ?>"><?php echo $context->getDateTime()->format('F'); ?></a>
+            </span>
+            <span class="yearvalue">
+                <a href="<?php echo $context->getYearURL(); ?>"><?php echo $context->getDateTime()->format('Y'); ?></a>
+            </span>
+            <span><a href="<?php echo $context->getNextMonthURL(); ?>" id="next_month" title="View events for <?php echo $next->format('F'); ?>"> &gt;&gt;</a></span>
+        </caption>
         <thead>
         <?php
         $weekdays = array(
