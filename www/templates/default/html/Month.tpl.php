@@ -46,16 +46,18 @@ $next = $context->getDateTime()->modify('+1 month');
                 echo '<tr>';
             }
 
-            $class = 'selected';
+            $classes = array('total-events-' . count($day));
             $day_timestamp = $day->getDateTime()->modify('first day of this month')->format('U');
             $current_timestamp = $context->getDateTime('first day of this month')->format('U');
             if ($day_timestamp < $current_timestamp) {
-                $class = 'prev';
-            } elseif ($day_timestamp > $current_timestamp) {
-                $class = 'next';
+                $classes[] = 'prev';
+            } else if ($day_timestamp > $current_timestamp) {
+                $classes[] = 'next';
+            } else {
+                $classes[] = 'selected';
             }
             ?>
-            <td class="<?php echo $class; ?>">
+            <td class="<?php echo implode(' ', $classes); ?>">
                 <?php echo $savvy->render($day, 'EventListing/Month.tpl.php'); ?>
             </td>
             <?php
