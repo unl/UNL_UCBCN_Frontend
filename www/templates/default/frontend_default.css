@@ -414,7 +414,7 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
     display: none;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .view-unl_ucbcn_frontend_month .wp-calendar td ul,
     .view-unl_ucbcn_frontend_month .wp-calendar .more_event,
     .view-unl_ucbcn_frontend_month #monthfullview {
