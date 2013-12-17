@@ -670,7 +670,6 @@ function createButton(linktext, attachE, actionFunc, classN){
 	var currentView =  document.getElementById('frontend_view_selector').className;
 	var hreflink;	
 	var morelink = document.createElement("a");
-	morelink.style.display = 'inline';
 	var text = document.createTextNode(linktext);
 	morelink.className=classN;	
 	if(currentView == 'unl_ucbcn_frontend_upcoming'){
