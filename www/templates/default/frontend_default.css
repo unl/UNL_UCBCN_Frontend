@@ -413,6 +413,18 @@ a#monthfullview.monthfullview_unchecked{background-position:0 0;}
 .view-unl_ucbcn_frontend_month .month-day-listing .all-day .date-title-separator {
     display: none;
 }
+
+@media (max-width: 480px) {
+    .view-unl_ucbcn_frontend_month .wp-calendar td ul,
+    .view-unl_ucbcn_frontend_month .wp-calendar .more_event,
+    .view-unl_ucbcn_frontend_month #monthfullview {
+        display: none;
+    }
+
+    .view-unl_ucbcn_frontend_month .month_cal table.wp-calendar td {
+        min-height: 4em;
+    }
+}
  
 /* IE */
 * html tr.vevent td.date{font-size:0.9em!important;}
