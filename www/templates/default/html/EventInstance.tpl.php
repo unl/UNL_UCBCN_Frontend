@@ -1,7 +1,7 @@
 <?php
 
-$startu = strtotime($context->eventdatetime->starttime);
-$endu   = strtotime($context->eventdatetime->endtime);
+$startu = strtotime($context->getStartTime());
+$endu   = strtotime($context->getEndTime());
 $url    = $frontend->getCalendarURL().date('Y/m/d/', $startu).$context->eventdatetime->id;
 
 /*
@@ -36,32 +36,8 @@ $url    = $frontend->getCalendarURL().date('Y/m/d/', $startu).$context->eventdat
 			<td class="date">Date:</td>
 			<td><?php echo date('l, F jS',$startu); ?></td>
 		</tr>
-		<tr class="alt"><td class="date">Time:</td>	
-			<td><?php
-			if (isset($context->eventdatetime->starttime)) {
-				if (strpos($context->eventdatetime->starttime,'00:00:00')) {
-					echo '<abbr class="dtstart" title="'.date(DATE_ISO8601, $startu).'">All day</abbr>';
-				} else {
-		        	echo '<abbr class="dtstart" title="'.date(DATE_ISO8601, $startu).'">'.date('g:i a', $startu).'</abbr>';
-				}
-		    } else {
-		        echo 'Unknown';
-		    }
-		    if (isset($context->eventdatetime->endtime) &&
-		    	($context->eventdatetime->endtime != $context->eventdatetime->starttime) &&
-		    	($context->eventdatetime->endtime > $context->eventdatetime->starttime)) {
-		    	if (substr($context->eventdatetime->endtime,0,10) != substr($context->eventdatetime->starttime,0,10)) {
-		    	    // Not on the same day
-		    	    if (strpos($context->eventdatetime->endtime,'00:00:00')) {
-		    	        echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('l, F jS', $endu).'</abbr>';
-		    	    } else {
-		    	        echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('l, F jS g:i a', $endu).'</abbr>';
-		    	    }
-		    	} else {
- 				    	    echo '-<abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'">'.date('g:i a', $endu).'</abbr>';
-		    	}
-		    }
-			?></td>
+		<tr class="alt"><td class="date">Time:</td>
+            <td><?php echo $savvy->render($context, 'EventInstance/Date.tpl.php') ?></td>
 		</tr>
 		<tr>
 			<td class="date">Description:</td>	
