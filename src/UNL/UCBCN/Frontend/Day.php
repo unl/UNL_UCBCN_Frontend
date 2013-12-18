@@ -51,15 +51,20 @@ class Day extends EventListing
      */
     function getSQL()
     {
+        $date = $this->getDateTime()->format('Y-m-d');
         $sql = '
-                SELECT DISTINCT e.id
+                SELECT DISTINCT e.id as id, recurringdate.id as recurringdate_id
                 FROM eventdatetime as e
                 INNER JOIN event ON e.event_id = event.id
                 INNER JOIN calendar_has_event ON calendar_has_event.event_id = event.id
+                LEFT JOIN recurringdate ON (recurringdate.event_id = event.id AND recurringdate.recurringdate = "' . $date . '")
                 WHERE
                     calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
                     AND calendar_has_event.status IN ("posted", "archived")
-                    AND  "'.$this->getDateTime()->format('Y-m-d').'" BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
+                    AND  (
+                        "' . $date . '" BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
+                       OR "' . $date . '" = recurringdate.recurringdate
+                      )
                 ORDER BY e.starttime ASC, event.title ASC
                 ';
         
