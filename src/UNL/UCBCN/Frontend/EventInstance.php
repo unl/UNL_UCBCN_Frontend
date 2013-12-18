@@ -50,8 +50,24 @@ class EventInstance
             throw new UnexpectedValueException('No event with that id exists', 404);
         }
         
+        //Find the requested date, and ensure format
+        $requestedDate = date('Y-m-d', strtotime($this->eventdatetime->starttime));
+        if (isset($options['y'], $options['m'], $options['d'])) {
+            $requestedDate = date('Y-m-d', strtotime($options['y'] . '-' . $options['m'] . '-' . $options['d']));
+        }
+        
+        //Set the recurring date
         if (isset($options['recurringdate_id'])) {
+            //Set the recurring date by the id
             $this->recurringdate = RecurringDate::getByID($options['recurringdate_id']);
+        } else if ($requestedDate != date('Y-m-d', strtotime($this->eventdatetime->starttime))) {
+            //Try to find the recurring date by the eventdatetime.id and Y/m/d
+            $this->recurringdate = RecurringDate::getByAnyField(
+                '\\UNL\\UCBCN\\Event\\RecurringDate',
+                'recurringdate',
+                $requestedDate,
+                'event_id = ' . (int)$this->eventdatetime->event_id
+            );
         }
 
         $this->event = $this->eventdatetime->getEvent();
@@ -74,7 +90,7 @@ class EventInstance
      */
     public function getURL()
     {
-        return $this->calendar->getURL() . date('Y/m/d/', strtotime($this->eventdatetime->starttime)) . $this->eventdatetime->id . '/';
+        return $this->calendar->getURL() . date('Y/m/d/', strtotime($this->getStartTime())) . $this->eventdatetime->id . '/';
     }
 
     /**
