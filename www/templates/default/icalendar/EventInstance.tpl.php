@@ -21,14 +21,14 @@ $out[] = 'DTSTAMP:'.date('Ymd\THis',strtotime($context->event->datecreated));
 $out[] = 'SUMMARY:'.strip_tags($context->event->title);
 $out[] = 'DESCRIPTION:'.preg_replace("/\r\n|\n|\r/", '\n', strip_tags($context->event->description));
 if (isset($context->eventdatetime->location_id) && $context->eventdatetime->location_id) {
-    $l = $context->eventdatetime->getLink('location_id');
+    $l = $context->eventdatetime->getLocation();
     $loc =  'LOCATION:'.$l->name;
     if (isset($context->eventdatetime->room)) {
         $loc .=  ' Room '.$context->eventdatetime->room;
     }
     $out[] = $loc;
 }
-$out[] = 'URL:'.$context->url;
+$out[] = 'URL:'.$context->getURL();
 if (isset($context->eventdatetime->endtime)
     && $endu > $startu) {
     if (strpos($context->eventdatetime->endtime,'00:00:00')) {

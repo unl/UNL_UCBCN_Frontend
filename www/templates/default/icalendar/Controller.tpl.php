@@ -2,18 +2,11 @@
 /**
  * This template file is for the icalendar and ics output formats.
  */
-UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Day','Frontend_Day_icalendar');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Search','Frontend_Day_icalendar');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_Upcoming','Frontend_Day_icalendar');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_EventListing','EventListing_icalendar');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_icalendar');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_EventInstance','EventInstance_icalendar');
-UNL_UCBCN::outputTemplate('UNL_UCBCN_Frontend_NoEvents','Frontend_NoEvents_icalendar');
 ob_start(); ?>
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//UNL_UCBCN//NONSGML UNL Event Publisher//EN
-X-WR-CALNAME:<?php echo $context->calendar->name."\n"; ?>
+X-WR-CALNAME:<?php echo $context->options['calendar']->name."\n"; ?>
 CALSCALE:GREGORIAN
 X-WR-TIMEZONE:America/Chicago
 METHOD:PUBLISH
