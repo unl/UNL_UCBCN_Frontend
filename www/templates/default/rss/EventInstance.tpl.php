@@ -4,7 +4,7 @@ $endu = strtotime($context->eventdatetime->endtime);
 ?>
 <item>
 	<title><?php echo $savvy->dbStringtoHtml($context->event->title); ?></title>
-	<link><?php echo $context->url; ?></link>
+	<link><?php echo $context->getURL(); ?></link>
 	<description>
 		<?php
 		echo '&lt;div&gt;'.$savvy->dbStringtoHtml(strip_tags($context->event->description)).'&lt;/div&gt;';
@@ -26,7 +26,7 @@ $endu = strtotime($context->eventdatetime->endtime);
 	    	echo '-&lt;small&gt;&lt;abbr class="dtend" title="'.date(DATE_ISO8601, $endu).'"&gt;'.date('g:i a', $endu).'&lt;/abbr&gt;&lt;/small&gt;';
 	    }
 		if ($context->eventdatetime->location_id) {
-		    $loc = $context->eventdatetime->getLink('location_id');
+		    $loc = $context->eventdatetime->getLocation();
 			echo ' | &lt;small&gt;'.$savvy->dbStringtoHtml($loc->name);
 			if (isset($context->eventdatetime->room)) {
 			    echo ' Room:'.$savvy->dbStringtoHtml($context->eventdatetime->room);
@@ -35,5 +35,5 @@ $endu = strtotime($context->eventdatetime->endtime);
 		} ?>
 	</description>
 	<pubDate><?php echo date('r',strtotime($context->event->datecreated)); ?></pubDate>
-	<guid><?php echo $context->url; ?></guid>
+	<guid><?php echo $context->getURL(); ?></guid>
 </item>
