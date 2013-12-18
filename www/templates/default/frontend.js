@@ -670,7 +670,6 @@ function createButton(linktext, attachE, actionFunc, classN){
 	var currentView =  document.getElementById('frontend_view_selector').className;
 	var hreflink;	
 	var morelink = document.createElement("a");
-	morelink.style.display = 'inline';
 	var text = document.createTextNode(linktext);
 	morelink.className=classN;	
 	if(currentView == 'unl_ucbcn_frontend_upcoming'){
@@ -745,7 +744,7 @@ return Word;
 var zInde = 1000;
 function showMoreEvents(){
 
-	var ul = this.previousSibling;
+	var ul = this.previousSibling.previousSibling;
 	var tdcell = ul.parentNode;
 	var monthL = getElementsByClassName(document.getElementById('month_viewcal'), "span", "monthvalue");
 
@@ -776,11 +775,11 @@ function showMoreEvents(){
 	var monthval = getCalendarDate(tdcell.childNodes[1].childNodes[0].nodeValue-1);
 
 	if (tdcell.className == 'prev'){
-	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
+	showDate(ul, li, monthval, yearL[0].childNodes[1].childNodes[0].nodeValue);
 	}else if (tdcell.className == 'next'){
-	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
+	showDate(ul, li, monthval, yearL[0].childNodes[1].childNodes[0].nodeValue);
 	}else{
-	showDate(ul, li, monthval, yearL[0].firstChild.childNodes[0].nodeValue);
+	showDate(ul, li, monthval, yearL[0].childNodes[1].childNodes[0].nodeValue);
 	}
 	
 	for (i=0;i<li.length;i++){
@@ -813,7 +812,7 @@ function showMoreEvents(){
  * Call to: none
  */	
 function showDate(ulList, liList, m, y){
-	var date = ulList.parentNode.firstChild.childNodes[0].nodeValue;
+	var date = ulList.parentNode.childNodes[1].childNodes[0].nodeValue;
 	var dateUL = document.createElement("li");
 	var dateTEXT = document.createTextNode(m+' '+date+','+' '+y);
 	var dateLink = document.createElement('a');

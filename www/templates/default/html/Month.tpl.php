@@ -1,6 +1,19 @@
+<?php
+$prev = $context->getDateTime()->modify('-1 month');
+$next = $context->getDateTime()->modify('+1 month');
+?>
 <div class="month_cal" id="month_viewcal">
     <table class="wp-calendar">
-        <caption><?php echo $context->getDateTime()->format('F, Y'); ?></caption>
+        <caption>
+            <span><a href="<?php echo $context->getPreviousMonthURL(); ?>" id="prev_month" title="View events for <?php echo $prev->format('F'); ?>">&lt;&lt; </a></span>
+            <span class="monthvalue">
+                <a href="<?php echo $context->getURL(); ?>"><?php echo $context->getDateTime()->format('F'); ?></a>
+            </span>
+            <span class="yearvalue">
+                <a href="<?php echo $context->getYearURL(); ?>"><?php echo $context->getDateTime()->format('Y'); ?></a>
+            </span>
+            <span><a href="<?php echo $context->getNextMonthURL(); ?>" id="next_month" title="View events for <?php echo $next->format('F'); ?>"> &gt;&gt;</a></span>
+        </caption>
         <thead>
         <?php
         $weekdays = array(
@@ -33,16 +46,18 @@
                 echo '<tr>';
             }
 
-            $class = 'selected';
+            $classes = array('total-events-' . count($day));
             $day_timestamp = $day->getDateTime()->modify('first day of this month')->format('U');
             $current_timestamp = $context->getDateTime('first day of this month')->format('U');
             if ($day_timestamp < $current_timestamp) {
-                $class = 'prev';
-            } elseif ($day_timestamp > $current_timestamp) {
-                $class = 'next';
+                $classes[] = 'prev';
+            } else if ($day_timestamp > $current_timestamp) {
+                $classes[] = 'next';
+            } else {
+                $classes[] = 'selected';
             }
             ?>
-            <td class="<?php echo $class; ?>">
+            <td class="<?php echo implode(' ', $classes); ?>">
                 <?php echo $savvy->render($day, 'EventListing/Month.tpl.php'); ?>
             </td>
             <?php
