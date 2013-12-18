@@ -90,7 +90,7 @@ class MonthWidget extends Month
         //Using the temporary table, get the number of events for each date.
         $sql = "SELECT og.d AS day, count(*) AS events
                 FROM ongoingcheck AS og
-                JOIN calendar_has_event ON (calendar_has_event.calendar_id = 1)
+                JOIN calendar_has_event ON (calendar_has_event.calendar_id = " . (int)$this->calendar->id . ")
                 JOIN eventdatetime as e ON (calendar_has_event.event_id = e.event_id)
             
                 WHERE calendar_has_event.status IN ('posted', 'archived')
