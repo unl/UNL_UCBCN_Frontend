@@ -93,7 +93,7 @@ class MonthWidget extends Month
                 FROM ongoingcheck AS og
                 JOIN calendar_has_event ON (calendar_has_event.calendar_id = " . (int)$this->calendar->id . ")
                 JOIN eventdatetime as e ON (calendar_has_event.event_id = e.event_id)
-                LEFT JOIN recurringdate ON (recurringdate.event_id = calendar_has_event.event_id)
+                LEFT JOIN recurringdate ON (recurringdate.event_id = calendar_has_event.event_id AND recurringdate.unlinked = 0)
                 WHERE calendar_has_event.status IN ('posted', 'archived')
                 AND (
                   og.d BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
