@@ -11,16 +11,19 @@ if ($context->isInProgress()) {
 if ($context->isOnGoing()) {
     $classes[] = 'ongoing';
 }
+
+$starttime = $context->getStartTime();
+$endtime = $context->getEndTime();
 ?>
 
 <span class="<?php echo implode(' ', $classes); ?>">
     <?php
     //Convert the times to something we can use.
-    $startu = strtotime($context->eventdatetime->starttime);
-    $endu = strtotime($context->eventdatetime->endtime);
+    $startu = strtotime($starttime);
+    $endu = strtotime($endtime);
     
     //get the start time
-    if (isset($context->eventdatetime->starttime)) {
+    if (!empty($starttime)) {
         ?>
         <abbr class="dtstart" title="<?php echo date('c', $startu); ?>">
             <span class="month"><?php echo date('M', $startu); ?></span>
@@ -49,8 +52,8 @@ if ($context->isOnGoing()) {
     }
     
     //get the end time
-    if ((isset($context->eventdatetime->endtime) 
-            && $context->eventdatetime->endtime > $context->eventdatetime->starttime)
+    if ((!empty($endtime) 
+            && $endu > $startu)
             && (!$context->isAllDay() || $context->isOngoing())) {
         ?>
         -<abbr class="dtend" title="<?php date(DATE_ISO8601, $endu) ?>">

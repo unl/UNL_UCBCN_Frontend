@@ -2,6 +2,7 @@
 namespace UNL\UCBCN\Frontend;
 
 use UNL\UCBCN\Event\Occurrence;
+use UNL\UCBCN\Event\RecurringDate;
 
 class EventInstance
 {
@@ -18,6 +19,11 @@ class EventInstance
      * @var \UNL\UCBCN\Event
      */
     public $event;
+
+    /**
+     * @var RecurringDate
+     */
+    public $recurringdate;
 
     /**
      * Calendar \UNL\UCBCN\Frontend\Calendar Object
@@ -43,6 +49,26 @@ class EventInstance
         if (false === $this->eventdatetime) {
             throw new UnexpectedValueException('No event with that id exists', 404);
         }
+        
+        //Find the requested date, and ensure format
+        $requestedDate = date('Y-m-d', strtotime($this->eventdatetime->starttime));
+        if (isset($options['y'], $options['m'], $options['d'])) {
+            $requestedDate = date('Y-m-d', strtotime($options['y'] . '-' . $options['m'] . '-' . $options['d']));
+        }
+        
+        //Set the recurring date
+        if (isset($options['recurringdate_id'])) {
+            //Set the recurring date by the id
+            $this->recurringdate = RecurringDate::getByID($options['recurringdate_id']);
+        } else if ($requestedDate != date('Y-m-d', strtotime($this->eventdatetime->starttime))) {
+            //Try to find the recurring date by the eventdatetime.id and Y/m/d
+            $this->recurringdate = RecurringDate::getByAnyField(
+                '\\UNL\\UCBCN\\Event\\RecurringDate',
+                'recurringdate',
+                $requestedDate,
+                'event_id = ' . (int)$this->eventdatetime->event_id
+            );
+        }
 
         $this->event = $this->eventdatetime->getEvent();
     }
@@ -64,7 +90,7 @@ class EventInstance
      */
     public function getURL()
     {
-        return $this->calendar->getURL() . date('Y/m/d/', strtotime($this->eventdatetime->starttime)) . $this->eventdatetime->id . '/';
+        return $this->calendar->getURL() . date('Y/m/d/', strtotime($this->getStartTime())) . $this->eventdatetime->id . '/';
     }
 
     /**
@@ -129,5 +155,47 @@ class EventInstance
         }
 
         return true;
+    }
+
+    /**
+     * Get the start time for this event instance
+     * 
+     * Takes into account current recurring date, if present.
+     * This should always be used instead of directly accessing $this->eventdatetime->starttime
+     * 
+     * @return string
+     */
+    public function getStartTime()
+    {
+        $time = $this->eventdatetime->starttime;
+        
+        if ($this->recurringdate) {
+            $time = $this->recurringdate->recurringdate . ' ' . substr($time, 11);
+        }
+
+        return $time;
+    }
+    
+    /**
+     * Get the end time for this event instance
+     * 
+     * Takes into account the current recurring date, if present.
+     * This should always be used instead of directly accessing $this->eventdatetime->endtime
+     */
+    public function getEndTime()
+    {
+        $time = $this->eventdatetime->endtime;
+        
+        if (empty($time)) {
+            return $time;
+        }
+
+        if ($this->recurringdate) {
+            $diff = strtotime($this->eventdatetime->endtime) - strtotime($this->eventdatetime->starttime);
+            
+            $time = date('Y-m-d H:i:s', strtotime($this->getStartTime()) + $diff);
+        }
+        
+        return $time;
     }
 }

@@ -88,16 +88,19 @@ class MonthWidget extends Month
         $db->query($sql);
         
         //Using the temporary table, get the number of events for each date.
-        $sql = "SELECT og.d AS day, count(*) AS events
+        $sql = "
+                SELECT og.d as day, count(DISTINCT e.id) as events
                 FROM ongoingcheck AS og
-                JOIN calendar_has_event ON (calendar_has_event.calendar_id = 1)
+                JOIN calendar_has_event ON (calendar_has_event.calendar_id = " . (int)$this->calendar->id . ")
                 JOIN eventdatetime as e ON (calendar_has_event.event_id = e.event_id)
-            
+                LEFT JOIN recurringdate ON (recurringdate.event_id = calendar_has_event.event_id AND recurringdate.unlinked = 0)
                 WHERE calendar_has_event.status IN ('posted', 'archived')
-                AND og.d BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
-            
-                AND og.d >= '$firstday' AND og.d <= '$lastday'
-                GROUP BY day";
+                AND (
+                  og.d BETWEEN DATE(e.starttime) AND IF(DATE(e.endtime), DATE(e.endtime), DATE(e.starttime))
+                  OR og.d = recurringdate.recurringdate
+                )
+                AND (og.d >= '$firstday' AND og.d <= '$lastday')
+                group by og.d";
         $res = $db->query($sql);
         
         if (!$res) {
