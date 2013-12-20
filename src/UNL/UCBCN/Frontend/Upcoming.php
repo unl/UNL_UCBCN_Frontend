@@ -73,11 +73,20 @@ class Upcoming extends EventListing
     {
         $timestamp = $this->getDateTime()->getTimestamp();
 
-        $sql = 'SELECT eventdatetime.id FROM eventdatetime
-                INNER JOIN event ON eventdatetime.event_id = event.id
+        $sql = '
+                SELECT e.id as id, recurringdate.id as recurringdate_id
+                FROM eventdatetime as e
+                INNER JOIN event ON e.event_id = event.id
+                INNER JOIN calendar_has_event ON calendar_has_event.event_id = event.id
+                LEFT JOIN recurringdate ON (recurringdate.event_id = event.id)
                 WHERE
-                    eventdatetime.starttime >= "'.date('Y-m-d', $timestamp).'"
-                ORDER BY eventdatetime.starttime ASC, event.title ASC
+                    calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
+                    AND (
+                        e.starttime >= "'.date('Y-m-d', $timestamp).'"
+                        OR recurringdate.recurringdate >= "'.date('Y-m-d', $timestamp).'"
+                    )
+                ORDER BY e.starttime ASC, recurringdate.recurringdate ASC, event.title ASC
+                LIMIT 20
                 ';
         return $sql;
     }
