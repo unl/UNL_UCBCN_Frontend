@@ -181,7 +181,7 @@
                 </ProfessionalAffiliations>
                 <Phones>
                     <Phone>
-                        <PhoneNumber><?php echo htmlspecialchars($contact->phone); ?>/PhoneNumber>
+                        <PhoneNumber><?php echo htmlspecialchars($contact->phone); ?></PhoneNumber>
                     </Phone>
                 </Phones>
 
