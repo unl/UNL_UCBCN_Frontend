@@ -114,13 +114,16 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
         <div id="maincontent" class="wdn-main">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->
-            <div class="wdn-band view-<?php echo $view_class; ?>">
-                <div class="wdn-inner-wrapper">
+            <div class="wdn-band view-<?php echo $view_class; ?> band-nav">
+                <div class="wdn-inner-wrapper wdn-grid-set">
+                    <div class="wdn-col-one-third">
                     <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
                         <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
                         <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
                         <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
                     </ul>
+                    </div>
+                    <div class="wdn-col-two-thirds">
                     <a id="frontend_login" href="<?php echo Controller::$manager_url; ?>">Submit an Event</a>
                     <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
                         <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
@@ -130,9 +133,10 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                             <a href="#" title="close search tip">(close message)</a>
                         </p>
                     </form>
+                    </div>
                 </div>
             </div>
-            <div class="wdn-band view-<?php echo $view_class; ?>">
+            <div class="wdn-band view-<?php echo $view_class; ?> band-results">
                 <div class="wdn-inner-wrapper">
                     <?php 
                         $template = null;
