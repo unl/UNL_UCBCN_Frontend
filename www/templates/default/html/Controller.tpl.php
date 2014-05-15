@@ -121,9 +121,8 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <div class="wdn-band view-<?php echo $view_class; ?>">
                 <div class="wdn-inner-wrapper">
-                    <div id="load"></div>
                     <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
-                        <input type='text' name='q' id='searchinput' alt='Search for events' value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+                        <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
                         <input type='submit' name='submit' value="Search" />
                         <input type='hidden' name='search' value='search' />
                         <p id="search_term">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
