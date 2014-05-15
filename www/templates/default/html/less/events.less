@@ -6,7 +6,7 @@
 @import "lib/colors.less";
 @import "lib/fonts.less";
 
-#monthwidget {
+#monthwidget, #month_viewcal {
 
     caption {
         background-color: mix(@ui09, @page-background, 95%);
@@ -17,11 +17,58 @@
         }
     }
 
-    td, th {
-        text-align:center;
+    th {
         text-transform:uppercase;
     }
+
+    td, th {
+        text-align:center;
+    }
+
+    td {
+        background-color:#fff;
+    }
 }
+
+#month_viewcal {
+    td {
+        font-size:0.65rem;
+        text-align:left;
+        border:1px solid darken(#fff, 20%);
+        vertical-align:top;
+
+        a {
+            text-decoration:none;
+            border-bottom:none;
+        }
+
+        > a {
+            font-size:1rem;
+        }
+
+        .year, .month, .day, .am-pm, .date-title-separator {
+            display:none;
+        }
+
+        abbr {
+            border-bottom:none;
+        }
+
+        ul {
+            padding:0;
+            li {
+                list-style:none;
+            }
+
+            li:nth-child(n + 5) {
+                display:none;
+            }
+
+        }
+
+    }
+}
+
 
 #maincontent {
 
