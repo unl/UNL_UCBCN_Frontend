@@ -117,22 +117,22 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <div class="wdn-band view-<?php echo $view_class; ?> band-nav">
                 <div class="wdn-inner-wrapper wdn-grid-set">
                     <div class="wdn-col-one-third">
-                    <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
-                        <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
-                        <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
-                        <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
-                    </ul>
+                        <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
+                            <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
+                            <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
+                            <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
+                        </ul>
                     </div>
                     <div class="wdn-col-two-thirds">
-                    <a id="frontend_login" href="<?php echo Controller::$manager_url; ?>">Submit an Event</a>
-                    <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
-                        <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
-                        <input type='submit' name='submit' value="Search" />
-                        <input type='hidden' name='search' value='search' />
-                        <p id="search_help">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
-                            <a href="#" title="close search tip">(close message)</a>
-                        </p>
-                    </form>
+                        <a id="frontend_login" href="<?php echo Controller::$manager_url; ?>">Submit an Event</a>
+                        <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
+                            <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+                            <input type='submit' name='submit' value="Search" />
+                            <input type='hidden' name='search' value='search' />
+                            <p id="search_help">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
+                                <a href="#" title="close search tip">(close message)</a>
+                            </p>
+                        </form>
                     </div>
                 </div>
             </div>
