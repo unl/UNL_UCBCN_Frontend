@@ -6,7 +6,7 @@
 @import "lib/colors.less";
 @import "lib/fonts.less";
 
-#monthwidget, #month_viewcal {
+.monthwidget, #month_viewcal {
 
     caption {
         background-color: mix(@ui09, @page-background, 95%);
@@ -136,6 +136,10 @@
                 border-top:2px solid darken(#fff, 15%);
             }
         }
+    }
+
+    .monthwidget {
+        float:left;
     }
 }
 
