@@ -2,14 +2,6 @@
     <?php echo $savvy->render($context->getMonthWidget()); ?>
 </div>
 
-<div class="cal_widget">
-    <h3>Contribute/Learn More</h3>
-    <ul>
-        <li id="login_list"><a id="frontend_login" href="<?php echo $context->manager_url; ?>">Submit an Event</a> </li>
-    </ul>
-</div>
-
-
 <div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
     <span>Subscribe to this calendar</span>
     <ul id="droplist">

@@ -1,4 +1,5 @@
 <?php
+use UNL\UCBCN\Frontend\Controller;
 if (!isset($GLOBALS['unl_template_dependents'])) {
     $GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
 }
@@ -121,6 +122,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <div class="wdn-band view-<?php echo $view_class; ?>">
                 <div class="wdn-inner-wrapper">
+                    <a id="frontend_login" href="<?php echo Controller::$manager_url; ?>">Submit an Event</a>
                     <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
                         <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
                         <input type='submit' name='submit' value="Search" />
