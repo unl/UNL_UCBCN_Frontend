@@ -48,7 +48,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>
-<body class="fixed" data-version="4.0">
+<body class="terminal" data-version="4.0">
 <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/skipnav.html'; ?>
 <div id="wdn_wrapper">
     <input type="checkbox" id="wdn_menu_toggle" value="Show navigation menu" class="wdn-content-slide wdn-input-driver" />
@@ -92,12 +92,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <nav id="navigation" role="navigation" class="wdn-band">
                 <h3 class="wdn_list_descriptor wdn-text-hidden">Navigation</h3>
                 <!-- InstanceBeginEditable name="navlinks" -->
-                <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
-                    <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today's Events</a></li>
-                    <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">This Month</a></li>
-                    <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">This Year</a></li>
-                    <li id="upcomingview"><a href="<?php echo $frontend->getCalendarURL(); ?>upcoming/">Upcoming</a></li>
-                </ul>
                 <!-- InstanceEndEditable -->
                 <label for="wdn_menu_toggle" class="wdn-icon-menu">Menu</label>
             </nav>
@@ -122,6 +116,11 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <div class="wdn-band view-<?php echo $view_class; ?>">
                 <div class="wdn-inner-wrapper">
+                    <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
+                        <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
+                        <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
+                        <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
+                    </ul>
                     <a id="frontend_login" href="<?php echo Controller::$manager_url; ?>">Submit an Event</a>
                     <form id="event_search" name="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search">
                         <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
