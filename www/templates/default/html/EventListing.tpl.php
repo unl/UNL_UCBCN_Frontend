@@ -1,11 +1,4 @@
-<table>
-    <thead>
-        <tr>
-            <th scope="col" class="date">Time</th>
-            <th scope="col" class="title">Event Title</th>
-        </tr>
-    </thead>
-    <tbody class="vcalendar">
+    <div class="vcalendar">
         <?php
         foreach ($context as $eventinstance) {
             //Start building an array of row classes
@@ -24,19 +17,14 @@
             }
 
             ?>
-            <tr class="<?php echo implode(' ', $row_classes) ?>">
-                <td class="date">
-                    <?php echo $savvy->render($eventinstance, 'EventInstance/Date.tpl.php') ?>
-                </td>
-                <td>
+            <div class="<?php echo implode(' ', $row_classes) ?>">
                     <?php echo $savvy->render($eventinstance, 'EventInstance/Summary.tpl.php') ?>
+                    <?php echo $savvy->render($eventinstance, 'EventInstance/Date.tpl.php') ?>
                     <?php echo $savvy->render($eventinstance, 'EventInstance/Location.tpl.php') ?>
                     <?php echo $savvy->render($eventinstance, 'EventInstance/Description.tpl.php') ?>
-                </td>
-            </tr>
+            </div>
             <?php
         }
         ?>
-    </tbody>
-</table>
+    </div>
 
