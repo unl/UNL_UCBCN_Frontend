@@ -7,16 +7,10 @@
     </thead>
     <tbody class="vcalendar">
         <?php
-        $oddrow = false;
         foreach ($context as $eventinstance) {
             //Start building an array of row classes
             $row_classes = array('vevent');
-        
-            if ($oddrow) {
-                //Add an alt class to odd rows
-                $row_classes[] = 'alt';
-            }
-            
+
             if ($eventinstance->isAllDay()) {
                 $row_classes[] = 'all-day';
             }
@@ -28,10 +22,7 @@
             if ($eventinstance->isOnGoing()) {
                 $row_classes[] = 'ongoing';
             }
-        
-            //Invert oddrow
-            $oddrow = !$oddrow;
-        
+
             ?>
             <tr class="<?php echo implode(' ', $row_classes) ?>">
                 <td class="date">
