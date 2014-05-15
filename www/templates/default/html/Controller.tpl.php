@@ -38,7 +38,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <!-- InstanceEndEditable -->
     <!-- InstanceBeginEditable name="head" -->
     <!-- Place optional header elements here -->
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/frontend_main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/html/css/events.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/facebook.css" />
     <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/ajaxCaller.js"></script>
     <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/frontend.js"></script>
