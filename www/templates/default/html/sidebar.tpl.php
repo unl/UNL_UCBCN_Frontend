@@ -6,8 +6,6 @@
     <h3>Contribute/Learn More</h3>
     <ul>
         <li id="login_list"><a id="frontend_login" href="<?php echo $context->manager_url; ?>">Submit an Event</a> </li>
-        <li><a href="http://www1.unl.edu/wdn/wiki/UNL_Calendar_Documentation">Learn More</a></li>
-        <li><a href="http://www1.unl.edu/comments/">Provide Feedback</a> </li>
     </ul>
 </div>
 
