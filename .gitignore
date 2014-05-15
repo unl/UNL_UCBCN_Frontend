@@ -1,2 +1,8 @@
 /config.inc.php
 /www/.htaccess
+/.project
+/.settings
+/www/css
+/www/less/lib
+/.buildpath
+
