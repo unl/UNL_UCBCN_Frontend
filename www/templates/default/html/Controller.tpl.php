@@ -130,6 +130,10 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                             <a href="#" title="close search tip">(close message)</a>
                         </p>
                     </form>
+                </div>
+            </div>
+            <div class="wdn-band view-<?php echo $view_class; ?>">
+                <div class="wdn-inner-wrapper">
                     <?php 
                         $template = null;
                         if ($context->output->getRawObject() instanceof Exception) {
