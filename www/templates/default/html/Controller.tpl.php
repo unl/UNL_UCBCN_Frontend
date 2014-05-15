@@ -125,7 +125,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                         <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
                         <input type='submit' name='submit' value="Search" />
                         <input type='hidden' name='search' value='search' />
-                        <p id="search_term">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
+                        <p id="search_help">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
                             <a href="#" title="close search tip">(close message)</a>
                         </p>
                     </form>
