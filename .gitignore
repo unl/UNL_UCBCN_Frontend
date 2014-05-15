@@ -2,8 +2,8 @@
 /www/.htaccess
 /.project
 /.settings
-/www/css
-/www/less/lib
+/www/templates/default/html/css
+/www/templates/default/html/less/lib
 /.buildpath
 /node_modules
 
