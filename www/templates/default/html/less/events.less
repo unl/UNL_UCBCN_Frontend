@@ -23,7 +23,10 @@
     }
 }
 
+#maincontent {
+
 .band-nav {
+
     ul {
         li {
             display:inline;
@@ -32,11 +35,35 @@
 
     .wdn-inner-wrapper {
         border-bottom: 1px solid darken(@page-background, 20%);
+        padding-top:1rem;
+        padding-bottom:0.5rem;
     }
 
+    #frontend_login {
+        float:left;
+    }
+
+
+    #event_search {
+        margin:0;
+        padding:0;
+        float:right;
+        width:45%;
+
+
+        input, button {
+            font-size:0.75rem;
+        }
+
+    }
 }
 
 .band-results {
+
+    .wdn-inner-wrapper {
+        padding-top:1rem;
+    }
+
     h4 {
         margin:0 0 1rem;
     }
@@ -53,4 +80,6 @@ h4 {
 
 #search_help {
     display:none;
+}
+
 }
