@@ -19,12 +19,6 @@ $url    = $frontend->getCalendarURL().date('Y/m/d/', $startu).$context->eventdat
 	<div class='vevent'>
 		<h1 class='summary'><?php echo $savvy->dbStringtoHtml($context->event->title); ?> <a class="permalink" href="<?php echo $url; ?>">(link)</a></h1>
 		<?php if (isset($context->event->subtitle)) echo '<h2>'.$savvy->dbStringtoHtml($context->event->subtitle).'</h2>'; ?>
-		<div id="tabsG">
-		  <ul>
-		    <li><a href="#" id="event_selected" title="Event Detail"><span>Event Detail</span></a></li>
-		
-		  </ul>
-		</div>
 		<table>
 		<thead>
 			<tr>
