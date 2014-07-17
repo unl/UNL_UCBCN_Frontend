@@ -40,7 +40,11 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <!-- Place optional header elements here -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/html/css/events.css" />
     <link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
-    <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search" />
+    <link rel="home" href="<?php echo $context->getCalendarURL() ?>" />
+    <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search/" />
+<?php if ($context->getRaw('output') instanceof UNL\UCBCN\Frontend\RoutableInterface): ?>
+    <link rel="canonical" href="<?php echo $context->output->getURL() ?>" />
+<?php endif; ?>
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>
