@@ -24,7 +24,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Week
+class Week extends \IteratorIterator implements RoutableInterface
 {
     /**
      * Calendar to show events for UNL_UCBCN_Month object
@@ -33,69 +33,15 @@ class Week
      */
     public $calendar;
     
-    /**
-     * Year the user is viewing.
-     * 
-     * @var int
-     */
-    public $year;
+    public $options = array(
+        'w' => null,
+        'y' => null,
+    );
     
     /**
-     * Month the user is viewing.
-     * 
-     * @var int
+     * @var \DatePeriod
      */
-    public $month;
-    
-    /**
-     * Day included in the week the user is viewing.
-     * 
-     * @var int
-     */
-    public $day;
-    
-    /**
-     * start day of the week 0 = Sunday
-     * 
-     * @var int
-     */
-    public $firstDay = 0;
-    
-    /**
-     * Display ongoing events?
-     * 
-     * @var bool
-     */
-    public $ongoing = true;
-    
-    /**
-     * Listing of events on this week. This will be an array of 7 
-     * UNL_UCBCN_Frontend_Day objects.
-     * 
-     * @var array
-     */
-    public $output;
-    
-    /**
-     * URL to this view.
-     * 
-     * @var string
-     */
-    public $url;
-    
-    /**
-     * URL to the next week
-     * 
-     * @var string
-     */
-    public $next_url;
-    
-    /**
-     * URL to the previous week
-     * 
-     * @var string
-     */
-    public $prev_url;
+    public $datePeriod;
     
     /**
      * Constructs this week object.
@@ -104,38 +50,59 @@ class Week
      */
     public function __construct($options)
     {
-        parent::__construct($options);
-        if (!isset($this->calendar)) {
-            $this->calendar = UNL_UCBCN::factory('calendar');
-            if (!$this->calendar->get(1)) {
-                return new UNL_UCBCN_Error('No calendar specified or could be found.');
-            }
+        if (!isset($options['calendar'])) {
+            throw new InvalidArgumentException('A calendar must be set', 500);
         }
-        $this->output[] = $this->showWeek();
-        $this->url = $this->getURL();
+
+        $this->calendar = $options['calendar'];
+        
+        // Set defaults
+        $this->options['w'] = date('W');
+        $this->options['y'] = date('Y');
+        
+        $this->options = $options + $this->options;
+        
+        $this->datePeriod = new \DatePeriod($this->getStartDateTime(), new \DateInterval('P1D'), $this->getEndDateTime());
+        parent::__construct($this->datePeriod);
+    }
+    public function getDateTime()
+    {
+        return new \DateTime($this->options['y'] . '-' . 'W' . $this->options['w']);
     }
     
-    /**
-     * Populates the output with the days for the events in this week.
-     * 
-     * @return void
-     */
-    public function showWeek()
+    public function getStartDateTime()
     {
-        $week = new Calendar_Week($this->year,
-                                  $this->month,
-                                  $this->day,
-                                  $this->firstDay);
-        $week->build();
-        while ($day = $week->fetch()) {
-            $this->output[] = new UNL_UCBCN_Frontend_Day(array(
-                            'year'=>$day->thisYear(),
-                            'month'=>$day->thisMonth(),
-                            'day'=>$day->thisDay(),
-                            'calendar'=>$this->calendar,
-                            'dsn'=>$this->dsn,
-                            'ongoing'=>$this->ongoing));
+        $start = $this->getDateTime();
+        
+        if (Month::$weekday_start != $start->format('l')) {
+            $start->modify('last ' . Month::$weekday_start);
         }
+        
+        return $start;
+    }
+    
+    public function getEndDateTime()
+    {
+        return $this->getStartDateTime()->modify('+1 week');
+    }
+    
+    function current()
+    {
+        /* @var $datetime \DateTime */
+        $datetime = parent::current();
+
+        $options = array(
+            'm' => $datetime->format('m'),
+            'y' => $datetime->format('Y'),
+            'd' => $datetime->format('d'),
+        ) + $this->options;
+
+        return new Day($options);
+    }
+    
+    public static function generateURL(Calendar $calendar, \DateTime $datetime)
+    {
+        return $calendar->getURL() . $datetime->format('Y/\WW/');
     }
 
     /**
@@ -145,10 +112,21 @@ class Week
      */
     public function getURL()
     {
-        return UNL_UCBCN_Frontend::formatURL(array('s'=>$this->firstDay,
-                                                   'd'=>$this->day,
-                                                   'm'=>$this->month,
-                                                   'y'=>$this->year,
-                                                   'calendar'=>$this->calendar->id));
+        return self::generateURL($this->calendar, $this->getDateTime());
+    }
+    
+    public function getNextURL()
+    {
+        return self::generateURL($this->calendar, $this->getDateTime()->modify('+1 week'));
+    }
+    
+    public function getPreviousURL()
+    {
+        return self::generateURL($this->calendar, $this->getDateTime()->modify('-1 week'));
+    }
+    
+    public function getYearURL()
+    {
+        return Year::generateURL($this->calendar, $this->getDateTime());
     }
 }
