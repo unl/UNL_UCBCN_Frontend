@@ -110,8 +110,10 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                     <div class="wdn-col-one-third">
                         <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
                             <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
+                            <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
                             <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
                             <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
+                            <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
                         </ul>
                     </div>
                     <div class="wdn-col-two-thirds" class="submit-search">
