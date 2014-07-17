@@ -26,7 +26,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Month extends \IteratorIterator
+class Month extends \IteratorIterator implements RoutableInterface
 {
     /**
      * Calendar to show events for UNL_UCBCN_Month object

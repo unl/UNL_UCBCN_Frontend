@@ -27,7 +27,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/ 
  */
-class Year
+class Year implements RoutableInterface
 {
     /**
      * Year to show events for.

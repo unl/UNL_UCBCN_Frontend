@@ -4,7 +4,7 @@ namespace UNL\UCBCN\Frontend;
 use UNL\UCBCN\Event\Occurrence;
 use UNL\UCBCN\Event\RecurringDate;
 
-class EventInstance
+class EventInstance implements RoutableInterface
 {
     /**
      * The event date & time record
