@@ -2,7 +2,7 @@
     <?php echo $savvy->render($context->getMonthWidget()); ?>
 </div>
 
-<div id="subscribe" onmouseover="if(!g_bH){document.getElementById('droplist').style.display='block';}" onmouseout="if(!g_bH){document.getElementById('droplist').style.display='none';}">
+<div id="subscribe">
     <span>Subscribe to this calendar</span>
     <ul id="droplist">
         <li id="eventrss"><a href="<?php echo $frontend->getUpcomingURL(); ?>?format=rss&amp;limit=100" title="RSS feed">RSS feed</a></li>
