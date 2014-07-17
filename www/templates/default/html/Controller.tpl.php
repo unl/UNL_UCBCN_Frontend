@@ -40,9 +40,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <!-- InstanceBeginEditable name="head" -->
     <!-- Place optional header elements here -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/html/css/events.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/facebook.css" />
-    <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/ajaxCaller.js"></script>
-    <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/frontend.js"></script>
     <link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
     <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search" />
     <!-- InstanceEndEditable -->
@@ -77,15 +74,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- WDN: see glossary item 'breadcrumbs' -->
             <h3 class="wdn_list_descriptor wdn-text-hidden">Breadcrumbs</h3>
             <!-- InstanceBeginEditable name="breadcrumbs" -->
-            <ul>
-                <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-                <?php
-                if (!empty($context->getCalendar()->website) && ($context->getCalendar()->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id'])) {
-                    echo '<li><a href="'.$context->getCalendar()->website.'">'.$context->getCalendar()->name.'</a></li>';
-                }
-                ?>
-                <li>Events</li>
-            </ul>
             <!-- InstanceEndEditable -->
         </nav>
         <div id="wdn_navigation_wrapper">
@@ -164,10 +152,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
         <div class="wdn-band" id="wdn_footer_related">
             <div class="wdn-inner-wrapper">
                 <!-- InstanceBeginEditable name="leftcollinks" -->
-                <h3>Related Links</h3>
-                <ul>
-                    <li><a href="http://code.google.com/p/unl-event-publisher/">UNL Event Publisher</a></li>
-                </ul>
                 <!-- InstanceEndEditable -->
             </div>
         </div>
@@ -177,19 +161,14 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                     <h3>Contact Us</h3>
                     <div class="wdn-contact-wrapper">
                         <!-- InstanceBeginEditable name="contactinfo" -->
-                        <h3>Contacting Us</h3>
-                        <p><strong>University of Nebraska-Lincoln</strong><br />
-                            1400 R Street<br />
-                            Lincoln, NE 68588 <br />
-                            402-472-7211</p>
                         <!-- InstanceEndEditable -->
                     </div>
                 </div>
                 <div id="wdn_copyright">
                     <div class="wdn-footer-text">
                         <!-- InstanceBeginEditable name="footercontent" -->
-                        Yeah, it's open source. &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
-                        <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
+                        Powered by <a href="http://code.google.com/p/unl-event-publisher/">UNL Event Publisher</a>. Yeah, it's open source<br />
+                        &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
                         <!-- InstanceEndEditable -->
                         <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/wdn.html'; ?>
                     </div>
