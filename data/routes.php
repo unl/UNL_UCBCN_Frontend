@@ -19,7 +19,6 @@ $format   = '(\.(?P<format>[\w]+))?';
 
 $routes['/^images\/(?P<id>[\d]+)'.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Image';
 $routes['/^'.$calendar.'upcoming'.'\/'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Upcoming';
-$routes['/^'.$calendar.'fullcal'.'\/'.$format.'$/']                                      = 'UNL\UCBCN\Frontend\FullCal';
 $routes['/^'.$calendar.'week'.'\/'.$format.'$/']                                         = 'UNL\UCBCN\Frontend\Week';
 $routes['/^'.$calendar.'search(\/(?P<q>.+))'.'\/'.$format.'$/']                          = 'UNL\UCBCN\Frontend\Search';
 $routes['/^'.$calendar.'$/']                                                             = 'UNL\UCBCN\Frontend\Day';
