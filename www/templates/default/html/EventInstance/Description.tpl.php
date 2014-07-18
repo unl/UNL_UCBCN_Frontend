@@ -1,3 +1,3 @@
-<blockquote class="description">
-    <?php echo $savvy->dbStringtoHtml($context->event->description) ?>
-</blockquote>
+<div class="description">
+    <?php echo $savvy->dbStringtoHtml($context->getShortDescription()) ?>
+</div>

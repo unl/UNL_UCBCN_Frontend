@@ -198,4 +198,21 @@ class EventInstance implements RoutableInterface
         
         return $time;
     }
+    
+    public function getShortDescription($maxChars = 250)
+    {
+        // normalize line endings
+        $fullDescription = str_replace("\r\n", "\n", $this->event->description);
+        
+        // break on paragraphs
+        $fullDescription = explode("\n\n", $fullDescription);
+        
+        if (mb_strlen($fullDescription[0]) > $maxChars) {
+            // find the maximum number of characters that do not break a word
+            preg_match("/.{1,$maxChars}(?:\\b|$)/s", $fullDescription[0], $matches);
+            return $matches[0] . ' ...';
+        }
+        
+        return $fullDescription[0];
+    }
 }
