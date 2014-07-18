@@ -107,7 +107,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <div class="wdn-band view-<?php echo $view_class; ?> band-nav">
                 <div class="wdn-inner-wrapper"><div class="wdn-grid-set">
-                    <div class="wdn-col-one-third">
+                    <div class="bp2-wdn-col-one-third">
                         <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
                             <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
                             <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
@@ -116,18 +116,15 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                             <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
                         </ul>
                     </div>
-                    <div class="wdn-col-two-thirds" class="submit-search">
-                        <a id="frontend_login" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
+                    <div class="bp2-wdn-col-two-thirds submit-search">
+                        <a id="frontend_login" class="wdn-icon-plus" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
                         <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
                             <div class="wdn-input-group">
-                                <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+                                <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
                                 <span class="wdn-input-group-btn">
                                     <button type="submit" class="wdn-icon-search" title="Search"></button>
                                 </span>
                             </div>
-                            <p id="search_help">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
-                                <a href="#" title="close search tip">(close message)</a>
-                            </p>
                         </form>
                     </div>
                 </div></div>
