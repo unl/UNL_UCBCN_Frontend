@@ -28,7 +28,7 @@ foreach ($context as $e) {
     
     ?>
     <li class="<?php echo implode(' ', $classes); ?>">
-        <?php echo $savvy->render($e, 'EventInstance/Date.tpl.php') ?> <span class="date-title-separator">:</span>
+        <?php echo $savvy->render($e, 'EventInstance/TimeOnly.tpl.php') ?>
         <a href="<?php echo $e->getURL(); ?>"><?php echo $savvy->dbStringtoHtml($e->event->title)?></a>
     </li>
     <?php
