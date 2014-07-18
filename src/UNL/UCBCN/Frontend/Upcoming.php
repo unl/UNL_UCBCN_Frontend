@@ -25,7 +25,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Upcoming extends EventListing
+class Upcoming extends EventListing implements RoutableInterface
 {
     /**
      * Calendar \UNL\UCBCN\Calendar Object

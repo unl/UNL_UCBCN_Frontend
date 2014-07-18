@@ -1,20 +1,11 @@
-<h4 class="sec_main">
-    <?php
-    $day = $context->getDateTime();
-    echo date('l, F jS',$day->getTimeStamp());
-    ?> <a class="permalink" href="<?php echo $context->getURL(); ?>">(link)</a>
-</h4>
-<p id="day_nav">
+<?php $formattedDate = $context->getDateTime()->format('l, F jS'); ?>
+<h1 class="day-heading">
+    <?php echo $formattedDate ?>
+    <a class="permalink" href="<?php echo $context->getURL(); ?>" title="permalink"><span class="wdn-icon-link"></span></a>
+    <a title="ics format for events on <?php echo $formattedDate ?>" href="<?php echo $context->getURL() ?>.ics"><span class="wdn-icon-calendar"></span></a>
+</h1>
+<p class="day-nav">
     <a class="url prev" href="<?php echo $context->getPreviousDay()->getURL(); ?>">Previous Day</a>
     <a class="url next" href="<?php echo $context->getNextDay()->getURL(); ?>">Next Day</a>
 </p>
-<div>
-    <?php
-    echo $savvy->render($context, 'EventListing.tpl.php');
-    ?>
-</div>
-
-<p id="feeds">
-    <a id="icsformat" title="ics format for events on <?php echo date('l, F jS',$day->getTimeStamp()) ?>" href="<?php echo $context->getURL() ?>.ics">ics format for events on <?php echo date('l, F jS',$day->getTimeStamp())?></a>
-    <a id="rssformat" title="rss format for events on <?php echo date('l, F jS',$day->getTimeStamp()) ?>" href="<?php echo $context->getURL() ?>.rss">rss format for events on <?php echo date('l, F jS',$day->getTimeStamp())?></a>
-</p>
+<?php echo $savvy->render($context, 'EventListing.tpl.php'); ?>

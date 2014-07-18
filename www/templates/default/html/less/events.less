@@ -6,7 +6,7 @@
 @import "lib/colors.less";
 @import "lib/fonts.less";
 
-.monthwidget, #month_viewcal {
+.wp-calendar {
 
     caption {
         background-color: mix(@ui09, @page-background, 95%);
@@ -14,16 +14,25 @@
         .sans-serif-font();
         font-size:0.75rem;
         text-transform:uppercase;
-        padding:0.55em;
+        padding: 1em;
+        margin: 0;
     
         a {
             color:#fff;
+        }
+        
+        > :first-child {
+        	float: left;
+        }
+        > :last-child {
+        	float: right;
         }
     }
 
     th {
         text-transform:uppercase;
         background-color:#eee;
+        width: 14%;
     }
 
     td, th {
@@ -31,6 +40,7 @@
         font-size:0.75rem;
         text-align:center;
         border:1px solid darken(#fff, 20%);
+        padding: 2px 1px;
     }
 
     td {
@@ -47,6 +57,7 @@
         font-size:0.65rem;
         text-align:left;
         vertical-align:top;
+        padding: 6px;
 
         a {
             text-decoration:none;
@@ -57,27 +68,43 @@
             font-size:1rem;
         }
 
-        .year, .month, .day, .am-pm, .date-title-separator {
-            display:none;
-        }
-
-        abbr {
-            border-bottom:none;
-        }
-
         ul {
             padding:0;
             li {
                 list-style:none;
             }
-
-            li:nth-child(n + 5) {
-                display:none;
-            }
-
         }
 
     }
+}
+
+.day-nav {
+	display: none;
+}
+
+#subscribe {
+	margin-top: 2em;
+	padding-top: 1em;
+	border-top: 1px solid @ui04;
+	
+	span {
+		.sans-serif-font();
+		font-size: 0.75em;
+		text-transform: uppercase;
+	}
+	
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		font-size: 1.4375em;
+		.brand-font();
+		
+		li {
+			display: inline;
+			margin-right: 1em;
+		}
+	}
 }
 
 
@@ -91,35 +118,41 @@
         text-transform:uppercase;
         margin:0;
         padding:0;
+        font-size: 1.4375em;
 
         li {
             display:inline;
+            margin-right: 0.5em;
         }
     }
 
     .wdn-inner-wrapper {
-        border-bottom: 1px solid darken(@page-background, 20%);
+        border-bottom: 1px solid @ui04;
         padding-top:1rem;
         padding-bottom:0.5rem;
     }
+    
+    .submit-search {
+    	text-align: right;
+    }
 
     #frontend_login {
-        float:left;
         text-transform:uppercase;
+        margin-right: 1em;
+        font-size: 1.4375em;
     }
 
 
     #event_search {
         margin:0;
         padding:0;
-        float:right;
         width:45%;
-
-
-        input, button {
-            font-size:0.75rem;
+        display: inline-block;
+        font-size: 0.75em;
+        
+        button {
+        	font-size: 0.75em;
         }
-
     }
 }
 
@@ -129,18 +162,26 @@
         padding-top:1rem;
     }
 
-    h4 {
+    .day-heading {
         margin:0 0 1rem;
         .sans-serif-font();
         font-size:0.75rem;
         text-transform:uppercase;
         padding:1em;
+        background-color: mix(@ui09, @page-background, 95%);
+	    color: #fff;
+	
+	    a {
+	    	float: right;
+	        color:#fff;
+	        margin-left: 0.5em;
+	    }
     }
 
     .vcalendar {
         .vevent {
             background-color:#fff;
-            border-top:5px solid darken(#fff, 30%);
+            border-top:5px solid @ui05;
             padding:0 2rem 2rem;
             margin-bottom:1rem;
 
@@ -148,14 +189,17 @@
                 border-top:5px solid @scarlet;
             }
 
-            .date-wrapper {
+            .date-wrapper,
+            .time-wrapper,
+            .location {
                 display:block;
+                .sans-serif-font();
             }
-
+            
             .description {
                 margin:1rem 0;
                 padding-top:1rem;
-                border-top:2px solid darken(#fff, 15%);
+                border-top:1px solid @ui04;
             }
         }
     }
@@ -167,18 +211,4 @@
         }
     }
 }
-
-h4 {
-    background-color: mix(@ui09, @page-background, 95%);
-    color: #fff;
-
-    a {
-        color:#fff;
-    }
-}
-
-#search_help {
-    display:none;
-}
-
 }

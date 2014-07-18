@@ -269,6 +269,11 @@ class Controller
     {
         return Upcoming::generateURL($this->options['calendar']);
     }
+    
+    public function getCurrentWeekURL()
+    {
+        return Week::generateURL($this->options['calendar'], new \DateTime);
+    }
 
     /**
      * Gets the specified event instance.

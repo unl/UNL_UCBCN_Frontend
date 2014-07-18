@@ -1,5 +1,4 @@
 <?php
-use UNL\UCBCN\Frontend\Controller;
 if (!isset($GLOBALS['unl_template_dependents'])) {
     $GLOBALS['unl_template_dependents'] = $_SERVER['DOCUMENT_ROOT'];
 }
@@ -40,11 +39,12 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <!-- InstanceBeginEditable name="head" -->
     <!-- Place optional header elements here -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/html/css/events.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/facebook.css" />
-    <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/ajaxCaller.js"></script>
-    <script type="text/javascript" src="<?php echo $frontend->getURL() ?>templates/default/frontend.js"></script>
     <link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
-    <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search" />
+    <link rel="home" href="<?php echo $context->getCalendarURL() ?>" />
+    <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search/" />
+<?php if ($context->getRaw('output') instanceof UNL\UCBCN\Frontend\RoutableInterface): ?>
+    <link rel="canonical" href="<?php echo $context->output->getURL() ?>" />
+<?php endif; ?>
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>
@@ -77,15 +77,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- WDN: see glossary item 'breadcrumbs' -->
             <h3 class="wdn_list_descriptor wdn-text-hidden">Breadcrumbs</h3>
             <!-- InstanceBeginEditable name="breadcrumbs" -->
-            <ul>
-                <li><a href="http://www.unl.edu/" title="University of Nebraska&ndash;Lincoln">UNL</a></li>
-                <?php
-                if (!empty($context->getCalendar()->website) && ($context->getCalendar()->id != $GLOBALS['_UNL_UCBCN']['default_calendar_id'])) {
-                    echo '<li><a href="'.$context->getCalendar()->website.'">'.$context->getCalendar()->name.'</a></li>';
-                }
-                ?>
-                <li>Events</li>
-            </ul>
             <!-- InstanceEndEditable -->
         </nav>
         <div id="wdn_navigation_wrapper">
@@ -115,29 +106,28 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <div class="wdn-band view-<?php echo $view_class; ?> band-nav">
-                <div class="wdn-inner-wrapper wdn-grid-set">
-                    <div class="wdn-col-one-third">
+                <div class="wdn-inner-wrapper"><div class="wdn-grid-set">
+                    <div class="bp2-wdn-col-one-third">
                         <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
                             <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
+                            <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
                             <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
                             <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
+                            <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
                         </ul>
                     </div>
-                    <div class="wdn-col-two-thirds">
-                        <a id="frontend_login" href="<?php echo Controller::$manager_url; ?>">Submit an Event</a>
-                        <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search" role="search">
+                    <div class="bp2-wdn-col-two-thirds submit-search">
+                        <a id="frontend_login" class="wdn-icon-plus" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
+                        <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
                             <div class="wdn-input-group">
-                                <input type='text' name='q' id='searchinput' alt='Search for events' title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+                                <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
                                 <span class="wdn-input-group-btn">
                                     <button type="submit" class="wdn-icon-search" title="Search"></button>
                                 </span>
                             </div>
-                            <p id="search_help">Search smartly: In addition to normal keyword search, you can also search with chronological terms such as 'tomorrow', 'Monday' and etc.
-                                <a href="#" title="close search tip">(close message)</a>
-                            </p>
                         </form>
                     </div>
-                </div>
+                </div></div>
             </div>
             <div class="wdn-band view-<?php echo $view_class; ?> band-results">
                 <div class="wdn-inner-wrapper">
@@ -164,10 +154,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
         <div class="wdn-band" id="wdn_footer_related">
             <div class="wdn-inner-wrapper">
                 <!-- InstanceBeginEditable name="leftcollinks" -->
-                <h3>Related Links</h3>
-                <ul>
-                    <li><a href="http://code.google.com/p/unl-event-publisher/">UNL Event Publisher</a></li>
-                </ul>
                 <!-- InstanceEndEditable -->
             </div>
         </div>
@@ -177,19 +163,14 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                     <h3>Contact Us</h3>
                     <div class="wdn-contact-wrapper">
                         <!-- InstanceBeginEditable name="contactinfo" -->
-                        <h3>Contacting Us</h3>
-                        <p><strong>University of Nebraska-Lincoln</strong><br />
-                            1400 R Street<br />
-                            Lincoln, NE 68588 <br />
-                            402-472-7211</p>
                         <!-- InstanceEndEditable -->
                     </div>
                 </div>
                 <div id="wdn_copyright">
                     <div class="wdn-footer-text">
                         <!-- InstanceBeginEditable name="footercontent" -->
-                        Yeah, it's open source. &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
-                        <a href="http://www1.unl.edu/comments/" title="Click here to direct your comments and questions">comments?</a>
+                        Powered by <a href="http://code.google.com/p/unl-event-publisher/">UNL Event Publisher</a>. Yeah, it's open source<br />
+                        &copy; <?php echo date('Y'); ?> University of Nebraska&ndash;Lincoln
                         <!-- InstanceEndEditable -->
                         <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/wdn.html'; ?>
                     </div>

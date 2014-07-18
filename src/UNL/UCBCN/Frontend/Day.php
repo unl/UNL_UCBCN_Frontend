@@ -27,7 +27,7 @@ use UNL\UCBCN\RuntimeException;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Day extends EventListing
+class Day extends EventListing implements RoutableInterface
 {
     /**
      * Constructor for an individual day.
