@@ -130,7 +130,7 @@
             <Image>
                 <Title>Image</Title>
                 <Description>image for event <?php echo $context->event->id; ?></Description>
-                <URL><?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $context->event->id; ?></URL>
+                <URL><?php echo \UNL\UCBCN\Frontend\Controller::$url; ?>?image&amp;id=<?php echo $context->event->id; ?></URL>
             </Image>
         </Images>
         <?php endif; ?>
