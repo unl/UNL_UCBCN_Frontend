@@ -4,12 +4,14 @@ namespace UNL\UCBCN\Frontend;
 class OutputController extends \Savvy
 {
     protected $theme = 'default';
+    protected $controller = false;
 
-    public function __construct($options = array())
+    public function __construct(Controller $controller)
     {
+        $this->controller = $controller;
         \Savvy_ClassToTemplateMapper::$classname_replacement = __NAMESPACE__ . '\\';
         parent::__construct();
-        $this->initialize($options);
+        $this->initialize($this->controller->options);
     }
 
     public function initialize($options = array())
@@ -65,6 +67,12 @@ class OutputController extends \Savvy
                 $this->setTemplateFormatPaths($options['format']);
                 break;
 
+            case 'image':
+                if (isset($this->controller->output->event)) {
+                    header('Content-type: '.$this->controller->output->event->imagemime);
+                }
+                $this->setTemplateFormatPaths($options['format']);
+                break;
             case 'partial':
             case 'hcalendar':
                 $this->sendCORSHeaders();
