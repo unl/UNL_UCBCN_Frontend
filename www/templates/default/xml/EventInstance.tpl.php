@@ -18,8 +18,8 @@
         </DateTime>
         <Locations>
         	<?php
-			if ($context->eventdatetime->location_id) : 
-			$loc = $context->eventdatetime->getLink('location_id');
+			if ($context->eventdatetime->location_id) :
+                $loc = $context->eventdatetime->getLocation();
 			?>
             <Location>
                 <LocationID><?php echo $loc->id; ?></LocationID>
@@ -61,13 +61,12 @@
             <?php endif; ?>
         </Locations>
         <?php
-        $etype = UNL_UCBCN::factory('event_has_eventtype');
-        $etype->event_id = $context->event->id;
-        if ($etype->find()) : ?>
+        $eventTypes = $context->event->getEventTypes();
+        if ($eventTypes->count()) : ?>
         <EventTypes>
-        	<?php while ($etype->fetch()) : 
-        		$type = $etype->getLink('eventtype_id');
-	        	if (!PEAR::isError($type)) : ?>
+        	<?php foreach ($eventTypes as $eventHasType) : 
+        		$type = $eventHasType->getType();
+	        	if ($type) : ?>
 	            <EventType>
 	                <EventTypeID><?php echo $type->id; ?></EventTypeID>
 	                <EventTypeName><?php echo htmlspecialchars($type->name); ?></EventTypeName>
@@ -75,7 +74,7 @@
 	            </EventType>
 	            <?php 
             	endif;
-            endwhile; ?>
+            endforeach; ?>
         </EventTypes>
         <?php endif; ?>
         <Languages>
@@ -89,7 +88,7 @@
         <WebPages>
             <WebPage>
                 <Title>Event Instance URL</Title>
-                <URL><?php echo htmlspecialchars($context->url); ?></URL>
+                <URL><?php echo htmlspecialchars($context->getURL()); ?></URL>
             </WebPage>
             <?php if (!empty($context->event->webpageurl)): ?>
             <WebPage>
@@ -99,11 +98,10 @@
             <?php endif; ?>
         </WebPages>
         <?php
-        $webcast = UNL_UCBCN::factory('webcast');
-        $webcast->event_id = $context->event->id;
-        if ($webcast->find()): ?>
+        $webcasts = $context->event->getWebcasts();
+        if ($webcasts->count()): ?>
         <Webcasts>
-        	<?php while ($webcast->fetch()) : ?>
+        	<?php foreach ($webcasts as $webcast) : ?>
             <Webcast>
                 <Title><?php echo htmlspecialchars($webcast->title); ?></Title>
                 <WebcastStatus><?php echo $webcast->status; ?></WebcastStatus>
@@ -111,21 +109,20 @@
                 <PlayerType><?php echo $webcast->playertype; ?></PlayerType>
                 <Bandwidth><?php echo $webcast->bandwidth; ?></Bandwidth>
                 <?php
-                $webcastlink = UNL_UCBCN::factory('webcastlink');
-                $webcastlink->webcast_id = $webcast->id;
-                if ($webcastlink->find()) : ?>
+                $webcastLinks = $webcast->getLinks();
+                if ($webcastLinks->count()) : ?>
                 <WebcastURLs>
-                	<?php while ($webcastlink->fetch()) : ?>
+                	<?php foreach ($webcastLinks as $webcastlink) : ?>
                     <WebcastURL>
-                        <URL><?php echo $webcastlink->url; ?></URL>
-                        <SequenceNumber><?php echo $webcastlink->sequencenumber; ?></SequenceNumber>
+                        <URL><?php echo $webcastLink->url; ?></URL>
+                        <SequenceNumber><?php echo $webcastLink->sequencenumber; ?></SequenceNumber>
                     </WebcastURL>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </WebcastURLs>
                 <?php endif; ?>
                 <WebcastAdditionalInfo><?php echo htmlspecialchars($webcast->additionalinfo); ?></WebcastAdditionalInfo>
             </Webcast>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </Webcasts>
         <?php endif; ?>
         <?php if (isset($context->event->imagedata)) : ?>
@@ -133,29 +130,27 @@
             <Image>
                 <Title>Image</Title>
                 <Description>image for event <?php echo $context->event->id; ?></Description>
-                <URL><?php echo UNL_UCBCN_Frontend::formatURL(array()); ?>?image&amp;id=<?php echo $context->event->id; ?></URL>
+                <URL><?php echo \UNL\UCBCN\Frontend\Controller::$url; ?>?image&amp;id=<?php echo $context->event->id; ?></URL>
             </Image>
         </Images>
         <?php endif; ?>
         <?php
-        $document = UNL_UCBCN::factory('document');
-        $document->event_id = $context->event->id;
-        if ($document->find()) : ?>
+        $documents = $context->event->getDocuments();
+        if ($documents->count()) : ?>
         <Documents>
-        	<?php while ($document->fetch()) : ?>
+        	<?php foreach ($documents as $document) : ?>
             <Document>
                 <Title><?php echo htmlspecialchars($document->name); ?></Title>
                 <URL><?php echo $document->url; ?></URL>
             </Document>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </Documents>
         <?php endif; ?>
         <?php
-        $contact = UNL_UCBCN::factory('publiccontact');
-        $contact->event_id = $context->event->id;
-        if ($contact->find()) : ?>
+        $contacts = $context->event->getPublicContacts();
+        if ($contacts->count()) : ?>
         <PublicEventContacts>
-        	<?php while ($contact->fetch()) : ?>
+        	<?php foreach ($contacts as $contact) : ?>
             <PublicEventContact>
                 <PublicEventContactID><?php echo $contact->id; ?></PublicEventContactID>
 
@@ -210,7 +205,7 @@
                     </WebPage>
                 </WebPages>
             </PublicEventContact>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </PublicEventContacts>
         <?php endif; ?>
         <EventListingContacts>

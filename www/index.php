@@ -36,7 +36,7 @@ if (isset($_GET['model'])) {
 $frontend = new Controller($router->route($_SERVER['REQUEST_URI'], $_GET));
 
 // Now render what the user has requested
-$savvy = new OutputController($frontend->options);
+$savvy = new OutputController($frontend);
 $savvy->addGlobal('frontend', $frontend);
 
 echo $savvy->render($frontend);

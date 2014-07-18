@@ -91,6 +91,10 @@ class Controller
             $options['model'] = 'UNL\\UCBCN\\Frontend\\MonthWidget';
         }
         
+        if (isset($options['image'])) {
+            $options['model'] = 'UNL\\UCBCN\\Frontend\\Image';
+        }
+        
         $this->options = $options + $this->options;
         
         try {
@@ -116,6 +120,11 @@ class Controller
         if (!isset($this->options['model'])
             || false === $this->options['model']) {
             throw new UnexpectedValueException('Un-registered view', 404);
+        }
+        
+        if ($this->options['model'] == 'UNL\\UCBCN\\Frontend\\Image') {
+            //Force the image format for the Image modal
+            $this->options['format'] = 'image';
         }
 
         if (is_callable($this->options['model'])) {
