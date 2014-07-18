@@ -4,53 +4,28 @@ if ($context->isAllDay()) {
     $classes[] = 'all-day';
 }
 
-if ($context->isInProgress()) {
-    $classes[] = 'in-progress';
-}
-
-if ($context->isOnGoing()) {
-    $classes[] = 'ongoing';
-}
-
 $starttime = $context->getStartTime();
 $endtime = $context->getEndTime();
+$startu = new DateTime($starttime);
+$endu = new DateTime($endtime);
 ?>
 
-<span class="<?php echo implode(' ', $classes); ?>">
-    <?php
-    //Convert the times to something we can use.
-    $startu = strtotime($starttime);
-    $endu = strtotime($endtime);
+<span class="date-wrapper">
+    <?php if (!empty($starttime)): ?>
+        <time class="dtstart" datetime="<?php echo $startu->format('c') ?>"><?php echo $startu->format('M. j, Y') ?></time>
+    <?php endif; ?>
+    <?php if (!empty($endtime) && $context->isOngoing()): ?>
+        - <time class="dtend" datetime="<?php echo $endu->format('c') ?>"><?php echo $endu->format('M. j, Y')?></time>
+    <?php endif; ?>
+</span>
+<span class="time-wrapper">
+    <?php if ($context->isAllDay()): ?>
+    All Day
+    <?php else: ?>
+        <?php echo $startu->format('g:i a')?>
+        <?php if (!empty($endtime)): ?>
+        - <?php echo $endu->format('g:i a')?>
+        <?php endif; ?>
+    <?php endif; ?>
     
-    //get the start time
-    if (!empty($starttime)) {
-        ?>
-        <abbr class="dtstart" title="<?php echo date('c', $startu); ?>"><span class="month"><?php echo date('M', $startu); ?></span><span class="day"><?php echo date('j', $startu); ?></span><span class="year"><?php echo date('Y', $startu); ?></span><span class="time"><?php
-            if ($context->isAllDay()) {
-                ?>All Day<?php
-            } else {
-                if (date('i', $startu) == '00') {
-                    echo date('g', $startu);
-                } else {
-                    echo date('g:i', $startu);
-                }
-            }
-            ?><span class="am-pm"><?php echo date('a', $startu); ?></span></span></abbr><?php
-    } else {
-        echo 'Unknown';
-    }
-    
-    //get the end time
-    if ((!empty($endtime) 
-            && $endu > $startu)
-            && (!$context->isAllDay() || $context->isOngoing())) {
-        ?>-<abbr class="dtend" title="<?php date(DATE_ISO8601, $endu) ?>"><span class="month"><?php echo date('M', $endu); ?></span><span class="day"><?php echo date('j', $endu); ?></span><span class="year"><?php echo date('Y', $endu); ?></span><span class="time"><?php
-                if (date('i', $endu) == '00') {
-                    echo date('g', $endu);
-                } else {
-                    echo date('g:i', $endu);
-                }
-                ?><span class="am-pm"><?php echo date('a', $endu); ?></span></span></abbr><?php
-    }
-    ?>
 </span>
