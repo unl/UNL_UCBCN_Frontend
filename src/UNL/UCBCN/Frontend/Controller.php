@@ -113,6 +113,11 @@ class Controller
     {
         $this->determineCalendar();
 
+        if (isset($this->options['image'])) {
+            //Legacy image route
+            $this->displayImage($_GET['id']);
+        }
+
         if (!isset($this->options['model'])
             || false === $this->options['model']) {
             throw new UnexpectedValueException('Un-registered view', 404);
@@ -427,5 +432,24 @@ class Controller
             && false !== $exit) {
             exit($exit);
         }
+    }
+
+    /**
+     * When the image view is set, the image for a given event will be displayed
+     * to the end user.
+     *
+     * @param $event_id - The event ID to show the id for
+     * @return void
+     */
+    function displayImage($event_id)
+    {
+        if ($event = \UNL\UCBCN\Event::getById($_GET['id'])) {
+            header('Content-type: '.$event->imagemime);
+            echo $event->imagedata;
+            exit();
+        }
+        header('HTTP/1.0 404 Not Found');
+        echo '404';
+        exit(0);
     }
 }
