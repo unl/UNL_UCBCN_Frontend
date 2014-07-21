@@ -8,17 +8,17 @@ $endu = new DateTime($endtime);
 <?php 
     if (!$context->isAllDay()) {
         if (intval($startu->format('i')) == 0) {
-            echo $startu->format('g');
+            echo $startu->format('g a');
         } else {
-            echo $startu->format('g:i');
+            echo $startu->format('g:i a');
         }
         
         if (!empty($endtime)) {
             echo '-';
             if (intval($endu->format('i')) == 0) {
-                echo $endu->format('g');
+                echo $endu->format('g a');
             } else {
-                echo $endu->format('g:i');
+                echo $endu->format('g:i a');
             }
         }
     }

@@ -10,7 +10,7 @@ $startu = new DateTime($starttime);
 $endu = new DateTime($endtime);
 ?>
 
-<span class="date-wrapper">
+<span class="date-wrapper eventicon-calendar-empty">
     <?php if (!empty($starttime)): ?>
         <time class="dtstart" datetime="<?php echo $startu->format('c') ?>"><?php echo $startu->format('M. j, Y') ?></time>
     <?php endif; ?>
@@ -18,7 +18,7 @@ $endu = new DateTime($endtime);
         - <time class="dtend" datetime="<?php echo $endu->format('c') ?>"><?php echo $endu->format('M. j, Y')?></time>
     <?php endif; ?>
 </span>
-<span class="time-wrapper">
+<span class="time-wrapper eventicon-clock">
     <?php if ($context->isAllDay()): ?>
     All Day
     <?php else: ?>
