@@ -29,7 +29,7 @@ $next = $context->getDateTime()->modify('+1 month');
         ?>
         <tr>
             <?php foreach ($weekdays as $full=>$short): ?>
-                <th abbr="<?php echo $full; ?>" scope="col" title="<?php echo $full; ?>"><?php echo $short; ?></th>
+                <th scope="col" title="<?php echo $full; ?>"><?php echo $short; ?></th>
             <?php endforeach; ?>
         </tr>
         </thead>
