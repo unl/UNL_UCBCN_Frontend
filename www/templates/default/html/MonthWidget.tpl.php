@@ -5,14 +5,14 @@ $next = $context->getDateTime()->modify('+1 month');
 <div class="monthwidget">
     <table class="wp-calendar">
         <caption>
-            <span><a href="<?php echo $context->getPreviousMonthURL(); ?>" id="prev_month" title="View events for <?php echo $prev->format('F'); ?>">&lt;&lt; </a></span>
+            <span><a href="<?php echo $context->getPreviousMonthURL(); ?>" id="prev_month" title="View events for <?php echo $prev->format('F'); ?>" class="eventicon-left-circled"></a></span>
             <span class="monthvalue">
                 <a href="<?php echo $context->getURL(); ?>"><?php echo $context->getDateTime()->format('F'); ?></a>
             </span>
             <span class="yearvalue">
                 <a href="<?php echo $context->getYearURL(); ?>"><?php echo $context->getDateTime()->format('Y'); ?></a>
             </span>
-            <span><a href="<?php echo $context->getNextMonthURL(); ?>" id="next_month" title="View events for <?php echo $next->format('F'); ?>"> &gt;&gt;</a></span>
+            <span><a href="<?php echo $context->getNextMonthURL(); ?>" id="next_month" title="View events for <?php echo $next->format('F'); ?>" class="eventicon-right-circled"></a></span>
     
         </caption>
         <thead>
@@ -63,7 +63,7 @@ $next = $context->getDateTime()->modify('+1 month');
             if (isset($context->data[$datetime->format('Y-m-d')])) {
                 echo '<a href="' . $context->getDayURL() . '">' . $d . '</a>';
             } else {
-                echo $d;
+                echo '<span>' . $d . '</span>';
             }
     
             echo '</td>';
