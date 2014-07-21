@@ -45,6 +45,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
 <?php if ($context->getRaw('output') instanceof UNL\UCBCN\Frontend\RoutableInterface): ?>
     <link rel="canonical" href="<?php echo $context->output->getURL() ?>" />
 <?php endif; ?>
+    <script src="<?php echo $frontend->getURL() ?>templates/default/html/js/events.min.js"></script>
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>
@@ -117,7 +118,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                         </ul>
                     </div>
                     <div class="bp2-wdn-col-two-thirds submit-search">
-                        <a id="frontend_login" class="wdn-icon-plus" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
+                        <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
                         <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
                             <div class="wdn-input-group">
                                 <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
