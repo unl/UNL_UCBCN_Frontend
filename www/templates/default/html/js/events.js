@@ -125,6 +125,15 @@ require(['jquery', 'wdn'], function($, WDN) {
 			determineActiveDay();
 			addMonthWidgetStates();
 			
+			// Add a button for returning to "Today"
+			$('<p>', {'class': 'wdn-center'})
+				.append($('<a>', {'class': 'wdn-button', 'href': '#'}).text('Today'))
+				.click(function(e) {
+					e.preventDefault();
+					changeDay(new Date());
+				})
+				.insertAfter($sidebarCal);
+			
 			$sidebarCal.on('click', 'td a', function(e) {
 				e.preventDefault();
 				changeDay(this.href);
