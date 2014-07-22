@@ -1,0 +1,29 @@
+@import "lib/fonts.less";
+
+// ICON FONT - see /wdn/templates_4.0/fonts/fontello/readme.md
+
+ @font-face {
+  font-family: 'wdn-icon';
+  src: url('../fonts/fontello/wdn-icon.eot?64658978');
+  src: url('../fonts/fontello/wdn-icon.eot?64658978#iefix') format('embedded-opentype'),
+       url('../fonts/fontello/wdn-icon.woff?64658978') format('woff'),
+       url('../fonts/fontello/wdn-icon.ttf?64658978') format('truetype'),
+       url('../fonts/fontello/wdn-icon.svg?64658978#wdn-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="wdn-icon-"]:before, [class*=" wdn-icon-"]:before {
+  .fontello()
+}
+
+.icon-plus-circled:before { content: '\e800'; } /* '' */
+.icon-search:before { content: '\e801'; } /* '' */
+.icon-angle-circled-left:before { content: '\e802'; } /* '' */
+.icon-angle-circled-right:before { content: '\e803'; } /* '' */
+.icon-rss:before { content: '\e804'; } /* '' */
+.icon-calendar-empty:before { content: '\e805'; } /* '' */
+.icon-link:before { content: '\e806'; } /* '' */
+.icon-location:before { content: '\e807'; } /* '' */
+.icon-clock:before { content: '\e808'; } /* '' */
+.icon-vcard:before { content: '\e809'; } /* '' */
