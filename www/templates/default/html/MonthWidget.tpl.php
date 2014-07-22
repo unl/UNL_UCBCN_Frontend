@@ -5,14 +5,14 @@ $next = $context->getDateTime()->modify('+1 month');
 <div class="monthwidget">
     <table class="wp-calendar" data-datetime="<?php echo $context->getDateTime()->format('c') ?>">
         <caption>
-            <span class="prev"><a href="<?php echo $context->getPreviousMonthURL(); ?>" title="View events for <?php echo $prev->format('F'); ?>" class="eventicon-left-circled"></a></span>
+            <span class="prev"><a href="<?php echo $context->getPreviousMonthURL(); ?>" title="View events for <?php echo $prev->format('F'); ?>" class="eventicon-angle-circled-left"></a></span>
             <span class="monthvalue">
                 <a href="<?php echo $context->getURL(); ?>"><?php echo $context->getDateTime()->format('F'); ?></a>
             </span>
             <span class="yearvalue">
                 <a href="<?php echo $context->getYearURL(); ?>"><?php echo $context->getDateTime()->format('Y'); ?></a>
             </span>
-            <span class="next"><a href="<?php echo $context->getNextMonthURL(); ?>" title="View events for <?php echo $next->format('F'); ?>" class="eventicon-right-circled"></a></span>
+            <span class="next"><a href="<?php echo $context->getNextMonthURL(); ?>" title="View events for <?php echo $next->format('F'); ?>" class="eventicon-angle-circled-right"></a></span>
     
         </caption>
         <thead>
