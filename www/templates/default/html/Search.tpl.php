@@ -2,7 +2,7 @@
     <h1 class="results">
         <?php
         if ($dt = strtotime($context->search_query) && ($context->search_query != 'art')) {
-            echo 'Search results for events dated <span>'.date('F jS',$dt).'</span><a class="permalink" href="'.$context->getURL().'">(link)</a>';
+            echo 'Search results for events dated <span>'.date('F jS',$dt).'</span></a>';
         } else {
             echo 'Search results for "<span>'.htmlentities($context->search_query).'</span>"';
         }
