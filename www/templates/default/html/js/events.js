@@ -64,6 +64,8 @@ require(['jquery', 'wdn'], function($, WDN) {
 			var headingDate = $('h1').data('datetime');
 			if (headingDate) {
 				nowActive = new Date(headingDate);
+			} else {
+				nowActive = new Date();
 			}
 		}
 		
