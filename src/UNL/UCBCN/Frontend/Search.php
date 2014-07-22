@@ -30,17 +30,20 @@ namespace UNL\UCBCN\Frontend;
 class Search extends EventListing implements RoutableInterface
 {
     public $search_query = '';
-    
+
     /**
      * Constructs this search output.
-     * 
+     *
      * @param array $options Associative array of options.
+     * @throws UnexpectedValueException
      */
     public function __construct($options=array())
     {
-        if (isset($options['q'])) {
-            $this->search_query = $options['q'];
+        if (!isset($options['q'])) {
+            throw new UnexpectedValueException('Enter a search string to search for events.', 400);
         }
+        
+        $this->search_query = $options['q'];
         
         parent::__construct($options);
     }
