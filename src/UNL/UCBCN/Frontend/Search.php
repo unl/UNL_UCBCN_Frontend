@@ -85,7 +85,7 @@ class Search extends EventListing implements RoutableInterface
         }
 
         $sql.= ')
-                ORDER BY e.starttime ASC, event.title ASC';
+                ORDER BY e.starttime ASC, recurringdate.recurringdate ASC, event.title ASC';
 
         return $sql;
     }
