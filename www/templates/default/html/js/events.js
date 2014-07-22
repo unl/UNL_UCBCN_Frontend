@@ -107,6 +107,17 @@ require(['jquery', 'wdn'], function($, WDN) {
 			});
 		}
 		
+		function loadEventInstance(href)
+		{
+			var $loadTo = $('#updatecontent');
+			
+			scheduleProgress()
+			$.get(href + '?format=hcalendar', function(data) {
+				cancelProgress();
+				$loadTo.html(data);
+			});
+		}
+		
 		var $sidebarCal = $('aside .calendar');
 		if ($sidebarCal.length) {
 			determineActiveDay();
@@ -124,22 +135,30 @@ require(['jquery', 'wdn'], function($, WDN) {
 		}
 		
 		// set up arrow navigation
-		var $dayNav = $('.day-nav');
-		if ($dayNav.length) {
-			$(document).on('keyup', function(e) {
-				if ($(e.target).is('input, select, textarea, button')) {
-					return;
-				}
-				
-				switch (e.which) {
-					case 39:
-						changeDay($('.day-nav .next').attr('href'));
-						break;
-					case 37:
-						changeDay($('.day-nav .prev').attr('href'));
-						break;
-				}
-			});
-		}
+		$(document).on('keyup', function(e) {
+			if ($(e.target).is('input, select, textarea, button')) {
+				return;
+			}
+			
+			var $dayNav = $('.day-nav');
+			
+			if (!$dayNav.length) {
+				return;
+			}
+			
+			switch (e.which) {
+				case 39:
+					changeDay($('.next', $dayNav).attr('href'));
+					break;
+				case 37:
+					changeDay($('.prev', $dayNav).attr('href'));
+					break;
+			}
+		});
+		
+		$('#updatecontent').on('click', '.vevent a.summary', function(e) {
+			e.preventDefault();
+			loadEventInstance(this.href);
+		});
 	});
 });
