@@ -1,4 +1,2 @@
 <?php
-foreach ($context as $eventInstance) {
-    echo $savvy->render($eventInstance);
-}
+include_once __DIR__ . '/EventListing.tpl.php';
