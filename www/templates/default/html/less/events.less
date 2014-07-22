@@ -165,7 +165,6 @@
     }
 
     .wdn-inner-wrapper {
-        border-bottom: 1px solid @ui04;
         padding-top:1rem;
         padding-bottom:0.5rem;
     }
@@ -231,7 +230,8 @@
 
             .date-wrapper,
             .time-wrapper,
-            .location {
+            .location,
+            .contact {
                 display:block;
                 .sans-serif-font();
                 font-size: 0.8125em;
@@ -239,6 +239,10 @@
                 &:before {
                 	color: @ui05;
                 }
+            }
+            
+            .location div {
+            	padding-left: 1.7em;
             }
             
             .description {
