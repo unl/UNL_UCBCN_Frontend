@@ -71,7 +71,7 @@ class Search extends EventListing implements RoutableInterface
 
         if (($t = strtotime($this->search_query)) && ($this->search_query != 'art')) {
             // This is a time...
-            $sql .= 'e.starttime LIKE \''.date('Y-m-d', $t).'%\' ORDER BY e.starttime';
+            $sql .= 'e.starttime LIKE \''.date('Y-m-d', $t).'%\'';
         } else {
             // Do a textual search.
             $sql .=
