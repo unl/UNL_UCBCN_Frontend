@@ -24,20 +24,20 @@ function convertEventToJsonArray($eventInstance)
     $data['Classification']        = 'Public';
     $data['Languages']['Language'] = 'en-US';
     $data['EventTransparency']     = $eventInstance->event->transparency;
-    $data['Description']           = htmlspecialchars($eventInstance->event->description);
-    $data['ShortDescription']      = htmlspecialchars($eventInstance->event->shortdescription);
-    $data['Refreshments']          = htmlspecialchars($eventInstance->event->refreshments);
+    $data['Description']           = $eventInstance->event->description;
+    $data['ShortDescription']      = $eventInstance->event->shortdescription;
+    $data['Refreshments']          = $eventInstance->event->refreshments;
     
     $data['Locations'] = array();
     if ($location) {
         $data['Locations'][0] = array(
             'LocationID'    => $location->id,
-            'LocationName'  => htmlspecialchars($location->name),
+            'LocationName'  => $location->name,
             'LocationTypes' => array('LocationType' => $location->type),
             'Address' => array(
-                'Room'                 => htmlspecialchars($eventInstance->eventdatetime->room),
-                'BuildingName'         => htmlspecialchars($location->name),
-                'CityName'             => htmlspecialchars($location->city),
+                'Room'                 => $eventInstance->eventdatetime->room,
+                'BuildingName'         => $location->name,
+                'CityName'             => $location->city,
                 'PostalZone'           => $location->zip,
                 'CountrySubentityCode' => $location->state,
                 'Country' => array(
@@ -53,15 +53,15 @@ function convertEventToJsonArray($eventInstance)
             'WebPages' => array(
                 0 => array(
                     'Title' => 'Location Web Page',
-                    'URL'   => htmlspecialchars($location->webpageurl),
+                    'URL'   => $location->webpageurl,
                 )
             ),
             'MapLinks' => array(
-                0 => htmlspecialchars($location->mapurl),
+                0 => $location->mapurl,
             ),
-            'LocationHours'        => htmlspecialchars($location->hours),
-            'Directions'           => htmlspecialchars($location->directions),
-            'AdditionalPublicInfo' => htmlspecialchars($location->additionalpublicinfo),
+            'LocationHours'        => $location->hours,
+            'Directions'           => $location->directions,
+            'AdditionalPublicInfo' => $location->additionalpublicinfo,
         );
     }
     
@@ -72,8 +72,8 @@ function convertEventToJsonArray($eventInstance)
             if ($type) {
                 $data['EventTypes'][] = array(
                     'EventTypeID'          => $type->id,
-                    'EventTypeName'        => htmlspecialchars($type->name),
-                    'EventTypeDescription' => htmlspecialchars($type->description),
+                    'EventTypeName'        => $type->name,
+                    'EventTypeDescription' => $type->description,
                 );
             }
         }
@@ -82,13 +82,13 @@ function convertEventToJsonArray($eventInstance)
     $data['WebPages'] = array();
     $data['WebPages'][] = array(
         'Title' => 'Event Instance URL',
-        'URL'   => htmlspecialchars($eventInstance->getURL()),
+        'URL'   => $eventInstance->getURL(),
     );
 
    if ($eventInstance->event->webpageurl) {
        $data['WebPages'][] = array(
            'Title' => 'Event webpage',
-           'URL'   => htmlspecialchars($eventInstance->event->webpageurl),
+           'URL'   => $eventInstance->event->webpageurl,
        );
    }
     
@@ -96,7 +96,7 @@ function convertEventToJsonArray($eventInstance)
         $data['Webcasts'] = array();
         foreach ($webcasts as $webcast) {
             $webcast_data = array();
-            $webcast_data['Title']         = htmlspecialchars($webcast->title);
+            $webcast_data['Title']         = $webcast->title;
             $webcast_data['WebcastStatus'] = $webcast->status;
             $webcast_data['DateAvailable'] = date('Y-m-d',strtotime($webcast->dateavailable));
             $webcast_data['PlayerType']    = $webcast->playertype;
@@ -129,7 +129,7 @@ function convertEventToJsonArray($eventInstance)
         $data['Documents'] = array();
         foreach ($documents as $document) {
             $data['Documents'][] = array(
-                'Title' => htmlspecialchars($document->name),
+                'Title' => $document->name,
                 'URL'   => $document->url,
             );
         }
@@ -141,17 +141,17 @@ function convertEventToJsonArray($eventInstance)
             $data['PublicEventContacts'][] = array(
                 'PublicEventContactID' => $contact->id,
                 'ContactName' => array(
-                    'FullName' => htmlspecialchars($contact->name),
+                    'FullName' => $contact->name,
                 ),
                 'ProfessionalAffiliations' => array(
                     0 => array(
                         'JobTitles' => array(
-                            0=>htmlspecialchars($contact->jobtitle)
+                            0 => $contact->jobtitle,
                         ),
-                        'OrganizationName' => htmlspecialchars($contact->organization),
+                        'OrganizationName' => $contact->organization,
                         'OrganizationWebPages' => array(
                             0 => array(
-                                'Title' => htmlspecialchars($contact->name),
+                                'Title' => $contact->name,
                                 'URL'   => $contact->webpageurl,
                             ),
                         )
@@ -159,7 +159,7 @@ function convertEventToJsonArray($eventInstance)
                 ),
                 'Phones' => array(
                     0 => array(
-                        'PhoneNumber' => htmlspecialchars($contact->phone),
+                        'PhoneNumber' => $contact->phone,
                     ),
                 ),
                 'EmailAddresses' => array(
@@ -167,12 +167,12 @@ function convertEventToJsonArray($eventInstance)
                 ),
                 'Addresses' => array(
                     0 => array(
-                        'StreetName'           => htmlspecialchars($contact->addressline1),
-                        'AdditionalStreetName' => htmlspecialchars($contact->addressline2),
-                        'Room'                 => htmlspecialchars($contact->room),
-                        'CityName'             => htmlspecialchars($contact->city),
-                        'PostalZone'           => htmlspecialchars($contact->zip),
-                        'CountrySubentityCode' => htmlspecialchars($contact->State),
+                        'StreetName'           => $contact->addressline1,
+                        'AdditionalStreetName' => $contact->addressline2,
+                        'Room'                 => $contact->room,
+                        'CityName'             => $contact->city,
+                        'PostalZone'           => $contact->zip,
+                        'CountrySubentityCode' => $contact->State,
                         'Country' => array(
                             'IdentificationCode' => 'US',
                             'Name' => 'United States',
@@ -181,7 +181,7 @@ function convertEventToJsonArray($eventInstance)
                 ),
                 'WebPages' => array(
                     0 => array(
-                        'Title' => htmlspecialchars($contact->name),
+                        'Title' => $contact->name,
                         'URL'   => $contact->webpageurl,
                     ),
                 ),
@@ -192,11 +192,11 @@ function convertEventToJsonArray($eventInstance)
     $data['PublicEventContacts'] = array(
         0 => array(
             'ContactName' => array(
-                'FullName' => htmlspecialchars($eventInstance->event->listingcontactname),
+                'FullName' => $eventInstance->event->listingcontactname,
             ),
             'Phones' => array(
                 0 => array(
-                    'PhoneNumber' => htmlspecialchars($eventInstance->event->listingcontactphone),
+                    'PhoneNumber' => $eventInstance->event->listingcontactphone,
                 ),
             ),
             'EmailAddresses' => array(
@@ -207,7 +207,7 @@ function convertEventToJsonArray($eventInstance)
 
     if (!empty($eventInstance->event->privatecomment)) {
         $data['PrivateComments'] = array(
-            0 => htmlspecialchars($eventInstance->event->privatecomment),
+            0 => $eventInstance->event->privatecomment,
         ); 
     }
     
