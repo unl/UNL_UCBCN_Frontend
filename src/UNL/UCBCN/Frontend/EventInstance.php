@@ -215,4 +215,219 @@ class EventInstance implements RoutableInterface
         
         return $fullDescription[0];
     }
+    
+    public function toJSONData()
+    {
+        $startu     = strtotime($this->eventdatetime->starttime);
+        $endu       = strtotime($this->eventdatetime->endtime);
+        $location   = $this->eventdatetime->getLocation();
+        $eventTypes = $this->event->getEventTypes();
+        $webcasts   = $this->event->getWebcasts();
+        $documents  = $this->event->getDocuments();
+        $contacts   = $this->event->getPublicContacts();
+        $data       = array();
+
+
+        $data['EventID']       = $this->event->id;
+        $data['EventTitle']    = $this->event->title;
+        $data['EventSubtitle'] = $this->event->subtitle;
+        $data['DateTime'] = array(
+            'StartDate' => date('Y-m-d', $startu),
+            'StartTime' => date('H:i:s', $startu),
+            'EndDate'   => date('Y-m-d', $endu),
+            'EndTime'   => date('H:i:s', $endu),
+        );
+        $data['EventStatus']           = 'Happening As Scheduled';
+        $data['Classification']        = 'Public';
+        $data['Languages']['Language'] = 'en-US';
+        $data['EventTransparency']     = $this->event->transparency;
+        $data['Description']           = $this->event->description;
+        $data['ShortDescription']      = $this->event->shortdescription;
+        $data['Refreshments']          = $this->event->refreshments;
+
+        $data['Locations'] = array();
+        if ($location) {
+            $data['Locations'][0] = array(
+                'LocationID'    => $location->id,
+                'LocationName'  => $location->name,
+                'LocationTypes' => array('LocationType' => $location->type),
+                'Address' => array(
+                    'Room'                 => $this->eventdatetime->room,
+                    'BuildingName'         => $location->name,
+                    'CityName'             => $location->city,
+                    'PostalZone'           => $location->zip,
+                    'CountrySubentityCode' => $location->state,
+                    'Country' => array(
+                        'IdentificationCode' => 'US',
+                        'Name'               => 'United States',
+                    ),
+                ),
+                'Phones' => array(
+                    0 => array(
+                        'PhoneNumber' => $location->phone,
+                    )
+                ),
+                'WebPages' => array(
+                    0 => array(
+                        'Title' => 'Location Web Page',
+                        'URL'   => $location->webpageurl,
+                    )
+                ),
+                'MapLinks' => array(
+                    0 => $location->mapurl,
+                ),
+                'LocationHours'        => $location->hours,
+                'Directions'           => $location->directions,
+                'AdditionalPublicInfo' => $location->additionalpublicinfo,
+            );
+        }
+
+        if ($eventTypes->count()) {
+            $data['EventTypes'] = array();
+            foreach ($eventTypes as $eventHasType) {
+                $type = $eventHasType->getType();
+                if ($type) {
+                    $data['EventTypes'][] = array(
+                        'EventTypeID'          => $type->id,
+                        'EventTypeName'        => $type->name,
+                        'EventTypeDescription' => $type->description,
+                    );
+                }
+            }
+        }
+
+        $data['WebPages'] = array();
+        $data['WebPages'][] = array(
+            'Title' => 'Event Instance URL',
+            'URL'   => $this->getURL(),
+        );
+
+        if ($this->event->webpageurl) {
+            $data['WebPages'][] = array(
+                'Title' => 'Event webpage',
+                'URL'   => $this->event->webpageurl,
+            );
+        }
+
+        if ($webcasts->count()) {
+            $data['Webcasts'] = array();
+            foreach ($webcasts as $webcast) {
+                $webcast_data = array();
+                $webcast_data['Title']         = $webcast->title;
+                $webcast_data['WebcastStatus'] = $webcast->status;
+                $webcast_data['DateAvailable'] = date('Y-m-d',strtotime($webcast->dateavailable));
+                $webcast_data['PlayerType']    = $webcast->playertype;
+                $webcast_data['Bandwidth']     = $webcast->bandwidth;
+
+                $webcastLinks = $webcast->getLinks();
+                if ($webcastLinks->count()) {
+                    $webcast_data['WebcastURLs'] = array();
+                    foreach ($webcastLinks as $webcastLink) {
+                        $linkURL = array(
+                            'URL'            => $webcastLink->url,
+                            'SequenceNumber' => $webcastLink->sequencenumber,
+                        );
+                        $webcast_data['WebcastURLs'][] = $linkURL;
+                    }
+                }
+                $data['Webcasts'][] = $webcast_data;
+            }
+        }
+
+        if (isset($this->event->imagedata)) {
+            $data['Images'][0] = array(
+                'Title'       => 'Image',
+                'Description' => 'image for event ' . $this->event->id,
+                'URL'         => \UNL\UCBCN\Frontend\Controller::$url . '?image&amp;id=' . $this->event->id,
+            );
+        }
+
+        if ($documents->count()) {
+            $data['Documents'] = array();
+            foreach ($documents as $document) {
+                $data['Documents'][] = array(
+                    'Title' => $document->name,
+                    'URL'   => $document->url,
+                );
+            }
+        }
+
+        if ($contacts->count()) {
+            $data['PublicEventContacts'] = array();
+            foreach ($contacts as $contact) {
+                $data['PublicEventContacts'][] = array(
+                    'PublicEventContactID' => $contact->id,
+                    'ContactName' => array(
+                        'FullName' => $contact->name,
+                    ),
+                    'ProfessionalAffiliations' => array(
+                        0 => array(
+                            'JobTitles' => array(
+                                0 => $contact->jobtitle,
+                            ),
+                            'OrganizationName' => $contact->organization,
+                            'OrganizationWebPages' => array(
+                                0 => array(
+                                    'Title' => $contact->name,
+                                    'URL'   => $contact->webpageurl,
+                                ),
+                            )
+                        ),
+                    ),
+                    'Phones' => array(
+                        0 => array(
+                            'PhoneNumber' => $contact->phone,
+                        ),
+                    ),
+                    'EmailAddresses' => array(
+                        0 => $contact->emailaddress
+                    ),
+                    'Addresses' => array(
+                        0 => array(
+                            'StreetName'           => $contact->addressline1,
+                            'AdditionalStreetName' => $contact->addressline2,
+                            'Room'                 => $contact->room,
+                            'CityName'             => $contact->city,
+                            'PostalZone'           => $contact->zip,
+                            'CountrySubentityCode' => $contact->State,
+                            'Country' => array(
+                                'IdentificationCode' => 'US',
+                                'Name' => 'United States',
+                            ),
+                        ),
+                    ),
+                    'WebPages' => array(
+                        0 => array(
+                            'Title' => $contact->name,
+                            'URL'   => $contact->webpageurl,
+                        ),
+                    ),
+                );
+            }
+        }
+
+        $data['PublicEventContacts'] = array(
+            0 => array(
+                'ContactName' => array(
+                    'FullName' => $this->event->listingcontactname,
+                ),
+                'Phones' => array(
+                    0 => array(
+                        'PhoneNumber' => $this->event->listingcontactphone,
+                    ),
+                ),
+                'EmailAddresses' => array(
+                    0 => $this->event->listingcontactemail,
+                ),
+            ),
+        );
+
+        if (!empty($this->event->privatecomment)) {
+            $data['PrivateComments'] = array(
+                0 => $this->event->privatecomment,
+            );
+        }
+
+        return $data;
+    }
 }
