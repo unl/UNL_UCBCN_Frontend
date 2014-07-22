@@ -6,6 +6,8 @@
 @import "lib/colors.less";
 @import "lib/fonts.less";
 
+@import "eventicon-embedded.less";
+
 .wp-calendar {
 
     caption {
@@ -40,7 +42,6 @@
         font-size:0.75rem;
         text-align:center;
         border:1px solid darken(#fff, 20%);
-        padding: 2px 1px;
     }
 
     td {
@@ -50,6 +51,43 @@
             color:darken(#fff, 5%);
         }
     }
+}
+
+.monthwidget {
+	th {
+		padding: 8px 1px;
+	}
+	
+	td {
+		padding: 0;
+		
+		span,
+		a {
+			display: block;
+			padding: 8px 1px;
+		}
+		
+		// day selection classes
+		&.active {
+			background: mix(@ui09, @page-background, 95%);
+			color: #fff;
+			a {
+				color: inherit;
+			}
+		}
+		
+		&.today {
+			background: @brand;
+			color: #fff;
+			a {
+				color: inherit;
+			}
+		}
+		
+		a:hover {
+			outline: 2px solid @brand;
+		}
+	}
 }
 
 #month_viewcal {
@@ -144,10 +182,11 @@
 
 
     #event_search {
-        margin:0;
+        margin:-8px 0 0;
         padding:0;
         width:45%;
         display: inline-block;
+        vertical-align: middle;
         font-size: 0.75em;
         
         button {
@@ -162,7 +201,8 @@
         padding-top:1rem;
     }
 
-    .day-heading {
+    .day-heading,
+    .upcoming-heading {
         margin:0 0 1rem;
         .sans-serif-font();
         font-size:0.75rem;
@@ -194,6 +234,11 @@
             .location {
                 display:block;
                 .sans-serif-font();
+                font-size: 0.8125em;
+                
+                &:before {
+                	color: @ui05;
+                }
             }
             
             .description {

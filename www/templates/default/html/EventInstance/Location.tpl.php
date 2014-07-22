@@ -1,11 +1,12 @@
-<?php
-if (isset($context->eventdatetime->location_id) && $context->eventdatetime->location_id) {
-    $l = $context->eventdatetime->getLocation();
-    echo ' <span class="location">';
-    if (isset($l->mapurl)) {
-        echo '<a class="mapurl" href="'.$savvy->dbStringtoHtml($l->mapurl).'">'.$savvy->dbStringtoHtml($l->name).'</a>';
-    } else {
-        echo $savvy->dbStringtoHtml($l->name);
-    }
-    echo '</span>';
-}
+<?php if (isset($context->eventdatetime->location_id) && $context->eventdatetime->location_id): ?>
+<?php $l = $context->eventdatetime->getLocation(); ?>
+<?php if (isset($l->mapurl) || !empty($l->name)): ?>
+    <span class="location eventicon-location">
+<?php if (isset($l->mapurl)): ?>
+        <a class="mapurl" href="<?php echo $l->mapurl ?>"><?php echo $savvy->dbStringtoHtml($l->name) ?></a>
+<?php else: ?>
+        <?php echo $savvy->dbStringtoHtml($l->name); ?>
+<?php endif; ?>
+    </span>
+<?php endif; ?>
+<?php endif; ?>
