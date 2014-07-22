@@ -1,4 +1,2 @@
 <?php
-$data = convertEventToJsonArray($context);
-
-echo json_encode($data);
+echo json_encode($context->toJSONData());
