@@ -130,7 +130,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                     </div>
                 </div></div>
             </div>
-            <div class="wdn-band view-<?php echo $view_class; ?> band-results">
+            <div class="wdn-band wdn-light-neutral-band view-<?php echo $view_class; ?> band-results">
                 <div class="wdn-inner-wrapper">
                     <?php 
                         $template = null;
