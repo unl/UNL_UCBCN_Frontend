@@ -18,7 +18,7 @@ $week     = 'W(?P<w>[0-5][0-9])';
 // Used for determining an output format, e.g. .xml, .html
 $format   = '(\.(?P<format>[\w]+))?';
 
-$routes['/^images\/(?P<id>[\d]+)'.$format.'$/']                                          = 'UNL\UCBCN\Frontend\Image';
+$routes['/^images\/(?P<id>[\d]+)$/']                                                     = 'UNL\UCBCN\Frontend\Image';
 $routes['/^'.$calendar.'upcoming'.'\/'.$format.'$/']                                     = 'UNL\UCBCN\Frontend\Upcoming';
 $routes['/^'.$calendar.'week'.'\/'.$format.'$/']                                         = 'UNL\UCBCN\Frontend\Week';
 $routes['/^'.$calendar.'search(\/(?P<q>.+))'.'\/'.$format.'$/']                          = 'UNL\UCBCN\Frontend\Search';
