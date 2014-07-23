@@ -208,7 +208,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 				return;
 			}
 			
-			var $dayNav = $('.day-nav');
+			var $dayNav = $('.day-nav'), day;
 			
 			if (!$dayNav.length) {
 				return;
@@ -216,10 +216,22 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			
 			switch (e.which) {
 				case 39:
-					changeDay($('.next', $dayNav).attr('href'));
+					if (e.altKey) {
+						day = new Date(nowActive);
+						day.setMonth(day.getMonth() + 1);
+					} else {
+						day = $('.next', $dayNav).attr('href');
+					}
+					changeDay(day);
 					break;
 				case 37:
-					changeDay($('.prev', $dayNav).attr('href'));
+					if (e.altKey) {
+						day = new Date(nowActive);
+						day.setMonth(day.getMonth() - 1);
+					} else {
+						day = $('.prev', $dayNav).attr('href');
+					}
+					changeDay(day);
 					break;
 			}
 		});
