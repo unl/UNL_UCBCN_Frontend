@@ -11,13 +11,19 @@
 .wp-calendar {
 
     caption {
-        background-color: mix(@ui09, @page-background, 95%);
-        color: #fff;
-        .sans-serif-font();
-        font-size:0.75rem;
-        text-transform:uppercase;
-        padding: 1em;
         margin: 0;
+        padding: 1.069em 1em 1em;
+        .sans-serif-font();
+        font-size: 12px;
+		font-size: 0.923rem;
+        text-transform:uppercase;
+        color: #fff;
+		background-color: mix(@ui09, @page-background, 95%);
+
+		@media @bp2 {
+	        font-size: 13px;
+			font-size: 0.802rem;
+		}
 
         a {
             color:#fff;
@@ -106,10 +112,14 @@
 }
 
 #month_viewcal {
+	th {
+        padding: 1.069em 1px 1em;
+	}
+
     td {
         text-align: left;
         vertical-align: top;
-        padding: 6px;
+        padding: 1em;
         font-size: 9px;
         font-size: 0.6923rem;
 
@@ -240,13 +250,20 @@
 
     .day-heading,
     .upcoming-heading {
+    	width: 100%;
         margin:0 0 1rem;
+        padding: 1.069em 1em 1em 5%;
         .sans-serif-font();
-        font-size:0.75rem;
-        text-transform:uppercase;
-        padding:1em;
-        background-color: mix(@ui09, @page-background, 95%);
+        font-size: 12px;
+		font-size: 0.923rem;
+        text-transform: uppercase;
 	    color: #fff;
+        background-color: mix(@ui09, @page-background, 95%);
+
+		@media @bp2 {
+	        font-size: 13px;
+			font-size: 0.802rem;
+		}
 
 	    a {
 	    	float: right;
