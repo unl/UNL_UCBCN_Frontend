@@ -43,7 +43,7 @@ class OutputController extends \Savvy
                 break;
 
             case 'rss':
-                header('Content-type:application/rss+xml');
+                header('Content-type:application/rss+xml; charset=UTF-8');
                 $this->sendCORSHeaders();
                 $this->setTemplateFormatPaths($options['format']);
                 break;
@@ -199,7 +199,7 @@ class OutputController extends \Savvy
      */
     function dbStringToHtml($text)
     {
-        return nl2br($text);
+        return nl2br(htmlspecialchars($text));
     }
 
 }
