@@ -5,12 +5,26 @@ require(['jquery', 'wdn'], function($, WDN) {
 	$(function() {
 		var homeUrl = $('link[rel=home]'),
 			$monthWidget = $('.wp-calendar'),
+			initRoute = 'day',
 			widgetDate, nowActive, progressTimeout;
 		
 		if (homeUrl.length) {
 			homeUrl = homeUrl[0].href;
 		} else {
 			homeUrl = '/';
+		}
+		
+		function pushState(url, route)
+		{
+			if (!window.history.pushState) {
+				return;
+			}
+			
+			if (window.location.href === url) {
+				return;
+			}
+			
+			window.history.pushState({route: route}, '', url);
 		}
 		
 		function addMonthWidgetStates()
@@ -96,6 +110,7 @@ require(['jquery', 'wdn'], function($, WDN) {
 				url = datetime;
 			}
 			
+			pushState(url, 'day');
 			scheduleProgress($loadTo);
 			$.get(url + '?format=hcalendar', function(data) {
 				cancelProgress();
@@ -113,7 +128,8 @@ require(['jquery', 'wdn'], function($, WDN) {
 		{
 			var $loadTo = $('#updatecontent');
 			
-			scheduleProgress()
+			pushState(href, 'event');
+			scheduleProgress();
 			$.get(href + '?format=hcalendar', function(data) {
 				cancelProgress();
 				$loadTo.html(data);
@@ -142,7 +158,11 @@ require(['jquery', 'wdn'], function($, WDN) {
 			$sidebarCal.on('click', '.next a, .prev a', function(e) {
 				e.preventDefault();
 				loadMonthWidget(this.href);
-			})
+			});
+		}
+		
+		if ($('.view-unl_ucbcn_frontend_eventinstance').length) {
+			initRoute = 'event';
 		}
 		
 		// set up arrow navigation
@@ -170,6 +190,20 @@ require(['jquery', 'wdn'], function($, WDN) {
 		$('#updatecontent').on('click', '.vevent a.summary', function(e) {
 			e.preventDefault();
 			loadEventInstance(this.href);
+		});
+		
+		$(window).on('popstate', function(e) {
+			var route = (e.originalEvent.state && e.originalEvent.state.route) || initRoute,
+				url = window.location.href;
+			
+			switch (route) {
+				case 'event':
+					loadEventInstance(url);
+					break;
+				case 'day':
+					changeDay(url)
+					break;
+			}
 		});
 	});
 });
