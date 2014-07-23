@@ -11,10 +11,13 @@
         </h1>
         <?php echo '<span class="wdn-subhead">'.$context->count().' results.  <a class="permalink" href="'.$context->getURL().'">(link)</a></span>'; ?>
 
-        <p id="feeds">
-            <a id="icsformat" title="ics format for search results" href="<?php echo $context->getURL()?>?format=ics">ics format for search results</a>
-            <a id="rssformat" title="rss format for search results" href="<?php echo $context->getURL()?>?format=rss">rss format for search results</a>
-        </p>
+        <div id="subscribe">
+            <span>Subscribe to this search</span>
+            <ul id="droplist">
+                <li id="eventrss"><a href="<?php echo $context->getURL()?>?format=rss" title="RSS feed of upcoming events" class="eventicon-rss">RSS</a></li>
+                <li id="eventical"><a href="<?php echo $context->getURL()?>?format=ics" title="ICS format of upcoming events" class="wdn-icon-calendar">ICS</a></li>
+            </ul>
+        </div>
     </section>
     <section id="updatecontent" class="day_cal bp2-wdn-col-two-thirds">
         <?php echo $savvy->render($context, 'EventListing.tpl.php'); ?>
