@@ -96,6 +96,14 @@
         text-align:left;
         vertical-align:top;
         padding: 6px;
+        
+        &.prev, &.next {
+    		display: none;
+    		
+        	@media @bp2 {
+        		display: table-cell;
+        	}
+        }
 
         a {
             text-decoration:none;
@@ -121,7 +129,7 @@
 }
 
 #subscribe {
-	margin-top: 2em;
+	margin: 2em 0;
 	padding-top: 1em;
 	border-top: 1px solid @ui04;
 	
