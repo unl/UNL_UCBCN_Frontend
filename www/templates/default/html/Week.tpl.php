@@ -3,7 +3,7 @@ $prev = $context->getDateTime()->modify('-1 week');
 $next = $context->getDateTime()->modify('+1 week');
 ?>
 <div class="week_cal" id="month_viewcal">
-    <table class="wp-calendar">
+    <table class="wp-calendar wdn_responsive_table">
         <caption>
             <span><a href="<?php echo $context->getPreviousURL(); ?>" id="prev_week" title="View events for week <?php echo $prev->format('W'); ?>" class="eventicon-angle-circled-left"></a></span>
             <span class="monthvalue">
@@ -25,6 +25,8 @@ $next = $context->getDateTime()->modify('+1 week');
             'Friday' => 'Fri',
             'Saturday' => 'Sat',
         );
+        $weekdaysCount = count($weekdays);
+        $weekdayKeys = array_keys($weekdays);
         ?>
         <tr>
             <?php foreach ($weekdays as $full => $short): ?>
@@ -36,9 +38,9 @@ $next = $context->getDateTime()->modify('+1 week');
         <tr>
         <?php
         $week = $context->getRawObject();
-        foreach ($week as $day): 
+        foreach ($week as $i => $day): 
         ?>
-            <td>
+            <td data-header="<?php echo $weekdayKeys[$i % $weekdaysCount] ?>">
                 <?php echo $savvy->render($day, 'EventListing/Month.tpl.php'); ?>
             </td>
         <?php endforeach; ?>
