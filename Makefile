@@ -39,7 +39,7 @@ clean:
 	rm $(JS_OBJ)
 	rm $(CSS_OBJ)
 	
-$(CSS_OBJ): www/templates/default/html/less/events.less $(LESSC) $(LESSHAT) $(WDN_MIXINS)
+$(CSS_OBJ): www/templates/default/html/less/events.less www/templates/default/html/less/eventicon-embedded.less $(LESSC) $(LESSHAT) $(WDN_MIXINS)
 	$(LESSC) --clean-css $< $@
 	
 $(LESSC):

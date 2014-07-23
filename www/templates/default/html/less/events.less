@@ -165,7 +165,6 @@
     }
 
     .wdn-inner-wrapper {
-        border-bottom: 1px solid @ui04;
         padding-top:1rem;
         padding-bottom:0.5rem;
     }
@@ -231,7 +230,8 @@
 
             .date-wrapper,
             .time-wrapper,
-            .location {
+            .location,
+            .contact {
                 display:block;
                 .sans-serif-font();
                 font-size: 0.8125em;
@@ -241,6 +241,10 @@
                 }
             }
             
+            .location div {
+            	padding-left: 1.7em;
+            }
+            
             .description {
                 margin:1rem 0;
                 padding-top:1rem;
@@ -248,11 +252,39 @@
             }
         }
     }
+    
+    .year_main {
+    	text-align: center;
+    }
 
     .year_cal {
+    	
+    	.wdn-col {
+    		@media @bp1 {
+    			&:nth-child(2n+1) {
+    				clear: left;
+    			}
+    		}
+    		
+    		@media @bp2 {
+    			&:nth-child(2n+1) {
+    				clear: none;
+    			}
+    			
+    			&:nth-child(3n+1) {
+    				clear: left;
+    			}
+    		}
+    	}
+    	
         .monthwidget {
-            float:left;
-            margin:0 1rem;
+            margin-bottom: 2em;
+            
+            caption {
+            	.next, .prev {
+            		display: none;
+            	}
+            }
         }
     }
 }

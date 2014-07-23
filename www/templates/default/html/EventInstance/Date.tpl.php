@@ -22,7 +22,7 @@ $endu = new DateTime($endtime);
     <?php if ($context->isAllDay()): ?>
     All Day
     <?php else: ?>
-        <?php echo $startu->format('g:i a')?><?php if (!empty($endtime)): ?>-<?php echo $endu->format('g:i a')?><?php endif; ?>
+        <?php echo $startu->format('g:i a')?><?php if (!empty($endtime) && $endtime != $starttime): ?>-<?php echo $endu->format('g:i a')?><?php endif; ?>
     <?php endif; ?>
     
 </span>
