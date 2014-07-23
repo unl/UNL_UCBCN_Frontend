@@ -43,7 +43,10 @@ class OutputController extends \Savvy
                 break;
 
             case 'rss':
-                header('Content-type:application/rss+xml');
+                header('Content-type:application/rss+xml; charset=UTF-8');
+                $this->setEscape(function($data) {
+                    return htmlspecialchars(nl2br(strip_tags($data)), ENT_QUOTES, 'UTF-8', false);
+                });
                 $this->sendCORSHeaders();
                 $this->setTemplateFormatPaths($options['format']);
                 break;
