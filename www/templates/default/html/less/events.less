@@ -107,18 +107,29 @@
 
 #month_viewcal {
     td {
-        font-size:0.65rem;
-        text-align:left;
-        vertical-align:top;
+        text-align: left;
+        vertical-align: top;
         padding: 6px;
+        font-size: 9px;
+        font-size: 0.6923rem;
+
+		@media @bp2 {
+	        font-size: 10px;
+	        font-size: 0.602rem;
+		}
+
+		li {
+			margin-bottom: 0.75em;
+		}
 
         a {
-            text-decoration:none;
-            border-bottom:none;
+            text-decoration: none;
+            border-bottom: none;
         }
 
         > a {
-            font-size:1rem;
+            font-size: 13px;
+            font-size: 0.802rem;
         }
 
         ul {
