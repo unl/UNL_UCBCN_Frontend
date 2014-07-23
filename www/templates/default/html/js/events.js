@@ -1,12 +1,14 @@
-require(['jquery', 'wdn'], function($, WDN) {
+require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 	"use strict";
 	
 	var $progress = $('<progress>'),
-		months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		mqBp2 = '(min-width: 768px)';
 	
 	$(function() {
 		var homeUrl = $('link[rel=home]'),
+			mainScript = $('#script_main'),
 			$monthWidget = $('.wp-calendar'),
+			$sidebarCal,
 			initRoute = 'day',
 			widgetDate, nowActive, progressTimeout;
 		
@@ -14,6 +16,12 @@ require(['jquery', 'wdn'], function($, WDN) {
 			homeUrl = homeUrl[0].href;
 		} else {
 			homeUrl = '/';
+		}
+		
+		if (mainScript.length) {
+			mainScript = WDN.toAbs('./', mainScript[0].src);
+		} else {
+			mainScript = '/templates/default/html/js/';
 		}
 		
 		function pushState(url, route)
@@ -99,6 +107,7 @@ require(['jquery', 'wdn'], function($, WDN) {
 				cancelProgress();
 				$loadTo.html(data);
 				$monthWidget = $('.wp-calendar');
+				$(document.body).trigger("sticky_kit:recalc");
 				addMonthWidgetStates();
 			});
 		}
@@ -118,6 +127,8 @@ require(['jquery', 'wdn'], function($, WDN) {
 				cancelProgress();
 				$loadTo.html(data);
 				determineActiveDay();
+				stickyHeader();
+				$(document.body).trigger("sticky_kit:recalc");
 				if (widgetDate.getFullYear() !== nowActive.getFullYear() || widgetDate.getMonth() !== nowActive.getMonth()) {
 					loadMonthWidget(nowActive);
 				} else {
@@ -135,13 +146,36 @@ require(['jquery', 'wdn'], function($, WDN) {
 			$.get(href + '?format=hcalendar', function(data) {
 				cancelProgress();
 				$loadTo.html(data);
+				$(document.body).trigger("sticky_kit:recalc");
 			});
 		}
 		
-		var $sidebarCal = $('aside .calendar');
+		function stickyHeader()
+		{
+			if (!Modernizr.mediaqueries || Modernizr.mq(mqBp2)) {
+				var $dayHeading = $('h1.day-heading, h1.upcoming-heading');
+				if ($dayHeading.length) {
+					require([mainScript + 'jquery.sticky-kit.min.js'], function() {
+						$dayHeading.stick_in_parent();
+					});
+				}
+			}
+		}
+		
+		function stickySidebar()
+		{
+			if (!Modernizr.mediaqueries || Modernizr.mq(mqBp2)) {
+				require([mainScript + 'jquery.sticky-kit.min.js'], function() {
+					$sidebarCal.closest('aside').stick_in_parent();
+				});
+			}
+		}
+		
+		$sidebarCal = $('aside .calendar');
 		if ($sidebarCal.length) {
 			determineActiveDay();
 			addMonthWidgetStates();
+			stickySidebar();
 			
 			// Add a button for returning to "Today"
 			$('<p>', {'class': 'wdn-center'})
@@ -162,6 +196,7 @@ require(['jquery', 'wdn'], function($, WDN) {
 				loadMonthWidget(this.href);
 			});
 		}
+		stickyHeader();
 		
 		if ($('.view-unl_ucbcn_frontend_eventinstance').length) {
 			initRoute = 'event';
@@ -205,6 +240,16 @@ require(['jquery', 'wdn'], function($, WDN) {
 				case 'day':
 					changeDay(url)
 					break;
+			}
+		});
+		
+		$(window).on('resize', function() {
+			if (Modernizr.mediaqueries && !Modernizr.mq(mqBp2)) {
+				$monthWidget.trigger('sticky_kit:detach');
+				$('h1').trigger('sticky_kit:detach');
+			} else {
+				stickySidebar();
+				stickyHeader();
 			}
 		});
 	});
