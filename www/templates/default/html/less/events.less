@@ -18,7 +18,7 @@
 		font-size: 0.923rem;
         text-transform:uppercase;
         color: #fff;
-		background-color: mix(@ui09, @page-background, 95%);
+		background-color: @ui09;
 
 		@media @bp2 {
 	        font-size: 13px;
@@ -68,7 +68,7 @@
 
 .monthwidget {
 	th {
-		padding: 8px 1px;
+        padding: 1.069em 1px 1em;
 	}
 
 	td {
@@ -82,7 +82,7 @@
 
 		// day selection classes
 		&.active {
-			background: mix(@ui09, @page-background, 95%);
+			background: @ui09;
 			color: #fff;
 			a {
 				color: inherit;
@@ -333,7 +333,7 @@
     	}
 
         .monthwidget {
-            margin-bottom: 2em;
+            margin-bottom: 1.899em;
 
             caption {
             	.next, .prev {
