@@ -145,7 +145,7 @@ require(['jquery', 'wdn'], function($, WDN) {
 			
 			// Add a button for returning to "Today"
 			$('<p>', {'class': 'wdn-center'})
-				.append($('<a>', {'class': 'wdn-button', 'href': '#'}).text('Today'))
+				.append($('<a>', {'class': 'wdn-button', 'href': homeUrl}).text('Today'))
 				.click(function(e) {
 					e.preventDefault();
 					changeDay(new Date());
