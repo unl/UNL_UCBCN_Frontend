@@ -18,11 +18,11 @@
         text-transform:uppercase;
         padding: 1em;
         margin: 0;
-    
+
         a {
             color:#fff;
         }
-        
+
         > :first-child {
         	float: left;
         }
@@ -57,16 +57,16 @@
 	th {
 		padding: 8px 1px;
 	}
-	
+
 	td {
 		padding: 0;
-		
+
 		span,
 		a {
 			display: block;
 			padding: 8px 1px;
 		}
-		
+
 		// day selection classes
 		&.active {
 			background: mix(@ui09, @page-background, 95%);
@@ -75,7 +75,7 @@
 				color: inherit;
 			}
 		}
-		
+
 		&.today {
 			background: @brand;
 			color: #fff;
@@ -83,7 +83,7 @@
 				color: inherit;
 			}
 		}
-		
+
 		a:hover {
 			outline: 2px solid @brand;
 		}
@@ -124,29 +124,36 @@
 	margin-top: 2em;
 	padding-top: 1em;
 	border-top: 1px solid @ui04;
-	
+
 	span {
 		.sans-serif-font();
 		font-size: 0.75em;
 		text-transform: uppercase;
 	}
-	
+
 	ul {
 		margin: 0;
 		padding: 0;
 		list-style: none;
 		font-size: 1.4375em;
 		.brand-font();
-		
+
 		li {
 			display: inline;
 			margin-right: 1em;
+
+			a {
+				border-bottom: 0;
+			}
 		}
 	}
 }
 
 
 #maincontent {
+//	a{
+//		border-bottom: 0;
+//	}
 
 .band-nav {
 
@@ -164,11 +171,15 @@
         }
     }
 
+	a {
+		border-bottom: 0;
+	}
+
     .wdn-inner-wrapper {
         padding-top:1rem;
         padding-bottom:0.5rem;
     }
-    
+
     .submit-search {
     	text-align: right;
     }
@@ -187,7 +198,7 @@
         display: inline-block;
         vertical-align: middle;
         font-size: 0.75em;
-        
+
         button {
         	font-size: 0.75em;
         }
@@ -210,7 +221,7 @@
         padding:1em;
         background-color: mix(@ui09, @page-background, 95%);
 	    color: #fff;
-	
+
 	    a {
 	    	float: right;
 	        color:#fff;
@@ -236,16 +247,16 @@
                 display:block;
                 .sans-serif-font();
                 font-size: 0.8125em;
-                
+
                 &:before {
                 	color: @ui05;
                 }
             }
-            
+
             .location div {
             	padding-left: 1.7em;
             }
-            
+
             .description {
                 margin:1rem 0;
                 padding-top:1rem;
@@ -253,34 +264,34 @@
             }
         }
     }
-    
+
     .year_main {
     	text-align: center;
     }
 
     .year_cal {
-    	
+
     	.wdn-col {
     		@media @bp1 {
     			&:nth-child(2n+1) {
     				clear: left;
     			}
     		}
-    		
+
     		@media @bp2 {
     			&:nth-child(2n+1) {
     				clear: none;
     			}
-    			
+
     			&:nth-child(3n+1) {
     				clear: left;
     			}
     		}
     	}
-    	
+
         .monthwidget {
             margin-bottom: 2em;
-            
+
             caption {
             	.next, .prev {
             		display: none;
