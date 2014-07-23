@@ -2,7 +2,7 @@
     <section class="bp2-wdn-col-one-third">
         <h1 class="results">
             <?php
-            if (($dt = strtotime($context->search_query)) && ($context->search_query != 'art')) {
+            if ($dt = $context->getSearchTimestamp()) {
                 echo 'Search results for events dated <span>'.date('F jS',$dt).'</span></a>';
             } else {
                 echo 'Search results for "<span>'.htmlentities($context->search_query).'</span>"';

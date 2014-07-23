@@ -69,7 +69,7 @@ class Search extends EventListing implements RoutableInterface
                     AND calendar_has_event.status IN ("posted", "archived")
                     AND  (';
 
-        if (($t = strtotime($this->search_query)) && ($this->search_query != 'art')) {
+        if ($t = $this->getSearchTimestamp()) {
             // This is a time...
             $sql .= 'e.starttime LIKE \''.date('Y-m-d', $t).'%\'';
         } else {
@@ -88,6 +88,21 @@ class Search extends EventListing implements RoutableInterface
                 ORDER BY e.starttime ASC, recurringdate.recurringdate ASC, event.title ASC';
 
         return $sql;
+    }
+
+    /**
+     * Determine the unix timestamp of the search
+     * 
+     * @return bool|int - false if not a date search, otherwise return the unix timestamp of the date search
+     */
+    public function getSearchTimestamp()
+    {
+        if (($t = strtotime($this->search_query)) && ($this->search_query != 'art')) {
+            // This is a time...
+            return $t;
+        }
+        
+        return false;
     }
     
     /**
