@@ -31,6 +31,8 @@ class EventInstance implements RoutableInterface
      * @var \UNL\UCBCN\Frontend\Calendar
      */
     public $calendar;
+    
+    public $options;
 
     function __construct($options = array())
     {
@@ -71,6 +73,7 @@ class EventInstance implements RoutableInterface
         }
 
         $this->event = $this->eventdatetime->getEvent();
+        $this->options = $options;
     }
 
     /**
@@ -92,6 +95,17 @@ class EventInstance implements RoutableInterface
     {
         return $this->calendar->getURL() . date('Y/m/d/', strtotime($this->getStartTime())) . $this->eventdatetime->id . '/';
     }
+    
+    public function getImageURL()
+    {
+        if (isset($this->event->imageurl)) {
+            return $this->event->imageurl;
+        } elseif (isset($this->event->imagedata)) {
+            return Controller::$url . 'images/' . $this->event->id;
+        }
+        
+        return false;
+    }
 
     /**
      * Determines if this is an ongoing event.
@@ -102,7 +116,10 @@ class EventInstance implements RoutableInterface
      */
     public function isOngoing()
     {
-
+        if (empty($this->eventdatetime->endtime)) {
+            return false;
+        }
+        
         $start = date('m-d-Y', strtotime($this->eventdatetime->starttime));
         $end   = date('m-d-Y', strtotime($this->eventdatetime->endtime));
 
@@ -429,5 +446,10 @@ class EventInstance implements RoutableInterface
         }
 
         return $data;
+	}
+
+    public function getMonthWidget()
+    {
+        return new MonthWidget($this->options);
     }
 }

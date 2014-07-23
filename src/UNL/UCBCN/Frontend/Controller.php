@@ -175,7 +175,7 @@ class Controller
      */
     public function getCalendarURL()
     {
-        if ($this->getCalendar()->id == self::$default_calendar_id) {
+        if (!$this->getCalendar() || $this->getCalendar()->id == self::$default_calendar_id) {
             return $this->getURL();
         }
 

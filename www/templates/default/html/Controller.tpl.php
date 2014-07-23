@@ -30,16 +30,19 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     -->
     <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/scriptsandstyles_local.html'; ?>
     <!-- InstanceBeginEditable name="doctitle" -->
-    <title>UNL <?php
+    <title><?php if (!$context->getCalendar()): ?>Page Not Found - UNL Events
+        <?php else: ?>UNL <?php
         if ($context->getCalendar()->id != UNL\UCBCN\Frontend\Controller::$default_calendar_id) {
             echo '| '.$context->getCalendar()->name.' ';
         }
-        ?>| Events</title>
+        ?>| Events<?php endif; ?></title>
     <!-- InstanceEndEditable -->
     <!-- InstanceBeginEditable name="head" -->
     <!-- Place optional header elements here -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo $frontend->getURL() ?>templates/default/html/css/events.css" />
+    <?php if ($context->getCalendar()): ?>
     <link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
+    <?php endif; ?>
     <link rel="home" href="<?php echo $context->getCalendarURL() ?>" />
     <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search/" />
 <?php if ($context->getRaw('output') instanceof UNL\UCBCN\Frontend\RoutableInterface): ?>
@@ -68,7 +71,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
         <div class="wdn-inner-wrapper">
             <div id="wdn_site_title">
                     <span><!-- InstanceBeginEditable name="titlegraphic" -->
-                        <?php echo $context->getCalendar()->name; ?> Events
+                        <?php echo $context->getCalendar() ? $context->getCalendar()->name : 'UNL'; ?> Events
                         <!-- InstanceEndEditable --></span>
             </div>
         </div>
@@ -106,6 +109,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
         <div id="maincontent" class="wdn-main">
             <!--THIS IS THE MAIN CONTENT AREA; WDN: see glossary item 'main content area' -->
             <!-- InstanceBeginEditable name="maincontentarea" -->
+            <?php if ($context->getCalendar()): ?>
             <div class="wdn-band view-<?php echo $view_class; ?> band-nav">
                 <div class="wdn-inner-wrapper"><div class="wdn-grid-set">
                     <div class="bp2-wdn-col-one-third">
@@ -130,7 +134,8 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                     </div>
                 </div></div>
             </div>
-            <div class="wdn-band view-<?php echo $view_class; ?> band-results">
+            <?php endif; ?>
+            <div class="wdn-band wdn-light-neutral-band view-<?php echo $view_class; ?> band-results">
                 <div class="wdn-inner-wrapper">
                     <?php 
                         $template = null;

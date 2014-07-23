@@ -13,7 +13,7 @@ $endu = new DateTime($endtime);
             echo $startu->format('g:i a');
         }
         
-        if (!empty($endtime)) {
+        if (!empty($endtime) && $endtime != $starttime) {
             echo '-';
             if (intval($endu->format('i')) == 0) {
                 echo $endu->format('g a');
