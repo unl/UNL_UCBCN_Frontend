@@ -3,12 +3,12 @@ $startu = strtotime($context->eventdatetime->starttime);
 $endu = strtotime($context->eventdatetime->endtime);
 ?>
 <item>
-	<title><?php echo $savvy->dbStringtoHtml($context->event->title); ?></title>
+	<title><?php echo htmlspecialchars($savvy->dbStringtoHtml($context->event->title)); ?></title>
 	<link><?php echo $context->getURL(); ?></link>
 	<description>
 		<?php
-		echo '&lt;div&gt;'.$savvy->dbStringtoHtml(strip_tags($context->event->description)).'&lt;/div&gt;';
-		if (isset($context->event->subtitle)) echo '&lt;div&gt;'.$savvy->dbStringtoHtml($context->event->subtitle).'&lt;/div&gt;';
+		echo '&lt;div&gt;'.htmlspecialchars($savvy->dbStringtoHtml(strip_tags($context->event->description))).'&lt;/div&gt;';
+		if (isset($context->event->subtitle)) echo '&lt;div&gt;'.htmlspecialchars($savvy->dbStringtoHtml($context->event->subtitle)).'&lt;/div&gt;';
 		echo '&lt;small&gt;'.date('l, F jS', $startu).'&lt;/small&gt;';
 		
 		if (isset($context->eventdatetime->starttime)) {

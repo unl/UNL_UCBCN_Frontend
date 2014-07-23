@@ -199,7 +199,7 @@ class OutputController extends \Savvy
      */
     function dbStringToHtml($text)
     {
-        return nl2br(htmlspecialchars($text));
+        return nl2br($text);
     }
 
 }
