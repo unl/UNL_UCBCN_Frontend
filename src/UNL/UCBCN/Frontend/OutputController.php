@@ -1,6 +1,8 @@
 <?php
 namespace UNL\UCBCN\Frontend;
 
+use Michelf\SmartyPants;
+
 class OutputController extends \Savvy
 {
     protected $theme = 'default';
@@ -27,7 +29,7 @@ class OutputController extends \Savvy
             case 'ics':
             case 'ical':
             case 'icalendar':
-                header('Content-type:text/calendar');
+                header('Content-type:text/calendar; charset=UTF-8');
                 header('Content-Disposition: attachment; filename="events.ics"');
                 $this->setTemplateFormatPaths('icalendar');
                 break;
@@ -43,7 +45,10 @@ class OutputController extends \Savvy
                 break;
 
             case 'rss':
-                header('Content-type:application/rss+xml');
+                header('Content-type:application/rss+xml; charset=UTF-8');
+                $this->setEscape(function($data) {
+                    return htmlspecialchars(nl2br(strip_tags($data)), ENT_QUOTES, 'UTF-8', false);
+                });
                 $this->sendCORSHeaders();
                 $this->setTemplateFormatPaths($options['format']);
                 break;
@@ -82,6 +87,7 @@ class OutputController extends \Savvy
             case 'html':
                 // Always escape output, use $context->getRaw('var'); to get the raw data.
                 $this->setEscape(function($data) {
+                    $data = SmartyPants::defaultTransform($data);
                     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8', false);
                 });
                 header('Content-type:text/html;charset=UTF-8');

@@ -3,12 +3,12 @@ $startu = strtotime($context->eventdatetime->starttime);
 $endu = strtotime($context->eventdatetime->endtime);
 ?>
 <item>
-	<title><?php echo $savvy->dbStringtoHtml($context->event->title); ?></title>
+	<title><?php echo $context->event->title; ?></title>
 	<link><?php echo $context->getURL(); ?></link>
 	<description>
 		<?php
-		echo '&lt;div&gt;'.$savvy->dbStringtoHtml(strip_tags($context->event->description)).'&lt;/div&gt;';
-		if (isset($context->event->subtitle)) echo '&lt;div&gt;'.$savvy->dbStringtoHtml($context->event->subtitle).'&lt;/div&gt;';
+		echo '&lt;div&gt;'.$context->event->description.'&lt;/div&gt;';
+		if (isset($context->event->subtitle)) echo '&lt;div&gt;'.$context->event->subtitle.'&lt;/div&gt;';
 		echo '&lt;small&gt;'.date('l, F jS', $startu).'&lt;/small&gt;';
 		
 		if (isset($context->eventdatetime->starttime)) {
@@ -27,9 +27,9 @@ $endu = strtotime($context->eventdatetime->endtime);
 	    }
 		if ($context->eventdatetime->location_id) {
 		    $loc = $context->eventdatetime->getLocation();
-			echo ' | &lt;small&gt;'.$savvy->dbStringtoHtml($loc->name);
+			echo ' | &lt;small&gt;'.$loc->name;
 			if (isset($context->eventdatetime->room)) {
-			    echo ' Room:'.$savvy->dbStringtoHtml($context->eventdatetime->room);
+			    echo ' Room:'.$context->eventdatetime->room;
 			}
 			echo '&lt;/small&gt;';
 		} ?>

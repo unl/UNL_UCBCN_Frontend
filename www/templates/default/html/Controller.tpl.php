@@ -48,7 +48,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
 <?php if ($context->getRaw('output') instanceof UNL\UCBCN\Frontend\RoutableInterface): ?>
     <link rel="canonical" href="<?php echo $context->output->getURL() ?>" />
 <?php endif; ?>
-    <script src="<?php echo $frontend->getURL() ?>templates/default/html/js/events.min.js"></script>
+    <script id="script_main" src="<?php echo $frontend->getURL() ?>templates/default/html/js/events.min.js"></script>
     <!-- InstanceEndEditable -->
     <!-- InstanceParam name="class" type="text" value="" -->
 </head>

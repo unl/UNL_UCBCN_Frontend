@@ -21,6 +21,7 @@ if (file_exists(__DIR__ . '/../config.inc.php')) {
 }
 require_once $config_file;
 
+require_once __DIR__ . '/../vendor/composer/autoload.php';
 
 use RegExpRouter as RegExpRouter;
 

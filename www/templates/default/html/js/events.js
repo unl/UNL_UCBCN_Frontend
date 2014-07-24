@@ -1,18 +1,42 @@
-require(['jquery', 'wdn'], function($, WDN) {
+require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
+	"use strict";
+	
 	var $progress = $('<progress>'),
-		months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
+		mqBp2 = '(min-width: 768px)';
+	
 	$(function() {
 		var homeUrl = $('link[rel=home]'),
+			mainScript = $('#script_main'),
 			$monthWidget = $('.wp-calendar'),
+			$sidebarCal,
+			initRoute = 'day',
 			widgetDate, nowActive, progressTimeout;
-
+		
 		if (homeUrl.length) {
 			homeUrl = homeUrl[0].href;
 		} else {
 			homeUrl = '/';
 		}
-
+		
+		if (mainScript.length) {
+			mainScript = WDN.toAbs('./', mainScript[0].src);
+		} else {
+			mainScript = '/templates/default/html/js/';
+		}
+		
+		function pushState(url, route)
+		{
+			if (!window.history.pushState) {
+				return;
+			}
+			
+			if (window.location.href === url) {
+				return;
+			}
+			
+			window.history.pushState({route: route}, '', url);
+		}
+		
 		function addMonthWidgetStates()
 		{
 			widgetDate = new Date($monthWidget.data('datetime'));
@@ -73,7 +97,7 @@ require(['jquery', 'wdn'], function($, WDN) {
 		{
 			var url, $loadTo = $('aside .calendar');
 			if (datetime instanceof Date) {
-				url = homeUrl + datetime.getFullYear() + '/' + (datetime.getMonth() + 1) + '/';
+				url = homeUrl + datetime.getFullYear() + '/' + (datetime.getMonth() + 1) + '/'; 
 			} else {
 				url = datetime;
 			}
@@ -83,6 +107,7 @@ require(['jquery', 'wdn'], function($, WDN) {
 				cancelProgress();
 				$loadTo.html(data);
 				$monthWidget = $('.wp-calendar');
+				$(document.body).trigger("sticky_kit:recalc");
 				addMonthWidgetStates();
 			});
 		}
@@ -95,12 +120,15 @@ require(['jquery', 'wdn'], function($, WDN) {
 			} else {
 				url = datetime;
 			}
-
+			
+			pushState(url, 'day');
 			scheduleProgress($loadTo);
 			$.get(url + '?format=hcalendar', function(data) {
 				cancelProgress();
 				$loadTo.html(data);
 				determineActiveDay();
+				stickyHeader();
+				$(document.body).trigger("sticky_kit:recalc");
 				if (widgetDate.getFullYear() !== nowActive.getFullYear() || widgetDate.getMonth() !== nowActive.getMonth()) {
 					loadMonthWidget(nowActive);
 				} else {
@@ -112,15 +140,38 @@ require(['jquery', 'wdn'], function($, WDN) {
 		function loadEventInstance(href)
 		{
 			var $loadTo = $('#updatecontent');
-
-			scheduleProgress()
+			
+			pushState(href, 'event');
+			scheduleProgress();
 			$.get(href + '?format=hcalendar', function(data) {
 				cancelProgress();
 				$loadTo.html(data);
+				$(document.body).trigger("sticky_kit:recalc");
 			});
 		}
-
-		var $sidebarCal = $('aside .calendar');
+		
+		function stickyHeader()
+		{
+			if (!Modernizr.mediaqueries || Modernizr.mq(mqBp2)) {
+				var $dayHeading = $('h1.day-heading, h1.upcoming-heading');
+				if ($dayHeading.length) {
+					require([mainScript + 'jquery.sticky-kit.min.js'], function() {
+						$dayHeading.stick_in_parent();
+					});
+				}
+			}
+		}
+		
+		function stickySidebar()
+		{
+			if (!Modernizr.mediaqueries || Modernizr.mq(mqBp2)) {
+				require([mainScript + 'jquery.sticky-kit.min.js'], function() {
+					$sidebarCal.closest('aside').stick_in_parent();
+				});
+			}
+		}
+		
+		$sidebarCal = $('aside .calendar');
 		if ($sidebarCal.length) {
 			determineActiveDay();
 			addMonthWidgetStates();
@@ -142,27 +193,44 @@ require(['jquery', 'wdn'], function($, WDN) {
 			$sidebarCal.on('click', '.next a, .prev a', function(e) {
 				e.preventDefault();
 				loadMonthWidget(this.href);
-			})
+			});
 		}
-
+		stickyHeader();
+		
+		if ($('.view-unl_ucbcn_frontend_eventinstance').length) {
+			initRoute = 'event';
+		}
+		
 		// set up arrow navigation
 		$(document).on('keyup', function(e) {
 			if ($(e.target).is('input, select, textarea, button')) {
 				return;
 			}
-
-			var $dayNav = $('.day-nav');
-
+			
+			var $dayNav = $('.day-nav'), day;
+			
 			if (!$dayNav.length) {
 				return;
 			}
 
 			switch (e.which) {
 				case 39:
-					changeDay($('.next', $dayNav).attr('href'));
+					if (e.altKey) {
+						day = new Date(nowActive);
+						day.setMonth(day.getMonth() + 1);
+					} else {
+						day = $('.next', $dayNav).attr('href');
+					}
+					changeDay(day);
 					break;
 				case 37:
-					changeDay($('.prev', $dayNav).attr('href'));
+					if (e.altKey) {
+						day = new Date(nowActive);
+						day.setMonth(day.getMonth() - 1);
+					} else {
+						day = $('.prev', $dayNav).attr('href');
+					}
+					changeDay(day);
 					break;
 			}
 		});
@@ -170,6 +238,30 @@ require(['jquery', 'wdn'], function($, WDN) {
 		$('#updatecontent').on('click', '.vevent a.summary', function(e) {
 			e.preventDefault();
 			loadEventInstance(this.href);
+		});
+		
+		$(window).on('popstate', function(e) {
+			var route = (e.originalEvent.state && e.originalEvent.state.route) || initRoute,
+				url = window.location.href;
+			
+			switch (route) {
+				case 'event':
+					loadEventInstance(url);
+					break;
+				case 'day':
+					changeDay(url)
+					break;
+			}
+		});
+		
+		$(window).on('resize', function() {
+			if (Modernizr.mediaqueries && !Modernizr.mq(mqBp2)) {
+				$monthWidget.trigger('sticky_kit:detach');
+				$('h1').trigger('sticky_kit:detach');
+			} else {
+				stickySidebar();
+				stickyHeader();
+			}
 		});
 	});
 });
