@@ -1,6 +1,8 @@
 <?php
 namespace UNL\UCBCN\Frontend;
 
+use Michelf\SmartyPants;
+
 class OutputController extends \Savvy
 {
     protected $theme = 'default';
@@ -85,6 +87,7 @@ class OutputController extends \Savvy
             case 'html':
                 // Always escape output, use $context->getRaw('var'); to get the raw data.
                 $this->setEscape(function($data) {
+                    $data = SmartyPants::defaultTransform($data);
                     return htmlspecialchars($data, ENT_QUOTES, 'UTF-8', false);
                 });
                 header('Content-type:text/html;charset=UTF-8');
