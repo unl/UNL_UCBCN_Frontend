@@ -3,7 +3,7 @@ $prev = $context->getDateTime()->modify('-1 month');
 $next = $context->getDateTime()->modify('+1 month');
 ?>
 <div class="month_cal" id="month_viewcal">
-    <table class="wp-calendar">
+    <table class="wp-calendar wdn_responsive_table">
         <caption>
             <span><a href="<?php echo $context->getPreviousMonthURL(); ?>" id="prev_month" title="View events for <?php echo $prev->format('F'); ?>" class="eventicon-angle-circled-left"></a></span>
             <span class="monthvalue">
@@ -25,10 +25,12 @@ $next = $context->getDateTime()->modify('+1 month');
             'Friday' => 'Fri',
             'Saturday' => 'Sat',
         );
+        $weekdaysCount = count($weekdays);
+        $weekdayKeys = array_keys($weekdays);
         ?>
         <tr>
             <?php foreach ($weekdays as $full => $short): ?>
-                <th abbr="<?php echo $full; ?>" scope="col" title="<?php echo $full; ?>"><?php echo $short; ?></th>
+                <th scope="col" title="<?php echo $full; ?>"><?php echo $short; ?></th>
             <?php endforeach; ?>
         </tr>
         </thead>
@@ -36,7 +38,7 @@ $next = $context->getDateTime()->modify('+1 month');
         <?php
         $first = true;
         $month = $context->getRawObject();
-        foreach ($month as $day) {
+        foreach ($month as $i => $day) {
             if (UNL\UCBCN\Frontend\Month::$weekday_start == $day->getDateTime()->format('l')) {
                 // Start of a new week, so start a new table row
                 if (!$first) {
@@ -57,7 +59,7 @@ $next = $context->getDateTime()->modify('+1 month');
                 $classes[] = 'selected';
             }
             ?>
-            <td class="<?php echo implode(' ', $classes); ?>">
+            <td data-header="<?php echo $weekdayKeys[$i % $weekdaysCount] ?>" class="<?php echo implode(' ', $classes); ?>">
                 <?php echo $savvy->render($day, 'EventListing/Month.tpl.php'); ?>
             </td>
             <?php
