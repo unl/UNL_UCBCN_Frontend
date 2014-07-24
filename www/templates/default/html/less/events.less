@@ -111,6 +111,26 @@
 	}
 }
 
+.return-today {
+    .sans-serif-font();
+    font-size: 12px;
+    font-size: 0.75rem;
+
+	@media @bp2 {
+		font-size: 13px;
+		font-size: 0.802rem;
+	}
+
+    &:before {
+    	color: @ui05;
+    	margin-right: 0.451em;
+    }
+
+	.wdn-main p a& { // Needed to make the selector more specific
+		border-bottom: 0;
+	}
+}
+
 #month_viewcal {
 	th {
         padding: 1.069em 1px 1em;
