@@ -278,22 +278,32 @@
 
     .vcalendar {
         .vevent {
-            background-color:#fff;
-            border-top:5px solid @ui05;
-            padding:0 2rem 2rem;
-            margin-bottom:1rem;
+            margin-bottom: 1em;
+            padding: 0 5% 1.899em;
+            border-top: 5px solid @ui05;
+            background-color: fadeout(#fff, 33%);
+			box-shadow: 0 0 0 1px @ui03;
+			transition: all 0.2s ease-out;
 
             &:hover {
-                border-top:5px solid @scarlet;
-            }
+                border-top: 5px solid @scarlet;
+				background-color: #fff;
+				box-shadow: 0 0 0 1px darken(@ui03,7%);
+			}
 
             .date-wrapper,
             .time-wrapper,
             .location,
             .contact {
-                display:block;
+                display: block;
                 .sans-serif-font();
-                font-size: 0.8125em;
+                font-size: 12px;
+                font-size: 0.75rem;
+
+				@media @bp2 {
+					font-size: 13px;
+					font-size: 0.802rem;
+				}
 
                 &:before {
                 	color: @ui05;
@@ -301,13 +311,21 @@
             }
 
             .location div {
-            	padding-left: 1.7em;
+            	padding-left: 1.777em;
             }
 
             .description {
-                margin:1rem 0;
-                padding-top:1rem;
-                border-top:1px solid @ui04;
+                margin: 1em 0;
+                padding-top: 1em;
+                border-top: 1px solid @ui04;
+                //font-size: 12px;
+                //font-size: 0.75rem;
+
+				//@media @bp2 {
+				//	font-size: 13px;
+				//	font-size: 0.802rem;
+				//}
+
             }
         }
     }
