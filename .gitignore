@@ -6,4 +6,4 @@
 /www/templates/default/html/less/lib
 /.buildpath
 /node_modules
-
+/vendor/composer
