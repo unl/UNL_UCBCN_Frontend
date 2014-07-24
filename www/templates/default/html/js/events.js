@@ -171,6 +171,17 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			}
 		}
 		
+		function getOffsetMonth(fromDate, offset)
+		{
+			var day = new Date(fromDate);
+			day.setMonth(day.getMonth() + offset);
+			if (day.getDate() < fromDate.getDate()) {
+				day.setDate(0);
+			}
+			
+			return day;
+		}
+		
 		$sidebarCal = $('aside .calendar');
 		if ($sidebarCal.length) {
 			determineActiveDay();
@@ -217,8 +228,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			switch (e.which) {
 				case 39:
 					if (e.altKey) {
-						day = new Date(nowActive);
-						day.setMonth(day.getMonth() + 1);
+						day = getOffsetMonth(nowActive, 1);
 					} else {
 						day = $('.next', $dayNav).attr('href');
 					}
@@ -226,8 +236,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 					break;
 				case 37:
 					if (e.altKey) {
-						day = new Date(nowActive);
-						day.setMonth(day.getMonth() - 1);
+						day = getOffsetMonth(nowActive, -1);
 					} else {
 						day = $('.prev', $dayNav).attr('href');
 					}
