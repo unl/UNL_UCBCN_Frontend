@@ -35,15 +35,5 @@ $out = ob_get_contents();
 ob_clean();
 $out = explode("\n", $out);
 foreach ($out as $line) {
-    if (strlen($line) < 75) {
-        echo $line."\r\n";
-    } else {
-        $folded = '';
-        while (strlen($line) > 75) {
-            $folded .= substr($line, 0, 74)."\r\n";
-            $line = ' '.substr($line, 74);
-        }
-        echo $folded.$line."\r\n";
-    }
+    echo \UNL\UCBCN\Frontend\Util::ical_split($line) . "\r\n";
 }
-?>
