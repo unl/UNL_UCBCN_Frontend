@@ -241,11 +241,7 @@
 	}
 }
 
-
 #maincontent {
-	//	a{
-	//		border-bottom: 0;
-	//	}
 
 	.band-nav {
 		background-color: @ui02;
@@ -279,7 +275,7 @@
 		}
 
 	    .wdn-inner-wrapper {
-	        padding-top: 1rem;
+	        padding-top: 1em;
 	        padding-bottom: 0.451em;
 	    }
 
@@ -294,7 +290,6 @@
 	        margin-right: 1em;
 	        font-size: 1.4375em;
 	    }
-
 
 	    #event_search {
 	        margin: -8px 0 0;
@@ -314,7 +309,7 @@
 		background-color: @ui02;
 
 	    .wdn-inner-wrapper {
-	        padding-top: 1rem;
+	        padding-top: 1em;
 	    }
 
 	    .day-heading,
@@ -335,61 +330,28 @@
 				font-size: 0.802rem;
 			}
 
-            &:hover {
-                border-top:5px solid @scarlet;
-            }
-
-            a h1 {
-            	color: inherit;
-            }
-
-            .date-wrapper,
-            .time-wrapper,
-            .location,
-            .contact {
-                display:block;
-                .sans-serif-font();
-                font-size: 0.8125em;
-
-                &:before {
-                	color: @ui05;
-                }
-            }
-
-            .location div {
-            	padding-left: 1.777em;
-            }
-
-            .description {
-                margin: 1em 0;
-                padding-top: 1em;
-                border-top: 1px solid @ui04;
-            }
-        }
-    }
-
-    .year-nav {
-    	text-align: center;
-
-    	a:first-child {
-    		float: left;
-    	}
-
-    	a:last-child {
-    		float: right;
-    	}
-
-    	h1 {
-    		display: inline-block;
-    		margin-top: 0;
-    	}
-    }
-
 		    a {
 		    	float: right;
 		        color: #fff;
-		        margin-left: 0.5em;
+		        margin-left: 0.451em;
 		    }
+		}
+
+	    .year-nav {
+	    	text-align: center;
+
+	    	a:first-child {
+	    		float: left;
+	    	}
+
+	    	a:last-child {
+	    		float: right;
+	    	}
+
+	    	h1 {
+	    		display: inline-block;
+	    		margin-top: 0;
+	    	}
 	    }
 
 	    .vcalendar {
@@ -434,13 +396,6 @@
 	                margin: 1em 0;
 	                padding-top: 1em;
 	                border-top: 1px solid @ui04;
-	                //font-size: 12px;
-	                //font-size: 0.75rem;
-
-					//@media @bp2 {
-					//	font-size: 13px;
-					//	font-size: 0.802rem;
-					//}
 	            }
 	        }
 	    }
