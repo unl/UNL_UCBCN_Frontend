@@ -45,21 +45,24 @@
 
     td, th {
         .sans-serif-font();
-        font-size: 0.75rem;
+        font-size: 12px;
+        font-size: 0.923rem;
         text-align: center;
         border: 1px solid darken(#fff, 20%);
+
+		@media @bp2 {
+	        font-size: 0.75rem;
+		}
     }
 
     td {
         background-color:#fff;
         /* Previous or next month */
         &.prev, &.prev a, &.next, &.next a {
-            //color:darken(#fff, 5%);
-			font-size: 7px;
-			font-size: 0.538rem;
+			font-size: 9px;
+			font-size: 0.6923rem;
 
 			@media @bp2 {
-				font-size: 9px;
 				font-size: 0.563rem;
 			}
         }
@@ -107,7 +110,6 @@
 				background-color: #f7f7f7;
 			}
 		}
-
 	}
 }
 
@@ -361,7 +363,6 @@
 				//	font-size: 13px;
 				//	font-size: 0.802rem;
 				//}
-
             }
         }
     }
