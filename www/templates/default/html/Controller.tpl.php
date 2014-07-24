@@ -16,16 +16,16 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/metanfavico.html'; ?>
     <!--
         Membership and regular participation in the UNL Web Developer Network
-        is required to use the UNL templates. Visit the WDN site at 
+        is required to use the UNL templates. Visit the WDN site at
         http://wdn.unl.edu/. Click the WDN Registry link to log in and
         register your unl.edu site.
         All UNL template code is the property of the UNL Web Developer Network.
-        The code seen in a source code view is not, and may not be used as, a 
-        template. You may not use this code, a reverse-engineered version of 
+        The code seen in a source code view is not, and may not be used as, a
+        template. You may not use this code, a reverse-engineered version of
         this code, or its associated visual presentation in whole or in part to
         create a derivative work.
         This message may not be removed from any pages based on the UNL site template.
-        
+
         $Id: fixed.dwt | 252c2891a48c70db689be6d897d4f34768b8258a | Thu Aug 1 15:08:19 2013 -0500 | Kevin Abel  $
     -->
     <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/scriptsandstyles_local.html'; ?>
@@ -111,33 +111,41 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
             <!-- InstanceBeginEditable name="maincontentarea" -->
             <?php if ($context->getCalendar()): ?>
             <div class="wdn-band view-<?php echo $view_class; ?> band-nav">
-                <div class="wdn-inner-wrapper"><div class="wdn-grid-set">
-                    <div class="bp2-wdn-col-one-third">
-                        <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
-                            <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
-                            <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
-                            <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
-                            <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
-                            <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
-                        </ul>
-                    </div>
-                    <div class="bp2-wdn-col-two-thirds submit-search">
-                        <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
-                        <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
-                            <div class="wdn-input-group">
-                                <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
-                                <span class="wdn-input-group-btn">
-                                    <button type="submit" class="wdn-icon-search" title="Search"></button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div></div>
+                <div class="wdn-inner-wrapper">
+                	<div class="wdn-grid-set">
+						<div class="wdn-col-full">
+							<div class="events-nav">
+								<div class="wdn-grid-set">
+				                    <div class="bp2-wdn-col-one-third">
+				                        <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
+				                            <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
+				                            <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
+				                            <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
+				                            <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
+				                            <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
+				                        </ul>
+				                    </div>
+				                    <div class="bp2-wdn-col-two-thirds submit-search">
+				                        <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
+				                        <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
+				                            <div class="wdn-input-group">
+				                                <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+				                                <span class="wdn-input-group-btn">
+				                                    <button type="submit" class="wdn-icon-search" title="Search"></button>
+				                                </span>
+				                            </div>
+				                        </form>
+				                    </div>
+								</div>
+							</div>
+						</div>
+                	</div>
+                </div>
             </div>
             <?php endif; ?>
             <div class="wdn-band view-<?php echo $view_class; ?> band-results">
                 <div class="wdn-inner-wrapper">
-                    <?php 
+                    <?php
                         $template = null;
                         if ($context->output->getRawObject() instanceof Exception) {
                             $template = 'Exception.tpl.php';
