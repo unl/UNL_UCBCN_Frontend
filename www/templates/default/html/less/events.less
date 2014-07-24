@@ -318,13 +318,13 @@
             padding: 0 5% 1.899em;
             border-top: 5px solid @ui05;
             background-color: fadeout(#fff, 33%);
-			box-shadow: 0 0 0 1px @ui03;
+			box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
 			transition: all 0.2s ease-out;
 
             &:hover {
                 border-top: 5px solid @scarlet;
 				background-color: #fff;
-				box-shadow: 0 0 0 1px darken(@ui03,7%);
+				box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
 			}
 
             .date-wrapper,
