@@ -116,7 +116,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
 						<div class="wdn-col-full">
 							<div class="events-nav">
 								<div class="wdn-grid-set">
-				                    <div class="bp2-wdn-col-one-third">
+				                    <div class="bp2-wdn-col-three-sevenths bp3-wdn-col-one-third">
 				                        <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
 				                            <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
 				                            <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
@@ -125,7 +125,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
 				                            <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
 				                        </ul>
 				                    </div>
-				                    <div class="bp2-wdn-col-two-thirds submit-search">
+				                    <div class="bp2-wdn-col-four-sevenths bp3-wdn-col-two-thirds submit-search">
 				                        <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
 				                        <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
 				                            <div class="wdn-input-group">
