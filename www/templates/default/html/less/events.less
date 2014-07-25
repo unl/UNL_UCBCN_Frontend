@@ -15,25 +15,25 @@
         padding: 1.069em 1em 1em;
         .sans-serif-font();
         font-size: 12px;
-		font-size: 0.923rem;
+        font-size: 0.923rem;
         text-transform: uppercase;
         color: #fff;
-		background-color: @ui09;
+        background-color: @ui09;
 
-		@media @bp2 {
-	        font-size: 13px;
-			font-size: 0.802rem;
-		}
+        @media @bp2 {
+            font-size: 13px;
+            font-size: 0.802rem;
+        }
 
         a {
             color:#fff;
         }
 
         > :first-child {
-        	float: left;
+            float: left;
         }
         > :last-child {
-        	float: right;
+            float: right;
         }
     }
 
@@ -50,67 +50,67 @@
         text-align: center;
         border: 1px solid darken(#fff, 20%);
 
-		@media @bp2 {
-	        font-size: 0.75rem;
-		}
+        @media @bp2 {
+            font-size: 0.75rem;
+        }
     }
 
     td {
         background-color:#fff;
         /* Previous or next month */
         &.prev, &.prev a, &.next, &.next a {
-			font-size: 9px;
-			font-size: 0.6923rem;
+            font-size: 9px;
+            font-size: 0.6923rem;
 
-			@media @bp2 {
-				font-size: 0.563rem;
-			}
+            @media @bp2 {
+                font-size: 0.563rem;
+            }
         }
     }
 }
 
 .monthwidget {
-	th {
+    th {
         padding: 1.069em 1px 1em;
-	}
+    }
 
-	td {
-		padding: 0;
+    td {
+        padding: 0;
 
-		span,
-		a {
-			display: block;
-			padding: 8px 1px;
-		}
+        span,
+        a {
+            display: block;
+            padding: 8px 1px;
+        }
 
-		// day selection classes
-		&.active {
-			background: @ui09;
-			color: #fff;
-			a {
-				color: inherit;
-			}
-		}
+        // day selection classes
+        &.active {
+            background: @ui09;
+            color: #fff;
+            a {
+                color: inherit;
+            }
+        }
 
-		&.today {
-			background: @brand;
-			color: #fff;
-			a {
-				color: inherit;
-			}
-		}
+        &.today {
+            background: @brand;
+            color: #fff;
+            a {
+                color: inherit;
+            }
+        }
 
-		a:hover {
-			outline: 2px solid @brand;
-		}
+        a:hover {
+            outline: 2px solid @brand;
+        }
 
-		&.prev, &.next{
-			a {
-				padding: 11px 1px;
-				background-color: #f7f7f7;
-			}
-		}
-	}
+        &.prev, &.next{
+            a {
+                padding: 11px 1px;
+                background-color: #f7f7f7;
+            }
+        }
+    }
 }
 
 .return-today {
@@ -118,53 +118,52 @@
     font-size: 12px;
     font-size: 0.75rem;
 
-	@media @bp2 {
-		font-size: 13px;
-		font-size: 0.802rem;
-	}
-
-    &:before {
-    	color: @ui05;
-    	margin-right: 0.451em;
+    @media @bp2 {
+        font-size: 13px;
+        font-size: 0.802rem;
     }
 
-	.wdn-main p a& { // Needed to make the selector more specific
-		border-bottom: 0;
-	}
+    &:before {
+        color: @ui05;
+        margin-right: 0.451em;
+    }
+
+    .wdn-main p a& { // Needed to make the selector more specific
+        border-bottom: 0;
+    }
 }
 
 #month_viewcal {
-	table {
-		line-height: 1.425;
-	}
+    table {
+        line-height: 1.425;
+    }
 
-	th {
+    th {
         padding: 1.069em 1px 1em;
-	}
+    }
 
     td {
-
         text-align: left;
         vertical-align: top;
         padding: 1em;
         font-size: 9px;
         font-size: 0.6923rem;
 
-		@media @bp2 {
-	        font-size: 10px;
-	        font-size: 0.602rem;
-		}
+        @media @bp2 {
+            font-size: 10px;
+            font-size: 0.602rem;
+        }
 
-		li {
-			margin-bottom: 0.75em;
-		}
+        li {
+            margin-bottom: 0.75em;
+        }
 
         &.prev, &.next {
-    		display: none;
+            display: none;
 
-        	@media @bp2 {
-        		display: table-cell;
-        	}
+            @media @bp2 {
+                display: table-cell;
+            }
         }
 
         a {
@@ -186,253 +185,253 @@
     }
 
     .week-number {
-	    .base-font();
-	    text-transform: none;
-	    color: @ui05;
+        .base-font();
+        text-transform: none;
+        color: @ui05;
     }
 }
 
 .day-nav {
-	display: none;
+    display: none;
 }
 
 #subscribe {
-	margin: 1.777em 0;
-	padding-top: 0.75em;
-	border-top: 1px solid @ui04;
+    margin: 1.777em 0;
+    padding-top: 0.75em;
+    border-top: 1px solid @ui04;
 
-	span {
-		.sans-serif-font();
-		font-size: 10px;
-		font-size: 0.769rem;
-		text-transform: uppercase;
+    span {
+        .sans-serif-font();
+        font-size: 10px;
+        font-size: 0.769rem;
+        text-transform: uppercase;
 
-		@media @bp2 {
-	        font-size: 12px;
-	        font-size: 0.75rem;
-		}
-	}
+        @media @bp2 {
+            font-size: 12px;
+            font-size: 0.75rem;
+        }
+    }
 
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		.brand-font();
-		font-size: 21px;
-		font-size: 1.615rem;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        .brand-font();
+        font-size: 21px;
+        font-size: 1.615rem;
 
-		@media @bp2 {
-	        font-size: 23px;
-	        font-size: 1.425rem;
-		}
+        @media @bp2 {
+            font-size: 23px;
+            font-size: 1.425rem;
+        }
 
-		li {
-			display: inline;
-			margin-right: 1em;
+        li {
+            display: inline;
+            margin-right: 1em;
 
-			a {
-				border-bottom: 0;
+            a {
+                border-bottom: 0;
 
-				&:before {
-					color: @ui05;
-				}
-			}
-		}
-	}
+                &:before {
+                    color: @ui05;
+                    }
+                }
+            }
+        }
 }
 
 #maincontent {
 
-	.band-nav {
-		background-color: @ui02;
-	    .brand-font();
+    .band-nav {
+        background-color: @ui02;
+        .brand-font();
 
-	    .events-nav {
-		    padding-bottom: 0.339em;
-		    border-bottom: 1px solid @ui04;
-	    }
+        .events-nav {
+            padding-bottom: 0.339em;
+            border-bottom: 1px solid @ui04;
+        }
 
-	    ul {
-	        text-transform: uppercase;
-	        margin: 0;
-	        padding: 0;
-			font-size: 21px;
-			font-size: 1.615rem;
+        ul {
+            text-transform: uppercase;
+            margin: 0;
+            padding: 0;
+            font-size: 21px;
+            font-size: 1.615rem;
 
-			@media @bp2 {
-		        font-size: 23px;
-		        font-size: 1.425rem;
-			}
+            @media @bp2 {
+                font-size: 23px;
+                font-size: 1.425rem;
+            }
 
-	        li {
-	            display: inline;
-	            margin-right: 0.451em;
-	        }
-	    }
+            li {
+                display: inline;
+                margin-right: 0.451em;
+            }
+        }
 
-		a {
-			border-bottom: 0;
-		}
+        a {
+            border-bottom: 0;
+        }
 
-	    .wdn-inner-wrapper {
-	        padding-top: 1em;
-	        padding-bottom: 0.451em;
-	    }
+        .wdn-inner-wrapper {
+            padding-top: 1em;
+            padding-bottom: 0.451em;
+        }
 
-	    .submit-search {
-	    	@media @bp2 {
-		    	text-align: right;
-	    	}
-	    }
+        .submit-search {
+            @media @bp2 {
+                text-align: right;
+            }
+        }
 
-	    #frontend_login {
-	        text-transform: uppercase;
-	        margin-right: 1em;
-	        font-size: 1.4375em;
-	    }
+        #frontend_login {
+            text-transform: uppercase;
+            margin-right: 1em;
+            font-size: 1.4375em;
+        }
 
-	    #event_search {
-	        margin: -8px 0 0;
-	        padding: 0;
-	        width: 45%;
-	        display: inline-block;
-	        vertical-align: middle;
-	        font-size: 0.75em;
+        #event_search {
+            margin: -8px 0 0;
+            padding: 0;
+            width: 45%;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 0.75em;
 
-	        button {
-	        	font-size: 0.75em;
-	        }
-	    }
-	}
+            button {
+                font-size: 0.75em;
+            }
+        }
+    }
 
-	.band-results {
-		background-color: @ui02;
+    .band-results {
+        background-color: @ui02;
 
-	    .wdn-inner-wrapper {
-	        padding-top: 1em;
-	    }
+        .wdn-inner-wrapper {
+            padding-top: 1em;
+        }
 
-	    .day-heading,
-	    .ongoing-heading,
-	    .upcoming-heading {
-	    	width: 100%;
-	        margin: 0 0 1rem;
-	        padding: 1.069em 1em 1em 5%;
-	        .sans-serif-font();
-	        font-size: 12px;
-			font-size: 0.923rem;
-	        text-transform: uppercase;
-		    color: #fff;
-	        background-color: mix(@ui09, @page-background, 95%);
+        .day-heading,
+        .ongoing-heading,
+        .upcoming-heading {
+            width: 100%;
+            margin: 0 0 1rem;
+            padding: 1.069em 1em 1em 5%;
+            .sans-serif-font();
+            font-size: 12px;
+            font-size: 0.923rem;
+            text-transform: uppercase;
+            color: #fff;
+            background-color: mix(@ui09, @page-background, 95%);
 
-			@media @bp2 {
-		        font-size: 13px;
-				font-size: 0.802rem;
-			}
+            @media @bp2 {
+                font-size: 13px;
+                font-size: 0.802rem;
+            }
 
-		    a {
-		    	float: right;
-		        color: #fff;
-		        margin-left: 0.451em;
-		    }
-		}
+            a {
+                float: right;
+                color: #fff;
+                margin-left: 0.451em;
+            }
+        }
 
-	    .year-nav {
-	    	text-align: center;
+        .year-nav {
+            text-align: center;
 
-	    	a:first-child {
-	    		float: left;
-	    	}
+            a:first-child {
+                float: left;
+            }
 
-	    	a:last-child {
-	    		float: right;
-	    	}
+            a:last-child {
+                float: right;
+            }
 
-	    	h1 {
-	    		display: inline-block;
-	    		margin-top: 0;
-	    	}
-	    }
+            h1 {
+                display: inline-block;
+                margin-top: 0;
+            }
+        }
 
-	    .vcalendar {
-	        .vevent {
-	            margin-bottom: 1em;
-	            padding: 0 5% 1.899em;
-	            border-top: 5px solid @ui05;
-	            background-color: fadeout(#fff, 33%);
-				box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
-				transition: all 0.2s ease-out;
+        .vcalendar {
+            .vevent {
+                margin-bottom: 1em;
+                padding: 0 5% 1.899em;
+                border-top: 5px solid @ui05;
+                background-color: fadeout(#fff, 33%);
+                box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
+                transition: all 0.2s ease-out;
 
-	            &:hover {
-	                border-top: 5px solid @scarlet;
-					background-color: #fff;
-					box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
-				}
+                &:hover {
+                    border-top: 5px solid @scarlet;
+                    background-color: #fff;
+                    box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+                }
 
-	            .date-wrapper,
-	            .time-wrapper,
-	            .location,
-	            .contact {
-	                display: block;
-	                .sans-serif-font();
-	                font-size: 12px;
-	                font-size: 0.75rem;
+                .date-wrapper,
+                .time-wrapper,
+                .location,
+                .contact {
+                    display: block;
+                    .sans-serif-font();
+                    font-size: 12px;
+                    font-size: 0.75rem;
 
-					@media @bp2 {
-						font-size: 13px;
-						font-size: 0.802rem;
-					}
+                    @media @bp2 {
+                        font-size: 13px;
+                        font-size: 0.802rem;
+                    }
 
-	                &:before {
-	                	color: @ui05;
-	                }
-	            }
+                    &:before {
+                        color: @ui05;
+                    }
+                }
 
-	            .location div {
-	            	padding-left: 1.777em;
-	            }
+                .location div {
+                    padding-left: 1.777em;
+                }
 
-	            .description {
-	                margin: 1em 0;
-	                padding-top: 1em;
-	                border-top: 1px solid @ui04;
-	            }
-	        }
-	    }
+                .description {
+                    margin: 1em 0;
+                    padding-top: 1em;
+                    border-top: 1px solid @ui04;
+                }
+            }
+        }
 
-	    .year_main {
-	    	text-align: center;
-	    }
+        .year_main {
+            text-align: center;
+        }
 
-	    .year_cal {
+        .year_cal {
 
-	    	.wdn-col {
-	    		@media @bp1 {
-	    			&:nth-child(2n+1) {
-	    				clear: left;
-	    			}
-	    		}
+            .wdn-col {
+                @media @bp1 {
+                    &:nth-child(2n+1) {
+                        clear: left;
+                    }
+                }
 
-	    		@media @bp2 {
-	    			&:nth-child(2n+1) {
-	    				clear: none;
-	    			}
+                @media @bp2 {
+                    &:nth-child(2n+1) {
+                        clear: none;
+                    }
 
-	    			&:nth-child(3n+1) {
-	    				clear: left;
-	    			}
-	    		}
-	    	}
+                    &:nth-child(3n+1) {
+                        clear: left;
+                    }
+                }
+            }
 
-	        .monthwidget {
-	            margin-bottom: 1.899em;
+            .monthwidget {
+                margin-bottom: 1.899em;
 
-	            caption {
-	            	.next, .prev {
-	            		display: none;
-	            	}
-	            }
-	        }
-	    }
-	}
+                caption {
+                    .next, .prev {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
 }
