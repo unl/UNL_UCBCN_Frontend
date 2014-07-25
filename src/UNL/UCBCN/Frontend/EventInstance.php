@@ -222,12 +222,12 @@ class EventInstance implements RoutableInterface
         $fullDescription = str_replace("\r\n", "\n", $this->event->description);
         
         // break on paragraphs
-        $fullDescription = explode("\n\n", $fullDescription);
+        $fullDescription = explode("\n", $fullDescription, 2);
         
         if (mb_strlen($fullDescription[0]) > $maxChars) {
             // find the maximum number of characters that do not break a word
             preg_match("/.{1,$maxChars}(?:\\b|$)/s", $fullDescription[0], $matches);
-            return $matches[0] . ' ...';
+            return $matches[0] . ' …';
         }
         
         return $fullDescription[0];
