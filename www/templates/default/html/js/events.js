@@ -1,9 +1,9 @@
 require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 	"use strict";
-	
+
 	var $progress = $('<progress>'),
 		mqBp2 = '(min-width: 768px)';
-	
+
 	$(function() {
 		var homeUrl = $('link[rel=home]'),
 			mainScript = $('#script_main'),
@@ -11,32 +11,32 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			$sidebarCal,
 			initRoute = 'day',
 			widgetDate, nowActive, progressTimeout;
-		
+
 		if (homeUrl.length) {
 			homeUrl = homeUrl[0].href;
 		} else {
 			homeUrl = '/';
 		}
-		
+
 		if (mainScript.length) {
 			mainScript = WDN.toAbs('./', mainScript[0].src);
 		} else {
 			mainScript = '/templates/default/html/js/';
 		}
-		
+
 		function pushState(url, route)
 		{
 			if (!window.history.pushState) {
 				return;
 			}
-			
+
 			if (window.location.href === url) {
 				return;
 			}
-			
+
 			window.history.pushState({route: route}, '', url);
 		}
-		
+
 		function addMonthWidgetStates()
 		{
 			widgetDate = new Date($monthWidget.data('datetime'));
@@ -97,7 +97,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 		{
 			var url, $loadTo = $('aside .calendar');
 			if (datetime instanceof Date) {
-				url = homeUrl + datetime.getFullYear() + '/' + (datetime.getMonth() + 1) + '/'; 
+				url = homeUrl + datetime.getFullYear() + '/' + (datetime.getMonth() + 1) + '/';
 			} else {
 				url = datetime;
 			}
@@ -120,7 +120,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			} else {
 				url = datetime;
 			}
-			
+
 			pushState(url, 'day');
 			scheduleProgress($loadTo);
 			$.get(url + '?format=hcalendar', function(data) {
@@ -140,7 +140,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 		function loadEventInstance(href)
 		{
 			var $loadTo = $('#updatecontent');
-			
+
 			pushState(href, 'event');
 			scheduleProgress();
 			$.get(href + '?format=hcalendar', function(data) {
@@ -149,7 +149,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 				$(document.body).trigger("sticky_kit:recalc");
 			});
 		}
-		
+
 		function stickyHeader()
 		{
 			if (!Modernizr.mediaqueries || Modernizr.mq(mqBp2)) {
@@ -161,7 +161,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 				}
 			}
 		}
-		
+
 		function stickySidebar()
 		{
 			if (!Modernizr.mediaqueries || Modernizr.mq(mqBp2)) {
@@ -170,11 +170,12 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 				});
 			}
 		}
-		
+
 		$sidebarCal = $('aside .calendar');
 		if ($sidebarCal.length) {
 			determineActiveDay();
 			addMonthWidgetStates();
+			stickySidebar();
 
 			// Add a button for returning to "Today"
 			$('<p>')
@@ -196,19 +197,19 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			});
 		}
 		stickyHeader();
-		
+
 		if ($('.view-unl_ucbcn_frontend_eventinstance').length) {
 			initRoute = 'event';
 		}
-		
+
 		// set up arrow navigation
 		$(document).on('keyup', function(e) {
 			if ($(e.target).is('input, select, textarea, button')) {
 				return;
 			}
-			
+
 			var $dayNav = $('.day-nav'), day;
-			
+
 			if (!$dayNav.length) {
 				return;
 			}
@@ -239,11 +240,11 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			e.preventDefault();
 			loadEventInstance(this.href);
 		});
-		
+
 		$(window).on('popstate', function(e) {
 			var route = (e.originalEvent.state && e.originalEvent.state.route) || initRoute,
 				url = window.location.href;
-			
+
 			switch (route) {
 				case 'event':
 					loadEventInstance(url);
@@ -253,7 +254,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 					break;
 			}
 		});
-		
+
 		$(window).on('resize', function() {
 			if (Modernizr.mediaqueries && !Modernizr.mq(mqBp2)) {
 				$monthWidget.trigger('sticky_kit:detach');
