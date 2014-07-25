@@ -8,7 +8,7 @@
     <a class="url prev" href="<?php echo $context->getPreviousDay()->getURL(); ?>">Previous Day</a>
     <a class="url next" href="<?php echo $context->getNextDay()->getURL(); ?>">Next Day</a>
 </p>
-<?php 
+<?php
 $events = array(
     'ongoing' => array(),
     'today' => array(),
@@ -23,6 +23,6 @@ foreach ($context->getRawObject() as $event) {
 ?>
 <?php echo $savvy->render(new ArrayIterator($events['today']), 'EventListing.tpl.php'); ?>
 <?php if (!empty($events['ongoing'])): ?>
-<h2>Ongoing Events</h2>
+<h2 class="ongoing-heading">Ongoing Events</h2>
 <?php echo $savvy->render(new ArrayIterator($events['ongoing']), 'EventListing.tpl.php'); ?>
 <?php endif; ?>

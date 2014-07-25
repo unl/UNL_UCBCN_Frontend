@@ -11,18 +11,24 @@
 .wp-calendar {
 
     caption {
-        background-color: mix(@ui09, @page-background, 95%);
-        color: #fff;
-        .sans-serif-font();
-        font-size:0.75rem;
-        text-transform:uppercase;
-        padding: 1em;
         margin: 0;
-    
+        padding: 1.069em 1em 1em;
+        .sans-serif-font();
+        font-size: 12px;
+		font-size: 0.923rem;
+        text-transform: uppercase;
+        color: #fff;
+		background-color: @ui09;
+
+		@media @bp2 {
+	        font-size: 13px;
+			font-size: 0.802rem;
+		}
+
         a {
             color:#fff;
         }
-        
+
         > :first-child {
         	float: left;
         }
@@ -32,50 +38,60 @@
     }
 
     th {
-        text-transform:uppercase;
-        background-color:#eee;
+        text-transform: uppercase;
+        background-color: #eee;
         width: 14%;
     }
 
     td, th {
         .sans-serif-font();
-        font-size:0.75rem;
-        text-align:center;
-        border:1px solid darken(#fff, 20%);
+        font-size: 12px;
+        font-size: 0.923rem;
+        text-align: center;
+        border: 1px solid darken(#fff, 20%);
+
+		@media @bp2 {
+	        font-size: 0.75rem;
+		}
     }
 
     td {
         background-color:#fff;
         /* Previous or next month */
         &.prev, &.prev a, &.next, &.next a {
-            color:darken(#fff, 5%);
+			font-size: 9px;
+			font-size: 0.6923rem;
+
+			@media @bp2 {
+				font-size: 0.563rem;
+			}
         }
     }
 }
 
 .monthwidget {
 	th {
-		padding: 8px 1px;
+        padding: 1.069em 1px 1em;
 	}
-	
+
 	td {
 		padding: 0;
-		
+
 		span,
 		a {
 			display: block;
 			padding: 8px 1px;
 		}
-		
+
 		// day selection classes
 		&.active {
-			background: mix(@ui09, @page-background, 95%);
+			background: @ui09;
 			color: #fff;
 			a {
 				color: inherit;
 			}
 		}
-		
+
 		&.today {
 			background: @brand;
 			color: #fff;
@@ -83,44 +99,96 @@
 				color: inherit;
 			}
 		}
-		
+
 		a:hover {
 			outline: 2px solid @brand;
+		}
+
+		&.prev, &.next{
+			a {
+				padding: 11px 1px;
+				background-color: #f7f7f7;
+			}
 		}
 	}
 }
 
+.return-today {
+    .sans-serif-font();
+    font-size: 12px;
+    font-size: 0.75rem;
+
+	@media @bp2 {
+		font-size: 13px;
+		font-size: 0.802rem;
+	}
+
+    &:before {
+    	color: @ui05;
+    	margin-right: 0.451em;
+    }
+
+	.wdn-main p a& { // Needed to make the selector more specific
+		border-bottom: 0;
+	}
+}
+
 #month_viewcal {
+	table {
+		line-height: 1.425;
+	}
+
+	th {
+        padding: 1.069em 1px 1em;
+	}
+
     td {
-        font-size:0.65rem;
-        text-align:left;
-        vertical-align:top;
-        padding: 6px;
-        
+
+        text-align: left;
+        vertical-align: top;
+        padding: 1em;
+        font-size: 9px;
+        font-size: 0.6923rem;
+
+		@media @bp2 {
+	        font-size: 10px;
+	        font-size: 0.602rem;
+		}
+
+		li {
+			margin-bottom: 0.75em;
+		}
+
         &.prev, &.next {
     		display: none;
-    		
+
         	@media @bp2 {
         		display: table-cell;
         	}
         }
 
         a {
-            text-decoration:none;
-            border-bottom:none;
+            text-decoration: none;
+            border-bottom: none;
         }
 
         > a {
-            font-size:1rem;
+            font-size: 13px;
+            font-size: 0.802rem;
         }
 
         ul {
             padding:0;
             li {
-                list-style:none;
+                list-style: none;
             }
         }
+    }
 
+    .week-number {
+	    .base-font();
+	    text-transform: none;
+	    color: @ui05;
     }
 }
 
@@ -129,188 +197,242 @@
 }
 
 #subscribe {
-	margin: 2em 0;
-	padding-top: 1em;
+	margin: 1.777em 0;
+	padding-top: 0.75em;
 	border-top: 1px solid @ui04;
-	
+
 	span {
 		.sans-serif-font();
-		font-size: 0.75em;
+		font-size: 10px;
+		font-size: 0.769rem;
 		text-transform: uppercase;
+
+		@media @bp2 {
+	        font-size: 12px;
+	        font-size: 0.75rem;
+		}
 	}
-	
+
 	ul {
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		font-size: 1.4375em;
 		.brand-font();
-		
+		font-size: 21px;
+		font-size: 1.615rem;
+
+		@media @bp2 {
+	        font-size: 23px;
+	        font-size: 1.425rem;
+		}
+
 		li {
 			display: inline;
 			margin-right: 1em;
+
+			a {
+				border-bottom: 0;
+
+				&:before {
+					color: @ui05;
+				}
+			}
 		}
 	}
 }
 
-
 #maincontent {
 
-.band-nav {
+	.band-nav {
+		background-color: @ui02;
+	    .brand-font();
 
-    .brand-font();
-
-    ul {
-        text-transform:uppercase;
-        margin:0;
-        padding:0;
-        font-size: 1.4375em;
-
-        li {
-            display:inline;
-            margin-right: 0.5em;
-        }
-    }
-
-    .wdn-inner-wrapper {
-        padding-top:1rem;
-        padding-bottom:0.5rem;
-    }
-    
-    .submit-search {
-    	text-align: right;
-    }
-
-    #frontend_login {
-        text-transform:uppercase;
-        margin-right: 1em;
-        font-size: 1.4375em;
-    }
-
-
-    #event_search {
-        margin:-8px 0 0;
-        padding:0;
-        width:45%;
-        display: inline-block;
-        vertical-align: middle;
-        font-size: 0.75em;
-        
-        button {
-        	font-size: 0.75em;
-        }
-    }
-}
-
-.band-results {
-
-    .wdn-inner-wrapper {
-        padding-top:1rem;
-    }
-
-    .day-heading,
-    .upcoming-heading {
-        margin:0 0 1rem;
-        .sans-serif-font();
-        font-size:0.75rem;
-        text-transform:uppercase;
-        padding:1em;
-        background-color: mix(@ui09, @page-background, 95%);
-	    color: #fff;
-	
-	    a {
-	    	float: right;
-	        color:#fff;
-	        margin-left: 0.5em;
+	    .events-nav {
+		    padding-bottom: 0.339em;
+		    border-bottom: 1px solid @ui04;
 	    }
-    }
 
-    .vcalendar {
-        .vevent {
-            background-color:#fff;
-            border-top:5px solid @ui05;
-            padding:0 2rem 2rem;
-            margin-bottom:1rem;
+	    ul {
+	        text-transform: uppercase;
+	        margin: 0;
+	        padding: 0;
+			font-size: 21px;
+			font-size: 1.615rem;
 
-            &:hover {
-                border-top:5px solid @scarlet;
-            }
-            
-            a h1 {
-            	color: inherit;
-            }
+			@media @bp2 {
+		        font-size: 23px;
+		        font-size: 1.425rem;
+			}
 
-            .date-wrapper,
-            .time-wrapper,
-            .location,
-            .contact {
-                display:block;
-                .sans-serif-font();
-                font-size: 0.8125em;
-                
-                &:before {
-                	color: @ui05;
-                }
-            }
-            
-            .location div {
-            	padding-left: 1.7em;
-            }
-            
-            .description {
-                margin:1rem 0;
-                padding-top:1rem;
-                border-top:1px solid @ui04;
-            }
-        }
-    }
-    
-    .year-nav {
-    	text-align: center;
-    	
-    	a:first-child {
-    		float: left;
-    	}
-    	
-    	a:last-child {
-    		float: right;
-    	}
-    	
-    	h1 {
-    		display: inline-block;
-    		margin-top: 0;
-    	}
-    }
+	        li {
+	            display: inline;
+	            margin-right: 0.451em;
+	        }
+	    }
 
-    .year_cal {
-    	
-    	.wdn-col {
-    		@media @bp1 {
-    			&:nth-child(2n+1) {
-    				clear: left;
-    			}
-    		}
-    		
-    		@media @bp2 {
-    			&:nth-child(2n+1) {
-    				clear: none;
-    			}
-    			
-    			&:nth-child(3n+1) {
-    				clear: left;
-    			}
-    		}
-    	}
-    	
-        .monthwidget {
-            margin-bottom: 2em;
-            
-            caption {
-            	.next, .prev {
-            		display: none;
-            	}
-            }
-        }
-    }
-}
+		a {
+			border-bottom: 0;
+		}
+
+	    .wdn-inner-wrapper {
+	        padding-top: 1em;
+	        padding-bottom: 0.451em;
+	    }
+
+	    .submit-search {
+	    	@media @bp2 {
+		    	text-align: right;
+	    	}
+	    }
+
+	    #frontend_login {
+	        text-transform: uppercase;
+	        margin-right: 1em;
+	        font-size: 1.4375em;
+	    }
+
+	    #event_search {
+	        margin: -8px 0 0;
+	        padding: 0;
+	        width: 45%;
+	        display: inline-block;
+	        vertical-align: middle;
+	        font-size: 0.75em;
+
+	        button {
+	        	font-size: 0.75em;
+	        }
+	    }
+	}
+
+	.band-results {
+		background-color: @ui02;
+
+	    .wdn-inner-wrapper {
+	        padding-top: 1em;
+	    }
+
+	    .day-heading,
+	    .ongoing-heading,
+	    .upcoming-heading {
+	    	width: 100%;
+	        margin: 0 0 1rem;
+	        padding: 1.069em 1em 1em 5%;
+	        .sans-serif-font();
+	        font-size: 12px;
+			font-size: 0.923rem;
+	        text-transform: uppercase;
+		    color: #fff;
+	        background-color: mix(@ui09, @page-background, 95%);
+
+			@media @bp2 {
+		        font-size: 13px;
+				font-size: 0.802rem;
+			}
+
+		    a {
+		    	float: right;
+		        color: #fff;
+		        margin-left: 0.451em;
+		    }
+		}
+
+	    .year-nav {
+	    	text-align: center;
+
+	    	a:first-child {
+	    		float: left;
+	    	}
+
+	    	a:last-child {
+	    		float: right;
+	    	}
+
+	    	h1 {
+	    		display: inline-block;
+	    		margin-top: 0;
+	    	}
+	    }
+
+	    .vcalendar {
+	        .vevent {
+	            margin-bottom: 1em;
+	            padding: 0 5% 1.899em;
+	            border-top: 5px solid @ui05;
+	            background-color: fadeout(#fff, 33%);
+				box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
+				transition: all 0.2s ease-out;
+
+	            &:hover {
+	                border-top: 5px solid @scarlet;
+					background-color: #fff;
+					box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+				}
+
+	            .date-wrapper,
+	            .time-wrapper,
+	            .location,
+	            .contact {
+	                display: block;
+	                .sans-serif-font();
+	                font-size: 12px;
+	                font-size: 0.75rem;
+
+					@media @bp2 {
+						font-size: 13px;
+						font-size: 0.802rem;
+					}
+
+	                &:before {
+	                	color: @ui05;
+	                }
+	            }
+
+	            .location div {
+	            	padding-left: 1.777em;
+	            }
+
+	            .description {
+	                margin: 1em 0;
+	                padding-top: 1em;
+	                border-top: 1px solid @ui04;
+	            }
+	        }
+	    }
+
+	    .year_main {
+	    	text-align: center;
+	    }
+
+	    .year_cal {
+
+	    	.wdn-col {
+	    		@media @bp1 {
+	    			&:nth-child(2n+1) {
+	    				clear: left;
+	    			}
+	    		}
+
+	    		@media @bp2 {
+	    			&:nth-child(2n+1) {
+	    				clear: none;
+	    			}
+
+	    			&:nth-child(3n+1) {
+	    				clear: left;
+	    			}
+	    		}
+	    	}
+
+	        .monthwidget {
+	            margin-bottom: 1.899em;
+
+	            caption {
+	            	.next, .prev {
+	            		display: none;
+	            	}
+	            }
+	        }
+	    }
+	}
 }

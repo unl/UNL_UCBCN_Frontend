@@ -2,19 +2,19 @@
 $starttime = $context->getStartTime();
 $endtime = $context->getEndTime();
 $startu = new DateTime($starttime);
-$endu = new DateTime($endtime); 
+$endu = new DateTime($endtime);
 ?>
 <span class="time-wrapper">
-<?php 
+<?php
     if (!$context->isAllDay()) {
         if (intval($startu->format('i')) == 0) {
             echo $startu->format('g a');
         } else {
             echo $startu->format('g:i a');
         }
-        
+
         if (!empty($endtime) && $endtime != $starttime) {
-            echo '-';
+            echo '&ndash;';
             if (intval($endu->format('i')) == 0) {
                 echo $endu->format('g a');
             } else {

@@ -228,7 +228,8 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			switch (e.which) {
 				case 39:
 					if (e.altKey) {
-						day = getOffsetMonth(nowActive, 1);
+						day = new Date(nowActive);
+						day.setMonth(day.getMonth() + 1);
 					} else {
 						day = $('.next', $dayNav).attr('href');
 					}
@@ -236,7 +237,8 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 					break;
 				case 37:
 					if (e.altKey) {
-						day = getOffsetMonth(nowActive, -1);
+						day = new Date(nowActive);
+						day.setMonth(day.getMonth() - 1);
 					} else {
 						day = $('.prev', $dayNav).attr('href');
 					}

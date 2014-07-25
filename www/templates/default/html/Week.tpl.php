@@ -7,7 +7,7 @@ $next = $context->getDateTime()->modify('+1 week');
         <caption>
             <span><a href="<?php echo $context->getPreviousURL(); ?>" id="prev_week" title="View events for week <?php echo $prev->format('W'); ?>" class="eventicon-angle-circled-left"></a></span>
             <span class="monthvalue">
-                <a href="<?php echo $context->getURL(); ?>">Week <?php echo $context->getDateTime()->format('W'); ?>: <?php echo $context->getDateTime()->format('F'); ?></a>
+                <a href="<?php echo $context->getURL(); ?>"><span class="week-number">Week <?php echo $context->getDateTime()->format('W'); ?>:</span> <?php echo $context->getDateTime()->format('F'); ?></a>
             </span>
             <span class="yearvalue">
                 <a href="<?php echo $context->getYearURL(); ?>"><?php echo $context->getDateTime()->format('Y'); ?></a>
