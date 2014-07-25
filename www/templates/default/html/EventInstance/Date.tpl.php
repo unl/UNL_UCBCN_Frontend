@@ -23,5 +23,4 @@ $endu = new DateTime($endtime);
     <?php else: ?>
         <?php echo $startu->format('g:i a')?><?php if (!empty($endtime) && $endtime != $starttime): ?>&ndash;<?php echo $endu->format('g:i a')?><?php endif; ?>
     <?php endif; ?>
-
 </span>
