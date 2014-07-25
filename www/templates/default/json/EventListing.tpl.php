@@ -1,9 +1,9 @@
 <?php
 $data = array();
-$data['events'] = array();
+$data['Events'] = array();
 
 foreach ($context as $eventInstance) {
-    $data['events'][] = $eventInstance->toJSONData();
+    $data['Events'][] = $eventInstance->toJSONData();
 }
 
 echo json_encode($data);
