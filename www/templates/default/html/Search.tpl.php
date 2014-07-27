@@ -12,8 +12,8 @@
         <div id="subscribe">
             <span>Subscribe to this search</span>
             <ul id="droplist">
-                <li id="eventrss"><a href="<?php echo $context->getURL()?>?format=rss" title="RSS feed of upcoming events" class="eventicon-rss">RSS</a></li>
-                <li id="eventical"><a href="<?php echo $context->getURL()?>?format=ics" title="ICS format of upcoming events" class="wdn-icon-calendar">ICS</a></li>
+                <li id="eventrss"><a href="<?php echo $context->getURL()?>?format=rss" class="eventicon-rss">RSS</a></li>
+                <li id="eventical"><a href="<?php echo $context->getURL()?>?format=ics" class="wdn-icon-calendar">ICS</a></li>
             </ul>
         </div>
     </section>
