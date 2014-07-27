@@ -316,7 +316,8 @@
         .upcoming-heading {
             width: 100%;
             margin: 0 0 1rem;
-            padding: 1.069em 1em 1em 5%;
+            padding: 1.069em 1em 1em 23px;
+            padding: 1.069em 1em 1em 1.425rem;
             .sans-serif-font();
             font-size: 12px;
             font-size: 0.923rem;
@@ -325,6 +326,8 @@
             background-color: mix(@ui09, @page-background, 95%);
 
             @media @bp2 {
+                padding: 1.069em 1em 1em 30px;
+                padding: 1.069em 1em 1em 1.899rem;
                 font-size: 13px;
                 font-size: 0.802rem;
             }
@@ -356,11 +359,18 @@
         .vcalendar {
             .vevent {
                 margin-bottom: 1em;
-                padding: 0 5% 1.899em;
+                padding: 0 1em 1em 23px;
+                padding: 0 1em 1em 1.425rem;
                 border-top: 5px solid @ui05;
                 background-color: fadeout(#fff, 33%);
                 box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
                 transition: all 0.2s ease-out;
+
+                @media @bp2 {
+                    padding: 0 1.899em 30px;
+                    padding: 0 1.899em 1.899rem;
+
+                }
 
                 &:hover {
                     border-top: 5px solid @scarlet;
