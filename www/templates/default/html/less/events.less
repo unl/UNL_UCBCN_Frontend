@@ -219,7 +219,15 @@
         font-size: 0.769rem;
         text-transform: uppercase;
 
+        @media @bp1 {
+            float: left;
+            padding: 1em 1em 0 0;
+        }
+
         @media @bp2 {
+            clear: both;
+            padding: 0;
+            width: 100%;
             font-size: 12px;
             font-size: 0.75rem;
         }
