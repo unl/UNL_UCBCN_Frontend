@@ -342,12 +342,36 @@
         .year-nav {
             text-align: center;
 
-            a:first-child {
-                float: left;
-            }
+            a {
+                .sans-serif-font();
+                font-size: 12px;
+                font-size: 0.923rem;
+                margin-top: 1.333em;
 
-            a:last-child {
-                float: right;
+                @media @bp2 {
+                    font-size: 13px;
+                    font-size: 0.802rem;
+                }
+
+                &:first-child {
+                    float: left;
+
+                    span[class^='eventicon-'] {
+                        &:before {
+                            padding-right: 0.254em;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    float: right;
+
+                    span[class^='eventicon-'] {
+                        &:before {
+                            padding-left: 0.254em;
+                        }
+                    }
+                }
             }
 
             h1 {
@@ -387,7 +411,7 @@
                         font-size: 2.532rem;
                     }
                 }
-                
+
                 h2 {
                     font-size: 28px;
                     font-size: 2.1538rem;
