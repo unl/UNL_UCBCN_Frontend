@@ -128,6 +128,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                                     <div class="bp2-wdn-col-four-sevenths bp3-wdn-col-two-thirds submit-search">
                                         <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
                                         <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
+                                            <label for="searchinput">Search Events</label>
                                             <div class="wdn-input-group">
                                                 <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
                                                 <span class="wdn-input-group-btn">

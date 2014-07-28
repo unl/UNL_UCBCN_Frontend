@@ -305,12 +305,14 @@
         }
 
         .submit-search {
+
             @media @bp2 {
                 text-align: right;
             }
         }
 
         #frontend_login {
+            .brand-font();
             text-transform: uppercase;
             margin-right: 1em;
             font-size: 21px;
@@ -323,12 +325,43 @@
         }
 
         #event_search {
-            margin: -8px 0 0;
+            margin: 0;
             padding: 0;
-            width: 45%;
+            width: 100%;
             display: inline-block;
             vertical-align: middle;
             font-size: 0.75em;
+
+            @media @bp1 {
+                width: 60%;
+                margin: -8px 0 0;
+            }
+
+            @media @bp2 {
+
+            }
+
+            .wdn-input-group {
+                margin-top: 0.143em;
+
+                @media @bp2 {
+                    margin-top: 0.1em;
+                }
+            }
+
+            label {
+                float: left;
+                margin-right: 0.339em;
+                .brand-font();
+                text-transform: uppercase;
+                font-size: 21px;
+                font-size: 1.615rem;
+
+                @media @bp2 {
+                    font-size: 23px;
+                    font-size: 1.425rem;
+                }
+            }
 
             button {
                 font-size: 0.75em;
