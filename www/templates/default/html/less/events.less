@@ -305,8 +305,11 @@
         }
 
         .submit-search {
+            text-align: left;
 
             @media @bp2 {
+                float: right;
+                width: 60%;
                 text-align: right;
             }
         }
@@ -321,6 +324,10 @@
             @media @bp2 {
                 font-size: 23px;
                 font-size: 1.425rem;
+            }
+
+            &:before {
+                color: @ui05;
             }
         }
 
