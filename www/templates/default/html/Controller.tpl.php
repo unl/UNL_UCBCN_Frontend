@@ -128,7 +128,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                                     </form>
                                 </div>
                                 <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
-                                    <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
+                                    <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today</a></li>
                                     <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
                                     <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
                                     <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
