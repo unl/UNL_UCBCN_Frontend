@@ -134,6 +134,13 @@
 }
 
 #month_viewcal {
+    .wp-calendar {
+
+        @media @under-bp2 {
+            //border: 0;
+        }
+    }
+
     table {
         line-height: 1.425;
     }
@@ -149,13 +156,21 @@
         font-size: 9px;
         font-size: 0.6923rem;
 
+        @media @under-bp2 {
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+        }
+
         @media @bp2 {
             font-size: 10px;
             font-size: 0.602rem;
         }
 
-        li {
-            margin-bottom: 0.75em;
+        &:before {
+            font-size: 10px;
+            font-size: 0.76923rem;
+            font-weight: 400;
         }
 
         &.prev, &.next {
@@ -166,14 +181,23 @@
             }
         }
 
+        li {
+            margin-bottom: 0.75em;
+        }
+
         a {
             text-decoration: none;
             border-bottom: none;
         }
 
         > a {
-            font-size: 13px;
-            font-size: 0.802rem;
+            font-size: 16px;
+            font-size: 1.2307rem;
+
+            @media @bp2 {
+                font-size: 13px;
+                font-size: 0.802rem;
+            }
         }
 
         ul {
@@ -201,12 +225,25 @@
     border-top: 1px solid @ui04;
 
     span {
+        float: left;
+        width: 50%;
+        padding: 0.254em 1em 0 0;
         .sans-serif-font();
         font-size: 10px;
         font-size: 0.769rem;
         text-transform: uppercase;
+        line-height: 1.425;
+
+        @media @bp1 {
+            float: left;
+            width: auto;
+            padding: 1em 1em 0 0;
+        }
 
         @media @bp2 {
+            clear: both;
+            padding: 0;
+            width: 100%;
             font-size: 12px;
             font-size: 0.75rem;
         }
@@ -279,24 +316,71 @@
         }
 
         .submit-search {
+            text-align: left;
+
             @media @bp2 {
+                float: right;
+                width: 60%;
                 text-align: right;
             }
         }
 
         #frontend_login {
+            .brand-font();
             text-transform: uppercase;
             margin-right: 1em;
-            font-size: 1.4375em;
+            font-size: 21px;
+            font-size: 1.615rem;
+
+            @media @bp2 {
+                font-size: 23px;
+                font-size: 1.425rem;
+            }
+
+            &:before {
+                color: @ui05;
+                margin-left: 0;
+            }
         }
 
         #event_search {
-            margin: -8px 0 0;
+            margin: 0;
             padding: 0;
-            width: 45%;
+            width: 100%;
             display: inline-block;
             vertical-align: middle;
             font-size: 0.75em;
+
+            @media @bp1 {
+                width: 60%;
+                margin: -8px 0 0;
+            }
+
+            @media @bp2 {
+
+            }
+
+            .wdn-input-group {
+                margin-top: 0.143em;
+
+                @media @bp2 {
+                    margin-top: 0.1em;
+                }
+            }
+
+            label {
+                float: left;
+                margin-right: 0.339em;
+                .brand-font();
+                text-transform: uppercase;
+                font-size: 21px;
+                font-size: 1.615rem;
+
+                @media @bp2 {
+                    font-size: 23px;
+                    font-size: 1.425rem;
+                }
+            }
 
             button {
                 font-size: 0.75em;
@@ -311,12 +395,20 @@
             padding-top: 1em;
         }
 
+        &.view-unl_ucbcn_frontend_search {
+
+            a.permalink {
+                color: @ui09;
+            }
+        }
+
         .day-heading,
         .ongoing-heading,
         .upcoming-heading {
             width: 100%;
             margin: 0 0 1rem;
-            padding: 1.069em 1em 1em 5%;
+            padding: 1.069em 23px 1em;
+            padding: 1.069em 1.425rem 1em;
             .sans-serif-font();
             font-size: 12px;
             font-size: 0.923rem;
@@ -325,6 +417,8 @@
             background-color: mix(@ui09, @page-background, 95%);
 
             @media @bp2 {
+                padding: 1.069em 30px 1em;
+                padding: 1.069em 1.899rem 1em;
                 font-size: 13px;
                 font-size: 0.802rem;
             }
@@ -338,13 +432,38 @@
 
         .year-nav {
             text-align: center;
+            padding-bottom: 0.75em;
 
-            a:first-child {
-                float: left;
-            }
+            a {
+                .sans-serif-font();
+                font-size: 12px;
+                font-size: 0.923rem;
+                margin-top: 1.333em;
 
-            a:last-child {
-                float: right;
+                @media @bp2 {
+                    font-size: 13px;
+                    font-size: 0.802rem;
+                }
+
+                &:first-child {
+                    float: left;
+
+                    span[class^='eventicon-'] {
+                        &:before {
+                            padding-right: 0.254em;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    float: right;
+
+                    span[class^='eventicon-'] {
+                        &:before {
+                            padding-left: 0.254em;
+                        }
+                    }
+                }
             }
 
             h1 {
@@ -356,16 +475,43 @@
         .vcalendar {
             .vevent {
                 margin-bottom: 1em;
-                padding: 0 5% 1.899em;
+                padding: 0 23px 1.777em;
+                padding: 0 1.425rem 1.777em;
                 border-top: 5px solid @ui05;
                 background-color: fadeout(#fff, 33%);
                 box-shadow: 0 0 0 1px fadeout(@ui14, 90%);
                 transition: all 0.2s ease-out;
 
+                @media @bp2 {
+                    padding: 0 30px 2.369em;
+                    padding: 0 1.899rem 2.369em;
+
+                }
+
                 &:hover {
                     border-top: 5px solid @scarlet;
                     background-color: #fff;
                     box-shadow: 0 0 1px 1px fadeout(@ui14, 80%);
+                }
+
+                h1 {
+                    font-size: 30px;
+                    font-size: 2.3077rem;
+
+                    @media @bp2 {
+                        font-size: 41px;
+                        font-size: 2.532rem;
+                    }
+                }
+
+                h2 {
+                    font-size: 28px;
+                    font-size: 2.1538rem;
+
+                    @media @bp2 {
+                        font-size: 38px;
+                        font-size: 2.369rem;
+                    }
                 }
 
                 .date-wrapper,
@@ -392,7 +538,7 @@
                 }
 
                 .description {
-                    margin: 1em 0;
+                    margin: 1em 0 0;
                     padding-top: 1em;
                     border-top: 1px solid @ui04;
                 }

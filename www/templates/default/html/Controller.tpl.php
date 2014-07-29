@@ -115,28 +115,25 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
                     <div class="wdn-grid-set">
                         <div class="wdn-col-full">
                             <div class="events-nav">
-                                <div class="wdn-grid-set">
-                                    <div class="bp2-wdn-col-three-sevenths bp3-wdn-col-one-third">
-                                        <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
-                                            <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Day</a></li>
-                                            <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
-                                            <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
-                                            <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
-                                            <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="bp2-wdn-col-four-sevenths bp3-wdn-col-two-thirds submit-search">
-                                        <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
-                                        <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
-                                            <div class="wdn-input-group">
-                                                <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
-                                                <span class="wdn-input-group-btn">
-                                                    <button type="submit" class="wdn-icon-search" title="Search"></button>
-                                                </span>
-                                            </div>
-                                        </form>
-                                    </div>
+                                <div class="submit-search">
+                                    <a id="frontend_login" class="eventicon-plus-circled" href="<?php echo UNL\UCBCN\Frontend\Controller::$manager_url; ?>">Submit an Event</a>
+                                    <form id="event_search" method="get" action="<?php echo $frontend->getCalendarURL(); ?>search/" role="search">
+                                        <label for="searchinput">Search Events</label>
+                                        <div class="wdn-input-group">
+                                            <input type="text" name="q" id="searchinput" title="Search Query" placeholder="e.g., Monday, tomorrow" value="<?php if (isset($context->options['q'])) { echo $context->options['q']; } ?>" />
+                                            <span class="wdn-input-group-btn">
+                                                <button type="submit" class="wdn-icon-search" title="Search"></button>
+                                            </span>
+                                        </div>
+                                    </form>
                                 </div>
+                                <ul id="frontend_view_selector" class="<?php echo $view_class; ?>">
+                                    <li id="todayview"><a href="<?php echo $frontend->getCurrentDayURL(); ?>">Today</a></li>
+                                    <li id="weekview"><a href="<?php echo $frontend->getCurrentWeekURL(); ?>">Week</a></li>
+                                    <li id="monthview"><a href="<?php echo $frontend->getCurrentMonthURL(); ?>">Month</a></li>
+                                    <li id="yearview"><a href="<?php echo $frontend->getCurrentYearURL(); ?>">Year</a></li>
+                                    <li id="upcomingview"><a href="<?php echo $frontend->getUpcomingURL(); ?>">Upcoming</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
