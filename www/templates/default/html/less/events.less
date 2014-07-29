@@ -167,8 +167,10 @@
             font-size: 0.602rem;
         }
 
-        li {
-            margin-bottom: 0.75em;
+        &:before {
+            font-size: 10px;
+            font-size: 0.76923rem;
+            font-weight: 400;
         }
 
         &.prev, &.next {
@@ -179,6 +181,10 @@
             }
         }
 
+        li {
+            margin-bottom: 0.75em;
+        }
+
         a {
             text-decoration: none;
             border-bottom: none;
@@ -186,7 +192,12 @@
 
         > a {
             font-size: 13px;
-            font-size: 0.802rem;
+            font-size: 1rem;
+
+            @media @bp2 {
+                font-size: 13px;
+                font-size: 0.802rem;
+            }
         }
 
         ul {
