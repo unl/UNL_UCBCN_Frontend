@@ -189,8 +189,8 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			stickySidebar();
 			
 			// Add a button for returning to "Today"
-			$('<p>', {'class': 'wdn-center'})
-				.append($('<a>', {'class': 'wdn-button', 'href': homeUrl}).text('Today'))
+			$('<p>')
+				.append($('<a>', {'class': 'return-today eventicon-angle-circled-left', 'href': '#'}).text('Return to today'))
 				.click(function(e) {
 					e.preventDefault();
 					changeDay(new Date());
@@ -228,8 +228,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			switch (e.which) {
 				case 39:
 					if (e.altKey) {
-						day = new Date(nowActive);
-						day.setMonth(day.getMonth() + 1);
+						day = getOffsetMonth(nowActive, 1)
 					} else {
 						day = $('.next', $dayNav).attr('href');
 					}
@@ -237,8 +236,7 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 					break;
 				case 37:
 					if (e.altKey) {
-						day = new Date(nowActive);
-						day.setMonth(day.getMonth() - 1);
+						day = getOffsetMonth(nowActive, -1);
 					} else {
 						day = $('.prev', $dayNav).attr('href');
 					}
