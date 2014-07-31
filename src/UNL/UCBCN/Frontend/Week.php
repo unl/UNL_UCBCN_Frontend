@@ -24,11 +24,9 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Week extends \IteratorIterator implements RoutableInterface
+class Week implements \IteratorAggregate, RoutableInterface
 {
     /**
-     * Calendar to show events for UNL_UCBCN_Month object
-     * 
      * @var \UNL\UCBCN\Calendar
      */
     public $calendar;
@@ -61,10 +59,26 @@ class Week extends \IteratorIterator implements RoutableInterface
         $this->options['y'] = date('Y');
         
         $this->options = $options + $this->options;
-        
-        $this->datePeriod = new \DatePeriod($this->getStartDateTime(), new \DateInterval('P1D'), $this->getEndDateTime());
-        parent::__construct($this->datePeriod);
     }
+    
+    /**
+     * Get the date period object for this month
+     *
+     * @return \DatePeriod
+     */
+    public function getDatePeriod()
+    {
+        $start_date = $this->getStartDateTime();
+        $end_date   = $this->getEndDateTime();
+        $interval   = new \DateInterval('P1D');
+    
+        return new \DatePeriod($start_date, $interval, $end_date);
+    }
+    
+    public function getIterator() {
+        return new DayIterator($this->getDatePeriod(), $this->calendar);
+    }
+    
     public function getDateTime()
     {
         return new \DateTime($this->options['y'] . '-' . 'W' . $this->options['w']);
@@ -84,20 +98,6 @@ class Week extends \IteratorIterator implements RoutableInterface
     public function getEndDateTime()
     {
         return $this->getStartDateTime()->modify('+1 week');
-    }
-    
-    function current()
-    {
-        /* @var $datetime \DateTime */
-        $datetime = parent::current();
-
-        $options = array(
-            'm' => $datetime->format('m'),
-            'y' => $datetime->format('Y'),
-            'd' => $datetime->format('d'),
-        ) + $this->options;
-
-        return new Day($options);
     }
     
     public static function generateURL(Calendar $calendar, \DateTime $datetime)
