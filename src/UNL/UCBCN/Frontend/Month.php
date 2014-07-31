@@ -26,7 +26,7 @@ namespace UNL\UCBCN\Frontend;
  * @license   http://www1.unl.edu/wdn/wiki/Software_License BSD License 
  * @link      http://code.google.com/p/unl-event-publisher/
  */
-class Month extends \IteratorIterator implements RoutableInterface
+class Month implements \IteratorAggregate, RoutableInterface
 {
     /**
      * Calendar to show events for UNL_UCBCN_Month object
@@ -66,8 +66,6 @@ class Month extends \IteratorIterator implements RoutableInterface
         $this->options['y'] = date('Y');
 
         $this->options = $options + $this->options;
-        
-        parent::__construct($this->getDatePeriod());
     }
 
     /**
@@ -82,6 +80,11 @@ class Month extends \IteratorIterator implements RoutableInterface
         $interval   = new \DateInterval('P1D');
         
         return new \DatePeriod($start_date, $interval, $end_date);
+    }
+    
+    public function getIterator()
+    {
+        return new DayIterator($this->getDatePeriod(), $this->calendar);
     }
 
     /**
@@ -129,20 +132,6 @@ class Month extends \IteratorIterator implements RoutableInterface
         return new \DateTime(
                 $this->options['y'].'-'.$this->options['m'].'-01'
         );
-    }
-
-    function current()
-    {
-        /* @var $datetime \DateTime */
-        $datetime = parent::current();
-
-        $options = array(
-                'm' => $datetime->format('m'),
-                'y' => $datetime->format('Y'),
-                'd' => $datetime->format('d'),
-                ) + $this->options;
-
-        return new Day($options);
     }
 
     /**
