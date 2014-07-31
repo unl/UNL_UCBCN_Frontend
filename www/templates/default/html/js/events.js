@@ -188,15 +188,6 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			addMonthWidgetStates();
 			stickySidebar();
 			
-			// Add a button for returning to "Today"
-			$('<p>')
-				.append($('<a>', {'class': 'return-today eventicon-angle-circled-left', 'href': '#'}).text('Return to today'))
-				.click(function(e) {
-					e.preventDefault();
-					changeDay(new Date());
-				})
-				.insertAfter($sidebarCal);
-			
 			$sidebarCal.on('click', 'td a', function(e) {
 				e.preventDefault();
 				changeDay(this.href);
