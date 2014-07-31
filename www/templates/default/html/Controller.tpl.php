@@ -28,7 +28,7 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
 
         $Id: fixed.dwt | 252c2891a48c70db689be6d897d4f34768b8258a | Thu Aug 1 15:08:19 2013 -0500 | Kevin Abel  $
     -->
-    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/scriptsandstyles_local.html'; ?>
+    <?php include_once $GLOBALS['unl_template_dependents'].'/wdn/templates_4.0/includes/scriptsandstyles.html'; ?>
     <!-- InstanceBeginEditable name="doctitle" -->
     <title><?php if (!$context->getCalendar()): ?>Page Not Found - UNL Events
         <?php else: ?>UNL <?php
