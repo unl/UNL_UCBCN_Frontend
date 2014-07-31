@@ -1,3 +1,6 @@
 [submodule "backend"]
 	path = backend
 	url = git://github.com/unl/UNL_UCBCN.git
+[submodule "vendor/unl_submodules/RegExpRouter"]
+	path = vendor/unl_submodules/RegExpRouter
+	url = https://github.com/unl/RegExpRouter.git
