@@ -61,7 +61,7 @@ $next = $context->getDateTime()->modify('+1 month');
 
             $d = $datetime->format('j');
             if (isset($context->data[$datetime->format('Y-m-d')])) {
-                echo '<a href="' . $context->getDayURL() . '">' . $d . '</a>';
+                echo '<a href="' . $context->getDayURL($datetime) . '">' . $d . '</a>';
             } else {
                 echo '<span>' . $d . '</span>';
             }

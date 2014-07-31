@@ -42,14 +42,14 @@ class MonthWidget extends Month
         $this->data = $this->getEventTotals($this->getDatePeriod());
     }
 
-    function current()
+    public function getIterator()
     {
-        return \IteratorIterator::current();
+        return new \IteratorIterator($this->getDatePeriod());
     }
     
-    public function getDayURL()
+    public function getDayURL(\DateTime $datetime)
     {
-        return Day::generateURL($this->calendar, $this->current());
+        return Day::generateURL($this->calendar, $datetime);
     }
 
     /**
