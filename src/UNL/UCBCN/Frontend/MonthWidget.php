@@ -39,7 +39,7 @@ class MonthWidget extends Month
     {
         parent::__construct($options);
 
-        $this->data = $this->getEventTotals($this->datePeriod);
+        $this->data = $this->getEventTotals($this->getDatePeriod());
     }
 
     function current()
