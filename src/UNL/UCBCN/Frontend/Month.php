@@ -48,14 +48,10 @@ class Month extends \IteratorIterator implements RoutableInterface
     public static $weekday_start = 'Sunday';
 
     /**
-     * @var bool|\DatePeriod
-     */
-    public $datePeriod = false;
-
-    /**
      * Constructor for an individual day.
-     * 
+     *
      * @param array $options Associative array of options to apply.
+     * @throws InvalidArgumentException
      */
     public function __construct($options)
     {
@@ -70,14 +66,22 @@ class Month extends \IteratorIterator implements RoutableInterface
         $this->options['y'] = date('Y');
 
         $this->options = $options + $this->options;
+        
+        parent::__construct($this->getDatePeriod());
+    }
 
+    /**
+     * Get the date period object for this month
+     * 
+     * @return \DatePeriod
+     */
+    public function getDatePeriod()
+    {
         $start_date = $this->getStartDateTime();
         $end_date   = $this->getEndDateTime();
         $interval   = new \DateInterval('P1D');
-
-        $this->datePeriod = new \DatePeriod($start_date, $interval, $end_date);
         
-        parent::__construct($this->datePeriod);
+        return new \DatePeriod($start_date, $interval, $end_date);
     }
 
     /**
