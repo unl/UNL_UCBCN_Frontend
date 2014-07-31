@@ -44,7 +44,7 @@ class MonthWidget extends Month
 
     function current()
     {
-        return $this->getInnerIterator()->current;
+        return \IteratorIterator::current();
     }
     
     public function getDayURL()
