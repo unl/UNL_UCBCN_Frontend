@@ -39,7 +39,7 @@ class Search extends EventListing implements RoutableInterface
      */
     public function __construct($options=array())
     {
-        if (!isset($options['q'])) {
+        if (empty($options['q'])) {
             throw new UnexpectedValueException('Enter a search string to search for events.', 400);
         }
         
