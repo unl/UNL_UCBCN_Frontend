@@ -39,7 +39,7 @@ class Search extends EventListing implements RoutableInterface
      */
     public function __construct($options=array())
     {
-        if (!isset($options['q'])) {
+        if (empty($options['q'])) {
             throw new UnexpectedValueException('Enter a search string to search for events.', 400);
         }
         
@@ -115,7 +115,7 @@ class Search extends EventListing implements RoutableInterface
         $url = $this->options['calendar']->getURL() . 'search/';
         
         if (!empty($this->search_query)) {
-            $url .= $this->search_query . '/';
+            $url .= '?q=' . urlencode($this->search_query);
         }
         
         return $url;
