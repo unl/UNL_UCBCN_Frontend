@@ -18,6 +18,6 @@
         </div>
     </section>
     <section id="updatecontent" class="day_cal bp2-wdn-col-two-thirds">
-        <?php echo $savvy->render($context, 'EventListing.tpl.php'); ?>
+        <?php echo $savvy->render($context, 'hcalendar/Search.tpl.php'); ?>
     </section>
 </div>
