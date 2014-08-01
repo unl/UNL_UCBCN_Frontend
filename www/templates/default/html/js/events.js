@@ -142,11 +142,23 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			var $loadTo = $('#updatecontent');
 			
 			pushState(href, 'event');
-			scheduleProgress();
+			scheduleProgress($loadTo);
 			$.get(href + '?format=hcalendar', function(data) {
 				cancelProgress();
 				$loadTo.html(data);
 				$(document.body).trigger("sticky_kit:recalc");
+			});
+		}
+		
+		function loadSearch(href)
+		{
+			var $loadTo = $('#updatecontent');
+			
+			pushState(href, 'search');
+			scheduleProgress($loadTo);
+			$.get(href + (href.indexOf('?') == -1 ? '?' : '&') + 'format=hcalendar', function(data) {
+				cancelProgress();
+				$loadTo.html(data);
 			});
 		}
 		
@@ -202,6 +214,8 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 		
 		if ($('.view-unl_ucbcn_frontend_eventinstance').length) {
 			initRoute = 'event';
+		} else if ($('.view-unl_ucbcn_frontend_search').length) {
+			initRoute = 'search';
 		}
 		
 		// set up arrow navigation
@@ -250,7 +264,10 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 					loadEventInstance(url);
 					break;
 				case 'day':
-					changeDay(url)
+					changeDay(url);
+					break;
+				case 'search':
+					loadSearch(url);
 					break;
 			}
 		});
