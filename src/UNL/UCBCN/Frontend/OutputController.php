@@ -41,6 +41,7 @@ class OutputController extends \Savvy
 
             case 'xml':
                 header('Content-type:text/xml');
+                $this->sendCORSHeaders();
                 $this->setTemplateFormatPaths($options['format']);
                 break;
 
