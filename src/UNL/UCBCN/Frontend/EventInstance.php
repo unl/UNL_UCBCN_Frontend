@@ -249,10 +249,8 @@ class EventInstance implements RoutableInterface
         $data['EventTitle']    = $this->event->title;
         $data['EventSubtitle'] = $this->event->subtitle;
         $data['DateTime'] = array(
-            'StartDate' => date('Y-m-d', $startu),
-            'StartTime' => date('H:i:s', $startu),
-            'EndDate'   => date('Y-m-d', $endu),
-            'EndTime'   => date('H:i:s', $endu),
+            'Start' => date('c', $startu),
+            'End'   => date('c', $endu),
         );
         $data['EventStatus']           = 'Happening As Scheduled';
         $data['Classification']        = 'Public';
