@@ -3,6 +3,7 @@
         "vendor-dir": "vendor/composer"
     },
     "require": {
-        "michelf/php-smartypants": "1.6.0-beta1"
+        "michelf/php-smartypants": "1.6.0-beta1",
+        "misd/linkify": "1.1.*"
     }
 }

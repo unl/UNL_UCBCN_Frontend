@@ -1,5 +1,9 @@
 <?php if (!empty($context->event->description)): ?>
 <div class="description">
-    <?php echo $savvy->dbStringtoHtml($context->getShortDescription()) ?>
+    <?php 
+    $text = $savvy->dbStringtoHtml($context->getShortDescription());
+    $text = $savvy->linkify($text);
+    echo $text;
+    ?>
 </div>
 <?php endif; ?>
