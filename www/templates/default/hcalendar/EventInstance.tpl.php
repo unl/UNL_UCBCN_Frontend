@@ -12,12 +12,20 @@
 	    <?php echo $savvy->render($context, 'EventInstance/FullLocation.tpl.php') ?>
         <?php echo $savvy->render($context, 'EventInstance/Contact.tpl.php') ?>
 	    <div class="description">
-	        <?php echo $savvy->dbStringtoHtml($context->event->description); ?>
+	        <?php 
+            $description = $savvy->dbStringtoHtml($context->event->description);
+            $description = $savvy->linkify($description);
+            echo $description;
+            ?>
 	    </div>
 	    <?php if (isset($context->eventdatetime->additionalpublicinfo)): ?>
 	    <p class="public-info">
 	        Additional Public Info:<br />
-	        <?php echo  $savvy->dbStringtoHtml($context->eventdatetime->additionalpublicinfo); ?>
+	        <?php
+            $publicInfo = $savvy->dbStringtoHtml($context->eventdatetime->additionalpublicinfo);
+            $publicInfo = $savvy->linkify($description);
+            echo $publicInfo;
+            ?>
 	    </p>
 	    <?php endif; ?>
 	    <?php if (isset($context->event->webpageurl)): ?>

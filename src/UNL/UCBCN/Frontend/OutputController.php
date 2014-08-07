@@ -2,17 +2,20 @@
 namespace UNL\UCBCN\Frontend;
 
 use Michelf\SmartyPants;
+use Misd\Linkify\Linkify;
 
 class OutputController extends \Savvy
 {
     protected $theme = 'default';
     protected $controller = false;
+    protected $linkify = false;
 
     public function __construct(Controller $controller)
     {
         $this->controller = $controller;
         \Savvy_ClassToTemplateMapper::$classname_replacement = __NAMESPACE__ . '\\';
         parent::__construct();
+        $this->linkify = new Linkify();
         $this->initialize($this->controller->options);
     }
 
@@ -103,6 +106,12 @@ class OutputController extends \Savvy
             default:
                 throw new UnexpectedValueException('Invalid/unsupported output format', 500);
         }
+    }
+    
+    public function linkify($text, $options = array())
+    {
+        
+        return $this->linkify->process($text, $options);
     }
 
     /**
