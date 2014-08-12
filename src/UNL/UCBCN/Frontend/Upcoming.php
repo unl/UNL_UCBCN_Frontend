@@ -82,6 +82,10 @@ class Upcoming extends EventListing implements RoutableInterface
                 WHERE
                     calendar_has_event.calendar_id = ' . (int)$this->calendar->id . '
                     AND (
+                         calendar_has_event.status =\'posted\'
+                         OR calendar_has_event.status =\'archived\'
+                    )
+                    AND (
                         e.starttime >= "'.date('Y-m-d', $timestamp).'"
                         OR recurringdate.recurringdate >= "'.date('Y-m-d', $timestamp).'"
                     )
