@@ -1,2 +1,2 @@
 <?php
-include_once __DIR__ . '/EventListing.tpl.php';
+include_once __DIR__ . '/EventListingAggregate.tpl.php';
