@@ -23,7 +23,7 @@
 	        Additional Public Info:<br />
 	        <?php
             $publicInfo = $savvy->dbStringtoHtml($context->eventdatetime->additionalpublicinfo);
-            $publicInfo = $savvy->linkify($description);
+            $publicInfo = $savvy->linkify($publicInfo);
             echo $publicInfo;
             ?>
 	    </p>
