@@ -86,8 +86,7 @@ class Upcoming extends EventListing implements RoutableInterface
                         OR recurringdate.recurringdate >= "'.date('Y-m-d', $timestamp).'"
                     )
                 ORDER BY e.starttime ASC, recurringdate.recurringdate ASC, event.title ASC
-                LIMIT 20
-                ';
+                LIMIT ' . (int)$this->options['limit'];
         return $sql;
     }
     
