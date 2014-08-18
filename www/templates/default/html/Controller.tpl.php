@@ -44,7 +44,6 @@ $view_class = str_replace('\\', '_', strtolower($context->options['model']));
     <link rel="alternate" type="application/rss+xml" title="<?php echo $context->getCalendar()->name; ?> Events" href="<?php echo $frontend->getCalendarURL(); ?>.rss" />
     <?php endif; ?>
     <link rel="home" href="<?php echo $context->getCalendarURL() ?>" />
-    <link rel="search" href="<?php echo $frontend->getCalendarURL(); ?>search/" />
 <?php if ($context->getRaw('output') instanceof UNL\UCBCN\Frontend\RoutableInterface): ?>
     <link rel="canonical" href="<?php echo $context->output->getURL() ?>" />
 <?php endif; ?>
