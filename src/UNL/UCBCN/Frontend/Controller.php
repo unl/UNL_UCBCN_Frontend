@@ -141,7 +141,7 @@ class Controller
             $this->options['calendar'] = Calendar::getByShortName($this->options['calendar_shortname']);
         } else if (!empty($this->options['calendar_id'])) {
             $this->options['calendar'] = Calendar::getByID($this->options['calendar_id']);
-        }else {
+        } else {
             $this->options['calendar'] = Calendar::getByID(self::$default_calendar_id);
         }
 
