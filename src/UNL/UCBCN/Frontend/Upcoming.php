@@ -97,7 +97,6 @@ class Upcoming extends EventListing implements RoutableInterface
                     ) ASC,
                     event.title ASC
                 LIMIT ' . (int)$this->options['limit'];
-        echo $sql;
         return $sql;
     }
     
