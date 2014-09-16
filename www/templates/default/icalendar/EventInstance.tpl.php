@@ -3,8 +3,8 @@
  * icalendar output for a single vent instance.
  */
 
-$startu = strtotime($context->eventdatetime->starttime);
-$endu = strtotime($context->eventdatetime->endtime);
+$startu = strtotime($context->getStartTime());
+$endu = strtotime($context->getEndTime());
 
 $out = array();
 $out[] = 'BEGIN:VEVENT';
