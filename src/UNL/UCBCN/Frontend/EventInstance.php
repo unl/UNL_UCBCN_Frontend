@@ -235,8 +235,8 @@ class EventInstance implements RoutableInterface
     
     public function toJSONData()
     {
-        $startu     = strtotime($this->eventdatetime->starttime);
-        $endu       = strtotime($this->eventdatetime->endtime);
+        $startu     = strtotime($this->getStartTime());
+        $endu       = strtotime($this->getEndTime());
         $location   = $this->eventdatetime->getLocation();
         $eventTypes = $this->event->getEventTypes();
         $webcasts   = $this->event->getWebcasts();
