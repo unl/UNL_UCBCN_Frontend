@@ -3,8 +3,8 @@
         <EventTitle><?php echo htmlspecialchars($context->event->title); ?></EventTitle>
         <EventSubtitle><?php echo htmlspecialchars($context->event->subtitle); ?></EventSubtitle>
         <?php 
-        $startu = strtotime($context->eventdatetime->starttime);
-		$endu = strtotime($context->eventdatetime->endtime);
+        $startu = strtotime($context->getStartTime());
+		$endu = strtotime($context->getEndTime());
 		?>
         <DateTime>
             <StartDate><?php echo date('Y-m-d', $startu); ?></StartDate>
