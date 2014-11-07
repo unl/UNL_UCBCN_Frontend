@@ -16,8 +16,9 @@ spl_autoload_register('autoload');
 
 set_include_path(
     __DIR__ . '/src' . PATH_SEPARATOR
-  . __DIR__ . '/backend/src' . PATH_SEPARATOR
-  . __DIR__ . '/vendor/php'
+    . __DIR__ . '/backend/src' . PATH_SEPARATOR
+    . __DIR__ . '/vendor/php' . PATH_SEPARATOR
+    . __DIR__ . '/vendor/unl_submodules/RegExpRouter/src'
 );
 
 ini_set('display_errors', true);
