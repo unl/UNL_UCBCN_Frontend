@@ -120,10 +120,23 @@ require(['jquery', 'wdn', 'modernizr'], function($, WDN, Modernizr) {
 			} else {
 				url = datetime;
 			}
-			
+
+			//Save the URL in history for the day before we append the hcal format
 			pushState(url, 'day');
+			
+			//Append the hcal format for ajax loading (partial content)
+			var format = 'format=hcalendar';
+			if (url.charAt(url.length - 1) === '?') {
+				url = url + format;
+			} else if (url.indexOf('?') > 0) {
+				url = url + '&' + format;
+			} else {
+				url = url + '?' + format;
+			}
+			
+			//Get the goods
 			scheduleProgress($loadTo);
-			$.get(url + '?format=hcalendar', function(data) {
+			$.get(url, function(data) {
 				cancelProgress();
 				$loadTo.html(data);
 				determineActiveDay();
