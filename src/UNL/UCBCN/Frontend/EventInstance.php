@@ -187,7 +187,8 @@ class EventInstance implements RoutableInterface
         $time = $this->eventdatetime->starttime;
         
         if ($this->recurringdate) {
-            $time = $this->recurringdate->recurringdate . ' ' . substr($time, 11);
+            $first_recurring_date = $this->recurringdate->getFirstRecordInOngoingSeries();
+            $time = $first_recurring_date->recurringdate . ' ' . substr($time, 11);
         }
 
         return $time;
