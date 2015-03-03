@@ -1,7 +1,8 @@
-UNL_UCBCN_Frontend
+UNL Events
 ==================
 
-Frontend for the UNL Event Publisher system
+This is the new branch for the manager rewrite of UNL Events. 
+This branch will eventually contain the manager, frontend, and backend, all in one repo.
 
 INSTALL
 -------
