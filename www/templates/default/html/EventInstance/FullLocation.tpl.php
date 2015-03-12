@@ -6,9 +6,9 @@ $directions = isset($location->directions) ? $location->directions : $context->e
 <?php if (isset($location->name) || $room || $directions || isset($location->streetaddress1)): ?>
 <div class="location eventicon-location">
 <?php if (isset($location->mapurl)): ?>
-    <a class="mapurl" href="<?php echo $location->mapurl ?>"><?php echo ucwords(strtolower($location->name)) ?></a>
+    <a class="mapurl" href="<?php echo $location->mapurl ?>"><?php echo $location->name ?></a>
 <?php else: ?>
-    <?php echo ucwords(strtolower($location->name)) ?>
+    <?php echo $location->name ?>
 <?php endif; ?>
 <?php if ($room): ?>
     <span class="room">Room: <?php echo $room ?></span>
