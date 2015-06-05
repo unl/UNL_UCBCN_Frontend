@@ -7,7 +7,7 @@ $routes         = array();
 /* Commonly used regular expressions */
 
 // Optional calendar short name, which prefixes all routes
-$calendar                = '(?P<calendar_shortname>([a-zA-Z-_]([0-9]+)?)+)';
+$calendar                = '(?P<calendar_shortname>([a-zA-Z-_0-9]+)+)';
 $calendar_slash_required = '(' . $calendar . '\/)?';
 $calendar_slash_optional = '(' . $calendar . '(\/)?)?';
 
